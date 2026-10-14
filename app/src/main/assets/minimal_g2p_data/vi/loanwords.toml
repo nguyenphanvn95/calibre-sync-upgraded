@@ -1,0 +1,56 @@
+# data/vi/loanwords.toml
+#
+# Authoritative override for Vietnamese loanwords that the structural VI
+# engine cannot pronounce correctly. See docs/lts/vi_loanword_policy.md
+# for inclusion criteria and review process.
+#
+# Status: Phase 2 v1 — seed entries confirmed by native speaker
+# (maintainer review on 2026-05-22). Each entry below carries
+# `# source: Native speaker review 2026-05-22`. Future additions beyond
+# this seed should follow the same review process and bear the
+# corresponding date stamp.
+
+[word]
+
+# === Tech / digital ===
+# laptop — "láp-tóp", two stressed syllables.
+laptop = "l a p T3 t o p T3"  # source: Native speaker review 2026-05-22
+# internet — three syllables, falling-falling-rising tone pattern.
+internet = "i n T1 t ɤ T2 n ɛ T3"  # source: Native speaker review 2026-05-22
+# wifi — initial /w/ glide; f-letter forces the mixed_to_phonemes bypass.
+wifi = "w a j T1 f a j T1"  # source: Native speaker review 2026-05-22
+# email — "i-meo", both syllables level tone (revised 2026-05-22).
+email = "i T1 m ɛ w T1"  # source: Native speaker review 2026-05-22
+# online — "ôn-lai", two syllables, both level tone.
+online = "ɔ n T1 l a j T1"  # source: Native speaker review 2026-05-22
+# video — three syllables historically; modern speech elides to two.
+video = "v i T1 d e w T1"  # source: Native speaker review 2026-05-22
+# file — single syllable, f-letter.
+file = "f a j T1"  # source: Native speaker review 2026-05-22
+# website — "uép-sai", two rising-tone syllables.
+website = "w e p T3 s a j T3"  # source: Native speaker review 2026-05-22
+
+# === Food / drink ===
+# pizza — "pi-da" / "pi-za"; z represents the northern initial.
+pizza = "p i T1 z a T1"  # source: Native speaker review 2026-05-22
+# salad — final t silent in fast speech but kept here.
+salad = "s a T1 l a t T3"  # source: Native speaker review 2026-05-22
+# taxi — "tắc-xi"; ă in first syllable with rising tone.
+taxi = "t ɐ k T3 s i T1"  # source: Native speaker review 2026-05-22
+# café — "ca-phê", falling final tone (huyền is rare in loans; this one
+# is fully integrated so it follows native phonotactics).
+cafe = "k a T1 f e T1"  # source: Native speaker review 2026-05-22
+
+# === Media / instrument ===
+# piano — "pi-a-nô", three syllables.
+piano = "p i T1 a T1 n o T1"  # source: Native speaker review 2026-05-22
+# radio — "ra-đi-o" (older) or "ra-đi-ô"; three syllables.
+radio = "r a T1 d i T1 o T1"  # source: Native speaker review 2026-05-22
+# guitar — "ghi-ta"; initial /g/ via ɣ would also work in Northern dialect.
+guitar = "g i T1 t a T1"  # source: Native speaker review 2026-05-22
+
+# === Common loans ===
+# fan — "fan" (as in "fan cuồng"); f-letter forces the bypass.
+fan = "f a n T3"  # source: Native speaker review 2026-05-22
+# show — "sô"; final w glide stays.
+show = "s o w T1"  # source: Native speaker review 2026-05-22

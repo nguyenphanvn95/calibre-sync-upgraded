@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Nut "Gui" pill xanh trong SendToEreaderDialogFragment (dialog_send_to_ereader.xml), thay the
+     nut positive mac dinh cua AlertDialog (chi la text button) - xem prompt nang cap UI Send to
+     E-Reader giong anh mau. -->
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/color_send_to_ereader_ripple">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/color_send_to_ereader" />
+            <corners android:radius="24dp" />
+        </shape>
+    </item>
+</ripple>

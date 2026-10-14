@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Thay the cho preference_material_settings.xml mac dinh cua androidx.preference: boc toan bo
+     hang vao mot the bo goc (bg_app_settings_card_single, doi thanh top/middle/bottom o Tang 2
+     qua CardPreferenceGroupAdapter). Giu nguyen id android chuan de PreferenceViewHolder tu dong
+     bind icon/title/summary/widget nhu binh thuong, khong dong den logic Java/Kotlin nao. Margin
+     ngoai (start/end/top/bottom) KHONG khai bao co dinh o day vi CardPreferenceGroupAdapter tu
+     tinh margin dong theo vi tri dau/giua/cuoi nhom (xem CardPreferenceGroupAdapter.kt); neu app
+     nao khong dung adapter tuy bien do (chi dung Tang 1), background mac dinh la
+     bg_app_settings_card_single va margin dong duoc adapter gan trong onBindViewHolder. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_app_settings_card_single"
+    android:clickable="true"
+    android:clipToOutline="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground"
+    android:outlineProvider="background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:minHeight="?android:attr/listPreferredItemHeightSmall"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="14dp"
+        android:paddingBottom="14dp">
+
+        <LinearLayout
+            android:id="@android:id/icon_frame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:minWidth="32dp"
+            android:orientation="horizontal"
+            android:paddingEnd="12dp">
+
+            <ImageView
+                android:id="@android:id/icon"
+                android:layout_width="24dp"
+                android:layout_height="24dp" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@android:id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:singleLine="true"
+                android:textAppearance="?android:attr/textAppearanceListItem" />
+
+            <TextView
+                android:id="@android:id/summary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@android:id/title"
+                android:layout_alignStart="@android:id/title"
+                android:maxLines="4"
+                android:textAppearance="?android:attr/textAppearanceListItemSecondary"
+                android:textColor="?android:attr/textColorSecondary" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@android:id/widget_frame"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="vertical" />
+
+    </LinearLayout>
+
+    <!-- Duong ke mang, mo, ngan cach cac hang chung mot the o Tang 2 (nhieu Preference lien tiep
+         gop thanh mot card); CardPreferenceGroupAdapter an duong ke nay o hang cuoi cung cua moi
+         nhom (isLast = true) de day the khong bi ke o day. Neu chi dung Tang 1 (moi Preference la
+         mot the rieng), View nay luon GONE vi khong co adapter nao bat no len. -->
+    <View
+        android:id="@+id/app_settings_card_row_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="?android:attr/textColorSecondary"
+        android:alpha="0.15"
+        android:visibility="gone" />
+
+</LinearLayout>

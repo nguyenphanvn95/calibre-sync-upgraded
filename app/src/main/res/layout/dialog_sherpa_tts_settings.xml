@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Noi dung dialog "Sherpa TTS", mo tu nut ngoi sao tren dialog_tts_player.xml va tu hang
+    "Sherpa TTS" trong tab Doc to (ReaderSettingsTtsPage). Cho nguoi dung chon so luong CPU
+    sherpa-onnx dung de tong hop giong NghiTTS, xem SherpaTtsSettingsDialog.kt.
+-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="16dp">
+
+        <!-- Hop canh bao mau ho phach, giong anh minh hoa -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal"
+            android:background="@drawable/bg_sherpa_tts_warning_box"
+            android:padding="14dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:text="\u2699\ufe0f"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/sherpa_settings_warning_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/reader_tts_sherpa_settings_warning"
+                android:textColor="#F5D6A8"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/reader_tts_sherpa_thread_section_title"
+            android:textStyle="bold"
+            android:textSize="16sp" />
+
+        <!-- Danh sach lua chon duoc do dong trong SherpaTtsSettingsDialog.kt bang
+             item_sherpa_thread_option.xml, KHONG khai bao cung tung dong o day vi so lua
+             chon phu thuoc SherpaThreadRecommender.SELECTABLE_THREAD_COUNTS. -->
+        <LinearLayout
+            android:id="@+id/sherpa_settings_thread_options_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical" />
+
+        <TextView
+            android:id="@+id/sherpa_settings_ack_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="20dp"
+            android:padding="8dp"
+            android:background="?attr/selectableItemBackground"
+            android:text="@string/reader_tts_sherpa_settings_ack"
+            android:textColor="?attr/colorPrimary"
+            android:textStyle="bold"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,220 @@
+# English suffix-stress table for RFC-009 phonological post-pass.
+# Each row: pattern (no leading dash), shift (penult|antepenult|neutral),
+# and a cite to a textbook source per clean-room discipline.
+# See docs/rfc/009-phonological-post-pass.md for the spec.
+# See docs/lts/references.md for valid cite source keys.
+#
+# Lookup semantics: longest pattern match wins; ties broken by file order.
+# `penult`     => primary stress lands on the nucleus immediately before
+#                 the orthographic suffix.
+# `antepenult` => primary stress two nuclei before the suffix.
+# `neutral`    => suffix does not attract stress; B.2 syllable-count
+#                 default decides instead.
+
+# ----- Stress-attracting (penult) -------------------------------------
+
+[[suffix]]
+pattern = "tion"
+shift   = "penult"
+cite    = "Carney 1994 ch.11 §3"
+
+[[suffix]]
+pattern = "sion"
+shift   = "penult"
+cite    = "Carney 1994 ch.11 §3"
+
+[[suffix]]
+pattern = "cian"
+shift   = "penult"
+cite    = "Carney 1994 ch.11 §3"
+
+[[suffix]]
+pattern = "tious"
+shift   = "penult"
+cite    = "Carney 1994 ch.11 §3"
+
+[[suffix]]
+pattern = "cious"
+shift   = "penult"
+cite    = "Carney 1994 ch.11 §3"
+
+[[suffix]]
+pattern = "ical"
+shift   = "penult"
+cite    = "Carney 1994 ch.11 §3 ; Cruttenden 2014 ch.11 §11.4"
+
+[[suffix]]
+pattern = "ic"
+shift   = "penult"
+cite    = "Carney 1994 ch.11 §3 ; Cruttenden 2014 ch.11 §11.4"
+
+[[suffix]]
+pattern = "ity"
+shift   = "penult"
+cite    = "Carney 1994 ch.11 §3"
+
+[[suffix]]
+pattern = "ify"
+shift   = "penult"
+cite    = "Carney 1994 ch.11 §3"
+
+[[suffix]]
+pattern = "escence"
+shift   = "penult"
+cite    = "Carney 1994 ch.11 §3"
+
+[[suffix]]
+pattern = "escent"
+shift   = "penult"
+cite    = "Carney 1994 ch.11 §3"
+
+[[suffix]]
+pattern = "ient"
+shift   = "penult"
+cite    = "Carney 1994 ch.11 §3"
+
+[[suffix]]
+pattern = "ience"
+shift   = "penult"
+cite    = "Carney 1994 ch.11 §3"
+
+[[suffix]]
+pattern = "iency"
+shift   = "penult"
+cite    = "Carney 1994 ch.11 §3"
+
+[[suffix]]
+pattern = "ial"
+shift   = "penult"
+cite    = "Carney 1994 ch.11 §3"
+
+# ----- Stress-attracting (antepenult) ---------------------------------
+
+[[suffix]]
+pattern = "graphy"
+shift   = "antepenult"
+cite    = "Carney 1994 ch.11 §3"
+
+[[suffix]]
+pattern = "logy"
+shift   = "antepenult"
+cite    = "Carney 1994 ch.11 §3"
+
+[[suffix]]
+pattern = "nomy"
+shift   = "antepenult"
+cite    = "Carney 1994 ch.11 §3"
+
+[[suffix]]
+pattern = "metry"
+shift   = "antepenult"
+cite    = "Carney 1994 ch.11 §3"
+
+[[suffix]]
+pattern = "sophy"
+shift   = "antepenult"
+cite    = "Carney 1994 ch.11 §3"
+
+[[suffix]]
+pattern = "opia"
+shift   = "antepenult"
+cite    = "Cruttenden 2014 ch.11 §11.4"
+
+[[suffix]]
+pattern = "odia"
+shift   = "antepenult"
+cite    = "Cruttenden 2014 ch.11 §11.4"
+
+[[suffix]]
+pattern = "alia"
+shift   = "antepenult"
+cite    = "Cruttenden 2014 ch.11 §11.4"
+
+# `-ate` defaults to verb reading (graduate-v /eɪt/, ~250 Carney verbs).
+# Noun reading (graduate-n /ət/) needs lexicon.toml override.
+[[suffix]]
+pattern = "ate"
+shift   = "antepenult"
+cite    = "Cruttenden 2014 ch.11 §11.4"
+
+# ----- Stress-neutral -------------------------------------------------
+
+[[suffix]]
+pattern = "able"
+shift   = "neutral"
+cite    = "Carney 1994 ch.11 §4"
+
+[[suffix]]
+pattern = "ible"
+shift   = "neutral"
+cite    = "Carney 1994 ch.11 §4"
+
+[[suffix]]
+pattern = "ment"
+shift   = "neutral"
+cite    = "Carney 1994 ch.11 §4"
+
+[[suffix]]
+pattern = "ness"
+shift   = "neutral"
+cite    = "Carney 1994 ch.11 §4"
+
+[[suffix]]
+pattern = "less"
+shift   = "neutral"
+cite    = "Carney 1994 ch.11 §4"
+
+[[suffix]]
+pattern = "ful"
+shift   = "neutral"
+cite    = "Carney 1994 ch.11 §4"
+
+[[suffix]]
+pattern = "ous"
+shift   = "neutral"
+cite    = "Carney 1994 ch.11 §4"
+
+[[suffix]]
+pattern = "ly"
+shift   = "neutral"
+cite    = "Carney 1994 ch.11 §4"
+
+[[suffix]]
+pattern = "est"
+shift   = "neutral"
+cite    = "Carney 1994 ch.11 §4"
+
+[[suffix]]
+pattern = "er"
+shift   = "neutral"
+cite    = "Carney 1994 ch.11 §4"
+
+[[suffix]]
+pattern = "ing"
+shift   = "neutral"
+cite    = "Carney 1994 ch.11 §4"
+
+[[suffix]]
+pattern = "ed"
+shift   = "neutral"
+cite    = "Carney 1994 ch.11 §4"
+
+[[suffix]]
+pattern = "s"
+shift   = "neutral"
+cite    = "Carney 1994 ch.11 §4"
+
+[[suffix]]
+pattern = "ish"
+shift   = "neutral"
+cite    = "Carney 1994 ch.11 §4"
+
+[[suffix]]
+pattern = "hood"
+shift   = "neutral"
+cite    = "Carney 1994 ch.11 §4"
+
+[[suffix]]
+pattern = "ship"
+shift   = "neutral"
+cite    = "Carney 1994 ch.11 §4"

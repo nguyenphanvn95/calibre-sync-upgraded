@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Toolbar menu for MetadataEditorActivity. Single action ("Get metadata from ebook") shown as
+     an icon button in the header, right after the title, see
+     MetadataEditorActivity#onCreateOptionsMenu / #onGetMetadataFromEbookClicked. -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_get_metadata_from_ebook"
+        android:icon="@drawable/ic_menu_get_metadata_from_ebook"
+        android:title="@string/metadata_editor_get_from_ebook"
+        android:showAsAction="always" />
+</menu>

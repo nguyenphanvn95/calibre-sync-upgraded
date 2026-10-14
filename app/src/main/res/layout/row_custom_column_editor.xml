@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    1 dòng Custom Column (nhãn cố định + giá trị sửa được) trong màn hình Hiệu đính metadata.
+    Được inflate động, 1 dòng/cột, vào me_custom_columns_container, xem
+    MetadataEditorActivity#populateCustomColumnRows(). Không có nút xóa dòng như
+    row_identifier_editor.xml. Không thể TẠO/XÓA Custom Column từ app này, chỉ sửa giá trị của
+    cột Calibre Desktop đã tạo sẵn (xóa hết chữ trong ô "Giá trị" = xóa giá trị cho sách này,
+    không xóa định nghĩa cột).
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginBottom="8dp">
+
+    <TextView
+        android:id="@+id/cc_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?attr/textAppearanceBodySmall"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/cc_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:maxLines="3"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textColorHint="?android:attr/textColorSecondary"
+        android:backgroundTint="?android:attr/textColorSecondary" />
+
+</LinearLayout>

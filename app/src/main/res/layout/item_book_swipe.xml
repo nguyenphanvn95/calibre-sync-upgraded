@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Detailed-list row for the Device Library tab (BookRecyclerAdapter, TYPE_LIST). Three-layer
+     FrameLayout: swipe_actions_background_start (Listen/Read, revealed by swipe RIGHT),
+     swipe_actions_background (Sync/Share/Delete, revealed by swipe LEFT), and the foreground
+     layer swipe_foreground_content on top, translated by SwipeRevealCallback.
+     Content mirrors book_item.xml (used by the Calibre Library / search tabs, which don't get
+     swipe actions) — kept as a separate file rather than <include>-ing book_item.xml because
+     the thumbnail here needs an extra checkbox-overlay layer for multi-select. -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <include layout="@layout/swipe_actions_background_start" />
+    <include layout="@layout/swipe_actions_background" />
+
+    <LinearLayout
+        android:id="@+id/swipe_foreground_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="?android:attr/colorBackground"
+        android:clickable="true"
+        android:focusable="true">
+
+        <FrameLayout
+            android:layout_width="70dp"
+            android:layout_height="105dp"
+            android:layout_margin="5dp">
+
+            <ImageView
+                android:id="@+id/bi_thumbnail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/dumbbook" />
+
+            <CheckBox
+                android:id="@+id/bi_select_checkbox"
+                android:layout_width="@dimen/selection_checkbox_size"
+                android:layout_height="@dimen/selection_checkbox_size"
+                android:layout_gravity="top|start"
+                android:layout_margin="2dp"
+                android:clickable="false"
+                android:focusable="false"
+                android:visibility="gone" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/bi_title"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="4dp"
+                android:text="Title"
+                android:textSize="15sp"
+                android:textStyle="normal"
+                android:fontFamily="sans-serif-medium"
+                android:letterSpacing="0.0"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:textColor="?android:attr/textColorPrimary" />
+
+            <TextView
+                android:id="@+id/bi_author"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="1dp"
+                android:text="Author"
+                android:textSize="12.5sp"
+                android:textStyle="normal"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textColor="?android:attr/textColorSecondary" />
+
+            <!-- Doan mo ta/comment rut gon (toi da 2 dong), kieu Readest. An hoan toan
+                 (View.GONE) khi sach khong co comment, xem BookRecyclerAdapter. -->
+            <TextView
+                android:id="@+id/bi_comment"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="3dp"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:textSize="12sp"
+                android:lineSpacingExtra="1dp"
+                android:textColor="?android:attr/textColorSecondary"
+                android:visibility="gone"
+                tools:text="Mo ta ngan gon cua cuon sach hien thi toi da hai dong roi cat bot..." />
+
+            <!-- % tien trinh doc, chi chu khong co progress bar do hoa, kieu Readest. An hoan
+                 toan khi sach chua doc / khong tinh duoc % (PDF, CBZ), xem BookRecyclerAdapter. -->
+            <TextView
+                android:id="@+id/bi_progress"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="2dp"
+                android:textSize="11sp"
+                android:textColor="?attr/colorPrimary"
+                android:visibility="gone"
+                tools:text="42%" />
+
+            <TextView
+                android:id="@+id/bi_uuid"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:typeface="monospace"
+                android:visibility="invisible" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>

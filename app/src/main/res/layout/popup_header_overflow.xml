@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Root cua HeaderOverflowMenu.java, thay the androidx.appcompat.widget.PopupMenu#show() mac
+     dinh. Dung CardView de co bo goc + do bong dong bo voi phan con lai cua app (xem
+     app/build.gradle.kts, muc vi sao du an khai bao rieng androidx.cardview). header_overflow_list
+     duoc dien day dong tu code: 1 dong item_header_overflow_entry cho moi MenuItem con hien
+     (isVisible), xen them 1 item_header_overflow_divider moi khi group id doi khac dong lien
+     truoc do, xem HeaderOverflowMenu#show(). -->
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/header_overflow_card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="14dp"
+    app:cardElevation="8dp"
+    app:cardBackgroundColor="?attr/colorButtonNormal"
+    app:cardUseCompatPadding="false">
+
+    <LinearLayout
+        android:id="@+id/header_overflow_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp" />
+
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- "Advanced Speed Settings" cho Doc cho nghe, xem
+     net.mrphan.calibre.reader.tts.TtsSpeedSettingsBottomSheet. Thay the AlertDialog 8 muc co
+     dinh (showSpeedPicker cu) bang slider lien tuc 0.5x-3.0x, kem 2 slider phu "Khoang nghi giua
+     cau" va "Khoang nghi giua doan" (2 pause nay KHONG nhan theo toc do doc, xem
+     TtsController#pauseBeforeSentence), dung cung bo cuc ConstraintLayout + nut back o goc tren
+     trai da dung o dialog_tts_background_music.xml. -->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/colorSurface"
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp"
+    android:paddingTop="16dp"
+    android:paddingBottom="24dp">
+
+    <ImageButton
+        android:id="@+id/tts_speed_settings_back"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@android:drawable/ic_menu_revert"
+        android:tint="?attr/colorControlNormal"
+        android:contentDescription="@string/reader_chrome_close"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tts_speed_settings_header"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/reader_tts_speed_settings_title"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="@id/tts_speed_settings_back"
+        app:layout_constraintBottom_toBottomOf="@id/tts_speed_settings_back"
+        app:layout_constraintStart_toEndOf="@id/tts_speed_settings_back"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Toc do doc: 0.5x - 3.0x, buoc 0.05 -->
+    <TextView
+        android:id="@+id/tts_speed_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/reader_tts_speed_label"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/tts_speed_settings_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tts_speed_value" />
+
+    <TextView
+        android:id="@+id/tts_speed_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="?attr/colorPrimary"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="@id/tts_speed_label"
+        app:layout_constraintBottom_toBottomOf="@id/tts_speed_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="1.25x" />
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/tts_speed_slider"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:valueFrom="0.5"
+        android:valueTo="3.0"
+        android:stepSize="0.05"
+        app:layout_constraintTop_toBottomOf="@id/tts_speed_label"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Khoang nghi giua cau (khong dau doan): 0-600ms, buoc 10ms -->
+    <TextView
+        android:id="@+id/tts_sentence_pause_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/reader_tts_sentence_pause_label"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/tts_speed_slider"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tts_sentence_pause_value" />
+
+    <TextView
+        android:id="@+id/tts_sentence_pause_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="?attr/colorPrimary"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="@id/tts_sentence_pause_label"
+        app:layout_constraintBottom_toBottomOf="@id/tts_sentence_pause_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="150 ms" />
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/tts_sentence_pause_slider"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:valueFrom="0"
+        android:valueTo="600"
+        android:stepSize="10"
+        app:layout_constraintTop_toBottomOf="@id/tts_sentence_pause_label"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Khoang nghi giua doan van: 0-2000ms, buoc 50ms -->
+    <TextView
+        android:id="@+id/tts_paragraph_pause_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/reader_tts_paragraph_pause_label"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/tts_sentence_pause_slider"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tts_paragraph_pause_value" />
+
+    <TextView
+        android:id="@+id/tts_paragraph_pause_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="?attr/colorPrimary"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="@id/tts_paragraph_pause_label"
+        app:layout_constraintBottom_toBottomOf="@id/tts_paragraph_pause_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="300 ms" />
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/tts_paragraph_pause_slider"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:valueFrom="0"
+        android:valueTo="2000"
+        android:stepSize="50"
+        app:layout_constraintTop_toBottomOf="@id/tts_paragraph_pause_label"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tts_pause_hint"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/reader_tts_pause_hint"
+        android:textColor="?android:attr/textColorSecondary"
+        android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@id/tts_paragraph_pause_slider"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

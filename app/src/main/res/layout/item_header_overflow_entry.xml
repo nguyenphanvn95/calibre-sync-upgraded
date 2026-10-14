@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 1 dong trong HeaderOverflowMenu, ung voi 1 MenuItem con hien (icon 22dp + tieu de), dua
+     theo item_reader_menu_entry.xml de dong bo phong cach voi menu 3 gach ngang cua reader.
+     Icon duoc set INVISIBLE (khong GONE) khi MenuItem khong khai bao android:icon, de tieu de van
+     thang hang voi cac dong co icon khac trong cung popup, xem HeaderOverflowMenu#show(). -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:paddingStart="16dp"
+    android:paddingEnd="20dp"
+    android:background="?attr/selectableItemBackground">
+
+    <ImageView
+        android:id="@+id/header_overflow_icon"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:contentDescription="@null" />
+
+    <TextView
+        android:id="@+id/header_overflow_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginStart="18dp"
+        android:textSize="15sp"
+        android:maxLines="2"
+        android:ellipsize="end" />
+
+</LinearLayout>

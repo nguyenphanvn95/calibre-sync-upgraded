@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Noi dung tab "Doc to" cua ReaderSettingsSheet; gom cai dat mac dinh cho lan doc to tiep
+     theo (giong doc, toc do) va loi tat mo hop thoai nhac nen, tai dung TtsSettingsStore/
+     TtsEngineRegistry/BackgroundMusicSettingsDialog da co san, xem ReaderSettingsTtsPage.kt. -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:paddingBottom="24dp">
+
+    <LinearLayout
+        android:id="@+id/reader_settings_tts_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/shape_reader_settings_group_bg"
+        android:paddingStart="14dp"
+        android:paddingEnd="14dp"
+        android:paddingBottom="10dp"
+        android:layout_marginTop="12dp" />
+
+</LinearLayout>

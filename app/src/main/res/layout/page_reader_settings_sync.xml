@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Noi dung tab "Đồng bộ" cua ReaderSettingsSheet: 1 muc duy nhat, chu ky tu
+     dong dong bo tien trinh doc, xem ReaderSettingsSyncPage.kt va
+     prompt-nang-cap-reader-sync.md muc 8. Copy nguyen cau truc tu
+     page_reader_settings_behavior.xml de dong bo voi cac tab khac. -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:paddingBottom="24dp">
+
+    <LinearLayout
+        android:id="@+id/reader_settings_sync_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/shape_reader_settings_group_bg"
+        android:paddingStart="14dp"
+        android:paddingEnd="14dp"
+        android:paddingBottom="10dp"
+        android:layout_marginTop="12dp" />
+
+</LinearLayout>

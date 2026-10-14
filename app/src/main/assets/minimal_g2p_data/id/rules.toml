@@ -1,0 +1,178 @@
+# data/id/rules.toml — Indonesian (id-ID) grapheme → phoneme rules.
+#
+# RFC-011. Indonesian orthography (EYD, post-1972) is almost perfectly
+# phonemic, so the engine is rule-based with a small exception lexicon.
+#
+# Rule application (see crates/g2p-core/src/lang/id.rs — same scan as the
+# Spanish engine):
+#   - Linear left-to-right scan over the lowercased NFC word.
+#   - At each position the FIRST rule (in file order) whose `pattern`
+#     matches as a prefix AND whose `context` holds wins; the scan then
+#     advances by the matched pattern length.
+#   - Multi-char digraphs are listed first so longest-match wins.
+#
+# `context` values (closed enum `IdRuleContext`):
+#   any          always applies (default; may be omitted)
+#   word_final   the matched pattern ends the word
+#
+# Phonology decisions (documented in RFC-011):
+#   - No stress markers: Indonesian stress is not phonemically contrastive;
+#     the acoustic model learns the (predominantly penultimate) prominence.
+#   - Final /k/ stays `k` (the [ʔ] realization is allophonic; encoding the
+#     phoneme keeps loanwords like "bank" consistent).
+#   - Orthographic `e` is ambiguous (/ə/ vs /e/). Default = /ə/ (covers the
+#     high-frequency ber-/ter-/se-/me-/pe-/ke- prefixes and most roots);
+#     word-final `e` = /e/ (sate, sore, tante). Common /e/-in-stem words
+#     are listed in lexicon.toml.
+#   - Diphthongs ai/au/oi are emitted as vowel sequences (`a i`, `a u`,
+#     `o i`) — no dedicated diphthong tokens; VITS learns the transition.
+
+[meta]
+dialect = "id"
+version = 1
+
+# ── Multi-char digraphs (longest-match: must precede single-char rules) ──
+[[rule]]
+pattern = "ngg"
+phoneme = "ŋ g"         # tangga, mangga: /ŋg/ cluster
+
+[[rule]]
+pattern = "ng"
+phoneme = "ŋ"           # dengan, orang
+
+[[rule]]
+pattern = "ny"
+phoneme = "ɲ"           # nyamuk, banyak
+
+[[rule]]
+pattern = "sy"
+phoneme = "ʃ"           # syarat, masyarakat
+
+[[rule]]
+pattern = "kh"
+phoneme = "x"           # khusus, akhir
+
+[[rule]]
+pattern = "gh"
+phoneme = "g"           # rare Arabic loans: maghrib
+
+[[rule]]
+pattern = "oe"
+phoneme = "u"           # pre-1972 orthography in proper names: Soekarno
+
+# ── Single consonants ──
+[[rule]]
+pattern = "c"
+phoneme = "tʃ"          # cinta, baca
+
+[[rule]]
+pattern = "j"
+phoneme = "dʒ"          # jalan, kerja
+
+[[rule]]
+pattern = "y"
+phoneme = "j"           # ya, saya
+
+[[rule]]
+pattern = "q"
+phoneme = "k"           # rare loans: Quran (qu → k u via separate scans)
+
+[[rule]]
+pattern = "v"
+phoneme = "f"           # standard Indonesian merges v → /f/: visa, televisi
+
+[[rule]]
+pattern = "x"
+phoneme = "k s"         # rare loans: taxi (modern spelling: taksi)
+
+[[rule]]
+pattern = "p"
+phoneme = "p"
+
+[[rule]]
+pattern = "b"
+phoneme = "b"
+
+[[rule]]
+pattern = "t"
+phoneme = "t"
+
+[[rule]]
+pattern = "d"
+phoneme = "d"
+
+[[rule]]
+pattern = "k"
+phoneme = "k"
+
+[[rule]]
+pattern = "g"
+phoneme = "g"
+
+[[rule]]
+pattern = "f"
+phoneme = "f"
+
+[[rule]]
+pattern = "z"
+phoneme = "z"           # zaman, izin
+
+[[rule]]
+pattern = "s"
+phoneme = "s"
+
+[[rule]]
+pattern = "h"
+phoneme = "h"
+
+[[rule]]
+pattern = "m"
+phoneme = "m"
+
+[[rule]]
+pattern = "n"
+phoneme = "n"
+
+[[rule]]
+pattern = "l"
+phoneme = "l"
+
+[[rule]]
+pattern = "r"
+phoneme = "r"           # trill/tap — single token; reuses the ES/VI trill
+
+[[rule]]
+pattern = "w"
+phoneme = "w"
+
+# ── Vowels ──
+[[rule]]
+pattern = "a"
+phoneme = "a"
+
+# e: word-final → /e/ (sate, sore); default → /ə/ (besar, ke-, se-).
+# Stem-internal /e/ exceptions (merah, meja, …) live in lexicon.toml.
+[[rule]]
+pattern = "e"
+context = "word_final"
+phoneme = "e"
+
+[[rule]]
+pattern = "e"
+phoneme = "ə"
+
+[[rule]]
+pattern = "é"
+phoneme = "e"           # dictionary-style explicit /e/ marking
+
+[[rule]]
+pattern = "i"
+phoneme = "i"
+
+[[rule]]
+pattern = "o"
+phoneme = "o"
+
+[[rule]]
+pattern = "u"
+phoneme = "u"

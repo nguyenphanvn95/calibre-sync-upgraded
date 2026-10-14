@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Cloud plus open-book glyph for the Calibre Libraries on GDrive card, not a Google logo (see
+     note about avoiding third-party logo reproduction). -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:fillColor="?attr/colorOnSurface"
+        android:pathData="M18.5,10.5c-0.1,-2.5 -2.1,-4.5 -4.6,-4.5c-1.9,0 -3.6,1.2 -4.3,2.9C7.4,9 6,10.5 6,12.3c0,2 1.6,3.7 3.7,3.7h8.3c1.7,0 3,-1.3 3,-3C21,11.5 19.9,10.3 18.5,10.5z" />
+    <path
+        android:fillColor="?attr/colorOnSurface"
+        android:pathData="M8,17.5c0,-0.3 0.2,-0.5 0.5,-0.5H11c0.6,0 1,0.4 1,1v3.5c0,0.3 -0.4,0.5 -0.7,0.3c-0.6,-0.4 -1.4,-0.6 -2.3,-0.6H8.5c-0.3,0 -0.5,-0.2 -0.5,-0.5z" />
+    <path
+        android:fillColor="?attr/colorOnSurface"
+        android:pathData="M16,17.5c0,-0.3 -0.2,-0.5 -0.5,-0.5H13c-0.6,0 -1,0.4 -1,1v3.5c0,0.3 0.4,0.5 0.7,0.3c0.6,-0.4 1.4,-0.6 2.3,-0.6h0.5c0.3,0 0.5,-0.2 0.5,-0.5z" />
+</vector>

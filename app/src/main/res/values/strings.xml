@@ -1,0 +1,1235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name" translatable="false">Calibre Sync</string>
+    <string name="service_name" translatable="false">Calibre Service</string>
+    <string name="status_starting">Starting sync service…</string>
+    <string name="status_discovering">Looking for Calibre servers…</string>
+    <string name="status_no_server_found">No Calibre server found</string>
+    <string name="status_connecting">Connecting to server…</string>
+    <string name="status_syncing">Connected — syncing with Calibre</string>
+    <string name="status_scanning_library">Scanning book library…</string>
+    <string name="status_connected_idle">Connected — waiting</string>
+    <string name="status_disconnected">Disconnected from server</string>
+    <string name="status_not_connected">Not connected</string>
+    <string name="status_wireless_off">Wireless device connection is off</string>
+    <string name="status_error_calibre_busy">Error: Calibre server is busy</string>
+    <string name="status_error_cant_connect">Error: can\'t connect to server</string>
+    <string name="status_error_cant_download">Error: couldn\'t download file</string>
+    <string name="status_error_wrong_password">Error: wrong password</string>
+    <string name="status_error_root_no_access">Error: no access to storage folder</string>
+    <string name="status_error_server">Error: server error</string>
+    <string name="menu_disconnect">End Connection</string>
+    <string name="menu_rediscover">Rediscover Servers</string>
+    <string name="menu_manual_connection">Manual Connection</string>
+    <string name="menu_goback">Go Back</string>
+    <string name="menu_collection_tags">Filter by...</string>
+    <string name="menu_collection_sort_by">Sort by...</string>
+    <string name="collection_filter_by_tags">Tags</string>
+    <string name="collection_filter_by_author">Author</string>
+    <string name="collection_filter_by_reading_status">Reading status</string>
+    <string name="collection_filter_by_series">Series</string>
+    <string name="collection_filter_by_publisher">Publisher</string>
+    <string name="collection_filter_by_rating">Rating</string>
+    <string name="collection_reading_status_new">Not started</string>
+    <string name="collection_reading_status_reading">In progress</string>
+    <string name="collection_reading_status_finished">Finished</string>
+
+    <!-- Shared by SortByDialog (CollectionFragment's Device Library tab and
+         OPDSBrowserFragment's Calibre Library tab); see MetadataDatabaseHelper.SORT_FIELD_*
+         and OPDSPage.SORT_FIELD_* for which fields each tab actually offers. -->
+    <string name="sort_direction_ascending">Sort Ascending</string>
+    <string name="sort_direction_descending">Sort Descending</string>
+    <string name="sort_field_title">Title</string>
+    <string name="sort_field_author">Author</string>
+    <string name="sort_field_rating">Rating</string>
+    <string name="sort_field_published">Published</string>
+    <string name="sort_field_last_modified">Last Modified</string>
+    <string name="sort_field_series">Series</string>
+    <string name="sort_field_recent">Recent</string>
+    <string name="sort_field_last_opened">Last Opened</string>
+    <string name="sort_field_publisher">Publisher</string>
+    <string name="sort_field_file_size">File size</string>
+
+    <string name="menu_search">Search</string>
+    <string name="menu_settings">Settings</string>
+    <string name="menu_collection_books">Show Books</string>
+    <string name="menu_view_mode">Display</string>
+    <string name="view_mode_list">List</string>
+    <string name="view_mode_grid_2">Grid (2 per row)</string>
+    <string name="view_mode_grid_3">Grid (3 per row)</string>
+    <string name="view_mode_grid_4">Grid (4 per row)</string>
+    <string name="view_mode_simple_list">Simple list</string>
+    <string name="view_mode_carousel">Carousel</string>
+    <string name="carousel_previous_book">Previous book</string>
+    <string name="carousel_next_book">Next book</string>
+
+    <string name="action_share">Share</string>
+    <string name="dialog_share_chooser_title">Send book via…</string>
+    <string name="dialog_share_error">Couldn\'t share this book: the file is missing.</string>
+    <string name="dialog_share_partial_failure">%1$d/%2$d books could not be shared.</string>
+
+    <string name="menu_selection_select_all">Select all</string>
+    <string name="menu_selection_exit">Exit selection</string>
+    <string name="selection_count_format">%1$d selected</string>
+    <string name="dialog_delete_selected_title">Delete selected books</string>
+    <string name="dialog_delete_selected_message">Delete %1$d selected book(s)? This cannot be undone.</string>
+    <string name="tab_collection">Device Library</string>
+    <string name="tab_connection">Connection</string>
+    <string name="tab_library">Calibre Library</string>
+
+    <!-- Header + Drawer navigation moi (thay 3 tab co dinh) -->
+    <string name="header_menu_content_desc">Open navigation menu</string>
+    <string name="header_refresh_content_desc">Refresh</string>
+    <string name="header_overflow_content_desc">More options</string>
+    <string name="header_back_content_desc">Back</string>
+    <string name="header_clear_content_desc">Clear search</string>
+    <string name="header_search_hint">Search</string>
+    <string name="nav_calibre_device">Calibre wireless device</string>
+    <string name="nav_device_library">Device Library</string>
+    <string name="nav_calibre_library">Calibre Library</string>
+    <string name="nav_calibre_library_opds">OPDS Catalog</string>
+    <string name="nav_calibre_library_content_server">Content Server (web view)</string>
+    <string name="nav_calibre_gdrive_libraries">Calibre Libraries on GDrive</string>
+    <string name="nav_cloud_sync">Cloud Sync</string>
+    <!-- Muc moi mo ProgressActivity, dat NGAY TRUOC Settings trong nav_drawer_menu.xml (xem
+         MainActivity#setupNavigationDrawer(), case R.id.nav_progress). -->
+    <string name="nav_progress">Progress</string>
+    <!-- Truoc day dung cho AlertDialog "About" don gian — gio la muc mo WhatsNewActivity, xem
+         nav_drawer_menu.xml va MainActivity. about_dialog_message khong con dung nua (giu lai
+         phong khi can dung lai o dau do khac). -->
+    <string name="nav_about">What\'s New</string>
+    <string name="about_dialog_message">Version %1$s</string>
+    <string name="nav_exit">Exit</string>
+    <string name="update_available_title">New version available</string>
+    <string name="update_available_message">Calibre Sync %1$s is available. You are using %2$s.</string>
+    <string name="update_now">Update</string>
+    <string name="update_later">Later</string>
+
+    <!-- Man hinh "Tien trinh" (ProgressActivity, DATABASE_VERSION 17) - thong ke thoi gian doc
+         cong don TOAN THU VIEN theo ngay/tuan/thang/nam, doc lap voi sach con trong thu vien hay
+         khong (khac voi "Thong ke" per-book cua ReadingStatsDialog, van giu nguyen). Xem
+         DailyReadingStatsStore/DailyStatsBarChartView/DailyGoalPickerBottomSheet. -->
+    <string name="progress_title">Progress</string>
+    <string name="progress_tab_week">Week</string>
+    <string name="progress_tab_month">Month</string>
+    <string name="progress_tab_year">Year</string>
+    <string name="progress_tab_all_time">All time</string>
+    <string name="progress_average_per_week">Average per week:</string>
+    <string name="progress_minutes_suffix">min</string>
+    <string name="progress_reading_time_title">Reading time</string>
+    <string name="progress_total">Total</string>
+    <string name="progress_today">Today</string>
+    <string name="progress_daily_goal">Daily goal</string>
+    <string name="progress_streak_title">Day streak</string>
+    <string name="progress_streak_current">Current</string>
+    <string name="progress_streak_record">Record</string>
+    <string name="progress_weekly_activity">Weekly activity</string>
+    <string name="progress_trend_title">Trend</string>
+    <string name="progress_trend_description">Your weekly reading time compared to last week:</string>
+    <string name="progress_previous_period">Previous period</string>
+    <string name="progress_current_period">Current period</string>
+    <string name="progress_not_enough_data">Not enough data to calculate reading percentage</string>
+    <string name="progress_reading_speed_title">Reading speed</string>
+    <string name="progress_reading_speed_unit">wpm</string>
+    <string name="progress_reading_speed_today_format">%1$d today</string>
+    <string name="progress_goal_picker_title">CHOOSE YOUR DAILY READING GOAL</string>
+    <string name="progress_goal_easy">Easy</string>
+    <string name="progress_goal_medium">Medium</string>
+    <string name="progress_goal_hard">Hard</string>
+    <string name="progress_goal_custom">Your value</string>
+    <string name="progress_goal_minutes_format">%1$d min</string>
+    <string name="progress_save">Save</string>
+    <string name="progress_cancel">Cancel</string>
+    <string name="progress_stepper_minus">−</string>
+    <string name="progress_stepper_plus">+</string>
+    <!-- Nhan truc X cho bieu do "Tien trinh" khi xem theo tuan - T7 la ngay dau tuan (khop
+         DailyReadingStatsStore.weekFields = WeekFields.of(DayOfWeek.SATURDAY, 1)). -->
+    <string-array name="progress_weekday_short">
+        <item>Sat</item>
+        <item>Sun</item>
+        <item>Mon</item>
+        <item>Tue</item>
+        <item>Wed</item>
+        <item>Thu</item>
+        <item>Fri</item>
+    </string-array>
+
+
+    <!-- Man hinh "What\'s New" (WhatsNewActivity), thay the AlertDialog "About" cu — tieu de
+         dang "<Ten app> <versionName> (<versionCode>)" giong mock-up Moon+ Reader nguoi dung
+         gui, moi phien ban 1 khoi "What\'s new in vX.X" + danh sach bullet. -->
+    <string name="whats_new_title_format">%1$s %2$s (%3$d)</string>
+    <string name="whats_new_section_format">What\'s new in v%1$s</string>
+    <string-array name="whats_new_versions">
+        <item>3.3.0</item>
+        <item>5.52</item>
+        <item>5.39–5.43</item>
+        <item>5.38</item>
+        <item>5.37</item>
+        <item>5.36</item>
+        <item>5.35</item>
+        <item>5.34</item>
+        <item>5.33</item>
+        <item>5.32</item>
+        <item>5.30</item>
+        <item>5.16</item>
+        <item>5.15</item>
+        <item>5.14</item>
+        <item>4.24</item>
+        <item>4.18</item>
+        <item>4.2</item>
+        <item>3.48–3.51</item>
+    </string-array>
+    <string-array name="whats_new_bullets">
+        <item>• Added Nghe Epub TTS as a read-aloud engine with manual model import\n• Added Waka Toolkit reader fonts, Bookerly, and Waka background image themes\n• Fixed EPUB reader dark mode so the page switches to a dark background with light text\n• Improved read-aloud sentence splitting and Nghe Epub TTS speed handling</item>
+        <item>• New \"Progress\" screen in the navigation menu: reading time by day/week/month/year, day streak with a record, a customizable daily reading goal, week-over-week trend, translation frequency, and estimated reading speed\n• Reading time here is tracked across your whole library and stays even if a book is later removed or edited</item>
+        <item>• More accurate sentence highlighting while using Read Aloud\n• Sleep timer now fades the volume out smoothly before stopping playback\n• Added a preview button to hear a voice sample before choosing it in the voice picker\n• Various reliability improvements to audio playback</item>
+        <item>• Book descriptions with formatting now display properly instead of showing raw HTML tags\n• Publish date and last-updated date now show for Google Drive library books\n• \"Local tags\" button on the book preview page replaced with \"Share\"</item>
+        <item>• Fixed downloading books from the Calibre Content Server browser — tapping Download now saves the book correctly, matching OPDS and Google Drive</item>
+        <item>• Device Library and Calibre Library no longer jump back to the top of the list when returning from a book preview</item>
+        <item>• Added a \"What\'s New\" screen (replacing \"About\") in the navigation drawer\n• Added a new \"Exit\" button to fully close the app</item>
+        <item>• Fixed a bug where editing a book\'s metadata could get silently overwritten by the next library sync\n• Added full editing support for Custom Columns from Calibre Desktop\n• Custom Column values now appear on the book detail screen (toggle in Settings)\n• \"Get metadata from ebook\" now also imports Custom Columns from EPUB files</item>
+        <item>• Sort by: added Series, Rating, Publisher, Publish Date, File Size\n• Filter by: added Series, Publisher, Rating, and any Custom Column\n• Works on both Device Library and Calibre Library</item>
+        <item>• Publisher, Publish Date, Series, Rating, Languages, Identifiers, Date Added and File Size are now saved for every book instead of being dropped during sync\n• Lays the groundwork for full Custom Column support</item>
+        <item>• New \"Scan QR\" button next to \"+ Add another library\" to add a Calibre-on-Google-Drive library\n• Fully on-device scanning, no extra sign-in required</item>
+        <item>• Internal app package renamed\n• Cloud accounts may need to be reconnected once after updating</item>
+        <item>• New Settings switch to hide the title and reading progress in Grid view, for a cleaner cover-only look</item>
+        <item>• New \"Sort by...\" button next to \"Filter by...\", with Ascending/Descending toggle, on both Device Library and Calibre Library</item>
+        <item>• Tapping a connected cloud account now shows library info and a \"Sync now\" button\n• Renaming books no longer creates duplicate uploads to cloud storage\n• Unchanged files are skipped on sync, and large files upload more reliably\n• Fixed background read-aloud audio stopping unexpectedly when switching apps\n• Added a \"+\" button to manually import books into the Device Library</item>
+        <item>• New pronunciation dictionary lets you define how names and words are read aloud, for more natural text-to-speech</item>
+        <item>• Fixed a blank screen when the Calibre server can\'t be reached\n• Now shows a retry option and your saved Google Drive libraries instead</item>
+        <item>• Reader Settings redesigned into one tabbed panel (Font / Layout / Color / Actions / Read Aloud)\n• Google Drive library browser upgraded for faster browsing</item>
+    </string-array>
+
+    <string name="connection_unresolved_ip">Unable to resolve host. Check your connection settings.</string>
+    <string name="connection_invalid_port">Please enter a valid Wireless Device Port and Content Server Port (numbers greater than 0). Find these in Calibre desktop under Preferences \u2192 Sharing.</string>
+    <string name="connection_communicating">Communicating with %s</string>
+    <string name="connection_connecting">Connecting to %s</string>
+    <string name="connection_connected">Connected to %s</string>
+    <string name="connection_disconnected">Disconnected</string>
+    <string name="connection_calibre_busy">Calibre is busy. Connection Refused.</string>
+    <string name="wireless_status_tap_to_connect">Tap to connect manually</string>
+    <string name="wireless_status_searching">Searching server...</string>
+    <string name="wireless_status_connecting">Connecting...</string>
+    <string name="wireless_error_short_busy">Server is busy</string>
+    <string name="wireless_error_short_cant_connect">Can\'t connect</string>
+    <string name="wireless_error_short_wrong_password">Wrong password</string>
+    <string name="wireless_error_short_server_error">Server error</string>
+    <string name="wireless_status_icon_connected_desc">Connected</string>
+    <string name="wireless_status_icon_error_desc">Connection error</string>
+    <string name="dialog_title_connection_settings">Connection Settings</string>
+    <string name="dialog_button_retry">Retry</string>
+    <string name="dialog_button_delete">Delete</string>
+    <string name="dialog_button_cancel">Cancel</string>
+    <string name="dialog_button_connect">Connect</string>
+    <string name="dialog_noserv_title">No Calibre Servers Found</string>
+    <string name="dialog_noserv_message">Check that your Calibre Server is running, that the proper ports are open and then retry.</string>
+    <string name="dialog_deletefile_message">Are you sure you want to delete this file?</string>
+    <string name="dialog_hint_password">Password</string>
+    <string name="dialog_cs_auth_section_title">Content Server login (only if required by Calibre)</string>
+    <string name="dialog_hint_cs_username">Content Server username (optional)</string>
+    <string name="dialog_hint_cs_password">Content Server password (optional)</string>
+    <string name="opds_error_unauthorized">Content Server requires a login, or the username/password is wrong. Please re-enter your credentials.</string>
+    <string name="opds_error_navigation">Couldn\'t open that link. Please try again or check the server\'s address in Settings.</string>
+    <string name="opds_search_not_supported">This server doesn\'t support search. Try browsing by author, tag, or series instead.</string>
+    <string name="dialog_hint_host">Hostname or IP</string>
+    <string name="dialog_hint_wd_port">Wireless Device Port</string>
+    <string name="dialog_hint_cs_port">Content Server Port</string>
+    <string name="dialog_header_title">Calibre Connection\nConfiguration</string>
+    <string name="dialog_header_description">Set up your Calibre Content Server for full library sync.</string>
+    <string name="dialog_hint_wd_port_short">Port</string>
+    <string name="dialog_hint_access_password">Access Password</string>
+    <string name="dialog_helper_access_password">Only required if configured on your server</string>
+    <string name="dialog_switch_remember_password">Remember server access password</string>
+    <string name="wireless_show_details">Show connection details</string>
+    <string name="wireless_hide_details">Hide connection details</string>
+    <string name="dialog_downloading_book">Downloading Book</string>
+    <string name="log_disc_working">Searching for Calibre Servers within WiFi network</string>
+    <string name="log_uploading_file">Uploading file to Calibre</string>
+    <string name="log_wait_for_drive">Scanning filesystem</string>
+    <string name="log_error_dlfile">Error with downloading file. Re-launch application and try again.</string>
+    <string name="log_err_wrong_password">Wrong password entered. Please try again.</string>
+    <string name="log_unable_to_connect">Unable to connect to host. Check your network configuration.</string>
+    <string name="toast_no_app_installed">No compatible application installed to read this file!</string>
+    <string name="toast_root_folder_renamed">Renamed Root Folder. Book list is still the same</string>
+    <string name="toast_root_folder_changed">Changed Root Folder. Book list is now different</string>
+    <string name="toast_download_cancelled">Error with downloading file. Please try again</string>
+    <string name="toast_book_not_available">This book isn\'t downloaded on this device yet</string>
+    <string name="toast_external_book_unsupported_format">This file format isn\'t supported by
+        Calibre Sync\'s reader yet. Please open it with another app.</string>
+    <string name="toast_external_book_open_failed">Couldn\'t open this file</string>
+    <string name="external_book_import_dialog_title">Nhập vào Device Library?</string>
+    <string name="external_book_import_dialog_message">Nhập \"%1$s\" vào Device Library để lưu vị trí đang đọc và xem lại trong danh sách sách trên máy. Có thể xoá sau trong Device Library nếu không cần nữa.</string>
+
+    <!-- Continue reading/listening FAB + auto-resume-on-launch (see ContinueReadingResolver.kt) -->
+    <string name="pref_show_continue_reading_fab_title">Continue reading button</string>
+    <string name="pref_show_continue_reading_fab_summary">Show a floating book button (bottom-right) that jumps straight into the book you most recently read or listened to</string>
+    <string name="pref_auto_resume_last_book_title">Auto-open last book on launch</string>
+    <string name="pref_auto_resume_last_book_summary">When starting the app, automatically resume the book you most recently read or listened to</string>
+    <string name="fab_continue_reading_description">Continue reading</string>
+    <string name="toast_no_recent_book">No recently opened book yet</string>
+    <string name="external_book_import_dialog_positive">Nhập vào</string>
+    <string name="external_book_import_dialog_negative">Chỉ đọc, không nhập</string>
+    <string name="toast_external_book_imported">Đã nhập \"%1$s\" vào Device Library</string>
+    <string name="toast_external_book_import_failed">Không nhập được vào Device Library, vẫn mở sách bình thường</string>
+    <string name="log_error_root_folder_noread">Error: Cannot read Root Folder. Change the Root Folder</string>
+    <string name="log_error_server_reported">Calibre reported an error, see log for details</string>
+
+    <!-- In-app reader (EPUB / PDF / CBZ) -->
+    <string name="reader_toc_title">Table of Contents</string>
+    <string name="reader_search_hint">Nhập từ khoá cần tìm…</string>
+    <string name="reader_search_no_results">Không tìm thấy kết quả nào</string>
+    <string name="reader_font_size_decrease">Decrease font size</string>
+    <string name="reader_font_size_increase">Increase font size</string>
+    <string name="reader_night_mode_toggle">Toggle night mode</string>
+    <string name="reader_error_open_failed">Could not open this book in the reader.</string>
+    <string name="reader_error_drm_protected">This book is DRM-protected and can\'t be opened.</string>
+    <string name="reader_error_unsupported_compression">This book uses a compression format that isn\'t supported.</string>
+    <string name="reader_error_unsupported_kf8">This AZW3 book\'s internal format is too complex to open. Try converting it to EPUB first.</string>
+    <string name="reader_error_unrecognized_format">This file doesn\'t look like a valid ebook, or it may be corrupted.</string>
+    <string name="reader_error_corrupt_file">This book file appears to be corrupted or incomplete.</string>
+    <string name="reader_error_conversion_write_failed">Couldn\'t prepare this book for reading (not enough storage?).</string>
+    <string name="reader_limited_compatibility_notice">This book is shown in limited compatibility mode - some formatting may differ from the original.</string>
+    <string name="reader_page_indicator">%1$d / %2$d</string>
+
+    <!-- Reader "Tìm kiếm" (search) dialog, see net.mrphan.calibre.reader.epub.EpubSearchEngine -->
+    <string name="reader_search_dialog_title">Tìm kiếm trong sách</string>
+    <string name="reader_search_button">Tìm</string>
+    <string name="reader_search_searching">Đang tìm kiếm…</string>
+    <string name="reader_search_result_count">Tìm thấy %1$d kết quả</string>
+    <string name="reader_search_error">Không thể tìm kiếm trong sách này</string>
+
+    <!-- Reader "Thống kê" (reading stats) dialog, see net.mrphan.calibre.reader.stats -->
+    <string name="reader_stats_progress_line">%1$s %2$d / %3$d: đã đọc %4$d%%</string>
+    <string name="reader_stats_current_eta">Thời gian cần để đọc hết %1$s: %2$s</string>
+    <string name="reader_stats_book_eta">Thời gian cần để đọc hết sách: %1$s</string>
+    <string name="reader_stats_last_unit_note">Đây là %1$s cuối cùng của sách.</string>
+    <string name="reader_stats_calculating">Đang tính toán…</string>
+    <string name="reader_stats_almost_done">Sắp xong</string>
+    <string name="reader_stats_duration_hm">%1$d giờ %2$d phút</string>
+    <string name="reader_stats_duration_m">%1$d phút</string>
+    <string name="reader_stats_duration_s">%1$d giây</string>
+    <string name="reader_stats_chapter_times_heading">Thời gian đọc từng %1$s</string>
+    <string name="reader_stats_subheading_measuring">Hãy bắt đầu đọc để tính toán và xem thống kê</string>
+    <string name="reader_stats_subheading_ready">Thời gian đọc thực tế theo từng %1$s của sách</string>
+    <string name="reader_stats_legend_actual">Thời gian thực tế</string>
+    <string name="reader_stats_legend_current">Phần đang đọc</string>
+    <string name="reader_stats_legend_estimated">Ước tính (đang đọc)</string>
+    <string name="reader_stats_legend_other">Phần khác (ước tính)</string>
+    <string name="reader_stats_unit_current">%1$s — đang đọc (%2$d%%)</string>
+    <string name="reader_stats_unit_actual">%1$s — %2$s</string>
+    <string name="reader_stats_unit_unread">%1$s — chưa đọc</string>
+    <string name="reader_stats_explainer_epub">Trong thống kê này, mỗi \"chương\" được hiểu là một tệp trong sách điện tử. Nếu bạn thấy sách có quá ít chương, hãy thử chuyển sang định dạng EPUB bằng Calibre: thông thường thao tác này sẽ tự động tách thành nhiều chương hơn.</string>
+    <string name="reader_stats_explainer_pages">Thống kê này tính theo từng trang. Đọc thêm để hệ thống ghi nhận tốc độ đọc thực tế của bạn và ước tính thời gian chính xác hơn.</string>
+    <string name="reader_stats_reset_button">Đặt lại thống kê</string>
+    <string name="reader_stats_reset_done">Đã đặt lại thống kê đọc sách</string>
+    <string name="reader_stats_unit_chapter">chương</string>
+    <string name="reader_stats_unit_page">trang</string>
+
+    <!-- Reader chrome overlay (shared floating toolbar, see reader/chrome/ReaderChromeOverlay) -->
+    <string name="reader_chrome_close">Đóng</string>
+    <string name="reader_chrome_help">Trợ giúp</string>
+    <string name="reader_chrome_help_unavailable">Trợ giúp sẽ có trong bản cập nhật sau</string>
+    <string name="reader_chrome_percent_label">%1$d%%</string>
+    <string name="reader_chrome_coming_soon">Tính năng %1$s sẽ có trong bản cập nhật sau</string>
+    <string name="reader_chrome_action_unsupported">%1$s: không hỗ trợ định dạng này</string>
+    <string name="reader_header_menu_content_description">Menu</string>
+
+    <!-- Reader chrome toolbar action labels, in registry order -->
+    <string name="reader_action_back">Trở lại</string>
+    <string name="reader_action_forward">Tiếp theo</string>
+    <string name="reader_action_search">Tìm kiếm</string>
+    <string name="reader_action_goto">Lật tới...</string>
+    <string name="reader_action_open">Mở sách</string>
+    <string name="reader_action_reload">Nạp lại</string>
+    <string name="reader_action_edit_book">Hiệu đính</string>
+    <string name="reader_action_toc">Mục lục</string>
+    <string name="reader_action_color_contrast">Màu nền &amp; Tương phản</string>
+    <string name="reader_action_highlights">Đánh dấu chữ</string>
+    <string name="reader_action_bookmarks">Đánh dấu trang</string>
+    <string name="reader_action_reading_stats">Thống kê</string>
+    <string name="reader_action_font_size">Cỡ chữ</string>
+    <string name="reader_action_preferences">Tinh chỉnh</string>
+    <string name="reader_action_read_aloud">Đọc cho nghe</string>
+
+    <string name="reader_color_theme_default">Mặc định</string>
+    <string name="reader_color_theme_waka_light">Waka Light</string>
+    <string name="reader_color_theme_gray">Xám</string>
+    <string name="reader_color_theme_waka_gray">Waka Gray</string>
+    <string name="reader_color_theme_sepia">Sepia</string>
+    <string name="reader_color_theme_grass">Cỏ xanh</string>
+    <string name="reader_color_theme_cherry">Anh đào</string>
+    <string name="reader_color_theme_sky">Bầu trời</string>
+    <string name="reader_color_theme_solarized">Solarized</string>
+    <string name="reader_color_theme_gruvbox">Gruvbox</string>
+    <string name="reader_color_theme_nord">Nord</string>
+    <string name="reader_color_theme_contrast">Tương phản cao</string>
+    <string name="reader_color_theme_sunset">Hoàng hôn</string>
+    <string name="reader_color_theme_waka_dark">Waka Dark</string>
+    <string name="reader_color_theme_waka_bg_black">Waka Black</string>
+    <string name="reader_color_theme_waka_bg_blue">Waka Blue</string>
+    <string name="reader_color_theme_waka_bg_green">Waka Green</string>
+    <string name="reader_color_theme_waka_bg_green2">Waka Green 2</string>
+    <string name="reader_color_theme_waka_bg_white">Waka White Paper</string>
+    <string name="reader_color_theme_waka_bg_scrapbook">Waka Scrapbook</string>
+    <string name="reader_color_theme_waka_bg_sand">Waka Sand</string>
+    <string name="reader_color_theme_waka_bg_moonsky">Waka Moon Sky</string>
+    <string name="reader_color_theme_waka_bg_leaves">Waka Leaves</string>
+    <string name="reader_color_theme_vip_city">VIP City</string>
+    <string name="reader_color_theme_vip_hoa_dep">VIP Flowers</string>
+    <string name="reader_color_theme_vip_hoa_dep_2">VIP Flowers 2</string>
+    <string name="reader_color_theme_vip_hoa_nuoc">VIP Water Flowers</string>
+    <string name="reader_color_theme_vip_nui_non">VIP Mountains</string>
+    <string name="reader_color_theme_vip_nuoc_bien">VIP Sea</string>
+    <string name="reader_color_theme_vip_sua_bien">VIP Jellyfish</string>
+    <string name="reader_color_theme_vip_to_quoc">VIP Homeland</string>
+    <string name="reader_color_theme_vip_to_quoc_2">VIP Homeland 2</string>
+    <string name="reader_color_theme_vip_tuoi_tho">VIP Childhood</string>
+    <string name="reader_color_theme_vip_vo_dinh">VIP Boundless</string>
+
+    <string name="reader_color_settings_brightness">Độ sáng màn hình</string>
+    <string name="reader_color_settings_color">Màu nền</string>
+    <string name="reader_background_opacity_label">Độ đậm ảnh nền</string>
+    <string name="reader_background_opacity_value">Độ đậm ảnh nền: %1$d%%</string>
+    <string name="reader_color_swatch_sample">Aa</string>
+
+    <string name="reader_progress_prev_chapter">Chương trước</string>
+    <string name="reader_progress_next_chapter">Chương sau</string>
+    <string name="reader_progress_no_prev_chapter">Đây đã là chương đầu tiên</string>
+    <string name="reader_progress_no_next_chapter">Đây đã là chương cuối cùng</string>
+    <string name="reader_progress_jump_start">Về đầu sách</string>
+    <string name="reader_progress_jump_end">Về cuối sách</string>
+    <string name="reader_tts_previous_sentence">Câu trước</string>
+    <string name="reader_tts_play_pause">Phát/Tạm dừng</string>
+    <string name="reader_tts_next_sentence">Câu sau</string>
+    <string name="reader_tts_sentence_progress">Câu %1$d / %2$d</string>
+    <string name="reader_tts_speed_label">Tốc độ</string>
+    <string name="reader_tts_speed_value_format">%.1fx</string>
+    <string name="reader_tts_speed_settings_title">Tốc độ nâng cao</string>
+    <string name="reader_tts_speed_precise_value_format">%.2fx</string>
+    <string name="reader_tts_sentence_pause_label">Khoảng nghỉ giữa câu</string>
+    <string name="reader_tts_paragraph_pause_label">Khoảng nghỉ giữa đoạn</string>
+    <string name="reader_tts_pause_ms_format">%d ms</string>
+    <string name="reader_tts_pause_hint">Khoảng nghỉ giữa câu/đoạn không đổi theo tốc độ đọc</string>
+    <string name="reader_tts_voice_label">Giọng đọc</string>
+    <string name="reader_tts_voice_picker_title">Chọn giọng đọc</string>
+    <string name="reader_tts_voice_group_header_format">%1$s: %2$d giọng</string>
+    <string name="reader_tts_voice_item_preview_description">Nghe thử giọng đọc</string>
+    <string name="reader_tts_sleep_timer_label">Hẹn giờ tắt</string>
+    <string name="reader_tts_sleep_timer_off">Tắt</string>
+    <string name="reader_tts_sleep_timer_active_format">Còn %1$d phút</string>
+    <string name="reader_tts_init_failed">Không thể khởi động engine đọc cho nghe trên máy này</string>
+
+    <!-- Mới cho bản nâng cấp v3.0: full player + nhạc nền + phát nền -->
+    <string name="reader_tts_background_music_label">Nhạc nền</string>
+    <string name="reader_tts_background_music_toggle_title">Bật nhạc nền</string>
+    <string name="reader_tts_background_music_toggle_subtitle">Phát/dừng theo TTS</string>
+    <string name="reader_tts_background_music_list_header">Danh sách (%d)</string>
+    <string name="reader_tts_background_music_empty">Chưa có file nhạc nền nào. Nhấn "Thêm file" để chọn.</string>
+    <string name="reader_tts_background_music_add_file">Thêm file</string>
+    <string name="reader_tts_background_music_add_youtube">Thêm YouTube</string>
+    <string name="reader_tts_background_music_youtube_title">Link YouTube</string>
+    <string name="reader_tts_background_music_youtube_hint">Dán link youtube.com hoặc youtu.be</string>
+    <string name="reader_tts_background_music_youtube_invalid">Link YouTube không hợp lệ</string>
+    <string name="reader_tts_background_music_volume_format">%d%%</string>
+    <string name="reader_tts_background_music_remove_track">Xoá file nhạc nền</string>
+    <string name="reader_tts_background_music_pill_value">Nhạc nền</string>
+    <string name="reader_tts_bookmark_chapter">Đánh dấu chương</string>
+    <string name="reader_tts_sherpa_settings_title">Sherpa TTS</string>
+    <string name="reader_tts_sherpa_settings_warning">Sherpa TTS chạy trực tiếp trên thiết bị bằng CPU. Để có trải nghiệm tốt nhất, bạn nên tạo file âm thanh trước khi nghe.</string>
+    <string name="reader_tts_sherpa_thread_section_title">Luồng CPU Sherpa</string>
+    <string name="reader_tts_sherpa_thread_option_format">%1$d luồng CPU</string>
+    <string name="reader_tts_sherpa_thread_recommended_suffix"> · Khuyến nghị</string>
+    <string name="reader_tts_sherpa_thread_option_1_desc">Ổn định nhất và dùng ít CPU hơn.</string>
+    <string name="reader_tts_sherpa_thread_option_2_desc">Có thể tạo giọng nhanh hơn, nhưng dùng CPU và pin nhiều hơn.</string>
+    <string name="reader_tts_sherpa_thread_option_3_desc">Nhanh hơn nữa, chỉ nên dùng trên máy nhiều core.</string>
+    <string name="reader_tts_sherpa_thread_option_4_desc">Nhanh nhất, có thể làm nóng máy hoặc giật các tác vụ khác khi đang đọc.</string>
+    <string name="reader_tts_sherpa_settings_ack">Đã hiểu</string>
+    <string name="tts_chapter_progress_format">Tiến độ: %1$d%%</string>
+    <string name="reader_tts_auto_advance_chapter_label">Tự động chuyển sang chương sau</string>
+    <string name="reader_tts_highlight_current_sentence_label">Tô sáng câu đang đọc</string>
+    <string name="reader_tts_auto_follow_sentence_label">Tự động cuộn/lật trang theo câu đang đọc</string>
+    <string name="reader_tts_normalize_vi_text_label">Chuẩn hóa số, ngày tháng, đơn vị khi đọc</string>
+    <string name="reader_tts_notification_channel_name">Đọc cho nghe</string>
+    <string name="reader_tts_pronunciation_dictionary_title">Từ điển phát âm</string>
+    <string name="tts_dictionary_source_hint">Từ gốc (ví dụ: David)</string>
+    <string name="tts_dictionary_replacement_hint">Phiên âm tiếng Việt (ví dụ: Đa vít)</string>
+    <string name="tts_dictionary_add_title">Thêm từ điển phát âm</string>
+    <string name="tts_dictionary_edit_title">Sửa từ điển phát âm</string>
+    <string name="tts_dictionary_delete_confirm_title">Xóa mục này?</string>
+    <string name="tts_dictionary_delete_confirm_message">Xóa cách phát âm của "%1$s"?</string>
+    <string name="tts_dictionary_delete_confirm_positive">Xóa</string>
+    <string name="tts_dictionary_empty_state">Chưa có từ nào. Bấm nút + để thêm cách phát âm cho tên riêng hoặc từ khó đọc.</string>
+    <string name="reader_action_profiles">Cấu hình tạo sẵn</string>
+    <string name="reader_settings_profiles_group_builtin">Có sẵn</string>
+    <string name="reader_settings_profiles_group_custom">Của bạn</string>
+    <string name="reader_settings_profiles_save_current_title">Lưu cấu hình hiện tại</string>
+    <string name="reader_settings_profiles_save_current_action">Lưu cấu hình hiện tại</string>
+    <string name="reader_settings_profiles_applied">Đã áp dụng cấu hình %1$s</string>
+    <string name="reader_settings_profiles_delete_confirm_title">Xoá cấu hình?</string>
+    <string name="reader_settings_profiles_delete_confirm_action">Xoá</string>
+    <string name="reader_action_fullscreen">Dãn hết màn hình</string>
+    <string name="reader_action_theme_toggle">Chế độ Sáng/Tối</string>
+    <string name="reader_action_reading_mode_page">Đọc theo trang</string>
+    <string name="reader_action_reading_mode_scroll">Đọc cuộn liên tục</string>
+    <string name="reader_action_auto_scroll">Tự động trôi trang</string>
+    <string name="reader_auto_scroll_requires_scroll_mode">Bật chế độ cuộn liên tục trước khi dùng tự động trôi trang</string>
+    <string name="reader_auto_scroll_speed_title">Tốc độ trôi trang</string>
+    <string name="reader_auto_scroll_speed_slow">Chậm</string>
+    <string name="reader_auto_scroll_speed_medium">Vừa</string>
+    <string name="reader_auto_scroll_speed_fast">Nhanh</string>
+    <string name="reader_display_settings_font_size">Cỡ chữ</string>
+    <string name="reader_display_settings_line_height">Giãn dòng</string>
+    <string name="reader_display_settings_font_family">Kiểu chữ</string>
+    <string name="reader_font_family_default">Mặc định</string>
+    <string name="reader_font_family_serif">Chữ có chân (Serif)</string>
+    <string name="reader_font_family_sans_serif">Chữ không chân (Sans-serif)</string>
+    <string name="reader_font_family_open_dyslexic">Dễ đọc (OpenDyslexic)</string>
+    <string name="reader_font_family_cursive">Chữ viết tay (Cursive)</string>
+    <string name="reader_font_family_monospace">Đều nét (Monospace)</string>
+    <string name="reader_bookmarks_title">Đánh dấu trang</string>
+    <string name="reader_bookmarks_add">Đánh dấu vị trí hiện tại</string>
+    <string name="reader_bookmarks_empty">Chưa có trang nào được đánh dấu</string>
+    <string name="reader_bookmarks_empty_title">Bạn chưa có dấu trang nào</string>
+    <string name="reader_bookmarks_empty_body">Các trang bạn đánh dấu sẽ hiển thị tại đây. Vui lòng nhấn nút dấu trang để lưu.</string>
+
+    <!-- Panel Mục lục (Chương/Đánh dấu trang/Ảnh) - xem prompt-nang-cap-muc-luc-panel-truot.md -->
+    <string name="reader_toc_close">Đóng mục lục</string>
+    <string name="reader_toc_sort">Sắp xếp</string>
+    <string name="reader_toc_search">Tìm kiếm</string>
+    <string name="reader_toc_search_hint">Tìm trong danh sách…</string>
+    <string name="reader_toc_tab_chapters">Chương</string>
+    <string name="reader_toc_tab_bookmarks">Đánh dấu trang</string>
+    <string name="reader_toc_tab_images">Ảnh trong sách</string>
+    <string name="reader_toc_chapters_empty">Không tìm thấy chương phù hợp</string>
+    <string name="reader_toc_images_empty">Sách này không có ảnh</string>
+    <string name="reader_toc_image_saved">Đã lưu ảnh vào Downloads</string>
+    <string name="reader_toc_image_save_failed">Không thể lưu ảnh</string>
+    <string name="reader_image_tool_share">Chia sẻ ảnh</string>
+    <string name="reader_image_tool_zoom_in">Phóng to</string>
+    <string name="reader_image_tool_zoom_out">Thu nhỏ</string>
+    <string name="reader_image_tool_prev">Ảnh trước</string>
+    <string name="reader_image_tool_next">Ảnh sau</string>
+    <string name="reader_image_tool_counter">%1$d / %2$d</string>
+    <string name="reader_highlights_title">Đánh dấu chữ &amp; ghi chú</string>
+    <string name="reader_highlights_empty">Chưa có đoạn nào được đánh dấu</string>
+    <string name="reader_notes_empty_title">Bạn chưa có ghi chú nào</string>
+    <string name="reader_notes_empty_body">Nội dung bạn ghi chú sẽ hiển thị tại đây. Vui lòng quét chọn nội dung chữ trong sách để ghi chú.</string>
+    <string name="search_empty_no_results_title">Chưa có cuốn sách nào</string>
+    <string name="reader_highlight_add_note">Thêm ghi chú</string>
+    <string name="reader_highlight_add_failed">Không thể lưu đánh dấu này, thử lại nhé</string>
+    <string name="reader_highlight_color_yellow">Đánh dấu vàng</string>
+    <string name="reader_highlight_color_green">Đánh dấu xanh lá</string>
+    <string name="reader_highlight_color_blue">Đánh dấu xanh dương</string>
+    <string name="reader_highlight_color_pink">Đánh dấu hồng</string>
+    <string name="reader_selection_highlight">Đánh dấu</string>
+    <string name="reader_selection_note">Ghi chú</string>
+    <string name="reader_selection_search">Tìm trong sách</string>
+    <string name="reader_selection_dictionary">Từ điển</string>
+    <string name="reader_selection_translate">Dịch</string>
+    <string name="reader_selection_share">Chia sẻ</string>
+    <string name="reader_selection_cancel">Huỷ</string>
+    <string name="reader_selection_share_chooser_title">Chia sẻ đoạn trích</string>
+    <!-- Menu chọn văn bản kiểu 2 hàng (giống ảnh mẫu) - hàng 1: nút chọn kiểu Gạch chân/Tô nền +
+         4 chấm màu; hàng 2: Xoá/Ghi chú/Sao chép/Từ điển/Dịch. -->
+    <string name="reader_selection_style_underline">Gạch chân</string>
+    <string name="reader_selection_style_fill">Tô nền</string>
+    <string name="reader_selection_action_clear">Xoá</string>
+    <string name="reader_selection_action_copy">Sao chép</string>
+    <string name="reader_selection_copied">Đã sao chép</string>
+    <string name="lookup_translate_title">Dịch</string>
+    <string name="lookup_error_generic">Không tra được. Kiểm tra kết nối mạng và thử lại.</string>
+    <string name="lookup_source_label">Nguồn: %1$s</string>
+    <string name="lookup_retry">Thử lại</string>
+    <string name="lookup_open_browser">Mở trình duyệt</string>
+    <string name="lookup_provider_free_dictionary">Free Dictionary</string>
+    <string name="lookup_provider_wiktionary">Wiktionary</string>
+    <string name="lookup_provider_google_translate">Google Translate</string>
+    <string name="lookup_provider_deepl">DeepL</string>
+    <string name="settings_lookup_category_title">Từ điển và Dịch</string>
+    <string name="settings_lookup_target_language_title">Ngôn ngữ dịch mặc định</string>
+    <string name="settings_lookup_translation_provider_title">Nhà cung cấp dịch</string>
+    <string name="settings_lookup_deepl_key_title">DeepL API Key (tùy chọn)</string>
+    <string name="settings_lookup_deepl_key_summary">Để trống sẽ dùng Google Translate miễn phí. Đăng ký key miễn phí tại deepl.com/pro-api.</string>
+    <!-- Nhóm mục Settings (xem prompt "nhóm thành các khối" - PreferenceCategory trong
+         res/xml/preference.xml). settings_lookup_category_title ở trên đã có sẵn, giữ nguyên. -->
+    <string name="settings_category_appearance_title">Giao diện</string>
+    <string name="settings_category_connection_title">Kết nối</string>
+    <string name="settings_category_storage_title">Lưu trữ</string>
+    <string name="settings_category_tts_title">Đọc to</string>
+    <string name="settings_category_system_title">Hệ thống</string>
+    <!-- Tieu de nhom nho ben trong tab Appearance, dung cho PreferenceCategory de gop nhieu hang
+         lien quan thanh mot the rieng (Tang 2 cua the bo goc App Settings), xem
+         prompt-nang-cap-app-settings-card-ui.md muc 7.4 va CardPreferenceGroupAdapter.kt. -->
+    <string name="pref_appearance_group_display_title">Hiển thị</string>
+    <string name="pref_appearance_group_grid_title">Chế độ lưới</string>
+    <string name="pref_appearance_group_continue_reading_title">Tiếp tục đọc</string>
+    <string name="reader_annotation_delete">Xoá</string>
+    <string name="reader_action_print">Print</string>
+    <string name="reader_print_preparing">Đang chuẩn bị PDF…</string>
+    <string name="reader_print_failed">Không thể tạo PDF cho chương này.</string>
+    <string name="reader_print_untitled_chapter">Chương chưa đặt tên</string>
+    <string name="reader_action_inspector">Inspector</string>
+    <string name="reader_action_reset_interface">Reset interface</string>
+    <string name="reader_action_quit">Quit</string>
+    <string name="note_received">Book Received</string>
+    <string name="note_updated">Book Updated</string>
+    <string name="pref_autocon_title">Enable Auto Connect</string>
+    <string name="pref_autocon_summary">Connects to Calibre Library when Wi-Fi is in range</string>
+    <string name="pref_auto_discover_server_title">Auto-discover Calibre server</string>
+    <string name="pref_auto_discover_server_summary">When off, the app only looks for Calibre servers on the network when you tap "Calibre wireless device" in the navigation menu</string>
+    <string name="pref_wd_address_title">Wireless Device Server Address</string>
+    <string name="pref_cs_url_title">Content Server URL</string>
+    <string name="pref_rootdir_title">Book Folder</string>
+    <string name="pref_rootdir_summary_default">Tap to choose a folder on your device\'s storage</string>
+    <string name="pref_rootdir_dialog">Folder must end with a slash /</string>
+    <string name="pref_debug_title">Show Debug</string>
+    <string name="pref_debug_summary">Select for debug messages to appear in the Connection Tab</string>
+    <string name="pref_filetypes_title">Accepted Filetypes</string>
+    <string name="pref_filetypes_dialog">Please provide a space-separated list of accepted file extensions</string>
+    <string name="pref_book_info_columns_title">Thông tin hiển thị trên trang chi tiết sách</string>
+    <string name="pref_book_open_effect_title">Book open/close effect</string>
+    <string name="pref_book_open_effect_summary">Sliding double-door cover animation when opening (cover splits apart) and closing (cover slides back together) any book</string>
+    <string name="pref_book_preview_fab_action_title">Book preview FAB action</string>
+    <string name="pref_book_preview_fab_action_summary">Choose what the floating button at the bottom-right of the book preview screen does: send to e-reader, open to read, or listen (TTS)</string>
+    <string name="pref_grid_show_title_progress_title">Show title and progress in grid view</string>
+    <string name="pref_grid_show_title_progress_summary">Show the book title and reading progress percentage under the cover when browsing in grid view</string>
+    <string name="pref_grid_display_style_title">Grid view style</string>
+    <string name="pref_grid_display_style_summary">Choose the cover layout used in grid view, for both the Device Library and Calibre Library tabs</string>
+
+    <string name="pref_grid_display_style_option_default">Default</string>
+    <string name="pref_grid_display_style_option_bookshelf">Bookshelf</string>
+    <string name="pref_grid_display_style_option_simple2">Simple 2</string>
+
+    <string-array name="pref_grid_display_style_entries">
+        <item>@string/pref_grid_display_style_option_default</item>
+        <item>@string/pref_grid_display_style_option_bookshelf</item>
+        <item>@string/pref_grid_display_style_option_simple2</item>
+    </string-array>
+
+    <!-- translatable="false": day la gia tri ky thuat map thang sang GridDisplayStyle.prefValue,
+         khong phai van ban hien thi, khong can dich. -->
+    <string-array name="pref_grid_display_style_values" translatable="false">
+        <item>default</item>
+        <item>bookshelf</item>
+        <item>simple2</item>
+    </string-array>
+    <string name="toast_need_all_files_access">Please allow \"All files access\" for Calibre Sync, then tap Book Folder again</string>
+    <string name="toast_need_storage_permission">Storage permission is required to choose a book folder</string>
+    <string name="toast_folder_unsupported">That folder can\'t be used , please pick a folder on your device\'s internal or SD card storage</string>
+    <string name="dialog_title_select_format">Select format to read</string>
+
+    <string name="pref_tts_models_title">TTS Models</string>
+    <string name="pref_tts_models_summary">Manage NghiTTS, Nghe Epub TTS, and Edge TTS voices</string>
+
+    <string name="pref_nghitts_model_dir_title">Thư mục models NghiTTS</string>
+    <string name="pref_nghitts_model_dir_summary_default">Chưa chọn thư mục — chọn thư mục chứa các cặp file .onnx + .onnx.json</string>
+
+    <string name="pref_nghitts_scan_now_title">Quét lại models</string>
+    <string name="pref_nghitts_scan_now_summary">Quét thư mục đã chọn để tìm giọng đọc mới hoặc đã thay đổi</string>
+
+    <string name="pref_nghitts_default_model_title">Giọng NghiTTS mặc định</string>
+    <string name="pref_nghitts_default_model_summary_empty">Chưa có giọng nào được import</string>
+
+    <string name="toast_nghitts_choose_folder_first">Hãy chọn thư mục models trước khi quét</string>
+    <string name="toast_nghitts_scan_result">Đã import %1$d giọng đọc</string>
+    <string name="toast_nghitts_scan_error">Quét thư mục thất bại, xem log để biết chi tiết</string>
+
+    <string name="pref_ngheepubtts_model_dir_title">Nghe Epub TTS model folder</string>
+    <string name="pref_ngheepubtts_model_dir_summary_default">No folder selected - choose the folder containing model-tts.json and .enc files</string>
+
+    <string name="pref_ngheepubtts_scan_now_title">Rescan Nghe Epub models</string>
+    <string name="pref_ngheepubtts_scan_now_summary">Scan the selected folder to import new or changed .enc files</string>
+
+    <string name="pref_ngheepubtts_default_voice_title">Default Nghe Epub voice</string>
+    <string name="pref_ngheepubtts_default_voice_summary_empty">No Nghe Epub voice has been imported</string>
+
+    <string name="toast_ngheepubtts_choose_folder_first">Choose a Nghe Epub models folder before scanning</string>
+    <string name="toast_ngheepubtts_scan_result">Imported %1$d model(s), %2$d voice(s)</string>
+    <string name="toast_ngheepubtts_scan_error">Could not scan the Nghe Epub folder. Check the log for details</string>
+
+    <!-- Content-description cho 2 nut quick toggle o header Navigation Drawer, xem
+         nav_drawer_header.xml + MainActivity#setupDrawerQuickToggles(). -->
+    <string name="drawer_quick_language_description">Đổi ngôn ngữ nhanh</string>
+    <string name="drawer_quick_theme_description">Đổi giao diện sáng/tối nhanh</string>
+
+    <string name="pref_app_theme_title">Chủ đề</string>
+    <string name="pref_app_theme_option_system">Theo hệ thống</string>
+    <string name="pref_app_theme_option_light">Sáng</string>
+    <string name="pref_app_theme_option_dark">Tối</string>
+
+    <!-- translatable="false": đây là giá trị kỹ thuật (map thẳng sang hằng số
+         AppCompatDelegate.MODE_NIGHT_*), không phải văn bản hiển thị, không cần dịch. -->
+    <string-array name="pref_app_theme_values" translatable="false">
+        <item>-1</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="pref_app_theme_entries">
+        <item>@string/pref_app_theme_option_system</item>
+        <item>@string/pref_app_theme_option_light</item>
+        <item>@string/pref_app_theme_option_dark</item>
+    </string-array>
+
+    <string name="pref_app_language_title">Language</string>
+    <string name="pref_app_language_option_system">System default</string>
+
+    <!-- translatable="false": đây là 5 lựa chọn giá trị kỹ thuật (locale tag), không phải văn bản
+         hiển thị, không cần dịch. Item rỗng đầu tiên = "theo hệ thống". -->
+    <string-array name="pref_app_language_values" translatable="false">
+        <item></item>
+        <item>en</item>
+        <item>vi</item>
+        <item>de</item>
+        <item>it</item>
+    </string-array>
+
+    <!-- Mục đầu dùng @string để mỗi locale UI có thể dịch riêng ("Theo hệ thống", "Systemsprache",
+         ...); 4 mục sau là tên tự gọi (autonym) của từng ngôn ngữ, cố tình viết cố định bằng chính
+         ngôn ngữ đó (giống cách hầu hết app làm) nên không đặt trong values-vi/values-de/values-it
+         — nếu đặt riêng theo từng locale sẽ chỉ lặp lại y hệt vì đây vốn đã là tên gọi gốc. -->
+    <string-array name="pref_app_language_entries">
+        <item>@string/pref_app_language_option_system</item>
+        <item>English</item>
+        <item>Tiếng Việt</item>
+        <item>Deutsch</item>
+        <item>Italiano</item>
+    </string-array>
+
+    <!-- translatable="false": ma ISO ngon ngu, gia tri ky thuat cho lookup_target_language
+         (ListPreference trong preference.xml), khong phai van ban hien thi. -->
+    <string-array name="lookup_language_codes" translatable="false">
+        <item>vi</item>
+        <item>en</item>
+        <item>zh</item>
+        <item>ja</item>
+        <item>ko</item>
+        <item>fr</item>
+        <item>de</item>
+    </string-array>
+
+    <!-- Ten tu goi (autonym) cua tung ngon ngu, co dinh, khong dat trong values-vi/... rieng,
+         cung ly do nhu pref_app_language_entries o tren. -->
+    <string-array name="lookup_language_names" translatable="false">
+        <item>Tiếng Việt</item>
+        <item>English</item>
+        <item>中文</item>
+        <item>日本語</item>
+        <item>한국어</item>
+        <item>Français</item>
+        <item>Deutsch</item>
+    </string-array>
+
+    <!-- translatable="false": gia tri ky thuat cho lookup_translation_provider. -->
+    <string-array name="lookup_translation_provider_values" translatable="false">
+        <item>google_free</item>
+        <item>deepl</item>
+    </string-array>
+
+    <string-array name="lookup_translation_provider_entries">
+        <item>@string/lookup_provider_google_translate</item>
+        <item>@string/lookup_provider_deepl</item>
+    </string-array>
+
+    <string name="pref_version_name" translatable="false">Calibre Sync Version</string>
+    <string name="opds_loading">Currently loading %s</string>
+    <string name="opds_more">More...</string>
+    <string name="opds_filter_by">Filter by...</string>
+    <string name="opds_sort_by">Sort by...</string>
+    <string name="opds_select_library">Select Library</string>
+    <string name="opds_library_fallback_name">Calibre Library</string>
+    <string name="opds_library_count_loading">Loading…</string>
+    <string name="opds_library_icon_desc">Library</string>
+    <string name="apprater_title">Rate Calibre Sync</string>
+	<string name="apprater_text">Do you like Calibre Sync? Please post a review. Thank you!</string>
+	<string name="apprater_b1">Sure! I\'ll rate Calibre Sync</string>
+	<string name="apprater_b2">Maybe later</string>
+	<string name="apprater_b3">No, thanks</string>
+    <string name="goodreads_key" translatable="false">Q2Z80mybeO7cQ6NbvZgREQ</string>
+    <string name="search_hint">Search Books</string>
+
+    <!-- Book Detail screen (Calibre Library tab) -->
+    <string name="bookdetail_title">Book Details</string>
+    <string name="bookdetail_cover_desc">Book cover</string>
+    <string name="bookdetail_action_back">Back</string>
+    <string name="bookdetail_action_read_aloud">Listen (TTS)</string>
+    <string name="bookdetail_action_view_cover">View cover</string>
+    <string name="bookdetail_action_tags">Local tags</string>
+    <string name="bookdetail_share_text_fallback">%1$s — %2$s</string>
+    <string name="bookdetail_action_download">Download</string>
+    <string name="bookdetail_action_read">Read</string>
+    <string name="bookdetail_section_publication">Publication info</string>
+    <string name="bookdetail_section_file_info">File info</string>
+    <string name="bookdetail_row_updated">Updated: %1$s</string>
+    <string name="bookdetail_row_language">Language: %1$s</string>
+    <string name="bookdetail_row_publisher">Publisher: %1$s</string>
+    <string name="bookdetail_row_file_with_size">%1$s (%2$s)</string>
+    <string name="bookdetail_row_file_no_size">%1$s</string>
+    <string name="bookdetail_send_to_ereader">Send to E-Reader</string>
+    <string name="bookdetail_feature_coming_soon">Coming soon</string>
+    <string name="bookdetail_action_edit_metadata">Hiệu đính</string>
+    <string name="bookdetail_swipe_first_book">Đây là cuốn sách đầu tiên trong danh sách</string>
+    <string name="bookdetail_swipe_last_book">Đây là cuốn sách cuối cùng trong danh sách</string>
+    <string name="bookdetail_swipe_load_failed">Không tải được cuốn sách này, vui lòng thử lại</string>
+
+    <!-- Metadata Editor screen (MetadataEditorActivity), "Hiệu đính": sửa đầy đủ metadata +
+         ảnh bìa của 1 sách trong Device Library, mở từ DeviceBookDetailActivity's nút
+         "Hiệu đính" (trước đây là "Local tags", nay gộp vào form này). -->
+    <string name="metadata_editor_title">Hiệu đính metadata</string>
+    <string name="metadata_editor_cover_desc">Ảnh bìa sách</string>
+    <string name="metadata_editor_change_cover">Đổi ảnh bìa</string>
+    <string name="metadata_editor_title_field">Tiêu đề</string>
+    <string name="metadata_editor_title_sort">Tiêu đề (sắp xếp)</string>
+    <string name="metadata_editor_authors">Tác giả (cách nhau bởi \" &amp; \")</string>
+    <string name="metadata_editor_author_sort">Tác giả (sắp xếp)</string>
+    <string name="metadata_editor_publisher">Nhà xuất bản</string>
+    <string name="metadata_editor_pubdate">Ngày xuất bản (YYYY-MM-DD)</string>
+    <string name="metadata_editor_language">Ngôn ngữ (mã ISO, vd: vi, en)</string>
+    <string name="metadata_editor_series">Series</string>
+    <string name="metadata_editor_series_index">Số thứ tự trong series</string>
+    <string name="metadata_editor_rating">Đánh giá (0-5)</string>
+    <string name="metadata_editor_tags_section">Thẻ</string>
+    <string name="metadata_editor_identifiers_section">Identifiers</string>
+    <string name="metadata_editor_identifier_key_hint">isbn, asin...</string>
+    <string name="metadata_editor_identifier_value_hint">Giá trị</string>
+    <string name="metadata_editor_remove_identifier">Xóa identifier này</string>
+    <string name="metadata_editor_add_identifier">+ Thêm identifier</string>
+    <string name="metadata_editor_comments">Mô tả</string>
+    <string name="metadata_editor_custom_columns_section">Cột tùy biến (Custom Column)</string>
+    <string name="metadata_editor_custom_columns_hint">Các cột do Calibre Desktop đồng bộ sang. Với cột nhiều giá trị (thể loại,...), cách nhau bằng dấu phẩy. Xóa hết chữ = xóa giá trị cho sách này, không xóa cột.</string>
+    <string name="metadata_editor_save">Lưu</string>
+    <string name="metadata_editor_save_to_file">Lưu vào file ebook</string>
+    <string name="metadata_editor_save_success">Đã lưu metadata</string>
+    <string name="metadata_editor_save_failed">Lưu thất bại: %1$s</string>
+    <string name="metadata_editor_embed_unsupported">Định dạng .%1$s chưa hỗ trợ nhúng trực tiếp — đã lưu vào thư viện, nhưng file gốc chưa được sửa</string>
+    <string name="metadata_editor_cover_pick_failed">Không đọc được ảnh vừa chọn</string>
+    <string name="metadata_editor_get_from_ebook">Lấy metadata từ ebook</string>
+    <string name="metadata_editor_get_from_ebook_no_file">Không tìm thấy file sách trên máy</string>
+    <string name="metadata_editor_get_from_ebook_unsupported">Định dạng .%1$s chưa hỗ trợ lấy metadata tự động</string>
+    <string name="metadata_editor_get_from_ebook_failed">Không đọc được metadata từ file ebook (file có thể bị lỗi hoặc thiếu content.opf)</string>
+    <string name="metadata_editor_get_from_ebook_success">Đã điền metadata từ file ebook</string>
+    <string name="metadata_editor_get_from_ebook_empty">File ebook không có metadata nào để lấy</string>
+
+    <!-- send2ereader (see Send2EreaderClient), the relay service the "Send to E-Reader" action
+         uploads to: its Settings entry, pairing-key dialog, and per-screen status strings. -->
+    <string name="pref_send2ereader_url_title">send2ereader address</string>
+    <string name="pref_send2ereader_url_summary">URL of the send2ereader instance used to send books to your e-reader (Kindle/Kobo)</string>
+    <string name="pref_send2ereader_url_dialog">Enter the full URL, e.g. https://send.djazz.se or your own self-hosted instance. See github.com/daniel-j/send2ereader for setup instructions.</string>
+    <string name="s2e_instance_hint">Open your e-reader\'s own browser and go to: %1$s. It will show a pairing code , enter that code below.</string>
+    <string name="s2e_btn_open_browser">Open this page on my phone (to test)</string>
+    <string name="s2e_key_hint">Pairing code (e.g. 5PAV)</string>
+    <string name="s2e_btn_send">Send</string>
+    <string name="s2e_error_key_required">Please enter the pairing code</string>
+    <string name="s2e_error_upload_failed">Send failed: %1$s</string>
+    <string name="s2e_success">Sent to your e-reader. Check its browser to confirm.</string>
+    <string name="s2e_downloading">Downloading book to send…</string>
+    <string name="s2e_error_download_failed">Download failed, could not send to e-reader</string>
+    <string name="s2e_error_no_file">Book file not found on this device</string>
+
+    <!-- Device Library book detail screen (DeviceBookDetailActivity), metadata rows this
+         screen knows how to label; shares several bookdetail_row_*/bookdetail_section_*
+         strings above (publisher, language, updated, publication/file info) with the Calibre
+         Library tab's book detail screen. -->
+    <string name="devicebd_row_pubdate">Published: %1$s</string>
+    <string name="devicebd_row_series">Series: %1$s</string>
+    <string name="devicebd_row_series_with_index">Series: %1$s (Book %2$s)</string>
+    <string name="devicebd_row_rating">Rating: %1$s</string>
+    <string name="devicebd_row_tags">Tags: %1$s</string>
+    <string name="devicebd_row_identifiers">Identifiers: %1$s</string>
+    <string name="devicebd_row_filename">File: %1$s</string>
+    <string name="devicebd_row_format">Format: %1$s</string>
+    <string name="devicebd_row_size">Size: %1$s</string>
+    <string name="devicebd_row_calibre_id">Calibre ID: %1$s</string>
+    <string name="devicebd_section_other">Other info</string>
+
+    <!-- Device Library empty-state -->
+    <string name="collection_empty_not_configured">No book folder selected yet.</string>
+    <string name="collection_empty_no_permission">Storage permission is needed to read your book folder.</string>
+    <string name="collection_empty_dir_missing">The selected book folder is no longer available.</string>
+    <string name="collection_empty_action_choose_folder">Choose book folder</string>
+    <string name="collection_empty_action_grant_permission">Grant permission</string>
+    <string name="collection_empty_action_choose_again">Choose folder again</string>
+    <string name="collection_empty_no_tags">No tags have been added to any book yet. Open a book\'s details and use "Local tags" to add one.</string>
+    <string name="collection_empty_no_authors">No book on your device has an author set yet.</string>
+    <string name="collection_empty_no_series">No book on your device has series info yet.</string>
+    <string name="collection_empty_no_publishers">No book on your device has a publisher set yet.</string>
+    <string name="collection_empty_no_matches">No book on your device matches this filter yet.</string>
+    <string name="collection_filter_rating_n_plus">%1$d+ stars</string>
+    <string name="collection_empty_reading_status">No book is in this reading status yet.</string>
+    <string name="toast_rescan_found_books">Found %1$d new book(s)</string>
+    <string name="toast_rescan_no_new_books">No new books found</string>
+
+    <!-- Cloud Libraries (Connection tab) -->
+    <string name="cloud_card_wireless_devices">Calibre Wireless Devices</string>
+    <string name="cloud_libraries_header">Calibre Libraries</string>
+    <string name="cloud_sync_header">Cloud sync</string>
+    <string name="cloud_type_google_drive">Google Drive</string>
+    <string name="cloud_type_webdav">WebDAV</string>
+    <string name="cloud_type_ftp">FTP</string>
+    <string name="cloud_card_content_server">Calibre Content Server</string>
+    <string name="cloud_card_webdav_ftp">WebDAV / FTP / NAS</string>
+    <string name="cloud_card_onedrive">OneDrive</string>
+    <string name="cloud_card_box">Box</string>
+    <string name="cloud_card_dropbox">Dropbox</string>
+    <string name="cloud_card_pcloud">pCloud</string>
+    <string name="cloud_card_nextcloud">Nextcloud</string>
+    <string name="cloud_card_owncloud">ownCloud</string>
+    <string name="cloud_card_local_storage">Local storage</string>
+    <string name="cloud_coming_soon_subtitle">Coming in a future update</string>
+    <string name="cloud_coming_soon_message">This feature will be supported in a future update.</string>
+    <string name="cloud_coming_soon_ack">OK</string>
+    <string name="cloud_not_configured">Google Drive isn\'t set up yet. See CLOUD_SETUP.md for how to add a Google Client ID.</string>
+    <string name="cloud_signed_in">Signed in</string>
+    <string name="cloud_not_signed_in">Not signed in</string>
+    <string name="cloud_not_connected">Not connected</string>
+    <string name="cloud_add_remote">Add remote</string>
+    <string name="cloud_add_another_remote">+ Add another remote</string>
+    <string name="cloud_remotes_added">%1$d remote(s) added</string>
+    <string name="content_server_not_connected_hint">Connect to a Calibre Content Server first (Calibre Wireless Devices above).</string>
+    <string name="cloud_login_google">Sign in with Google</string>
+    <string name="cloud_login_google_hint">Sign in to browse and download books from your Google Drive.</string>
+    <string name="cloud_login_google_failed">Google sign-in failed</string>
+    <string name="cloud_login_google_cancelled">Google sign-in was cancelled</string>
+    <string name="gdrive_oauth_title">Sign in to Google Drive</string>
+    <string name="gdrive_oauth_waiting">Opening your browser to sign in…</string>
+    <string name="gdrive_oauth_server_start_failed">Could not start the local sign-in helper. Please try again.</string>
+    <string name="gdrive_oauth_missing_code">Google did not return an authorization code. Please try signing in again.</string>
+    <string name="gdrive_oauth_notification_channel_name">Google Drive sign-in</string>
+    <string name="gdrive_oauth_notification_title">Signing in to Google Drive</string>
+    <string name="gdrive_oauth_notification_text">Waiting for you to finish signing in in Chrome…</string>
+    <string name="cloud_login_google_failed_reason">Google sign-in failed: %1$s</string>
+    <string name="gdrive_disconnect_title">Disconnect Google Drive?</string>
+    <string name="gdrive_disconnect_message">You will need to sign in again to browse or sync books from Google Drive.</string>
+    <string name="gdrive_disconnect_confirm">Disconnect</string>
+    <string name="cloud_login_onedrive_hint">Sign in to browse and download books from your OneDrive.</string>
+    <string name="cloud_login_onedrive">Sign in with Microsoft</string>
+    <string name="cloud_login_onedrive_failed">Microsoft sign-in failed</string>
+    <string name="cloud_login_onedrive_failed_reason">Microsoft sign-in failed: %1$s</string>
+    <string name="cloud_login_onedrive_cancelled">Microsoft sign-in was cancelled</string>
+    <string name="onedrive_oauth_title">Sign in to OneDrive</string>
+    <string name="onedrive_oauth_missing_code">Microsoft did not return an authorization code. Please try signing in again.</string>
+    <string name="onedrive_oauth_server_start_failed">Could not start the local sign-in helper. Please try again.</string>
+    <string name="onedrive_oauth_notification_channel_name">OneDrive sign-in</string>
+    <string name="onedrive_oauth_notification_title">Signing in to OneDrive</string>
+    <string name="onedrive_oauth_notification_text">Waiting for you to finish signing in in Chrome…</string>
+    <string name="onedrive_disconnect_title">Disconnect OneDrive?</string>
+    <string name="onedrive_disconnect_message">You will need to sign in again to browse or sync books from OneDrive.</string>
+    <string name="onedrive_disconnect_confirm">Disconnect</string>
+    <string name="cloud_login_box_hint">Sign in to browse and download books from your Box.</string>
+    <string name="cloud_login_box">Sign in with Box</string>
+    <string name="cloud_login_box_failed">Box sign-in failed</string>
+    <string name="cloud_login_box_failed_reason">Box sign-in failed: %1$s</string>
+    <string name="cloud_login_box_cancelled">Box sign-in was cancelled</string>
+    <string name="box_oauth_title">Sign in to Box</string>
+    <string name="box_oauth_waiting">Opening your browser to sign in…</string>
+    <string name="box_oauth_server_start_failed">Could not start the local sign-in helper. Please try again.</string>
+    <string name="box_oauth_missing_code">Box did not return an authorization code. Please try signing in again.</string>
+    <string name="box_disconnect_title">Disconnect Box?</string>
+    <string name="box_disconnect_message">You will need to sign in again to browse or sync books from Box.</string>
+    <string name="box_disconnect_confirm">Disconnect</string>
+    <string name="cloud_login_dropbox_hint">Sign in to browse and download books from your Dropbox.</string>
+    <string name="cloud_login_dropbox">Sign in with Dropbox</string>
+    <string name="cloud_login_dropbox_failed">Dropbox sign-in failed</string>
+    <string name="cloud_login_dropbox_failed_reason">Dropbox sign-in failed: %1$s</string>
+    <string name="cloud_login_dropbox_cancelled">Dropbox sign-in was cancelled</string>
+    <string name="dropbox_oauth_title">Sign in to Dropbox</string>
+    <string name="dropbox_oauth_waiting">Opening your browser to sign in…</string>
+    <string name="dropbox_oauth_server_start_failed">Could not start the local sign-in helper. Please try again.</string>
+    <string name="dropbox_oauth_missing_code">Dropbox did not return an authorization code. Please try signing in again.</string>
+    <string name="dropbox_disconnect_title">Disconnect Dropbox?</string>
+    <string name="dropbox_disconnect_message">You will need to sign in again to browse or sync books from Dropbox.</string>
+    <string name="dropbox_disconnect_confirm">Disconnect</string>
+    <string name="cloud_oauth_notification_channel_name">Cloud sign-in</string>
+    <string name="cloud_oauth_notification_title">Signing in to %1$s</string>
+    <string name="cloud_oauth_notification_text">Waiting for you to finish signing in in Chrome…</string>
+    <string name="cloud_field_display_name">Name (optional)</string>
+    <string name="cloud_field_host">Host / address</string>
+    <string name="cloud_field_port">Port</string>
+    <string name="cloud_field_username">Username</string>
+    <string name="cloud_field_password">Password</string>
+    <string name="cloud_field_base_path">Base folder path (optional, defaults to /)</string>
+    <string name="cloud_field_use_tls">Use TLS / SSL (WebDAVS / FTPS)</string>
+    <string name="cloud_error_required">Required</string>
+    <string name="cloud_error_invalid_port">Enter a valid port (1-65535)</string>
+    <string name="cloud_test_connection">Test connection</string>
+    <string name="cloud_test_connection_success">Connection successful</string>
+    <string name="cloud_test_connection_failed">Connection failed</string>
+    <string name="cloud_test_connection_failed_reason">Connection failed: %1$s</string>
+    <string name="cloud_remote_menu">More options</string>
+    <string name="cloud_action_browse">Browse</string>
+    <string name="cloud_action_edit">Edit</string>
+    <string name="cloud_action_delete">Delete</string>
+    <string name="cloud_confirm_delete_remote">Delete \"%1$s\"? Its saved password will also be removed.</string>
+    <string name="cloud_remote_not_found">This remote no longer exists.</string>
+    <string name="cloud_folder_empty">This folder is empty</string>
+    <string name="cloud_downloading">Downloading…</string>
+    <string name="cloud_download_success">Downloaded %1$s</string>
+    <string name="cloud_download_failed">Couldn\'t download %1$s</string>
+    <string name="cloud_download_failed_generic">Download failed</string>
+    <string name="cloud_download_success_generic">Book added to your library</string>
+    <string name="cloud_load_folder_failed">Couldn\'t load this folder: %1$s</string>
+    <string name="cloud_unsupported_extension">This file type isn\'t in your Accepted Filetypes (Settings). Download anyway?</string>
+    <string name="cloud_download_anyway">Download anyway</string>
+    <string name="cloud_workspace_doc_unsupported">Google Docs/Sheets/Slides files can\'t be downloaded as ebooks.</string>
+
+    <!-- Calibre Libraries on GDrive: public (non-OAuth) Calibre library browsing via a
+         metadata_public.json file shared "Anyone with the link" on Google Drive. -->
+    <string name="cloud_card_gdrive_opds_library">Libraries on Gdrive</string>
+    <string name="gdrive_opds_libraries_added">%1$d librar(ies) added</string>
+    <string name="gdrive_opds_add_library_title">Add a Calibre library on Google Drive</string>
+    <string name="gdrive_opds_edit_library_title">Edit Calibre library on Google Drive</string>
+    <string name="gdrive_opds_field_display_name">Display name (optional)</string>
+    <string name="gdrive_opds_field_file_id_or_link">metadata_public.json ID or share link</string>
+    <string name="gdrive_opds_add_library_hint">The metadata_public.json file must be shared as \"Anyone with the link\" on Google Drive. Paste the share link or file ID above and the app will check it automatically.</string>
+    <string name="gdrive_opds_validation_found_file">Found file: %1$s</string>
+    <string name="gdrive_opds_validation_reusing_saved">Using the previously saved configuration</string>
+    <string name="gdrive_opds_validation_not_found">File not found on Google Drive. Check the ID/link.</string>
+    <string name="gdrive_opds_validation_not_public">This file hasn\'t been shared publicly (\"Anyone with the link\").</string>
+    <string name="gdrive_opds_validation_quota_exceeded">Google Drive API quota exceeded, try again later.</string>
+    <string name="gdrive_opds_validation_network_error">Couldn\'t connect to Google Drive.</string>
+    <string name="gdrive_opds_validation_unknown_error">Couldn\'t verify this file.</string>
+    <string name="gdrive_opds_add_another_library">+ Add another library</string>
+    <string name="gdrive_opds_qr_scan_button">Scan QR</string>
+    <string name="gdrive_opds_qr_scan_hint">Point the camera at the library\'s QR code</string>
+    <string name="gdrive_opds_qr_camera_permission_denied">Camera permission is required to scan a QR code</string>
+    <string name="gdrive_opds_qr_camera_error">Couldn\'t start the camera</string>
+    <string name="gdrive_opds_qr_invalid_link">This QR code doesn\'t contain a valid Calibre library link</string>
+    <string name="gdrive_opds_confirm_delete_library">Delete \"%1$s\"? Its local synced data will also be removed.</string>
+    <string name="gdrive_opds_not_synced_yet">Not synced yet</string>
+    <string name="gdrive_opds_syncing">Syncing library…</string>
+    <string name="gdrive_opds_sync_failed_generic">Couldn\'t sync this library. Try again later.</string>
+    <string name="gdrive_opds_library_not_found">This library couldn\'t be found (it may have been deleted).</string>
+    <string name="gdrive_opds_refresh_library">Refresh this library</string>
+    <string name="gdrive_opds_refresh_unchanged">This library is already up to date</string>
+    <string name="gdrive_opds_refresh_updated">Library refreshed</string>
+    <string name="gdrive_opds_already_in_device_library_title">Already in your library</string>
+    <string name="gdrive_opds_already_in_device_library_message">This book is already in your Device Library. Download it again anyway?</string>
+    <string name="gdrive_opds_redownload_overwrite">Overwrite</string>
+    <string name="gdrive_opds_redownload_add_new">Add as new copy</string>
+    <string name="gdrive_library_info_title">Thông tin thư viện</string>
+    <string name="gdrive_library_info_sync">Đồng bộ</string>
+    <string name="gdrive_library_info_last_sync">Đồng bộ lần cuối: %1$s</string>
+    <string name="gdrive_library_info_never_synced">Chưa đồng bộ lần nào</string>
+    <string name="gdrive_library_info_books">Sách</string>
+    <string name="gdrive_library_info_authors">Tác giả</string>
+    <string name="gdrive_library_info_tags">Thẻ</string>
+    <string name="gdrive_library_info_publishers">NXB</string>
+    <string name="gdrive_library_info_series">Bộ sách</string>
+    <string name="opds_offline_banner_has_libraries">Couldn\'t connect to the Calibre server. Browse your saved online libraries instead.</string>
+    <string name="opds_offline_banner_no_libraries">Couldn\'t connect to the Calibre server, and no online library has been added yet.</string>
+    <string name="opds_offline_retry_button">Retry</string>
+    <string name="opds_offline_libraries_title">Online Libraries</string>
+    <string name="dialog_save">Save</string>
+
+
+    <!-- Library selection cards: subtitle under each library's name (see LibraryCardAdapter).
+         %s is the total book count already formatted with grouping separators (e.g. "1,234"). -->
+    <plurals name="opds_library_book_count">
+        <item quantity="one">%s book</item>
+        <item quantity="other">%s books</item>
+    </plurals>
+
+    <string name="tag_editor_title">Local tags</string>
+    <string name="tag_editor_input_hint">Type a tag and press Enter</string>
+    <string name="tag_editor_done">Done</string>
+
+    <!-- Device Library <-> Google Drive sync (see DeviceLibrarySyncManager) -->
+    <string name="action_sync_to_cloud">Đồng bộ lên cloud</string>
+    <!-- Shorter label for view_collection_selection_pill.xml (icon + label under it) - the full
+         action_sync_to_cloud text above doesn't fit in a pill button that's 1/5 of screen width. -->
+    <string name="pill_action_sync_short">Đồng bộ</string>
+    <string name="sync_no_cloud_connected">Chưa kết nối cloud nào. Vào tab Kết nối để đăng nhập Google Drive.</string>
+    <string name="sync_started">Đã bắt đầu đồng bộ, chạy nền trong lúc bạn tiếp tục dùng app.</string>
+    <string name="sync_notification_channel_name">Đồng bộ thư viện</string>
+    <string name="sync_notification_title">Đang đồng bộ Device Library</string>
+    <string name="sync_notification_preparing">Đang chuẩn bị...</string>
+    <string name="sync_notification_uploading">Đang tải lên %1$d/%2$d</string>
+    <string name="sync_notification_downloading">Đang tải xuống %1$d/%2$d</string>
+    <string name="menu_background_jobs">Tác vụ chạy nền</string>
+
+    <!-- Manual "Import book" (dấu +) trên toolbar Device Library, xem
+         CollectionFragment#openImportBookPicker() / #importBookFiles(). -->
+    <string name="menu_import_book">Nhập sách thủ công</string>
+    <string name="import_book_progress">Đang nhập %1$d/%2$d sách…</string>
+    <string name="import_book_result_success">Đã nhập %1$d sách</string>
+    <string name="import_book_result_partial">Đã nhập %1$d/%2$d sách (%3$d lỗi)</string>
+    <string name="import_book_result_failed">Không thể nhập sách. Vui lòng kiểm tra định dạng file.</string>
+    <string name="import_book_unsupported_format">Định dạng không được hỗ trợ: %1$s</string>
+    <string name="background_jobs_title">Tác vụ chạy nền</string>
+    <string name="background_jobs_empty">Chưa có tác vụ đồng bộ nào</string>
+    <string name="background_jobs_clear_history">Xóa lịch sử</string>
+    <string name="background_jobs_clear_history_toast">Đã xóa lịch sử tác vụ đã hoàn tất</string>
+    <string name="background_job_title_upload">Tải sách lên %1$s</string>
+    <string name="background_job_title_download">Tải sách xuống từ %1$s</string>
+    <string name="background_job_title_full_sync">Đồng bộ 2 chiều với %1$s</string>
+    <string name="background_job_status_waiting">Đang chờ…</string>
+    <string name="background_job_status_running">Đang xử lý…</string>
+    <string name="background_job_status_done">Hoàn tất</string>
+    <string name="background_job_status_failed">Thất bại</string>
+    <string name="background_job_progress_format">%1$d/%2$d</string>
+    <string name="background_job_content_book_count">%1$d sách</string>
+
+    <!-- Bang "Cai dat doc" hop nhat (ReaderSettingsSheet); xem
+         prompt-nang-cap-reader-settings-tabbed.md. Cac dialog/BottomSheet rieng le cu
+         (dialog_reader_display_settings.xml/dialog_reader_color_settings.xml) va string cua chung
+         khong bi doi, sheet nay chi la mot loi vao THEM. -->
+    <string name="reader_settings_tab_font">Phông chữ</string>
+    <string name="reader_settings_tab_layout">Bố cục</string>
+    <string name="reader_settings_tab_color">Màu</string>
+    <string name="reader_settings_tab_behavior">Thao tác</string>
+    <string name="reader_settings_tab_tts">Đọc to</string>
+    <string name="reader_settings_tab_sync">Đồng bộ</string>
+
+    <!-- Đồng bộ tiến trình đọc trong Reader (menu ☰ + Sync Info + tab Cài đặt),
+         xem prompt-nang-cap-reader-sync.md. -->
+    <string name="reader_sync_never">Chưa đồng bộ</string>
+    <string name="reader_sync_syncing">Đang đồng bộ…</string>
+    <string name="reader_sync_synced_ago">Đã đồng bộ %1$s trước</string>
+    <!-- Do dai thoi gian dung trong reader_sync_synced_ago. KHONG dung
+         DateUtils.getRelativeTimeSpanString() vi ham do tra ve chuoi da co san hau to
+         "ago"/"trước" theo locale HE THONG cua may (vd may de tieng Anh se ra "10 minutes
+         ago"), ghep voi "trước" trong reader_sync_synced_ago o tren se thanh
+         "Đã đồng bộ 10 minutes ago trước", vua sai ngon ngu vua lap hau to. Cac chuoi
+         duoi day CHI la con so + don vi (khong co "trước"/"ago"), luon co dinh tieng Viet
+         bat ke locale may, de ReaderMenuSheet tu ghep vao reader_sync_synced_ago. -->
+    <string name="reader_sync_ago_just_now">vài giây</string>
+    <string name="reader_sync_ago_minutes">%1$d phút</string>
+    <string name="reader_sync_ago_hours">%1$d giờ</string>
+    <string name="reader_sync_ago_days">%1$d ngày</string>
+    <string name="reader_sync_failed">Đồng bộ thất bại, thử lại sau</string>
+    <string name="reader_sync_info_button">Thông tin đồng bộ</string>
+    <string name="reader_sync_info_title">Thông tin đồng bộ</string>
+    <string name="reader_sync_info_back">Đóng</string>
+    <string name="reader_sync_computing">Đang tính…</string>
+    <string name="sync_info_label_fingerprint">MÃ ĐỊNH DANH SÁCH</string>
+    <string name="sync_info_label_title">TIÊU ĐỀ</string>
+    <string name="sync_info_label_author">TÁC GIẢ</string>
+    <string name="sync_info_label_identifiers">MÃ ĐỒNG BỘ (UUID)</string>
+    <string name="sync_info_label_last_synced">LẦN ĐỒNG BỘ GẦN NHẤT</string>
+    <string name="reader_settings_sync_interval">Tự động đồng bộ mỗi</string>
+    <string name="reader_sync_interval_off">Tắt</string>
+    <string name="reader_sync_interval_minutes">%1$d phút</string>
+    <string name="reader_sync_no_cloud_connected_hint">Kết nối Google Drive/Dropbox/OneDrive/… trong tab Kết nối để bật đồng bộ tiến trình đọc</string>
+
+    <string name="reader_settings_group_advanced">Nâng cao</string>
+    <string name="reader_settings_group_spacing">Giãn dòng &amp; đoạn văn</string>
+    <string name="reader_settings_group_tts_engine">Công cụ đọc</string>
+    <string name="reader_settings_group_tts_music">Nhạc nền</string>
+    <string name="reader_settings_group_tts_audio_cache">Bộ nhớ đệm âm thanh</string>
+    <string name="reader_tts_cache_audio_label">Lưu đệm âm thanh đã tổng hợp</string>
+    <string name="reader_tts_cache_storage_limit_label">Giới hạn dung lượng</string>
+    <string name="reader_tts_clear_cache_label">Xoá bộ nhớ đệm</string>
+    <string name="reader_tts_cache_cleared_message">Đã xoá bộ nhớ đệm âm thanh.</string>
+
+    <!-- Tab Phông chữ -->
+    <string name="reader_settings_font_weight">Độ đậm chữ</string>
+    <string name="reader_settings_publisher_styles_override">Ghi đè kiểu của sách</string>
+
+    <!-- Tab Bố cục -->
+    <string name="reader_settings_page_margins">Lề trang</string>
+    <string name="reader_settings_two_column">Chia 2 cột</string>
+    <string name="reader_settings_advanced_requires_override">Bật "Ghi đè kiểu của sách" ở tab Phông chữ để dùng các mục bên dưới</string>
+    <string name="reader_settings_paragraph_spacing">Giãn đoạn văn</string>
+    <string name="reader_settings_paragraph_indent">Thụt đầu dòng</string>
+    <string name="reader_settings_word_spacing">Giãn từ</string>
+    <string name="reader_settings_letter_spacing">Giãn chữ</string>
+    <string name="reader_settings_justify_text">Căn đều hai bên</string>
+    <string name="reader_settings_hyphens">Gạch nối từ</string>
+
+    <!-- Tab Màu -->
+    <string name="reader_settings_color_theme_label">Màu nền</string>
+
+    <!-- Tab Thao tác -->
+    <string name="reader_settings_keep_screen_on">Giữ màn hình sáng khi đọc</string>
+    <string name="reader_settings_screen_orientation_label">Xoay màn hình</string>
+    <string name="reader_screen_orientation_system">Theo hệ thống</string>
+    <string name="reader_screen_orientation_portrait">Dọc</string>
+    <string name="reader_screen_orientation_landscape">Ngang</string>
+    <string name="reader_page_turn_animation_label">Hiệu ứng lật trang</string>
+    <string name="reader_page_turn_animation_none">Mặc định (không hiệu ứng)</string>
+    <string name="reader_page_turn_animation_slide">Trượt</string>
+    <string name="reader_page_turn_animation_curl">Cong trang</string>
+    <string name="reader_settings_group_volume_keys">Phím âm lượng</string>
+    <string name="reader_settings_volume_key_page_turn">Dùng phím âm lượng để lật trang</string>
+    <string name="reader_settings_volume_key_invert">Đảo chiều phím âm lượng</string>
+    <string name="reader_settings_group_edge_tap">Vùng chạm lật trang</string>
+    <string name="reader_settings_edge_tap_page_turn">Chạm mép trái/phải màn hình để lật trang</string>
+    <string name="reader_settings_edge_tap_invert">Đảo chiều vùng chạm</string>
+
+    <!-- Tab Đọc to -->
+    <string name="reader_settings_tts_voice_loading">Đang tải…</string>
+    <string name="reader_settings_tts_open_label">Mở</string>
+    <string name="reader_settings_tts_music_requires_session">Bắt đầu đọc cho nghe trước khi chỉnh nhạc nền</string>
+
+    <!-- Dialog hỏi nhảy tới tiến trình đọc mới hơn phát hiện được từ thiết bị khác sau khi
+         pull-khi-mở-sách (xem EpubReaderActivity#pullProgressOnOpen). -->
+    <string name="reader_remote_progress_found_title">Có tiến trình đọc mới</string>
+    <string name="reader_remote_progress_found_message">Phát hiện vị trí đọc mới hơn từ một thiết bị khác. Chuyển tới đó?</string>
+    <string name="reader_remote_progress_jump">Chuyển tới</string>
+
+    <!-- Dialog "Thông tin thư viện cloud" — mở khi bấm vào 1 card Google Drive/OneDrive/Box/
+         Dropbox ĐÃ đăng nhập trong tab Connection (xem CloudRemoteInfoBottomSheetFragment). -->
+    <string name="cloud_remote_info_sync">Đồng bộ</string>
+    <string name="cloud_remote_info_last_sync">Đồng bộ lần cuối: %1$s</string>
+    <string name="cloud_remote_info_never_synced">Chưa đồng bộ lần nào</string>
+    <string name="cloud_remote_info_books">Sách</string>
+    <string name="cloud_remote_info_authors">Tác giả</string>
+    <string name="cloud_remote_info_tags">Thẻ</string>
+    <string name="cloud_remote_info_browse_files">Duyệt file</string>
+    <string name="cloud_remote_info_disconnect">Ngắt kết nối</string>
+    <string name="cloud_remote_info_sync_success">Đã đồng bộ xong</string>
+    <string name="cloud_remote_info_sync_failed">Đồng bộ thất bại, thử lại sau</string>
+
+    <!-- Nút "Check" dọn file/thư mục mồ côi trên cloud remote (xem RemoteOrphanScanner). -->
+    <string name="cloud_remote_info_check_orphans">Kiểm tra &amp; dọn dẹp</string>
+    <string name="cloud_remote_info_orphan_none_found">Không tìm thấy file/thư mục mồ côi nào</string>
+    <string name="cloud_remote_info_orphan_found_title">Tìm thấy dữ liệu mồ côi</string>
+    <string name="cloud_remote_info_orphan_found_message">Tìm thấy %1$d file rời, %2$d thư mục sách mồ côi và %3$d thư mục sách trùng lặp (cùng 1 sách bị đồng bộ nhầm thành nhiều bản) trên cloud. Bạn có muốn xoá không?</string>
+    <string name="cloud_remote_info_orphan_delete">Xoá</string>
+    <string name="cloud_remote_info_orphan_scan_failed">Kiểm tra thất bại, thử lại sau</string>
+    <string name="cloud_remote_info_orphan_delete_result">Đã xoá %1$d mục</string>
+    <string name="cloud_remote_info_orphan_delete_result_with_failures">Đã xoá %1$d mục, %2$d mục thất bại</string>
+
+    <!-- "Dong bo tu dong" (App-wide Auto Sync) - Settings > Ket noi. Xem AppLibraryAutoSyncPrefs
+         / AppLibraryAutoSyncScheduler / AppLibraryAutoSyncWorker. -->
+    <string name="pref_category_auto_sync_title">Đồng bộ tự động</string>
+    <string name="pref_auto_sync_interval_title">Chu kỳ tự động đồng bộ</string>
+    <string name="pref_auto_sync_interval_off">Tắt</string>
+    <string name="pref_auto_sync_interval_10min">10 phút</string>
+    <string name="pref_auto_sync_interval_15min">15 phút</string>
+    <string name="pref_auto_sync_interval_30min">30 phút</string>
+    <string name="pref_auto_sync_interval_custom">Tùy chỉnh…</string>
+    <string name="pref_auto_sync_interval_custom_title">Số phút tùy chỉnh</string>
+    <string name="pref_auto_sync_interval_custom_dialog_title">Nhập số phút</string>
+    <string name="pref_auto_sync_interval_custom_dialog_hint">Ví dụ: 20</string>
+    <string name="pref_auto_sync_interval_custom_invalid">Vui lòng nhập một số nguyên lớn hơn 0</string>
+    <string name="pref_auto_sync_remotes_title">Server đồng bộ</string>
+    <string name="pref_auto_sync_remotes_summary_none">Chưa kết nối server nào hỗ trợ đồng bộ</string>
+    <string name="pref_auto_sync_remotes_summary_all">Tất cả server đã kết nối (%1$d)</string>
+    <string name="pref_auto_sync_remotes_summary_partial">%1$d / %2$d server đã chọn</string>
+    <string name="menu_device_library_auto_sync_now">Đồng bộ</string>
+    <string name="menu_device_library_auto_sync_last_sync">Đồng bộ · %1$s</string>
+    <string name="menu_device_library_auto_sync_never">Đồng bộ · chưa từng đồng bộ</string>
+    <string name="menu_random_book">Đọc ngẫu nhiên</string>
+    <string name="toast_random_book_empty">Thư viện chưa có sách nào</string>
+    <string name="toast_auto_sync_no_remote_selected">Chưa chọn server nào để đồng bộ. Vào Cài đặt > Kết nối để chọn.</string>
+    <!-- Reader background music (v3.4) -->
+    <string name="reader_background_music_label">Nhạc nền</string>
+    <string name="reader_music_tab_library">Kho nhạc</string>
+    <string name="reader_music_tab_links">Link kho nhạc</string>
+    <string name="reader_music_search_hint">Nhập tên bài hát...</string>
+    <string name="reader_music_empty">Chưa có bài nhạc nào</string>
+    <string name="reader_music_add_link">Thêm link kho nhạc</string>
+    <string name="reader_music_edit_link">Sửa</string>
+    <string name="reader_music_delete_link">Xóa</string>
+    <string name="reader_music_refresh_link">Refresh</string>
+    <string name="reader_music_link_name_hint">Tên kho nhạc</string>
+    <string name="reader_music_link_url_hint">Link JSON</string>
+    <string name="reader_music_link_dialog_title">Link kho nhạc</string>
+    <string name="reader_music_play_pause">Phát / tạm dừng nhạc nền</string>
+    <string name="reader_music_stop">Tắt nhạc nền</string>
+    <string name="reader_music_loading">Đang tải kho nhạc...</string>
+    <string name="reader_music_load_failed">Không tải được kho nhạc</string>
+</resources>

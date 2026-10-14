@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Night counterpart of values/colors.xml's toolbar_background. Dark gray rather than pure
+    black to match Material's own dark surface tone (the same shade the rest of a dark-mode
+    screen's background/cards already use), so the ActionBar blends in instead of standing out.
+-->
+<resources>
+    <color name="toolbar_background">#1E1E1E</color>
+
+    <!-- Ban toi cua color_action_destructive (xem values/colors.xml) - sang hon 1 chut so voi
+         ban Sang de van du tuong phan tren nen toi thay vi bi "chim" mau. -->
+    <color name="color_action_destructive">#EF5350</color>
+
+    <!-- Ban Toi cua man hinh "Dang phat" TTS (xem values/colors.xml) - giu nguyen dung bang mau
+         den/trang/xam ma dialog_tts_player.xml da hardcode truoc khi co token nay, khong doi giao
+         dien Toi hien tai. -->
+    <color name="tts_player_background">#000000</color>
+    <color name="tts_player_on_background">#FFFFFF</color>
+    <color name="tts_player_on_background_secondary">#CCCCCC</color>
+    <color name="tts_player_transport_side_background">#22FFFFFF</color>
+    <color name="tts_player_gradient_center">#66000000</color>
+
+    <!-- Ban Toi cua the menu chon van ban (xem values/colors.xml) - xam dam thay vi trang, chu/icon
+         sang mau thay vi toi, giu cung nguyen tac DayNight AppThemeManager da dung o cac man hinh
+         khac cua reader. -->
+    <color name="reader_selection_card_bg">#FF2C2C2E</color>
+    <color name="reader_selection_card_divider">#33FFFFFF</color>
+    <color name="reader_selection_icon_tint">#FFEBEBF0</color>
+    <color name="reader_selection_label_text">#FFEBEBF0</color>
+</resources>

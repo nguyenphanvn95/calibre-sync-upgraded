@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Width of a single swipe action button (Share / Delete) in item_book_swipe.xml and
+         item_book_simple_swipe.xml. SwipeRevealCallback clamps the swipe distance to
+         2 x this value (both buttons together). -->
+    <dimen name="swipe_action_button_width">72dp</dimen>
+    <dimen name="swipe_actions_width">216dp</dimen>
+    <!-- Chieu rong vung swipe-phai (Nghe sach + Doc sach), 2 nut x swipe_action_button_width. -->
+    <dimen name="swipe_actions_width_start">144dp</dimen>
+
+    <!-- Size of the multi-select checkbox overlay drawn on top of each book cover. -->
+    <dimen name="selection_checkbox_size">28dp</dimen>
+
+    <!-- Chieu rong co dinh cua popup HeaderOverflowMenu (nut 3 cham tren app_header.xml), co
+         dinh (khong wrap_content) de moi trang (Connection/Device Library/Calibre Library) hien
+         cung 1 kich thuoc nhu nhau, giong menu 3 cham cua Edge mobile. -->
+    <dimen name="header_overflow_popup_width">236dp</dimen>
+</resources>

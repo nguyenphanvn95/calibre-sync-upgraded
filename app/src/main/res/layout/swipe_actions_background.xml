@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Included by item_book_swipe.xml / item_book_simple_swipe.xml as the FrameLayout's bottom
+     child. Always the full size of the row; sits BEHIND swipe_foreground_content, which is
+     translated left by SwipeRevealCallback to reveal these three buttons. Do not give this its
+     own id-less merge here, it needs to be a real ViewGroup so match_parent height works
+     the same regardless of which row layout includes it. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:gravity="center_vertical|end"
+    android:background="@android:color/transparent">
+
+    <FrameLayout
+        android:id="@+id/action_sync"
+        android:layout_width="@dimen/swipe_action_button_width"
+        android:layout_height="match_parent"
+        android:background="#2E7D32"
+        android:contentDescription="@string/action_sync_to_cloud">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_menu_cloud_upload" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/action_share"
+        android:layout_width="@dimen/swipe_action_button_width"
+        android:layout_height="match_parent"
+        android:background="#1976D2"
+        android:contentDescription="@string/action_share">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_menu_share" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/action_delete"
+        android:layout_width="@dimen/swipe_action_button_width"
+        android:layout_height="match_parent"
+        android:background="#D32F2F"
+        android:contentDescription="@string/dialog_button_delete">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_menu_delete" />
+    </FrameLayout>
+
+</LinearLayout>
+

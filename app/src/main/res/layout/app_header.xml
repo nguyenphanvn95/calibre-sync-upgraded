@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Header dung chung cho ca 3 trang (Connection, Device Library, Calibre Library). MainActivity
+     doc HeaderContentProvider tu fragment dang hien de dat tieu de, so luong sach, bat/tat nut
+     search, va forward su kien.
+
+     Dung @color/toolbar_background thay vi ?attr/colorPrimary lam nen: xem values/colors.xml,
+     colorPrimary trong app nay da bi dung lam mau accent rieng (badge, vien card, v.v.) chu
+     khong phai mau thanh toolbar - toolbar_background moi la mau thuc su dang duoc ActionBar
+     cu dung (trang o theme sang, xam dam o theme toi, xem values-night/colors.xml). Chu/icon
+     dung ?android:attr/textColorPrimary va ?attr/colorControlNormal de tu dong doi mau theo
+     Light/Dark giong toan bo phan con lai cua app.
+
+     BUG FIX (header/hamburger bi status bar de len, "bien mat" tren man hinh that): ban truoc
+     dung android:fitsSystemWindows="true" ngay tren FrameLayout nay de tu cong them phan dem
+     status bar, nhung tren targetSdk 35 (edge-to-edge bi ep buoc) fitsSystemWindows KHONG con tu
+     dong cong padding tin cay duoc nua - dung y het van de da gap va da fix o BookSearchActivity/
+     BookDetailActivity/DeviceBookDetailActivity (xem comment trong may file do). Fix: BO
+     fitsSystemWindows o day, thay bang ViewCompat.setOnApplyWindowInsetsListener() cong
+     padding-top = inset that su cua status bar ngay trong MainActivity#setupAppHeader() - giong
+     100% pattern da chung minh hoat dong dung o cac Activity tren.
+
+     QUAN TRONG: layout_height cua FrameLayout nay phai la "wrap_content" (KHONG phai "44dp" co
+     dinh nhu ban truoc) - neu de co dinh 44dp roi cong them padding-top vao chinh no, phan
+     padding do se AN VAO trong 44dp co san (chi con lai ~44dp - status bar, tuc la am hoac gan
+     bang 0), bop nghet toan bo hamburger/tieu de xuong con vai dp, nhin cung y het "bien mat" du
+     inset co duoc cong dung hay khong. wrap_content moi giup padding-top cong THEM vao ben ngoai:
+     tong chieu cao thuc te = padding-top (status bar) + 44dp (chieu cao "that" cua header_state_
+     normal/header_state_search o duoi, dat co dinh 44dp thay vi match_parent). -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_header"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/toolbar_background"
+    android:elevation="4dp">
+
+    <!-- Trang thai thuong: hamburger, tieu de + so sach, search, refresh, 3 cham -->
+    <LinearLayout
+        android:id="@+id/header_state_normal"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <ImageButton
+            android:id="@+id/btn_header_menu"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="2dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/header_menu_content_desc"
+            android:tint="?attr/colorControlNormal"
+            android:src="@drawable/ic_menu_hamburger" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="6dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_header_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:text="One's Custom" />
+
+            <TextView
+                android:id="@+id/tv_header_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.7"
+                android:textColor="?android:attr/textColorSecondary"
+                android:textSize="11sp"
+                android:visibility="gone"
+                tools:text="25 books"
+                tools:visibility="visible" />
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/btn_header_search"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/menu_search"
+            android:tint="?attr/colorControlNormal"
+            android:src="@drawable/ic_menu_search" />
+
+        <ImageButton
+            android:id="@+id/btn_header_refresh"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/header_refresh_content_desc"
+            android:tint="?attr/colorControlNormal"
+            android:src="@drawable/ic_menu_rediscover" />
+
+        <ImageButton
+            android:id="@+id/btn_header_overflow"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="2dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/header_overflow_content_desc"
+            android:tint="?attr/colorControlNormal"
+            android:src="@drawable/ic_menu_overflow" />
+    </LinearLayout>
+
+    <!-- Trang thai search: nut back, o nhap tu khoa full-width, nut xoa -->
+    <LinearLayout
+        android:id="@+id/header_state_search"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:visibility="gone">
+
+        <ImageButton
+            android:id="@+id/btn_header_search_back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="2dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/header_back_content_desc"
+            android:tint="?attr/colorControlNormal"
+            android:src="@drawable/ic_button_prev" />
+
+        <EditText
+            android:id="@+id/et_header_search"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="@string/header_search_hint"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textColorHint="?android:attr/textColorSecondary" />
+
+        <ImageButton
+            android:id="@+id/btn_header_search_clear"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="2dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/header_clear_content_desc"
+            android:tint="?attr/colorControlNormal"
+            android:src="@drawable/ic_close" />
+    </LinearLayout>
+</FrameLayout>

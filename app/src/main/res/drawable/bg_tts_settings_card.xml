@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Card nền bo góc, dùng cho khối toggle "Bật nhạc nền" trong
+     dialog_tts_background_music.xml, dùng ?attr/colorButtonNormal (DayNight-aware) thay vì
+     một màu tối cố định để tự đổi đúng theo Sáng/Tối. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="?attr/colorButtonNormal" />
+    <corners android:radius="16dp" />
+</shape>

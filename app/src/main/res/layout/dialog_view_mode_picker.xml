@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Body of ViewModePickerDialog: a plain vertical stack of item_view_mode_dialog_row rows,
+     added programmatically in ViewModePickerDialog#show(). Wrapped in a ScrollView purely as a
+     safety net for very short/small screens; with at most 6 rows (Device Library's List /
+     Grid x3 / Simple list / Carousel) it should never actually need to scroll. -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/view_mode_row_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp" />
+
+</ScrollView>

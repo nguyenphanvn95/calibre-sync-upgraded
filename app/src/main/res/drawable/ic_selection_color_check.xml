@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Small white-circle + dark checkmark badge shown over whichever color dot in row 1 of
+     view_reader_selection_pill_toolbar.xml was last tapped (see
+     ReaderSelectionToolbar#refreshColorCheckBadge) , mirrors the checkmark on the green dot in
+     the reference screenshot. Deliberately small (14dp) and positioned bottom-end of the 28dp dot
+     via layout_gravity, not centered over it, so the dot's own color stays visible. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="14dp"
+    android:height="14dp"
+    android:viewportWidth="14"
+    android:viewportHeight="14">
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M7,0.5 C10.6,0.5 13.5,3.4 13.5,7 C13.5,10.6 10.6,13.5 7,13.5 C3.4,13.5 0.5,10.6 0.5,7 C0.5,3.4 3.4,0.5 7,0.5 Z" />
+    <path
+        android:fillColor="#FF2E7D32"
+        android:pathData="M5.9,9.1 L3.9,7.1 L3.1,7.9 L5.9,10.7 L10.9,5.7 L10.1,4.9 Z" />
+</vector>

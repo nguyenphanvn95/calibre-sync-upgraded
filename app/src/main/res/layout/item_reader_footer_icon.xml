@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/reader_footer_item_root"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="?attr/selectableItemBackgroundBorderless"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp">
+
+    <ImageView
+        android:id="@+id/reader_footer_item_icon"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:tint="#FFFFFF"
+        android:contentDescription="@null" />
+
+    <!-- Nang cap: an nhan chu (chi con icon) de thanh footer gon hon, kieu Readest. Van giu
+         TextView (chi GONE, khong xoa) vi ReaderChromeOverlay.buildFooterIcons() van set text
+         vao day — dung lam contentDescription/accessibility label cho icon phia tren, va de de
+         bat lai neu sau nay muon hien nhan tro lai. -->
+    <TextView
+        android:id="@+id/reader_footer_item_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:textColor="#CCCCCC"
+        android:textSize="10sp"
+        android:maxLines="1"
+        android:visibility="gone" />
+
+</LinearLayout>

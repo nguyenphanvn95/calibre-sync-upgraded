@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Solid "A" glyph for the Highlight (fill-background) style-toggle button in row 1 of
+     view_reader_selection_pill_toolbar.xml , see ReaderHighlightStyle.FILL, the app's original
+     (and still default) highlight rendering. Uses android:tint from ReaderSelectionPillStyleButton
+     so it reads white-on-green when selector_reader_selection_style_bg's active state is showing,
+     same as ic_selection_style_underline.xml's tint in its unselected state. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="M7,17 L11.2,6.5 C11.5,5.8 12.5,5.8 12.8,6.5 L17,17 L14.9,17 L13.8,14.1 L10.2,14.1 L9.1,17 Z M10.8,12.3 L13.2,12.3 L12,9.1 Z" />
+</vector>

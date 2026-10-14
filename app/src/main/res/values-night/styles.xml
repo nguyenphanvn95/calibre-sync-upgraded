@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Style *resources* are picked wholesale per night qualifier (unlike individual color/dimen
+    values, they don't merge with the values/ version), so AppTheme and AppActionBar have to be
+    redeclared here in full rather than just overriding the one changed item.
+-->
+<resources>
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight">
+        <item name="actionBarStyle">@style/AppActionBar</item>
+        <item name="android:statusBarColor">@color/toolbar_background</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+    <!-- Widget.MaterialComponents.ActionBar.Solid (the plain, non-"Light" variant) gives light
+         title text/icons, the right contrast for the dark-gray bar. -->
+    <style name="AppActionBar" parent="Widget.MaterialComponents.ActionBar.Solid">
+        <item name="background">@color/toolbar_background</item>
+    </style>
+</resources>

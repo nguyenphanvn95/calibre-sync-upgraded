@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Header mong cua reader, phong cach Readest: nhom icon trai, tieu de giua, nhom icon phai + nut
+  mo menu + nut dong. An/hien theo tap giua man hinh, dieu khien boi ReaderChromeOverlay (khong
+  doi logic tap).
+  LUU Y: khong dung hai dau gach ngang lien tiep ben trong noi dung comment XML, vi pham quy tac
+  XML se lam aapt2 bao loi khi build.
+-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/reader_header_bar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="48dp"
+    android:layout_gravity="top"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:background="@color/reader_chrome_bar_dark"
+    android:paddingStart="4dp"
+    android:paddingEnd="8dp"
+    android:elevation="4dp"
+    android:clickable="true">
+
+    <LinearLayout
+        android:id="@+id/reader_header_start_group"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center_vertical" />
+
+    <TextView
+        android:id="@+id/reader_header_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:singleLine="true"
+        android:ellipsize="end" />
+
+    <LinearLayout
+        android:id="@+id/reader_header_end_group"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center_vertical" />
+
+    <ImageButton
+        android:id="@+id/reader_header_menu_button"
+        style="?attr/borderlessButtonStyle"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:padding="8dp"
+        android:src="@drawable/ic_reader_menu_hamburger"
+        android:tint="#FFFFFF"
+        android:contentDescription="@string/reader_header_menu_content_description"
+        android:background="?attr/selectableItemBackgroundBorderless" />
+
+    <ImageButton
+        android:id="@+id/reader_header_close_button"
+        style="?attr/borderlessButtonStyle"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:padding="8dp"
+        android:src="@drawable/ic_reader_close"
+        android:tint="#FFFFFF"
+        android:contentDescription="@string/reader_chrome_close"
+        android:background="?attr/selectableItemBackgroundBorderless" />
+
+</LinearLayout>

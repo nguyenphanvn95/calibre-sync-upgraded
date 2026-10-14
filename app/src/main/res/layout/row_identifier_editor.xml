@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    1 dòng identifier (key/value) trong màn hình Hiệu đính metadata, ví dụ "isbn" / "9780...".
+    Được inflate động, nhiều dòng, vào me_identifiers_container, xem
+    MetadataEditorActivity#addIdentifierRow. Nút xóa (ri_btn_remove) gỡ chính dòng này khỏi
+    container, không xóa gì trên đĩa cho tới khi người dùng bấm Lưu.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:layout_marginBottom="8dp">
+
+    <EditText
+        android:id="@+id/ri_key"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:hint="@string/metadata_editor_identifier_key_hint"
+        android:inputType="text"
+        android:maxLines="1" />
+
+    <EditText
+        android:id="@+id/ri_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:layout_marginStart="8dp"
+        android:hint="@string/metadata_editor_identifier_value_hint"
+        android:inputType="text"
+        android:maxLines="1" />
+
+    <ImageButton
+        android:id="@+id/ri_btn_remove"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="4dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="6dp"
+        android:src="@drawable/ic_menu_delete"
+        android:contentDescription="@string/metadata_editor_remove_identifier" />
+
+</LinearLayout>

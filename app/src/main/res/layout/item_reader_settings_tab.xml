@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Mot icon-tab trong thanh tab ngang cua ReaderSettingsSheet (Aa / luoi / co mau / ban tay /
+     loa); background la selector state_selected, xem shape_reader_settings_tab_selected_bg.xml.
+     contentDescription duoc gan bang code (ReaderSettingsSheet.buildTabRow()) tu
+     ReaderSettingsTab.label vi khong co gia tri co dinh o day. -->
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="48dp"
+    android:layout_height="48dp"
+    android:layout_margin="4dp"
+    android:background="@drawable/shape_reader_settings_tab_selected_bg"
+    android:foreground="?attr/selectableItemBackgroundBorderless"
+    android:clickable="true"
+    android:focusable="true">
+
+    <ImageView
+        android:id="@+id/reader_settings_tab_icon"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_gravity="center"
+        android:contentDescription="@null" />
+
+</FrameLayout>

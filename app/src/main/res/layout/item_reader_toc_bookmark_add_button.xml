@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ImageButton
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/reader_toc_bookmark_add_button"
+    style="?attr/borderlessButtonStyle"
+    android:layout_width="44dp"
+    android:layout_height="44dp"
+    android:padding="10dp"
+    android:src="@android:drawable/ic_input_add"
+    android:contentDescription="@string/reader_bookmarks_add"
+    android:background="?attr/selectableItemBackgroundBorderless" />

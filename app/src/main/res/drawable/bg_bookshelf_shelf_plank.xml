@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Canh ke go (shelf plank) ma cuon sach dung len tren, dat ngay duoi anh bia trong moi o
+     Grid khi chon style "Gia sach". Lop giua la mat go chinh (gradient), lop tren cung la vien
+     sang mo phong canh ke, lop duoi cung la bong do tao chieu sau. -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="90"
+                android:startColor="@color/bookshelf_plank_top"
+                android:endColor="@color/bookshelf_plank_bottom" />
+        </shape>
+    </item>
+    <item
+        android:height="1dp"
+        android:gravity="top">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/bookshelf_plank_highlight" />
+        </shape>
+    </item>
+    <item
+        android:height="2dp"
+        android:gravity="bottom">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/bookshelf_plank_shadow" />
+        </shape>
+    </item>
+</layer-list>

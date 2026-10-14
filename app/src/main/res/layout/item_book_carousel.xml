@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Carousel cell (BookRecyclerAdapter, TYPE_CAROUSEL). Used with a horizontal RecyclerView
+     (LinearLayoutManager.HORIZONTAL) + PagerSnapHelper in CollectionFragment, upgraded to a 3D
+     "Cover Flow" carousel by CarouselCoverFlowEffect (per-child scale/alpha/rotationY/elevation,
+     applied from CollectionFragment#applyCarouselChrome). The negative start/end margins let
+     neighbouring cards overlap once clipChildren/clipToPadding are turned off on the parent
+     RecyclerView (see activity_collection.xml) , required for the cover-flow look where side
+     cards peek out from behind the centered one instead of sitting flush next to it.
+     bi_title/bi_author/bi_uuid are kept (GONE) purely so BookRecyclerAdapter#onBindViewHolder
+     can keep calling findViewById/setText without any TYPE_CAROUSEL-specific null branches ,
+     the actual title/author for the centered book is shown once, below the whole carousel, by
+     col_carousel_title/col_carousel_author in activity_collection.xml. No swipe actions (same
+     reasoning as the grid cell); long-press still enters multi-select.
+
+     Card width bumped 180dp -> 260dp (thumbnail height 260dp -> 380dp, keeping the same ~2:3
+     cover aspect ratio) so the centered book reads as a proper "hero" cover close to the full
+     screen width, matching the reference "TUYỂN TẬP SÁCH" screenshot, instead of looking small
+     and off-center. Negative overlap margins scaled proportionally (-20dp -> -30dp) so
+     neighbouring cards still peek out by roughly the same fraction of the new, larger card width.
+     IMPORTANT: the 260dp width here MUST stay in sync with the CAROUSEL_ITEM_WIDTH_DP constant
+     in CollectionFragment.java (used to compute the RecyclerView's side padding that centers the
+     first/last card) , see applyCarouselChrome(). -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="260dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="-30dp"
+    android:layout_marginEnd="-30dp"
+    android:layout_marginTop="12dp"
+    android:layout_marginBottom="12dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/bi_cover_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="14dp"
+        app:cardElevation="2dp"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:contentPadding="0dp">
+
+        <ImageView
+            android:id="@+id/bi_thumbnail"
+            android:layout_width="match_parent"
+            android:layout_height="380dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/dumbbook" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Kept for BookRecyclerAdapter compatibility only , always GONE in Carousel mode, see the
+         class comment above. -->
+    <TextView
+        android:id="@+id/bi_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Title"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/bi_author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Author"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/bi_uuid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <CheckBox
+        android:id="@+id/bi_select_checkbox"
+        android:layout_width="@dimen/selection_checkbox_size"
+        android:layout_height="@dimen/selection_checkbox_size"
+        android:layout_gravity="top|start"
+        android:layout_margin="6dp"
+        android:clickable="false"
+        android:focusable="false"
+        android:visibility="gone" />
+
+</FrameLayout>

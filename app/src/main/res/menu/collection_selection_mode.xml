@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Swapped in by CollectionFragment#onCreateOptionsMenu in place of collection_fragment.xml
+     while multi-select is active (see mSelectionMode), via getActivity().invalidateOptionsMenu().
+     "Exit selection" doubles as the visual/behavioral equivalent of a contextual action bar's
+     back arrow, since this app's Fragments share the host Activity's single ActionBar rather
+     than using a separate ActionMode. -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 2 group chi phuc vu HeaderOverflowMenu (popup 3 cham khi dang mSelectionMode): tac vu
+         tren tap sach da chon o tren, tach vach roi den "Xoa" (to mau canh bao, xem
+         CollectionFragment#onHeaderOverflowClick() -> setDestructiveItemIds) va "Thoat chon" o
+         duoi. -->
+    <group android:id="@+id/group_overflow_selection_main">
+        <item
+            android:id="@+id/menu_selection_select_all"
+            android:title="@string/menu_selection_select_all"
+            android:icon="@drawable/ic_menu_select_all"
+            android:showAsAction="ifRoom" />
+        <item
+            android:id="@+id/menu_selection_sync"
+            android:title="@string/action_sync_to_cloud"
+            android:icon="@drawable/ic_menu_cloud_upload"
+            android:showAsAction="ifRoom" />
+        <item
+            android:id="@+id/menu_selection_share"
+            android:title="@string/action_share"
+            android:icon="@drawable/ic_menu_share"
+            android:showAsAction="ifRoom" />
+    </group>
+    <group android:id="@+id/group_overflow_selection_other">
+        <item
+            android:id="@+id/menu_selection_delete"
+            android:title="@string/dialog_button_delete"
+            android:icon="@drawable/ic_menu_delete"
+            android:showAsAction="ifRoom" />
+        <item
+            android:id="@+id/menu_selection_exit"
+            android:title="@string/menu_selection_exit"
+            android:icon="@drawable/ic_menu_exit"
+            android:showAsAction="never" />
+    </group>
+</menu>

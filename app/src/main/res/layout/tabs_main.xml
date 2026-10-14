@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Root layout moi cho MainActivity: DrawerLayout thay the BottomNavigationView lam dieu huong
+    chinh (nang cap header gon + Drawer duy nhat, xem
+    prompt-nang-cap-header-drawer-navigation.md). BottomNavigationView cu duoc giu lai o duoi
+    (an di, height 0dp) de tai su dung nguyen ven BarTabManager#switchTab() ma khong phai viet
+    lai co che chuyen Fragment - xem MainActivity#setupNavigationDrawer().
+
+    BUG FIX: KHONG dat android:fitsSystemWindows="true" o DrawerLayout nay (nhu ban truoc).
+    NavigationView ben duoi da tu dat fitsSystemWindows="true" rieng cho no de tu dinh vi header
+    cua Drawer ngay duoi status bar (hoat dong dung, xem nav_drawer_header.xml). Neu dat THEM
+    fitsSystemWindows o ca DrawerLayout cha, status bar inset se bi cong don o 2 cap (DrawerLayout
+    dem 1 lan, NavigationView doc rieng 1 lan nua) lam app_header.xml o duoi trong day/lech hon
+    binh thuong.
+
+    app_header.xml (include ben duoi) KHONG con dung fitsSystemWindows nua (tren targetSdk 35 no
+    khong cong padding tin cay duoc, xem chu thich chi tiet trong app_header.xml) - MainActivity#
+    setupAppHeader() tu cong padding-top = inset status bar bang tay qua
+    ViewCompat.setOnApplyWindowInsetsListener() thay vi dua vao XML attribute nay.
+-->
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/app_header" />
+
+        <FrameLayout
+            android:id="@+id/bartab_content"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <!-- Nut "Tiep tuc doc/nghe" (giong Moon Reader): mo sach/tien trinh nghe gan day
+                 nhat. An/hien theo pref_show_continue_reading_fab (xem
+                 MainActivity#refreshContinueReadingFabVisibility). android:visibility="gone" mac
+                 dinh de tranh nhap nhay 1 frame truoc khi Java kip doc preference va goi
+                 setVisibility() thuc su trong onCreate/onStart. -->
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_continue_reading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="20dp"
+                android:src="@drawable/ic_action_open_book"
+                android:contentDescription="@string/fab_continue_reading_description"
+                android:visibility="gone"
+                app:elevation="6dp" />
+
+        </FrameLayout>
+
+        <!-- Giu nguyen BottomNavigationView de BarTabManager.setup() khong bi vo, nhung an hoan
+             toan khoi UI: nguoi dung chi dieu huong qua Drawer tu gio. -->
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bartab_bottomnav"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_drawer_header"
+        app:menu="@menu/nav_drawer_menu" />
+
+</androidx.drawerlayout.widget.DrawerLayout>

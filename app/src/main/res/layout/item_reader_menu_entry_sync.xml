@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Hang Sync trong menu ☰ Reader: 2 vung bam rieng, than hang (dong bo
+     ngay) va nut info tron (mo BookSyncInfoSheet), xem ReaderMenuSheet. Copy
+     bo cuc 48dp/20dp tu item_reader_menu_entry.xml de dong bo voi cac hang
+     khac trong cung sheet. -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:paddingStart="20dp"
+    android:paddingEnd="8dp"
+    android:background="?attr/selectableItemBackground">
+
+    <ImageView
+        android:id="@+id/reader_menu_sync_icon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@android:drawable/ic_popup_sync"
+        android:contentDescription="@null" />
+
+    <ProgressBar
+        android:id="@+id/reader_menu_sync_progress"
+        style="?android:attr/progressBarStyleSmall"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="20dp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/reader_menu_sync_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginStart="20dp"
+        android:textSize="15sp" />
+
+    <ImageButton
+        android:id="@+id/reader_menu_sync_info"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/ic_action_info"
+        android:contentDescription="@string/reader_sync_info_button" />
+
+</LinearLayout>

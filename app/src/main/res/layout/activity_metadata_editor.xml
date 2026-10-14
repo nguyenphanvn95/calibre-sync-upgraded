@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Form Hiệu đính metadata cho 1 sách trong Device Library, xem MetadataEditorActivity.
+    Dùng AppTheme mặc định (có ActionBar, hiển thị nút back nhờ parentActivityName trong
+    AndroidManifest) thay vì Theme.Calibre.BookDetail, vì đây là 1 form nhập liệu thường, không
+    cần cover full-bleed như BookDetailActivity/DeviceBookDetailActivity.
+
+    BUG FIX (ảnh bìa/nội dung form bị thanh ActionBar + status bar đè lên, chỉ thấy nửa dưới ảnh
+    bìa): trên targetSdk 35, edge-to-edge bị ép buộc và ScrollView này chưa từng consume system
+    bar insets, nên nội dung được vẽ tràn lên phía sau ActionBar/status bar thay vì bắt đầu ngay
+    dưới đó , cùng nguyên nhân và cách fix đã áp dụng cho lvBookList trong BookSearchActivity
+    (xem comment trong file đó). Fix: id "me_scroll" ở đây để MetadataEditorActivity#onCreate
+    cộng thêm padding-top/bottom = inset system bar thật sự qua
+    ViewCompat.setOnApplyWindowInsetsListener(), thay vì để mặc định.
+-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/me_scroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/me_cover_preview"
+            android:layout_width="120dp"
+            android:layout_height="180dp"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="centerCrop"
+            android:src="@drawable/dumbbook"
+            android:contentDescription="@string/metadata_editor_cover_desc" />
+
+        <Button
+            android:id="@+id/me_btn_change_cover"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="4dp"
+            android:text="@string/metadata_editor_change_cover" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/me_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/metadata_editor_title_field" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/me_title_sort"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/metadata_editor_title_sort" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/me_authors"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/metadata_editor_authors" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/me_author_sort"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/metadata_editor_author_sort" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/me_publisher"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/metadata_editor_publisher" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/me_pubdate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/metadata_editor_pubdate" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/me_language"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/metadata_editor_language" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/me_series"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/metadata_editor_series" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/me_series_index"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/metadata_editor_series_index"
+                android:inputType="numberDecimal" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/me_rating"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/metadata_editor_rating"
+                android:inputType="numberDecimal" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            style="@style/BookDetailSectionTitle"
+            android:layout_marginTop="12dp"
+            android:text="@string/metadata_editor_tags_section" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/me_tags_chip_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:chipSpacingHorizontal="8dp"
+            app:chipSpacingVertical="4dp" />
+
+        <AutoCompleteTextView
+            android:id="@+id/me_tags_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/tag_editor_input_hint"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:completionThreshold="1" />
+
+        <TextView
+            style="@style/BookDetailSectionTitle"
+            android:layout_marginTop="12dp"
+            android:text="@string/metadata_editor_identifiers_section" />
+
+        <LinearLayout
+            android:id="@+id/me_identifiers_container"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/me_btn_add_identifier"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/metadata_editor_add_identifier" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/me_comments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/metadata_editor_comments"
+                android:inputType="textMultiLine"
+                android:minLines="4"
+                android:gravity="top" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/me_custom_columns_title"
+            style="@style/BookDetailSectionTitle"
+            android:layout_marginTop="12dp"
+            android:text="@string/metadata_editor_custom_columns_section"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/me_custom_columns_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:text="@string/metadata_editor_custom_columns_hint"
+            android:textAppearance="?attr/textAppearanceBodySmall"
+            android:textColor="?android:attr/textColorSecondary"
+            android:visibility="gone" />
+
+        <!-- Điền động 1 dòng/cột trong onCreate(), xem MetadataEditorActivity#populateCustomColumnRows()
+             và row_custom_column_editor.xml cho hình dạng 1 dòng. Không có cột nào cố định sẵn ở
+             đây vì Custom Column là danh sách động, khác nhau giữa từng thư viện Calibre. -->
+        <LinearLayout
+            android:id="@+id/me_custom_columns_container"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/me_btn_save"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="4dp"
+                android:text="@string/metadata_editor_save" />
+
+            <Button
+                android:id="@+id/me_btn_save_to_file"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="4dp"
+                android:text="@string/metadata_editor_save_to_file" />
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/me_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:visibility="gone" />
+
+    </LinearLayout>
+</ScrollView>

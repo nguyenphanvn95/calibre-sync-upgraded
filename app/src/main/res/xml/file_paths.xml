@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Exposes the book folder (see StorageUtils#getRootDirectory / CalibreService#setDirectories)
+     via a content:// Uri through FileProvider, so that ACTION_VIEW intents to book-reading apps
+     don't hit FileUriExposedException (API 24+). The book folder can now be anywhere the user
+     picked on shared storage (see SettingsActivity's folder picker), not just the app-specific
+     dir, so this exposes the whole primary storage root rather than only that one subfolder. -->
+<paths xmlns:tools="http://schemas.android.com/tools">
+    <external-files-path name="ebooks" path="." />
+    <external-path name="ebooks_ext" path="." />
+    <cache-path name="images" path="images" />
+</paths>

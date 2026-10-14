@@ -1,0 +1,9 @@
+# Vietnamese override dictionary (custom phoneme set, space-separated tokens).
+# The rule-based G2P handles standard orthography; use this for irregular
+# words, loanwords, or dialect-specific pronunciations.
+#
+# Example format:
+# [word]
+# hà = "h a T2"
+# nội = "n o j T4"
+[word]

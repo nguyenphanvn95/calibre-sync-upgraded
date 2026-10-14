@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- app:actionLayout cho muc "Cloud Sync" trong nav_drawer_menu.xml. Chi la 1 mui ten chevron
+     nho o cuoi dong bao hieu accordion co the xoe ra , ban than ImageView nay KHONG tu bat
+     su kien click (khong set onClickListener/clickable), nen tap vao bat ky dau tren dong "Cloud
+     Sync" (ke ca vao chinh mui ten) van kich hoat NavigationView#setNavigationItemSelectedListener
+     nhu binh thuong. MainActivity#toggleCloudSyncSubmenu() lay lai view nay qua
+     MenuItem#getActionView() roi xoay 90 do (view.animate().rotation(...)) de doi chieu
+     phai ">" (thu gon) <-> huong xuong "v" (dang xoe) , xem ic_library_chevron.xml, von la 1 mui
+     ten tro phai duoc tai su dung, khong tao icon rieng.
+
+     BUG FIX: ImageView truoc day khong co FrameLayout bao ngoai , NavigationView dat actionView
+     vao 1 container co chieu cao rieng (thuong la wrap_content sat voi kich thuoc actionView),
+     nen "android:layout_gravity=center_vertical" tren chinh ImageView khong co "khong gian" du
+     cao de tu can giua, dan den mui ten bi lech thap/cao hon so voi icon+text ben trai cua dong
+     "Cloud Sync" (so voi cac dong menu khac khong co actionView). Boc ImageView trong 1
+     FrameLayout match_parent + gravity="center_vertical|end" de dam bao luon can giua chinh xac
+     theo chieu cao THAT SU cua ca dong, bat ke container ma NavigationView tao ra o ben ngoai
+     co hanh vi do chieu cao nhu the nao. -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_vertical">
+
+    <ImageView
+        android:id="@+id/ivCloudSyncChevron"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_gravity="center_vertical|end"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/ic_library_chevron"
+        android:tint="?attr/colorControlNormal"
+        android:importantForAccessibility="no"
+        android:focusable="false"
+        android:clickable="false" />
+
+</FrameLayout>

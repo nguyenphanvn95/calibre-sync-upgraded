@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Icon tint for the two style-toggle buttons (row 1, view_reader_selection_pill_toolbar.xml), 
+     paired with selector_reader_selection_style_bg.xml's green state_selected background: white
+     while selected so the "A" glyph stays legible on the green fill, and the normal DayNight
+     icon color (@color/reader_selection_icon_tint) otherwise. -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="#FFFFFFFF" android:state_selected="true" />
+    <item android:color="@color/reader_selection_icon_tint" />
+</selector>

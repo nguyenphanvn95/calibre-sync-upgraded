@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Compact Waka-style floating selection toolbar: one rounded white capsule with color dots,
+     a divider, icon-only actions, and a close button. Function wiring lives in
+     ReaderSelectionToolbar#bindPillButtons. -->
+<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/reader_selection_pill_root"
+    android:layout_width="330dp"
+    android:layout_height="wrap_content"
+    android:fillViewport="false"
+    android:overScrollMode="never"
+    android:scrollbars="none">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@drawable/shape_reader_selection_card_bg"
+        android:elevation="12dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp">
+
+        <View
+            android:id="@+id/reader_selection_color_red"
+            style="@style/ReaderSelectionColorDot" />
+
+        <View
+            android:id="@+id/reader_selection_color_yellow"
+            style="@style/ReaderSelectionColorDot"
+            android:layout_marginStart="12dp" />
+
+        <View
+            android:id="@+id/reader_selection_color_green"
+            style="@style/ReaderSelectionColorDot"
+            android:layout_marginStart="12dp" />
+
+        <View
+            android:id="@+id/reader_selection_color_purple"
+            style="@style/ReaderSelectionColorDot"
+            android:layout_marginStart="12dp" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="34dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/reader_selection_card_divider" />
+
+        <ImageButton
+            android:id="@+id/reader_selection_action_note"
+            style="@style/ReaderSelectionCapsuleIconButton"
+            android:src="@drawable/ic_selection_note"
+            android:contentDescription="@string/reader_selection_note" />
+
+        <ImageButton
+            android:id="@+id/reader_selection_action_copy"
+            style="@style/ReaderSelectionCapsuleIconButton"
+            android:src="@drawable/ic_selection_copy"
+            android:contentDescription="@string/reader_selection_action_copy" />
+
+        <ImageButton
+            android:id="@+id/reader_selection_action_dictionary"
+            style="@style/ReaderSelectionCapsuleIconButton"
+            android:src="@drawable/ic_selection_dictionary"
+            android:contentDescription="@string/reader_selection_dictionary" />
+
+        <ImageButton
+            android:id="@+id/reader_selection_action_translate"
+            style="@style/ReaderSelectionCapsuleIconButton"
+            android:src="@drawable/ic_selection_translate"
+            android:contentDescription="@string/reader_selection_translate" />
+
+        <ImageButton
+            android:id="@+id/reader_selection_action_clear"
+            style="@style/ReaderSelectionCapsuleIconButton"
+            android:src="@drawable/ic_selection_clear"
+            android:contentDescription="@string/reader_selection_action_clear" />
+
+    </LinearLayout>
+</HorizontalScrollView>

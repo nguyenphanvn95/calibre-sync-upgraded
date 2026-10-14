@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Sun/moon glyph for ThemeToggleAction (quick Light/Dark switch). Placeholder geometry, same
+     spirit as ic_reader_bookmark.xml/ic_reader_highlight.xml, a simple circle with a crescent
+     bite taken out of it, recognizable as a day/night switch at 20-24dp without needing two
+     separate drawables for the two states (ReaderMenuSheet only shows/hides the check mark next
+     to this same icon to indicate which state is active, see item_reader_menu_entry_toggle.xml). -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="M12,4 A8,8 0 1,0 20,12 A6.5,6.5 0 0,1 12,4 Z" />
+</vector>

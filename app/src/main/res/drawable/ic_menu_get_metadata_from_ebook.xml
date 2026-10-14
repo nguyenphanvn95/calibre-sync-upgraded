@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- "Get metadata from ebook" action in MetadataEditorActivity's toolbar (see
+     R.menu.metadata_editor / menu_get_metadata_from_ebook). A dog-eared document/page silhouette
+     with a down-arrow cut out of the middle (fillType="evenOdd" makes the arrow subpath a hole
+     in the page subpath), reading as "pull data out of the file" rather than a generic
+     book/library icon. Built from straight-line path segments only (no curves) so the shape is
+     easy to verify by eye against the 24x24 viewport instead of relying on a memorized/copied
+     icon glyph. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24"
+    android:tint="#FFFFFF">
+    <path
+        android:fillColor="#FF000000"
+        android:fillType="evenOdd"
+        android:pathData="M5,3L15,3L19,7L19,21L5,21Z M11,9L13,9L13,14L11,14Z M9,14L15,14L12,18Z" />
+</vector>

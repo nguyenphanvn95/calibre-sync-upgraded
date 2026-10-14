@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Icon huy chuong cho "Ky luc" trong the "Chuoi ngay" (anh mau anh 1/4: huy chuong vang voi
+     day ruy bang do/xanh, so "1" o giua). Rieng cho man hinh Tien trinh nen mau co dinh. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="20dp"
+    android:height="20dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:fillColor="#E8837A"
+        android:pathData="M8,2 L11,9 L7,9 Z" />
+    <path
+        android:fillColor="#4C8DFF"
+        android:pathData="M16,2 L13,9 L17,9 Z" />
+    <path
+        android:fillColor="#F2A93C"
+        android:pathData="M12,7A7,7 0,1 0,19 14,7 7,0 0,0 12,7zM12,19A5,5 0,1 1,17 14,5 5,0 0,1 12,19z" />
+    <path
+        android:fillColor="#D98A1E"
+        android:pathData="M12,10.6L13,13.2L15.6,13.4L13.6,15L14.3,17.5L12,16.1L9.7,17.5L10.4,15L8.4,13.4L11,13.2Z" />
+</vector>

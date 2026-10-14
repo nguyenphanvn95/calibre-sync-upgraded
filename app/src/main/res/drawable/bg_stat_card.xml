@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Nền bo góc cho từng ô thống kê (Sách/Tác giả/Thẻ/NXB/Bộ sách) trong
+     bottomsheet_cloud_remote_info.xml và bottomsheet_gdrive_library_info.xml. Dùng
+     ?attr/colorButtonNormal (DayNight-aware) giống shape_sync_info_field_bg.xml và
+     bg_tts_settings_card.xml đã có trong dự án - KHÔNG dùng ?attr/colorSurfaceVariant vì app
+     dùng Theme.MaterialComponents.DayNight, attr đó chỉ tồn tại ở theme Material3. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <corners android:radius="14dp" />
+    <solid android:color="?attr/colorButtonNormal" />
+</shape>

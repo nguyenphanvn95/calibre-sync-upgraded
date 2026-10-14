@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Noi dung tab "Luu tru" cua SettingsActivity (xem SettingsTab.STORAGE). Tach ra tu
+  <PreferenceCategory android:title="@string/settings_category_storage_title"> trong
+  res/xml/preference.xml (nay da xoa), giu nguyen android:key cua tung muc.
+-->
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <Preference android:title="@string/pref_rootdir_title" android:key="pref_root_dir_path" android:summary="@string/pref_rootdir_summary_default" />
+    <MultiSelectListPreference android:title="@string/pref_filetypes_title"
+        android:key="pref_filetypes"
+        android:entries="@array/pref_filetypes_entries"
+        android:entryValues="@array/pref_filetypes_values"
+        android:defaultValue="@array/pref_filetypes_default" />
+
+</PreferenceScreen>

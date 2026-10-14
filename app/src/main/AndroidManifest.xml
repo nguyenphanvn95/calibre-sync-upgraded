@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Wi-Fi discovery / TCP+UDP socket to the Calibre "Smart Device" driver -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <!-- Quét mã QR để nhập thư viện Calibre-on-GDrive (xem QrScanActivity). required="false" vì
+         đây chỉ là 1 cách nhập bổ sung, không bắt buộc để dùng app; máy không có camera vẫn
+         nhập thủ công ID/link được. -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
+    <!-- Required from API 34 to declare what kind of work a foreground service does -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
+    <!-- For TtsPlaybackService (Đọc cho nghe chạy nền) - xem
+         net.mrphan.calibre.reader.tts.TtsPlaybackService. -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
+
+    <!-- Required from API 33 to post the "book received" notification (the persistent
+         foreground-service notification itself does not need this permission, only ad-hoc
+         notify() calls do — see CalibreService#ui_notify) -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <!-- Lets the user pick any folder on shared storage (see Settings > "Choose book folder")
+         instead of being confined to the app-specific external files directory. Below API 30
+         the classic runtime permissions below are requested/used instead; MANAGE_EXTERNAL_STORAGE
+         itself only exists from API 30 and is granted via the special "All files access" system
+         Settings screen (see SettingsActivity#requestAllFilesAccess), not a normal runtime
+         permission dialog. This is a personal/sideloaded-build app, not distributed on Play
+         Store, where this permission is heavily restricted; see README "Known issues". -->
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="29" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="29" />
+
+    <!-- Package visibility (API 30+, targetSdk 35 here): android.speech.tts.TextToSpeech needs to
+         enumerate installed TTS engines internally (e.g. to pick a default) - without this
+         <queries> block that lookup silently returns nothing on API 30+, see
+         net.mrphan.calibre.reader.tts.SystemTtsEngine. -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.TTS_SERVICE" />
+        </intent>
+    </queries>
+
+    <application
+        android:name=".CalibreSyncApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:theme="@style/AppTheme"
+        tools:targetApi="34">
+
+        <activity
+            android:name="net.mrphan.calibre.MainActivity"
+            android:exported="true"
+            android:icon="@drawable/ic_launcher"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name="net.mrphan.calibre.CalibreService"
+            android:exported="false"
+            android:foregroundServiceType="dataSync"
+            android:icon="@drawable/ic_launcher"
+            android:label="@string/service_name" />
+
+        <!-- Bắt buộc để AndroidX tự lưu lại ngôn ngữ đã chọn (AppCompatDelegate
+             .setApplicationLocales()) qua các lần khởi động app / bị hệ thống kill tiến trình
+             trên API < 33. Không có service này, lựa chọn ngôn ngữ trong Settings sẽ bị mất. -->
+        <service
+            android:name="androidx.appcompat.app.AppLocalesMetadataHolderService"
+            android:enabled="false"
+            android:exported="false">
+            <meta-data
+                android:name="autoStoreLocales"
+                android:value="true" />
+        </service>
+
+        <!-- Sống độc lập với CalibreService/EpubReaderActivity - xem
+             net.mrphan.calibre.reader.tts.TtsPlaybackService cho lý do tại sao "Đọc cho nghe"
+             cần một Service riêng để tiếp tục phát khi người dùng thoát màn hình đọc sách. -->
+        <!-- stopWithTask="false": mac dinh Android se dung Service nay ngay khi nguoi dung vuot
+             app khoi Recents, du dang phat am thanh nen; day la mot phan cua trieu chung "chuyen
+             app khac thi tu tat" ma nguoi dung gap phai. Voi flag nay, Service chi dung khi nguoi
+             dung bam nut X/stop (stopReadAloud()) hoac he thong that su can bo nho, dung "tu tat"
+             chi vi task bi vuot khoi Recents. -->
+        <service
+            android:name="net.mrphan.calibre.reader.tts.TtsPlaybackService"
+            android:exported="false"
+            android:foregroundServiceType="mediaPlayback"
+            android:stopWithTask="false"
+            android:label="@string/reader_tts_notification_channel_name" />
+
+        <!-- Ôm lấy OAuthLoopbackServer (server HTTP nội bộ bắt redirect từ Chrome Custom Tabs khi
+             đăng nhập Google Drive hoặc OneDrive) và giữ nó ở foreground trong lúc CloudOAuthActivity
+             bị đẩy khỏi màn hình bởi Custom Tabs, xem Javadoc của OAuthLoopbackService cho lý do
+             (nếu không, hệ thống có thể kill server trước khi provider kịp redirect về, gây lỗi
+             "127.0.0.1 refused to connect"). Dùng chung 1 Service cho cả 2 provider (chỉ 1
+             loopback server chạy tại một thời điểm). -->
+        <service
+            android:name="net.mrphan.calibre.OAuthLoopbackService"
+            android:exported="false"
+            android:foregroundServiceType="dataSync"
+            android:label="@string/cloud_oauth_notification_channel_name" />
+
+        <!-- QUAN TRONG: androidx.work library tu khai bao SystemForegroundService trong manifest
+             cua no NHUNG KHONG kem foregroundServiceType. Tren API 34+ (targetSdk 35), du
+             DeviceLibrarySyncWorker.buildForegroundInfo() da truyen dung
+             ForegroundInfo(id, notification, FOREGROUND_SERVICE_TYPE_DATA_SYNC), he thong van
+             throw MissingForegroundServiceTypeException vi service THUC SU goi startForeground()
+             (chinh la SystemForegroundService nay, khong phai Worker) khong co type trong
+             manifest da merge. Phai override o day, tools:node="merge" de gop voi khai bao goc
+             cua thu vien thay vi thay the toan bo. -->
+        <service
+            android:name="androidx.work.impl.foreground.SystemForegroundService"
+            android:foregroundServiceType="dataSync"
+            tools:node="merge" />
+
+        <!-- The old ServiceReceiver (static <receiver> for android.net.wifi.STATE_CHANGE) has
+             been removed. That implicit broadcast can no longer be declared statically in the
+             manifest since Android 7/8. CalibreService now uses a dynamically registered
+             ConnectivityManager.NetworkCallback instead (see
+             CalibreService#registerNetworkCallback), which is also the modern, non-deprecated
+             way to detect Wi-Fi connectivity changes. -->
+
+        <activity
+            android:name="net.mrphan.calibre.OpenBookActivity"
+            android:enabled="true"
+            android:exported="false"
+            android:finishOnTaskLaunch="true" />
+
+        <!-- Book Detail screen for the Calibre Library (OPDS) tab, opened from
+             OPDSBrowserFragment#openBookDetail instead of downloading/opening a tapped book
+             straight away. Not exported: only reachable from inside this app. -->
+        <activity
+            android:name="net.mrphan.calibre.BookDetailActivity"
+            android:label="@string/bookdetail_title"
+            android:theme="@style/Theme.Calibre.BookDetail"
+            android:exported="false"
+            android:parentActivityName="net.mrphan.calibre.MainActivity" />
+
+        <!-- Book Detail screen for the Device Library tab, opened from
+             CollectionFragment#onBookOpen instead of opening a tapped book straight away.
+             Not exported: only reachable from inside this app. -->
+        <activity
+            android:name="net.mrphan.calibre.DeviceBookDetailActivity"
+            android:label="@string/bookdetail_title"
+            android:theme="@style/Theme.Calibre.BookDetail"
+            android:exported="false"
+            android:parentActivityName="net.mrphan.calibre.MainActivity" />
+
+        <!-- "Hiệu đính metadata" screen, opened from DeviceBookDetailActivity's "Hiệu đính"
+             action button, sửa đầy đủ metadata + ảnh bìa của 1 sách trong Device Library.
+             Dùng AppTheme mặc định (có ActionBar, back button qua parentActivityName) thay vì
+             Theme.Calibre.BookDetail, vì đây là 1 form nhập liệu thường. Not exported: only
+             reachable from inside this app. -->
+        <activity
+            android:name="net.mrphan.calibre.MetadataEditorActivity"
+            android:label="@string/metadata_editor_title"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"
+            android:parentActivityName="net.mrphan.calibre.DeviceBookDetailActivity" />
+
+        <!-- Chapter list for "Nghe sách" (listen via TTS), opened from BookDetailActivity's /
+             DeviceBookDetailActivity's headphones action button. Not exported: only reachable
+             from inside this app. Reuses Theme.Calibre.BookDetail (NoActionBar) since this
+             screen draws its own title bar, same as BookDetailActivity/DeviceBookDetailActivity. -->
+        <activity
+            android:name="net.mrphan.calibre.TtsChapterListActivity"
+            android:theme="@style/Theme.Calibre.BookDetail"
+            android:exported="false" />
+
+        <!-- Man hinh quan ly "Tu dien phat am" toan cuc cho TTS, mo tu icon sach tren
+             TtsPlayerBottomSheet (canh icon "Sherpa TTS"). Cung dung Theme.Calibre.BookDetail
+             (NoActionBar) vi man hinh nay tu ve title bar rieng, giong TtsChapterListActivity
+             o tren. -->
+        <activity
+            android:name="net.mrphan.calibre.reader.tts.dictionary.TtsDictionaryManagerActivity"
+            android:label="@string/reader_tts_pronunciation_dictionary_title"
+            android:theme="@style/Theme.Calibre.BookDetail"
+            android:exported="false" />
+
+        <!-- Man hinh "What's New", mo tu muc nav_about trong Navigation Drawer (thay the
+             AlertDialog "About" cu). Cung dung Theme.Calibre.BookDetail (NoActionBar) vi man
+             hinh nay tu ve title bar rieng, giong TtsDictionaryManagerActivity o tren. -->
+        <activity
+            android:name="net.mrphan.calibre.WhatsNewActivity"
+            android:label="@string/nav_about"
+            android:theme="@style/Theme.Calibre.BookDetail"
+            android:exported="false" />
+
+        <!-- Man hinh "Tien trinh", mo tu muc nav_progress trong Navigation Drawer - thong ke
+             thoi gian doc cong don toan thu vien theo ngay (xem ProgressActivity/
+             DailyReadingStatsStore). Cung Theme.Calibre.BookDetail vi cung tu ve title bar rieng
+             giong WhatsNewActivity o tren. -->
+        <activity
+            android:name="net.mrphan.calibre.ProgressActivity"
+            android:label="@string/nav_progress"
+            android:theme="@style/Theme.Calibre.BookDetail"
+            android:exported="false" />
+
+        <!-- Full-screen cover viewer, opened from BookDetailActivity's / DeviceBookDetailActivity's
+             "view cover" action. -->
+        <activity
+            android:name="net.mrphan.calibre.ViewCoverActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Calibre.Reader" />
+
+        <!-- In-app readers, launched by OpenBookActivity/ReaderActivity router for epub/pdf/cbz
+             respectively. Not exported: only reachable from inside this app. -->
+        <activity
+            android:name="net.mrphan.calibre.EpubReaderActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Calibre.Reader" />
+
+        <activity
+            android:name="net.mrphan.calibre.PdfReaderActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Calibre.Reader" />
+
+        <activity
+            android:name="net.mrphan.calibre.CbzReaderActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Calibre.Reader" />
+
+        <!-- Điểm vào công khai để các app khác (trình quản lý file, trình duyệt, share sheet) đưa
+             thẳng một file EPUB/PDF/CBZ vào reader riêng của Calibre Sync – ví dụ bấm file .epub
+             trong Cx File Explorer / ZArchiver rồi chọn "Calibre Sync" ở hộp thoại "Open with", đúng
+             vị trí Moon+ Reader Pro và Readest đang chiếm trong ảnh chụp màn hình làm nền cho tính
+             năng này. Trong suốt hoàn toàn (không có giao diện riêng): việc duy nhất của nó là copy +
+             điều hướng rồi tự đóng, xem OpenExternalBookActivity.kt để biết chi tiết. -->
+        <activity
+            android:name="net.mrphan.calibre.OpenExternalBookActivity"
+            android:exported="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:label="@string/app_name">
+
+            <!-- Filter A: dành cho app/trình duyệt/email đã set đúng MIME type. -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="content" />
+                <data android:scheme="file" />
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+                <data android:mimeType="application/epub+zip" />
+                <data android:mimeType="application/pdf" />
+                <data android:mimeType="application/x-cbz" />
+                <data android:mimeType="application/vnd.comicbook+zip" />
+                <data android:mimeType="application/x-mobipocket-ebook" />
+                <data android:mimeType="application/vnd.amazon.ebook" />
+                <data android:mimeType="application/x-mobi8-ebook" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+
+            <!-- Filter B: dành cho trình quản lý file (đúng trường hợp trong ảnh chụp màn hình,
+                 Cx File Explorer) thường đưa Uri với MIME type chung chung/thiếu (ví dụ
+                 "application/octet-stream") và dựa vào phần mở rộng file thay vì MIME type. -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="content" android:host="*" android:pathPattern=".*\\.epub" />
+                <data android:scheme="content" android:host="*" android:pathPattern=".*\\.pdf" />
+                <data android:scheme="content" android:host="*" android:pathPattern=".*\\.cbz" />
+                <data android:scheme="content" android:host="*" android:pathPattern=".*\\.mobi" />
+                <data android:scheme="content" android:host="*" android:pathPattern=".*\\.azw" />
+                <data android:scheme="content" android:host="*" android:pathPattern=".*\\.azw3" />
+                <data android:scheme="content" android:host="*" android:pathPattern=".*\\.txt" />
+                <data android:scheme="file" android:host="*" android:pathPattern=".*\\.epub" />
+                <data android:scheme="file" android:host="*" android:pathPattern=".*\\.pdf" />
+                <data android:scheme="file" android:host="*" android:pathPattern=".*\\.cbz" />
+                <data android:scheme="file" android:host="*" android:pathPattern=".*\\.mobi" />
+                <data android:scheme="file" android:host="*" android:pathPattern=".*\\.azw" />
+                <data android:scheme="file" android:host="*" android:pathPattern=".*\\.azw3" />
+                <data android:scheme="file" android:host="*" android:pathPattern=".*\\.txt" />
+            </intent-filter>
+        </activity>
+
+        <!-- Cloud Libraries upgrade: browses one CloudRemote (Google Drive / WebDAV / FTP), see
+             ConnectionFragment "Google Drive" and "WebDAV / FTP / NAS" cards. -->
+        <activity
+            android:name="net.mrphan.calibre.CloudBrowserActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Calibre.CloudBrowser"
+            android:parentActivityName="net.mrphan.calibre.MainActivity" />
+
+        <!-- Cloud Libraries upgrade: embedded WebView browser for the Calibre Content Server's
+             own web UI, see ConnectionFragment "Calibre Content Server" card. -->
+        <activity
+            android:name="net.mrphan.calibre.ContentServerBrowserActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Calibre.CloudBrowser"
+            android:parentActivityName="net.mrphan.calibre.MainActivity" />
+
+        <!-- OAuth 2.0 Authorization Code Flow dùng chung cho Google Drive và OneDrive: mở trang
+             đăng nhập/cấp quyền trong Chrome Custom Tabs, xem CloudOAuthActivity /
+             CloudOAuthManager / CloudTokenManager / OAuthProviderSpec. Không cần intent-filter cho
+             redirect URI: redirect được bắt bởi một HTTP server nội bộ chạy trên loopback
+             (127.0.0.1), sống bên trong OAuthLoopbackService, không bao giờ thực sự điều hướng ra
+             ngoài app hay tới Android OS. -->
+        <activity
+            android:name="net.mrphan.calibre.CloudOAuthActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Calibre.CloudBrowser"
+            android:parentActivityName="net.mrphan.calibre.MainActivity" />
+
+        <!-- Calibre Libraries on GDrive upgrade: browses one saved GDriveOpdsLibrary via a local
+             HTTP server (GDriveOpdsHttpServer) embedding the "Thư viện mini" web UI in a WebView
+             (assets/gdrive_library/), same architecture as ContentServerBrowserActivity. See
+             GDriveOpdsLibraryListBottomSheet "Calibre Libraries on GDrive" card. -->
+        <activity
+            android:name="net.mrphan.calibre.GDriveLibraryWebViewActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Calibre.CloudBrowser"
+            android:parentActivityName="net.mrphan.calibre.MainActivity" />
+
+        <!-- Quét mã QR để nhập thư viện Calibre-on-GDrive: mở từ nút "Scan QR" trong
+             GDriveOpdsLibraryListBottomSheet, trả chuỗi text quét được về qua
+             ActivityResultLauncher (xem QrScanActivity). Full-screen, không cần ActionBar, dùng
+             chung Theme.Calibre.Reader như các màn full-screen khác trong app. exported="false"
+             vì chỉ được gọi nội bộ. -->
+        <activity
+            android:name="net.mrphan.calibre.QrScanActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Calibre.Reader"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="net.mrphan.calibre.BookSearchActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+        </activity>
+        <meta-data
+            android:name="android.app.default_searchable"
+            android:value=".BookSearchActivity" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+    </application>
+</manifest>

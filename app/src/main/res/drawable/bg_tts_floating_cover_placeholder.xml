@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Fallback fill for the floating panel's cover ImageView (tts_mini_player_cover) while no
+     cover bitmap has been set yet, or the current book has no embedded cover art. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <solid android:color="#33FFFFFF" />
+    <corners android:radius="24dp" />
+</shape>

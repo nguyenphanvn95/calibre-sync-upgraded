@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nsvConnectionRoot"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="24dp">
+
+            <!-- Calibre Wireless Devices: nâng cấp thành 1 row bấm được duy nhất, cùng phong
+                 cách item_provider_card.xml (icon trái + tên/subtitle + cột trạng thái phải).
+                 serverlist và dump giữ nguyên, đặt bên dưới row, ngoài vùng bấm.
+                 Xem ConnectionFragment#renderWirelessCard / #onWirelessRowClick. -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardWirelessDevices"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                app:cardElevation="2dp"
+                app:cardCornerRadius="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- Row bấm được duy nhất: icon trái + tên/tình trạng + cột trạng thái phải.
+                         Bấm row này thay thế hoàn toàn cho việc phải mở menu "Manual Connection" /
+                         "End Connection", xem ConnectionFragment#onWirelessRowClick. -->
+                    <LinearLayout
+                        android:id="@+id/wirelessDeviceRow"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center_vertical"
+                        android:minHeight="64dp"
+                        android:orientation="horizontal"
+                        android:padding="12dp">
+
+                        <ImageView
+                            android:id="@+id/conicon"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:importantForAccessibility="no"
+                            android:src="@drawable/csync2" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <!-- Tên cố định "Calibre Wireless Devices", KHÔNG đổi động nữa, khác
+                                 code cũ (trước đây contitle hiện text trạng thái động). Trạng thái
+                                 động giờ nằm ở constatus bên dưới. -->
+                            <TextView
+                                android:id="@+id/contitle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/cloud_card_wireless_devices"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/constatus"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:textColor="?android:attr/textColorSecondary"
+                                tools:text="192.168.1.23:8080" />
+                        </LinearLayout>
+
+                        <!-- Cột trạng thái bên phải: chỉ hiện TỐI ĐA 1 trong 2 view này cùng lúc,
+                             xem ConnectionFragment#renderWirelessCard(). -->
+                        <ProgressBar
+                            android:id="@+id/progress"
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:layout_marginStart="8dp"
+                            android:indeterminate="true"
+                            android:visibility="gone" />
+
+                        <ImageView
+                            android:id="@+id/conStatusIcon"
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:layout_marginStart="8dp"
+                            android:importantForAccessibility="no"
+                            android:visibility="gone"
+                            tools:src="@drawable/ic_status_connected"
+                            tools:visibility="visible" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/wirelessAdvancedSection"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <ListView
+                            android:id="@+id/serverlist"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:clickable="true"
+                            android:nestedScrollingEnabled="false"
+                            android:paddingStart="12dp"
+                            android:paddingEnd="12dp"
+                            android:paddingBottom="8dp"
+                            tools:listitem="@android:layout/simple_list_item_1" />
+
+                        <TextView
+                            android:id="@+id/dump"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:maxLines="6"
+                            android:padding="12dp"
+                            android:scrollbars="vertical"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:typeface="monospace" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/toggleWirelessAdvanced"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginEnd="12dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:padding="8dp"
+                        android:text="@string/wireless_show_details"
+                        android:textAllCaps="false"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="?attr/colorPrimary" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- 2. Calibre Libraries: Calibre Content Server + Libraries on Gdrive.
+                 Xem ConnectionFragment#buildCalibreLibraryItems(). Boc trong 1 LinearLayout rieng
+                 (sectionCalibreLibraries) de co the an/hien ca cum khi Drawer chi muon xem 1
+                 section duy nhat (xem ConnectionFragment#setDisplayMode). -->
+            <LinearLayout
+                android:id="@+id/sectionCalibreLibraries"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="4dp"
+                    android:text="@string/cloud_libraries_header"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textStyle="bold" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvCalibreLibraryCards"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:listitem="@layout/item_provider_card" />
+            </LinearLayout>
+
+            <!-- 3. Cloud sync: Google Drive, OneDrive, Box, Nextcloud, WebDAV/FTP/NAS, + các
+                 placeholder còn lại (pCloud, ownCloud, Local storage).
+                 Xem ConnectionFragment#buildCloudSyncItems(). Boc trong sectionCloudSync cung ly
+                 do voi sectionCalibreLibraries o tren. -->
+            <LinearLayout
+                android:id="@+id/sectionCloudSync"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvCloudSyncHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="4dp"
+                    android:text="@string/cloud_sync_header"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textStyle="bold" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvCloudSyncCards"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:listitem="@layout/item_provider_card" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</FrameLayout>

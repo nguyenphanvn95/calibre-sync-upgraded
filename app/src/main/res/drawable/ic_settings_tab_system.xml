@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Bieu tuong banh rang (gear/cog), dai dien tab "He thong" trong thanh tab ngang cua
+     SettingsActivity (xem SettingsTab.kt). Mot polygon 8 rang + 1 lo tron o giua (fillType
+     evenOdd de "khoet" lo), cung phong cach hinh hoc don gian nhu cac icon tab khac trong du an
+     (ic_reader_tab_color.xml, ic_reader_tab_layout.xml...). -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:fillColor="#FF000000"
+        android:fillType="evenOdd"
+        android:pathData="M21.36,10.37 L21.36,13.63 L18.74,14.79 L19.77,17.46 L17.46,19.77 L14.79,18.74 L13.63,21.36 L10.37,21.36 L9.21,18.74 L6.54,19.77 L4.23,17.46 L5.26,14.79 L2.64,13.63 L2.64,10.37 L5.26,9.21 L4.23,6.54 L6.54,4.23 L9.21,5.26 L10.37,2.64 L13.63,2.64 L14.79,5.26 L17.46,4.23 L19.77,6.54 L18.74,9.21 Z
+                M9,12 A3,3 0 1,0 15,12 A3,3 0 1,0 9,12 Z" />
+</vector>

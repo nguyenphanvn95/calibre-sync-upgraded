@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- O gia tri bo tron trong BookSyncInfoSheet (giong anh minh hoa Readest Sync Info), xem
+     prompt-nang-cap-reader-sync.md muc 7.1. Dung ?attr/colorButtonNormal (DayNight-aware) thay vi
+     ?attr/colorSurfaceVariant: attr do chi ton tai trong theme Material3, con app nay dung
+     Theme.MaterialComponents.DayNight (xem styles.xml), giong ly do
+     shape_reader_settings_group_bg.xml cung dang dung colorButtonNormal. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <corners android:radius="10dp" />
+    <solid android:color="?attr/colorButtonNormal" />
+</shape>

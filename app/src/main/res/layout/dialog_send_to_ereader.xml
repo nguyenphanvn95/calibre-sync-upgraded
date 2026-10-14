@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Pairing-key input for the send2ereader relay; see Send2EreaderClient's class Javadoc for
+     the full handshake this dialog is the sending side of.
+
+     UI nang cap (xem anh mau "Send to Kindle/Kobo"): thay EditText/Button pho thong bang o nhap
+     ma to, can giua nhu the nhap OTP, va nut "Mo trinh duyet" dang pill vien thay vi text button
+     tran. Van giu dung 2 field s2e_key_input/s2e_instance_url + 1 nut s2e_btn_open_browser ma
+     SendToEreaderDialogFragment da findViewById, chi doi giao dien, khong doi id/logic. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:paddingStart="24dp"
+    android:paddingEnd="24dp"
+    android:paddingTop="4dp"
+    android:paddingBottom="8dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/s2e_instance_url"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:lineSpacingExtra="2dp"
+        android:alpha="0.75" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/s2e_btn_open_browser"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        app:cornerRadius="20dp"
+        app:icon="@drawable/ic_menu_share"
+        app:iconTint="@color/color_send_to_ereader"
+        app:iconSize="16dp"
+        app:strokeColor="@color/color_send_to_ereader"
+        android:textColor="@color/color_send_to_ereader"
+        android:textAllCaps="false"
+        android:textSize="13sp"
+        android:text="@string/s2e_btn_open_browser" />
+
+    <!-- O nhap ma ghep cap: chu to, can giua, gian chu nhu 1 the "XXXX", vien duoi mau xanh
+         khi focus, tao cam giac giong o nhap OTP trong anh mau thay vi 1 dong EditText tran. -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:boxStrokeColor="@color/color_send_to_ereader"
+        app:hintTextColor="@color/color_send_to_ereader"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/s2e_key_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:hint="@string/s2e_key_hint"
+            android:inputType="textCapCharacters"
+            android:letterSpacing="0.3"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:maxLines="1" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <ProgressBar
+        android:id="@+id/s2e_progress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:indeterminate="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:visibility="gone" />
+
+</LinearLayout>

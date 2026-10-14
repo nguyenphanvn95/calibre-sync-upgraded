@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Open-book glyph for the "Dictionary" placeholder action — geometry only needs to read as
+     "a book" at 24dp inside the selection toolbar, matching Readest's dictionary icon silhouette.
+     Same style note as ic_selection_note.xml. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#FF000000"
+        android:strokeWidth="1.6"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M12,5.5 C10.7,4.6 8.7,4 7,4 C5.6,4 4.2,4.3 3,5 L3,18.5 C4.2,17.8 5.6,17.5 7,17.5 C8.7,17.5 10.7,18.1 12,19 C13.3,18.1 15.3,17.5 17,17.5 C18.4,17.5 19.8,17.8 21,18.5 L21,5 C19.8,4.3 18.4,4 17,4 C15.3,4 13.3,4.6 12,5.5 Z" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#FF000000"
+        android:strokeWidth="1.6"
+        android:strokeLineCap="round"
+        android:pathData="M12,5.5 L12,19" />
+</vector>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Background for the two style-toggle buttons in row 1 of view_reader_selection_pill_toolbar.xml
+     (Underline / Highlight-fill) , state_selected (see ReaderSelectionToolbar#refreshStyleButtons,
+     which sets View#isSelected) shows the green rounded-square "currently active style" fill from
+     the reference screenshot; the default state is a plain ripple so the two buttons don't look
+     like solid boxes when not selected. -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_selected="true">
+        <shape android:shape="rectangle">
+            <corners android:radius="8dp" />
+            <solid android:color="@color/reader_selection_style_active_bg" />
+        </shape>
+    </item>
+    <item>
+        <ripple android:color="#33808080">
+            <item>
+                <shape android:shape="rectangle">
+                    <corners android:radius="8dp" />
+                    <solid android:color="@android:color/transparent" />
+                </shape>
+            </item>
+        </ripple>
+    </item>
+</selector>

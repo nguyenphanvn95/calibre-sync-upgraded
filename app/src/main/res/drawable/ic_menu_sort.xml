@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- "Sort by..." toolbar icon and Title-field row icon (SortByDialog): three decreasing-width
+     horizontal bars, the standard Material "sort" glyph. Same drawable convention as
+     ic_menu_view_mode.xml/ic_view_list.xml (android:tint baked white, ImageView-level app:tint
+     re-colors on top for the dialog rows). -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24"
+    android:tint="#FFFFFF">
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="M3,18h6v-2H3v2zM3,6v2h18V6H3zM3,13h12v-2H3v2z" />
+</vector>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Phủ dần từ trong suốt (đầu ảnh bìa) xuống nền bên dưới (cuối ảnh bìa), giúp header và các
+     TextView phía dưới luôn đọc được dù ảnh bìa sáng hay tối - dùng cho tts_player_cover
+     trong dialog_tts_player.xml. endColor/centerColor trỏ tới tts_player_background/
+     tts_player_gradient_center (values/colors.xml + values-night/colors.xml) thay vì hardcode
+     đen, để điểm nối giữa ảnh bìa và phần nền bên dưới liền mạch ở cả theme Sáng lẫn Tối - xem
+     ghi chú ở values/colors.xml. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <gradient
+        android:angle="270"
+        android:startColor="#00000000"
+        android:centerColor="@color/tts_player_gradient_center"
+        android:endColor="@color/tts_player_background" />
+</shape>

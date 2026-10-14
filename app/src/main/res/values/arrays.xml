@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Checkbox labels for the "Accepted Filetypes" setting (see pref_filetypes in
+         res/xml/preference.xml). Displayed to the user; pref_filetypes_values below holds the
+         actual extension (without the leading dot) that BookCrawler matches against on disk. -->
+    <string-array name="pref_filetypes_entries">
+        <item>EPUB</item>
+        <item>PDF</item>
+        <item>MOBI</item>
+        <item>AZW3</item>
+        <item>AZW</item>
+        <item>PDB</item>
+        <item>FB2</item>
+        <item>RTF</item>
+        <item>DOCX</item>
+        <item>HTML</item>
+        <item>TXT</item>
+        <item>CBZ</item>
+        <item>CBR</item>
+        <item>MP3 (Audio)</item>
+        <item>M4B (Audiobook)</item>
+        <item>M4A (Audio)</item>
+        <item>OGG (Audio)</item>
+        <item>FLAC (Audio)</item>
+        <item>WAV (Audio)</item>
+    </string-array>
+    <string-array name="pref_filetypes_values" translatable="false">
+        <item>epub</item>
+        <item>pdf</item>
+        <item>mobi</item>
+        <item>azw3</item>
+        <item>azw</item>
+        <item>pdb</item>
+        <item>fb2</item>
+        <item>rtf</item>
+        <item>docx</item>
+        <item>html</item>
+        <item>txt</item>
+        <item>cbz</item>
+        <item>cbr</item>
+        <item>mp3</item>
+        <item>m4b</item>
+        <item>m4a</item>
+        <item>ogg</item>
+        <item>flac</item>
+        <item>wav</item>
+    </string-array>
+    <!-- Default selection: same ebook formats accepted before, plus cbz (the in-app reader
+         already supports it via CbzReaderActivity; its previous absence from this list looks
+         like an oversight). Audio formats start unchecked; the user opts in explicitly. -->
+    <string-array name="pref_filetypes_default" translatable="false">
+        <item>epub</item>
+        <item>pdf</item>
+        <item>mobi</item>
+        <item>azw3</item>
+        <item>pdb</item>
+        <item>fb2</item>
+        <item>rtf</item>
+        <item>html</item>
+        <item>cbz</item>
+    </string-array>
+    <!-- "Đọc cho nghe" (TTS) sleep timer options - see net.mrphan.calibre.reader.tts.TtsPlayerBottomSheet. -->
+    <string-array name="reader_tts_sleep_timer_options">
+        <item>Tắt</item>
+        <item>10 phút</item>
+        <item>20 phút</item>
+        <item>30 phút</item>
+        <item>45 phút</item>
+        <item>60 phút</item>
+    </string-array>
+
+    <!-- Checkbox labels for the "Book info columns" setting (see pref_book_info_columns in
+         res/xml/preference.xml), lets the user hide/show individual rows on the book detail
+         screen for both the Calibre Library (BookDetailActivity) and Device Library
+         (DeviceBookDetailActivity) tabs, see BookInfoColumns.java. -->
+    <string-array name="pref_book_info_columns_entries">
+        <item>Ngày cập nhật</item>
+        <item>Ngày xuất bản</item>
+        <item>Ngôn ngữ</item>
+        <item>Nhà xuất bản</item>
+        <item>Bộ sách (series)</item>
+        <item>Đánh giá</item>
+        <item>Thẻ (tags)</item>
+        <item>Định danh (ISBN...)</item>
+        <item>Mô tả</item>
+        <item>Cột tùy biến (Custom Column)</item>
+    </string-array>
+    <string-array name="pref_book_info_columns_values" translatable="false">
+        <item>updated</item>
+        <item>published</item>
+        <item>language</item>
+        <item>publisher</item>
+        <item>series</item>
+        <item>rating</item>
+        <item>tags</item>
+        <item>identifiers</item>
+        <item>description</item>
+        <item>custom_columns</item>
+    </string-array>
+    <!-- Default: every column visible, matching the app's behaviour before this setting existed;
+         must stay in sync with BookInfoColumns.ALL_KEYS. -->
+    <string-array name="pref_book_info_columns_default" translatable="false">
+        <item>updated</item>
+        <item>published</item>
+        <item>language</item>
+        <item>publisher</item>
+        <item>series</item>
+        <item>rating</item>
+        <item>tags</item>
+        <item>identifiers</item>
+        <item>description</item>
+        <item>custom_columns</item>
+    </string-array>
+
+    <!-- "Dong bo tu dong" (App-wide Auto Sync) chu ky lua chon - xem AppLibraryAutoSyncPrefs /
+         SettingsFragment#setupAutoSyncPreferences. Cac moc preset la 10/15/30 phut (KHONG dung
+         3/5 phut: qua ngan so voi 1 lan full-sync 2 chieu thuc te, de gay chong job/ton pin), cong
+         voi "Tuy chinh..." cho phep nhap so phut bat ky > 0. -->
+    <string-array name="pref_auto_sync_interval_entries">
+        <item>@string/pref_auto_sync_interval_off</item>
+        <item>@string/pref_auto_sync_interval_10min</item>
+        <item>@string/pref_auto_sync_interval_15min</item>
+        <item>@string/pref_auto_sync_interval_30min</item>
+        <item>@string/pref_auto_sync_interval_custom</item>
+    </string-array>
+    <string-array name="pref_auto_sync_interval_values" translatable="false">
+        <item>0</item>
+        <item>10</item>
+        <item>15</item>
+        <item>30</item>
+        <item>custom</item>
+    </string-array>
+
+    <!-- Hanh dong cua FAB (nut noi goc duoi-phai) tren 2 man xem truoc sach (BookDetailActivity /
+         DeviceBookDetailActivity), xem pref_book_preview_fab_action trong preference_appearance.xml
+         va applyFabAction() o ca 2 Activity. Entries tai su dung dung 3 string resource ma FAB/
+         hang nut icon ngang dang dung san (bookdetail_send_to_ereader, bookdetail_action_read,
+         bookdetail_action_read_aloud) de nhan hien thi luon nhat quan o moi noi trong app, va tu
+         dong duoc dich theo values-vi/values-de/values-it hien co ma khong can lap lai chuoi. -->
+    <string-array name="pref_book_preview_fab_action_entries">
+        <item>@string/bookdetail_send_to_ereader</item>
+        <item>@string/bookdetail_action_read</item>
+        <item>@string/bookdetail_action_read_aloud</item>
+    </string-array>
+    <!-- translatable="false": gia tri ky thuat luu vao SharedPreferences (khop 1-1 thu tu voi
+         pref_book_preview_fab_action_entries o tren), khong phai van ban hien thi. -->
+    <string-array name="pref_book_preview_fab_action_values" translatable="false">
+        <item>send_to_ereader</item>
+        <item>read</item>
+        <item>listen</item>
+    </string-array>
+</resources>

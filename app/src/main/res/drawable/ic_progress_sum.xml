@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Icon "Sigma" (tong cong don) cho o "Tong" cua man hinh Tien trinh (anh mau: ky hieu Sigma
+     mau xanh la, goc tren-trai o "Tong"). Ve nhu 1 net gap khuc (polyline) mo phong ky tu Σ,
+     khong dung font-glyph de tranh lech baseline giua cac may. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M5,4 L19,4 L19,7.2 L17.6,7.2 C17.2,5.9 16.6,5.6 15,5.6 L9.1,5.6 L14.2,11.6 L9.1,18.4 L15,18.4
+            C16.7,18.4 17.3,17.9 17.7,16.4 L19,16.4 L19,20 L5,20 L5,18.7 L11.3,11.7 L5,5.3 Z" />
+</vector>

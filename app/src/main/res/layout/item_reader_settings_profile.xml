@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Mot dong trong ReaderSettingsProfilesSheet: ten cua "Cau hinh tao san" ben trai (cham ca dong
+     de ap dung ngay), nut overflow (...) ben phai chi hien khi la preset nguoi dung tu tao
+     (isBuiltIn == false) de Xoa. Xem ReaderSettingsProfilesSheet.addProfileRow(). -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:minHeight="48dp"
+    android:paddingStart="4dp"
+    android:paddingEnd="4dp"
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp"
+    android:background="?attr/selectableItemBackground">
+
+    <TextView
+        android:id="@+id/reader_settings_profile_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textSize="14sp"
+        android:textColor="?android:attr/textColorPrimary" />
+
+    <ImageButton
+        android:id="@+id/reader_settings_profile_overflow"
+        style="?attr/borderlessButtonStyle"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:padding="9dp"
+        android:src="@android:drawable/ic_menu_delete"
+        android:contentDescription="@string/reader_settings_profiles_delete_confirm_action"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:visibility="gone" />
+
+</LinearLayout>

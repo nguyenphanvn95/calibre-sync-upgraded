@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Danh sách thư viện Calibre-on-GDrive đã lưu, copy cấu trúc từ bottomsheet_cloud_remote_list.xml. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="@string/cloud_card_gdrive_opds_library"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvLibraries"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/item_gdrive_opds_library" />
+
+    <!-- Quét mã QR để nhập thư viện (thay cho gõ tay link/ID): xem
+         GDriveOpdsLibraryListBottomSheet#onQrScanned. Đặt cạnh tvAddAnotherLibrary trong 1 hàng
+         ngang, mỗi nút chia đôi chiều rộng, để không phá layout dọc hiện tại. -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvAddAnotherLibrary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:padding="16dp"
+            android:text="@string/gdrive_opds_add_another_library"
+            android:textColor="?attr/colorPrimary" />
+
+        <TextView
+            android:id="@+id/tvScanQrLibrary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:drawableStart="@drawable/ic_qr_scan"
+            android:drawablePadding="6dp"
+            android:drawableTint="?attr/colorPrimary"
+            android:focusable="true"
+            android:gravity="center"
+            android:padding="16dp"
+            android:text="@string/gdrive_opds_qr_scan_button"
+            android:textColor="?attr/colorPrimary" />
+
+    </LinearLayout>
+
+</LinearLayout>

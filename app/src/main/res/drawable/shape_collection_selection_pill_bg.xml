@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Floating action pill background for CollectionFragment's multi-select mode (Device
+     Library), shown behind view_collection_selection_pill.xml. Same dark, fully-rounded look as
+     shape_reader_selection_pill_bg.xml (the EPUB reader's text-selection toolbar) for visual
+     consistency across the app's floating pill controls - kept as a separate file rather than
+     reused directly since the two pills belong to unrelated features and may need to diverge
+     later (this one holds 4-5 icon+label buttons instead of icon-only swatches). -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <corners android:radius="28dp" />
+    <solid android:color="#E6202124" />
+</shape>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Single toolbar button: icon + label, laid out left-to-right per spec section 2 ("icon nằm bên
+  trái nhãn chữ trên cùng 1 hàng"). Inflated once per ReaderAction by ReaderChromeOverlay and given
+  layout_weight=1 so a row's buttons share width evenly.
+-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:background="?attr/selectableItemBackground"
+    android:paddingStart="8dp"
+    android:paddingEnd="8dp"
+    android:paddingTop="12dp"
+    android:paddingBottom="12dp"
+    android:clickable="true"
+    android:focusable="true">
+
+    <ImageView
+        android:id="@+id/reader_chrome_action_icon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:tint="#FFFFFF"
+        android:contentDescription="@null" />
+
+    <TextView
+        android:id="@+id/reader_chrome_action_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginStart="8dp"
+        android:textColor="#FFFFFF"
+        android:textSize="13sp"
+        android:maxLines="1"
+        android:ellipsize="end" />
+
+</LinearLayout>

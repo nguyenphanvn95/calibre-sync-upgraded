@@ -1,0 +1,245 @@
+# data/id/lexicon.toml — Indonesian exception dictionary (id-ID).
+#
+# Rules in `rules.toml` cover the overwhelming majority of Indonesian words
+# (EYD orthography is highly phonemic). This file holds only the exceptions:
+#
+#   route = "primary"   use these phonemes (stem-internal /e/ words that the
+#                       default-/ə/ rule would misread, naturalized loanwords,
+#                       function words).
+#   route = "fallback"  ignore `phonemes`; the router sends the word to the
+#                       EN engine (genuinely foreign words / English names).
+#
+# Phoneme strings are space-separated tokens that must exist in
+# data/phoneme_id_map.json. No stress markers are emitted (RFC-011: stress
+# is not contrastive in Indonesian).
+
+# ── Function words where word-final `e` is schwa, not /e/ ──
+[[entry]]
+word = "ke"
+phonemes = "k ə"
+route = "primary"
+
+# ── Stem-internal /e/ exceptions (default rule reads non-final `e` as /ə/) ──
+[[entry]]
+word = "enak"
+phonemes = "e n a k"
+route = "primary"
+
+[[entry]]
+word = "ekor"
+phonemes = "e k o r"
+route = "primary"
+
+[[entry]]
+word = "es"
+phonemes = "e s"
+route = "primary"
+
+[[entry]]
+word = "merah"
+phonemes = "m e r a h"
+route = "primary"
+
+[[entry]]
+word = "meja"
+phonemes = "m e dʒ a"
+route = "primary"
+
+[[entry]]
+word = "desa"
+phonemes = "d e s a"
+route = "primary"
+
+[[entry]]
+word = "heran"
+phonemes = "h e r a n"
+route = "primary"
+
+[[entry]]
+word = "sehat"
+phonemes = "s e h a t"
+route = "primary"
+
+[[entry]]
+word = "lewat"
+phonemes = "l e w a t"
+route = "primary"
+
+[[entry]]
+word = "besok"
+phonemes = "b e s o k"
+route = "primary"
+
+[[entry]]
+word = "bebek"
+phonemes = "b e b e k"
+route = "primary"
+
+[[entry]]
+word = "dewan"
+phonemes = "d e w a n"
+route = "primary"
+
+[[entry]]
+word = "bensin"
+phonemes = "b e n s i n"
+route = "primary"
+
+[[entry]]
+word = "hotel"
+phonemes = "h o t e l"
+route = "primary"
+
+# ── Month names with stem-internal /e/ (emitted by the date expander) ──
+[[entry]]
+word = "februari"
+phonemes = "f e b r u a r i"
+route = "primary"
+
+[[entry]]
+word = "maret"
+phonemes = "m a r e t"
+route = "primary"
+
+[[entry]]
+word = "mei"
+phonemes = "m e i"
+route = "primary"
+
+[[entry]]
+word = "september"
+phonemes = "s e p t e m b e r"
+route = "primary"
+
+[[entry]]
+word = "oktober"
+phonemes = "o k t o b e r"
+route = "primary"
+
+[[entry]]
+word = "november"
+phonemes = "n o f e m b e r"
+route = "primary"
+
+[[entry]]
+word = "desember"
+phonemes = "d e s e m b e r"
+route = "primary"
+
+# ── Measurement / unit loanwords (emitted by the normalize expanders) ──
+[[entry]]
+word = "meter"
+phonemes = "m e t ə r"
+route = "primary"
+
+[[entry]]
+word = "kilometer"
+phonemes = "k i l o m e t ə r"
+route = "primary"
+
+[[entry]]
+word = "sentimeter"
+phonemes = "s e n t i m e t ə r"
+route = "primary"
+
+[[entry]]
+word = "milimeter"
+phonemes = "m i l i m e t ə r"
+route = "primary"
+
+[[entry]]
+word = "desimeter"
+phonemes = "d e s i m e t ə r"
+route = "primary"
+
+[[entry]]
+word = "nanometer"
+phonemes = "n a n o m e t ə r"
+route = "primary"
+
+[[entry]]
+word = "celsius"
+phonemes = "s e l s i u s"
+route = "primary"
+
+[[entry]]
+word = "fahrenheit"
+phonemes = "f a r e n h a i t"
+route = "primary"
+
+[[entry]]
+word = "kelvin"
+phonemes = "k e l f i n"
+route = "primary"
+
+[[entry]]
+word = "hertz"
+phonemes = "h e r t s"
+route = "primary"
+
+[[entry]]
+word = "kilohertz"
+phonemes = "k i l o h e r t s"
+route = "primary"
+
+[[entry]]
+word = "megahertz"
+phonemes = "m e g a h e r t s"
+route = "primary"
+
+[[entry]]
+word = "gigahertz"
+phonemes = "g i g a h e r t s"
+route = "primary"
+
+[[entry]]
+word = "persen"
+phonemes = "p ə r s e n"
+route = "primary"
+
+[[entry]]
+word = "euro"
+phonemes = "e u r o"
+route = "primary"
+
+[[entry]]
+word = "pound"
+phonemes = "p a u n"
+route = "primary"
+
+# ── Naturalized loanwords whose pronunciation deviates from the rules ──
+[[entry]]
+word = "bank"
+phonemes = "b a ŋ"
+route = "primary"
+
+# ── Genuinely foreign words / English names → EN engine ──
+[[entry]]
+word = "google"
+phonemes = ""
+route = "fallback"
+
+[[entry]]
+word = "facebook"
+phonemes = ""
+route = "fallback"
+
+[[entry]]
+word = "youtube"
+phonemes = ""
+route = "fallback"
+
+[[entry]]
+word = "iphone"
+phonemes = ""
+route = "fallback"
+
+[[entry]]
+word = "john"
+phonemes = ""
+route = "fallback"
+
+[[entry]]
+word = "smith"
+phonemes = ""
+route = "fallback"

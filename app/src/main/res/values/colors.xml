@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Day (light) toolbar/status bar color, used ONLY for MainActivity's ActionBar background
+    (see AppActionBar/AppTheme in styles.xml). Deliberately a dedicated color rather than
+    reusing colorPrimary: colorPrimary is already used all over the app as an accent color (the
+    blue library-icon badges in bg_library_icon_circle.xml, checked-state text/icons, provider
+    card selection borders, etc.), and repointing colorPrimary itself at white/dark-gray here
+    would turn all of those invisible against their own background. This name only feeds the
+    ActionBar's own background, so nothing else is affected.
+
+    Set to plain white so the bar blends into the same white the rest of a light-mode screen
+    already uses, instead of standing out as a separate colored band. values-night/colors.xml
+    gives the dark counterpart.
+-->
+<resources>
+    <color name="toolbar_background">#FFFFFF</color>
+
+    <!-- Xanh nhan dien rieng cho chrome cua reader (thanh tien do dang vien nang + icon dang
+         hoat trong footer), tach khoi colorPrimary vi mau theme co the khac (xem ghi chu o tren)
+         va vi reader luon dung nen toi bat ke Light/Dark theme cua app - xem
+         prompt-nang-cap-thanh-tien-do-doc.md. Lay cam hung tu mau accent xanh duong cua Readest. -->
+    <color name="reader_accent_blue">#4C8DFF</color>
+    <!-- Nen mo cho trang thai "dang hoat" cua 1 nut footer (vong tron mo phia sau icon), 18% alpha
+         tren reader_accent_blue. -->
+    <color name="reader_accent_blue_muted">#2E4C8DFF</color>
+    <!-- Nen header/footer reader khi theme doc dang la Sang. Dung cung tong xanh oliu voi pill
+         player TTS mini (bg_tts_mini_player_pill.xml), de chrome khong con luon la thanh toi tren
+         nen sach sang. Khi theme doc la Toi, ReaderChromeOverlay dung reader_chrome_bar_dark. -->
+    <color name="reader_chrome_bar_light">#F2555B43</color>
+    <color name="reader_chrome_bar_dark">#F21A1A1A</color>
+
+    <!-- Mau cho nut "Ngat ket noi" (destructive action) trong bottomsheet_cloud_remote_info.xml
+         - thay the @android:color/holo_red_dark hardcode truoc day bang named resource de co
+         ban rieng cho theme Toi (xem values-night/colors.xml), xem
+         prompt-nang-cap-ui-va-import-device-library.md muc 1.3. -->
+    <color name="color_action_destructive">#D32F2F</color>
+
+    <!-- Man hinh "Dang phat" full-man-hinh cua TTS (dialog_tts_player.xml, mo tu
+         TtsPlayerBottomSheet). Chi phan "duoi anh bia" (tieu de chuong, cau dang doc, thanh
+         tien do, cum nut transport, hang tien ich hen gio/toc do/giong doc/nhac nen) doi mau
+         theo Sang/Toi nhu phan con lai cua app - xem values-night/colors.xml cho ban Toi (giu
+         nguyen dung mau den/trang/xam cu, khong doi giao dien Toi hien tai). Hang icon tren cung
+         (nut back, tieu de, nut nhac nen/danh dau/tu dien) nam DE LEN anh bia co gradient toi dan
+         nen CO Y giu trang co dinh o ca 2 theme, khong dung token nay - xem
+         dialog_tts_player.xml. -->
+    <color name="tts_player_background">#FFFFFF</color>
+    <color name="tts_player_on_background">#1A1A1A</color>
+    <color name="tts_player_on_background_secondary">#666666</color>
+    <color name="tts_player_transport_side_background">#14000000</color>
+    <!-- Diem giua cua gradient phu len anh bia (gradient_tts_player_cover_fade.xml) - alpha 40%
+         (hex 66) tren tts_player_background, de gradient hoa hop mau voi nen ben duoi anh bia o
+         ca 2 theme thay vi luon toi den nhu truoc. -->
+    <color name="tts_player_gradient_center">#66FFFFFF</color>
+
+    <!-- "Send to E-Reader" nang cap UI (nut noi FAB o BookDetailActivity/DeviceBookDetailActivity
+         + nut "Gui" pill trong SendToEreaderDialogFragment) - xanh la doc lap voi colorPrimary,
+         lay cam hung tu anh mau UI "Send to Kindle/Kobo". Dung 1 mau duy nhat cho ca Sang/Toi
+         (khong co values-night rieng) vi day la mau thuong hieu co dinh cua hanh dong nay, giong
+         cach reader_accent_blue cung khong doi theo theme. -->
+    <color name="color_send_to_ereader">#2E7D32</color>
+    <color name="color_send_to_ereader_ripple">#33FFFFFF</color>
+
+    <!-- Style Grid "Gia sach" (Bookshelf) - mau go nau, dung cho bg_bookshelf_wall va
+         bg_bookshelf_shelf_plank. Co dinh, khong doi theo theme sang/toi (giong cach
+         reader_accent_blue co dinh o tren). -->
+    <color name="bookshelf_wall_top">#3E2723</color>
+    <color name="bookshelf_wall_bottom">#5D4037</color>
+    <color name="bookshelf_plank_top">#8D6E63</color>
+    <color name="bookshelf_plank_bottom">#4E342E</color>
+    <color name="bookshelf_plank_highlight">#66FFFFFF</color>
+    <color name="bookshelf_plank_shadow">#4D000000</color>
+
+    <!-- Man hinh "Tien trinh" (ProgressActivity, DATABASE_VERSION 17) - xem anh mau nguoi dung
+         gui (Linga-style progress screen). Co dinh, khong doi theo Sang/Toi (giong cach
+         reader_accent_blue/color_send_to_ereader cung co dinh o tren) vi day la mau nhan dien
+         rieng cho man hinh thong ke nay, khong phai mau chrome chung cua app. -->
+    <color name="color_progress_accent">#E8837A</color>
+    <color name="color_progress_bar_muted">#6B6B6B</color>
+    <color name="color_progress_trend_up">#4CAF50</color>
+    <color name="color_progress_trend_down">#E8837A</color>
+
+    <!-- Menu chọn văn bản trong reader (view_reader_selection_pill_toolbar.xml) - thẻ nổi 2 hàng
+         nền sáng thay cho thanh "pill" nền tối cũ, theo đúng ảnh mẫu người dùng gửi. Có bản Tối
+         riêng trong values-night/colors.xml (cùng token name) để tự đổi theo Sáng/Tối, giống
+         cách toolbar_background đã làm ở đầu file này. -->
+    <color name="reader_selection_card_bg">#FFFFFFFF</color>
+    <color name="reader_selection_card_divider">#1F1C1C1E</color>
+    <color name="reader_selection_icon_tint">#FF3C3C43</color>
+    <color name="reader_selection_label_text">#FF3C3C43</color>
+    <!-- Nền hình vuông bo góc màu xanh lá cho nút kiểu (Gạch chân/Tô nền) đang được chọn - cố
+         định, không đổi theo theme (giống cách color_send_to_ereader/reader_accent_blue cũng cố
+         định ở trên), vì đây là màu nhận diện trạng thái "đang chọn", không phải màu chrome. -->
+    <color name="reader_selection_style_active_bg">#FF34C759</color>
+</resources>

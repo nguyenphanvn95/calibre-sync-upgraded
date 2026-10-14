@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copy of item_reader_menu_entry.xml with a trailing check mark, used for ReaderToggleAction
+     rows (see ReaderMenuSheet#buildContent). The check ImageView's visibility is toggled in code
+     depending on ReaderToggleAction#isChecked(host); its drawable is swapped between a checkmark
+     (isExclusiveChoice, radio-style) and a filled dot/switch look (independent on/off) so the two
+     kinds of control read differently at a glance, matching Readest's ViewMenu having both
+     checkbox-style and segmented-control-style rows. -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp"
+    android:background="?attr/selectableItemBackground">
+
+    <ImageView
+        android:id="@+id/reader_menu_entry_icon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:contentDescription="@null" />
+
+    <TextView
+        android:id="@+id/reader_menu_entry_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginStart="20dp"
+        android:textSize="15sp" />
+
+    <ImageView
+        android:id="@+id/reader_menu_entry_check"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="12dp"
+        android:contentDescription="@null"
+        android:src="@android:drawable/checkbox_on_background"
+        android:visibility="gone" />
+
+</LinearLayout>

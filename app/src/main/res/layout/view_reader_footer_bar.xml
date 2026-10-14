@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Footer mong: toi da 5 nut dan deu, moi nut icon+nhan nho, tap mo panel truot len phia tren -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/reader_footer_bar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:orientation="horizontal"
+    android:background="@color/reader_chrome_bar_dark"
+    android:paddingTop="2dp"
+    android:paddingBottom="2dp"
+    android:clickable="true" />

@@ -1,0 +1,672 @@
+# data/it/lexicon.toml — Italian exception dictionary (it-IT).
+#
+# Rules in `rules.toml` cover regular Italian words (penultimate stress,
+# closed e/o). This file holds only the exceptions:
+#
+#   route = "primary"   use these phonemes — proparoxytones (stress earlier
+#                       than the penult), open-vowel /ɛ ɔ/ stems, /ddz/ words,
+#                       intervocalic-/z/ words, unstressed function words,
+#                       naturalized loanwords.
+#   route = "fallback"  ignore `phonemes`; the router sends the word to the
+#                       EN engine (genuinely foreign words / English names).
+#
+# Phoneme strings are space-separated tokens that must exist in
+# data/phoneme_id_map.json. Primary stress is `ˈ` (ID 112), placed before
+# the onset of the stressed syllable. Unstressed clitics omit `ˈ`.
+# Lookup happens on the lowercased, apostrophe-stripped word.
+
+# ── Unstressed function words (clitics — no ˈ marker) ──
+[[entry]]
+word = "e"
+phonemes = "e"
+route = "primary"
+
+[[entry]]
+word = "a"
+phonemes = "a"
+route = "primary"
+
+[[entry]]
+word = "o"
+phonemes = "o"
+route = "primary"
+
+[[entry]]
+word = "i"
+phonemes = "i"
+route = "primary"
+
+[[entry]]
+word = "di"
+phonemes = "d i"
+route = "primary"
+
+[[entry]]
+word = "da"
+phonemes = "d a"
+route = "primary"
+
+[[entry]]
+word = "il"
+phonemes = "i l"
+route = "primary"
+
+[[entry]]
+word = "lo"
+phonemes = "l o"
+route = "primary"
+
+[[entry]]
+word = "la"
+phonemes = "l a"
+route = "primary"
+
+[[entry]]
+word = "le"
+phonemes = "l e"
+route = "primary"
+
+[[entry]]
+word = "li"
+phonemes = "l i"
+route = "primary"
+
+[[entry]]
+word = "gli"
+phonemes = "ʎ i"
+route = "primary"
+
+[[entry]]
+word = "un"
+phonemes = "u n"
+route = "primary"
+
+[[entry]]
+word = "in"
+phonemes = "i n"
+route = "primary"
+
+[[entry]]
+word = "che"
+phonemes = "k e"
+route = "primary"
+
+[[entry]]
+word = "non"
+phonemes = "n o n"
+route = "primary"
+
+[[entry]]
+word = "per"
+phonemes = "p e r"
+route = "primary"
+
+[[entry]]
+word = "con"
+phonemes = "k o n"
+route = "primary"
+
+[[entry]]
+word = "su"
+phonemes = "s u"
+route = "primary"
+
+[[entry]]
+word = "ma"
+phonemes = "m a"
+route = "primary"
+
+[[entry]]
+word = "se"
+phonemes = "s e"
+route = "primary"
+
+[[entry]]
+word = "si"
+phonemes = "s i"
+route = "primary"
+
+[[entry]]
+word = "mi"
+phonemes = "m i"
+route = "primary"
+
+[[entry]]
+word = "ti"
+phonemes = "t i"
+route = "primary"
+
+[[entry]]
+word = "ci"
+phonemes = "tʃ i"
+route = "primary"
+
+[[entry]]
+word = "al"
+phonemes = "a l"
+route = "primary"
+
+[[entry]]
+word = "del"
+phonemes = "d e l"
+route = "primary"
+
+[[entry]]
+word = "nel"
+phonemes = "n e l"
+route = "primary"
+
+[[entry]]
+word = "dal"
+phonemes = "d a l"
+route = "primary"
+
+[[entry]]
+word = "sul"
+phonemes = "s u l"
+route = "primary"
+
+[[entry]]
+word = "dei"
+phonemes = "d e i"
+route = "primary"
+
+[[entry]]
+word = "nei"
+phonemes = "n e i"
+route = "primary"
+
+[[entry]]
+word = "ed"
+phonemes = "e d"
+route = "primary"
+
+# ── Irregular monosyllables ──
+[[entry]]
+word = "ho"
+phonemes = "ˈ ɔ"
+route = "primary"
+
+[[entry]]
+word = "più"
+phonemes = "ˈ p j u"
+route = "primary"
+
+# ── Proparoxytones (stress earlier than the default penult) ──
+[[entry]]
+word = "essere"
+phonemes = "ˈ ɛ s s e r e"
+route = "primary"
+
+[[entry]]
+word = "tavolo"
+phonemes = "ˈ t a v o l o"
+route = "primary"
+
+[[entry]]
+word = "medico"
+phonemes = "ˈ m ɛ d i k o"
+route = "primary"
+
+[[entry]]
+word = "telefono"
+phonemes = "t e ˈ l ɛ f o n o"
+route = "primary"
+
+[[entry]]
+word = "camera"
+phonemes = "ˈ k a m e r a"
+route = "primary"
+
+[[entry]]
+word = "musica"
+phonemes = "ˈ m u z i k a"
+route = "primary"
+
+[[entry]]
+word = "numero"
+phonemes = "ˈ n u m e r o"
+route = "primary"
+
+[[entry]]
+word = "sabato"
+phonemes = "ˈ s a b a t o"
+route = "primary"
+
+[[entry]]
+word = "ultimo"
+phonemes = "ˈ u l t i m o"
+route = "primary"
+
+[[entry]]
+word = "piccolo"
+phonemes = "ˈ p i k k o l o"
+route = "primary"
+
+[[entry]]
+word = "difficile"
+phonemes = "d i f ˈ f i tʃ i l e"
+route = "primary"
+
+[[entry]]
+word = "facile"
+phonemes = "ˈ f a tʃ i l e"
+route = "primary"
+
+[[entry]]
+word = "possibile"
+phonemes = "p o s ˈ s i b i l e"
+route = "primary"
+
+[[entry]]
+word = "subito"
+phonemes = "ˈ s u b i t o"
+route = "primary"
+
+[[entry]]
+word = "popolo"
+phonemes = "ˈ p ɔ p o l o"
+route = "primary"
+
+[[entry]]
+word = "secolo"
+phonemes = "ˈ s ɛ k o l o"
+route = "primary"
+
+[[entry]]
+word = "opera"
+phonemes = "ˈ ɔ p e r a"
+route = "primary"
+
+[[entry]]
+word = "isola"
+phonemes = "ˈ i z o l a"
+route = "primary"
+
+[[entry]]
+word = "giovane"
+phonemes = "ˈ dʒ o v a n e"
+route = "primary"
+
+[[entry]]
+word = "vivere"
+phonemes = "ˈ v i v e r e"
+route = "primary"
+
+[[entry]]
+word = "conoscere"
+phonemes = "k o ˈ n o ʃ e r e"
+route = "primary"
+
+[[entry]]
+word = "crescere"
+phonemes = "ˈ k r e ʃ e r e"
+route = "primary"
+
+[[entry]]
+word = "sciopero"
+phonemes = "ˈ ʃ ɔ p e r o"
+route = "primary"
+
+[[entry]]
+word = "psicologo"
+phonemes = "p s i ˈ k ɔ l o g o"
+route = "primary"
+
+# ── -ia hiatus words (the diphthong default shifts stress one left) ──
+[[entry]]
+word = "compagnia"
+phonemes = "k o m p a ɲ ˈ i a"
+route = "primary"
+
+[[entry]]
+word = "farmacia"
+phonemes = "f a r m a tʃ ˈ i a"
+route = "primary"
+
+[[entry]]
+word = "poesia"
+phonemes = "p o e z ˈ i a"
+route = "primary"
+
+# ── Long vowel runs the nuclei grouping over-merges ──
+[[entry]]
+word = "cucchiaio"
+phonemes = "k u k ˈ k j a i o"
+route = "primary"
+
+# ── Open-vowel /ɛ ɔ/ stems (default rule reads closed /e o/) ──
+[[entry]]
+word = "bene"
+phonemes = "ˈ b ɛ n e"
+route = "primary"
+
+[[entry]]
+word = "bello"
+phonemes = "ˈ b ɛ l l o"
+route = "primary"
+
+[[entry]]
+word = "bella"
+phonemes = "ˈ b ɛ l l a"
+route = "primary"
+
+[[entry]]
+word = "buono"
+phonemes = "ˈ b w ɔ n o"
+route = "primary"
+
+[[entry]]
+word = "buona"
+phonemes = "ˈ b w ɔ n a"
+route = "primary"
+
+[[entry]]
+word = "uomo"
+phonemes = "ˈ w ɔ m o"
+route = "primary"
+
+[[entry]]
+word = "donna"
+phonemes = "ˈ d ɔ n n a"
+route = "primary"
+
+[[entry]]
+word = "oggi"
+phonemes = "ˈ ɔ d dʒ i"
+route = "primary"
+
+[[entry]]
+word = "era"
+phonemes = "ˈ ɛ r a"
+route = "primary"
+
+[[entry]]
+word = "ecco"
+phonemes = "ˈ ɛ k k o"
+route = "primary"
+
+[[entry]]
+word = "festa"
+phonemes = "ˈ f ɛ s t a"
+route = "primary"
+
+[[entry]]
+word = "tempo"
+phonemes = "ˈ t ɛ m p o"
+route = "primary"
+
+[[entry]]
+word = "gente"
+phonemes = "ˈ dʒ ɛ n t e"
+route = "primary"
+
+[[entry]]
+word = "niente"
+phonemes = "ˈ n j ɛ n t e"
+route = "primary"
+
+[[entry]]
+word = "ieri"
+phonemes = "ˈ j ɛ r i"
+route = "primary"
+
+[[entry]]
+word = "chiesa"
+phonemes = "ˈ k j ɛ z a"
+route = "primary"
+
+# ── Intervocalic /z/ words (rules keep plain /s/ between vowels) ──
+[[entry]]
+word = "casa"
+phonemes = "ˈ k a z a"
+route = "primary"
+
+[[entry]]
+word = "cosa"
+phonemes = "ˈ k ɔ z a"
+route = "primary"
+
+# ── /ddz/ words (the zz rule defaults to /tts/) ──
+[[entry]]
+word = "mezzo"
+phonemes = "ˈ m ɛ d dz o"
+route = "primary"
+
+[[entry]]
+word = "mezza"
+phonemes = "ˈ m ɛ d dz a"
+route = "primary"
+
+[[entry]]
+word = "azzurro"
+phonemes = "a d ˈ dz u r r o"
+route = "primary"
+
+# ── Number / unit words (emitted by the normalize expanders) ──
+[[entry]]
+word = "zero"
+phonemes = "ˈ dz ɛ r o"
+route = "primary"
+
+[[entry]]
+word = "sei"
+phonemes = "ˈ s ɛ i"
+route = "primary"
+
+[[entry]]
+word = "sette"
+phonemes = "ˈ s ɛ t t e"
+route = "primary"
+
+[[entry]]
+word = "otto"
+phonemes = "ˈ ɔ t t o"
+route = "primary"
+
+[[entry]]
+word = "nove"
+phonemes = "ˈ n ɔ v e"
+route = "primary"
+
+[[entry]]
+word = "dieci"
+phonemes = "ˈ d j ɛ tʃ i"
+route = "primary"
+
+[[entry]]
+word = "undici"
+phonemes = "ˈ u n d i tʃ i"
+route = "primary"
+
+[[entry]]
+word = "dodici"
+phonemes = "ˈ d o d i tʃ i"
+route = "primary"
+
+[[entry]]
+word = "tredici"
+phonemes = "ˈ t r e d i tʃ i"
+route = "primary"
+
+[[entry]]
+word = "quattordici"
+phonemes = "k w a t ˈ t o r d i tʃ i"
+route = "primary"
+
+[[entry]]
+word = "quindici"
+phonemes = "ˈ k w i n d i tʃ i"
+route = "primary"
+
+[[entry]]
+word = "sedici"
+phonemes = "ˈ s e d i tʃ i"
+route = "primary"
+
+[[entry]]
+word = "cento"
+phonemes = "ˈ tʃ ɛ n t o"
+route = "primary"
+
+[[entry]]
+word = "virgola"
+phonemes = "ˈ v i r g o l a"
+route = "primary"
+
+[[entry]]
+word = "settimo"
+phonemes = "ˈ s ɛ t t i m o"
+route = "primary"
+
+[[entry]]
+word = "nono"
+phonemes = "ˈ n ɔ n o"
+route = "primary"
+
+[[entry]]
+word = "decimo"
+phonemes = "ˈ d ɛ tʃ i m o"
+route = "primary"
+
+[[entry]]
+word = "euro"
+phonemes = "ˈ ɛ u r o"
+route = "primary"
+
+[[entry]]
+word = "dollaro"
+phonemes = "ˈ d ɔ l l a r o"
+route = "primary"
+
+[[entry]]
+word = "dollari"
+phonemes = "ˈ d ɔ l l a r i"
+route = "primary"
+
+[[entry]]
+word = "metro"
+phonemes = "ˈ m ɛ t r o"
+route = "primary"
+
+[[entry]]
+word = "metri"
+phonemes = "ˈ m ɛ t r i"
+route = "primary"
+
+[[entry]]
+word = "chilometro"
+phonemes = "k i ˈ l ɔ m e t r o"
+route = "primary"
+
+[[entry]]
+word = "chilometri"
+phonemes = "k i ˈ l ɔ m e t r i"
+route = "primary"
+
+[[entry]]
+word = "centimetro"
+phonemes = "tʃ e n ˈ t i m e t r o"
+route = "primary"
+
+[[entry]]
+word = "centimetri"
+phonemes = "tʃ e n ˈ t i m e t r i"
+route = "primary"
+
+[[entry]]
+word = "millimetro"
+phonemes = "m i l ˈ l i m e t r o"
+route = "primary"
+
+[[entry]]
+word = "millimetri"
+phonemes = "m i l ˈ l i m e t r i"
+route = "primary"
+
+[[entry]]
+word = "nanometro"
+phonemes = "n a ˈ n ɔ m e t r o"
+route = "primary"
+
+[[entry]]
+word = "nanometri"
+phonemes = "n a ˈ n ɔ m e t r i"
+route = "primary"
+
+[[entry]]
+word = "celsius"
+phonemes = "ˈ tʃ ɛ l s i u s"
+route = "primary"
+
+[[entry]]
+word = "fahrenheit"
+phonemes = "ˈ f a r e n a i t"
+route = "primary"
+
+[[entry]]
+word = "hertz"
+phonemes = "ˈ ɛ r t s"
+route = "primary"
+
+[[entry]]
+word = "kilohertz"
+phonemes = "k i l o ˈ ɛ r t s"
+route = "primary"
+
+[[entry]]
+word = "megahertz"
+phonemes = "m e g a ˈ ɛ r t s"
+route = "primary"
+
+[[entry]]
+word = "gigahertz"
+phonemes = "dʒ i g a ˈ ɛ r t s"
+route = "primary"
+
+# ── Naturalized loanwords whose pronunciation deviates from the rules ──
+[[entry]]
+word = "internet"
+phonemes = "ˈ i n t e r n e t"
+route = "primary"
+
+# ── Genuinely foreign words / English names → EN engine ──
+[[entry]]
+word = "google"
+phonemes = ""
+route = "fallback"
+
+[[entry]]
+word = "facebook"
+phonemes = ""
+route = "fallback"
+
+[[entry]]
+word = "youtube"
+phonemes = ""
+route = "fallback"
+
+[[entry]]
+word = "computer"
+phonemes = ""
+route = "fallback"
+
+[[entry]]
+word = "mouse"
+phonemes = ""
+route = "fallback"
+
+[[entry]]
+word = "whatsapp"
+phonemes = ""
+route = "fallback"
+
+[[entry]]
+word = "iphone"
+phonemes = ""
+route = "fallback"
+
+[[entry]]
+word = "john"
+phonemes = ""
+route = "fallback"

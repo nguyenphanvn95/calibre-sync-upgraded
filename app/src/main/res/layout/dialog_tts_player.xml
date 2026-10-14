@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Full "Now playing" style player cho Đọc cho nghe, mở bằng cách tap vào
+     TtsMiniPlayerView - xem net.mrphan.calibre.reader.tts.TtsPlayerBottomSheet.
+     Bố cục mô phỏng trình phát audiobook chuyên nghiệp: ảnh bìa lớn phía trên, tên
+     chương, trích đoạn câu đang đọc, progress bar liên tục, cụm nút điều khiển,
+     và hàng tiện ích dưới cùng (hẹn giờ, tốc độ, giọng đọc, nhạc nền).
+
+     Theo Sáng/Tối (nâng cấp): phần "dưới ảnh bìa" (tiêu đề chương, câu đang đọc, progress,
+     transport controls, hàng tiện ích) giờ dùng các token tts_player_* (values/colors.xml +
+     values-night/colors.xml) thay vì màu đen/trắng hardcode, nên đổi theo Giao diện Sáng/Tối
+     trong Cài đặt giống phần còn lại của app. Riêng hàng icon TRÊN CÙNG (nút back, tiêu đề, nút
+     nhạc nền/đánh dấu/từ điển) và icon bên trong nút play/pause CỐ Ý vẫn giữ trắng/đen cố định ở
+     cả 2 theme, 2 vùng này nằm ĐÈ LÊN ảnh bìa (qua gradient_tts_player_cover_fade tối dần) hoặc
+     đè lên hình tròn trắng cố định của nút play, độ tương phản của chúng phụ thuộc vào ảnh bìa/
+     nút tròn chứ không phụ thuộc theme của app, xem gradient_tts_player_cover_fade.xml và
+     bg_tts_player_play_button.xml. -->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/tts_player_background">
+
+    <ImageView
+        android:id="@+id/tts_player_cover"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:scaleType="centerCrop"
+        android:alpha="0.55"
+        android:src="@drawable/ic_reader_cover_placeholder"
+        android:contentDescription="@null" />
+
+    <!-- Gradient phủ từ trong suốt xuống đen, để header và text bên dưới luôn đọc được
+         bất kể ảnh bìa sáng hay tối. Dùng drawable list riêng, không set màu cứng ở đây. -->
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/gradient_tts_player_cover_fade"
+        app:layout_constraintTop_toTopOf="@id/tts_player_cover"
+        app:layout_constraintBottom_toBottomOf="@id/tts_player_cover"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageButton
+        android:id="@+id/tts_player_back"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="9dp"
+        android:src="@drawable/ic_tts_player_back"
+        android:tint="#FFFFFF"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:contentDescription="@string/reader_chrome_close" />
+
+    <TextView
+        android:id="@+id/tts_player_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:singleLine="true"
+        android:ellipsize="end"
+        app:layout_constraintTop_toTopOf="@id/tts_player_back"
+        app:layout_constraintBottom_toBottomOf="@id/tts_player_back"
+        app:layout_constraintStart_toEndOf="@id/tts_player_back"
+        app:layout_constraintEnd_toStartOf="@id/tts_player_music_toggle" />
+
+    <ImageButton
+        android:id="@+id/tts_player_music_toggle"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="10dp"
+        android:src="@drawable/ic_reader_background_music_note"
+        android:tint="#FFFFFF"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tts_player_bookmark"
+        android:contentDescription="@string/reader_tts_background_music_label" />
+
+    <ImageButton
+        android:id="@+id/tts_player_bookmark"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="9dp"
+        android:src="@drawable/ic_action_star"
+        android:tint="#FFFFFF"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tts_player_dictionary"
+        android:contentDescription="@string/reader_tts_sherpa_settings_title" />
+
+    <!-- Icon "sach mo" tai su dung nguyen icon Tu dien cua thanh chon van ban
+         (ic_selection_dictionary) de nhat quan hinh anh - mo man hinh quan ly "Tu dien phat
+         am" toan cuc cho TTS (xem TtsDictionaryManagerActivity). -->
+    <ImageButton
+        android:id="@+id/tts_player_dictionary"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_marginEnd="4dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="9dp"
+        android:src="@drawable/ic_selection_dictionary"
+        android:tint="#FFFFFF"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="@string/reader_tts_pronunciation_dictionary_title" />
+
+    <TextView
+        android:id="@+id/tts_player_chapter_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:textColor="@color/tts_player_on_background"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?attr/selectableItemBackground"
+        app:layout_constraintTop_toBottomOf="@id/tts_player_cover"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tts_player_sentence_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:paddingStart="32dp"
+        android:paddingEnd="32dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:textColor="@color/tts_player_on_background_secondary"
+        android:textSize="15sp"
+        android:textStyle="italic"
+        android:gravity="center"
+        android:lines="3"
+        android:ellipsize="end"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?attr/selectableItemBackground"
+        app:layout_constraintTop_toBottomOf="@id/tts_player_chapter_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Loading overlay: chi hien khi mo phien nghe (isAudioSession=true) va chuong that su chua
+         san sang (state.sentenceCount == 0), tranh cam giac man hinh dung hinh trong luc engine
+         TTS khoi tao/trich xuat text o phia sau. An ngay khi bind(state) nhan duoc sentenceCount
+         > 0 lan dau tien. Xem TtsPlayerBottomSheet.show() va
+         prompt-fix-tts-now-playing-mo-truoc-audio-sau.md muc 5. -->
+    <ProgressBar
+        android:id="@+id/tts_player_loading_progress"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/tts_player_on_background"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="@id/tts_player_sentence_text"
+        app:layout_constraintBottom_toBottomOf="@id/tts_player_sentence_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatSeekBar
+        android:id="@+id/tts_player_progress_bar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginEnd="28dp"
+        android:max="1000"
+        app:layout_constraintTop_toBottomOf="@id/tts_player_sentence_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tts_player_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="28dp"
+        android:textColor="@color/tts_player_on_background_secondary"
+        android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@id/tts_player_progress_bar"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tts_player_voice_name_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="28dp"
+        android:textColor="@color/tts_player_on_background_secondary"
+        android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@id/tts_player_progress_bar"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/tts_player_transport_controls"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="44dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/tts_player_voice_name_label"
+        app:layout_constraintBottom_toTopOf="@id/tts_player_utility_row"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageButton
+            android:id="@+id/tts_player_prev"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:background="@drawable/bg_tts_player_transport_side_button"
+            android:padding="12dp"
+            android:src="@drawable/ic_tts_mini_prev"
+            android:tint="@color/tts_player_on_background"
+            android:contentDescription="@string/reader_tts_previous_sentence" />
+
+        <ImageButton
+            android:id="@+id/tts_player_play_pause"
+            android:layout_width="54dp"
+            android:layout_height="54dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:background="@drawable/bg_tts_player_play_button"
+            android:padding="16dp"
+            android:src="@drawable/ic_tts_mini_play"
+            android:tint="#000000"
+            android:contentDescription="@string/reader_tts_play_pause" />
+
+        <ImageButton
+            android:id="@+id/tts_player_next"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:background="@drawable/bg_tts_player_transport_side_button"
+            android:padding="12dp"
+            android:src="@drawable/ic_tts_mini_next"
+            android:tint="@color/tts_player_on_background"
+            android:contentDescription="@string/reader_tts_next_sentence" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/tts_player_utility_row"
+        android:layout_width="match_parent"
+        android:layout_height="176dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="horizontal"
+        android:gravity="bottom"
+        android:paddingStart="18dp"
+        android:paddingEnd="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:id="@+id/tts_player_sleep_timer_pill"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="?attr/selectableItemBackground"
+            android:minHeight="88dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="10dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_tts_player_timer"
+                android:tint="@color/tts_player_on_background"
+                android:contentDescription="@null" />
+
+            <TextView
+                android:id="@+id/tts_player_sleep_timer_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:textColor="@color/tts_player_on_background"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/reader_tts_sleep_timer_label"
+                android:textColor="@color/tts_player_on_background_secondary"
+                android:includeFontPadding="true"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tts_player_speed_pill"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="?attr/selectableItemBackground"
+            android:minHeight="88dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="10dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_tts_player_speed"
+                android:tint="@color/tts_player_on_background"
+                android:contentDescription="@null" />
+
+            <TextView
+                android:id="@+id/tts_player_speed_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:textColor="@color/tts_player_on_background"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/reader_tts_speed_label"
+                android:textColor="@color/tts_player_on_background_secondary"
+                android:includeFontPadding="true"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tts_player_voice_pill"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="?attr/selectableItemBackground"
+            android:minHeight="88dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="10dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_tts_player_voice"
+                android:tint="@color/tts_player_on_background"
+                android:contentDescription="@null" />
+
+            <TextView
+                android:id="@+id/tts_player_voice_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textColor="@color/tts_player_on_background"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/reader_tts_voice_label"
+                android:textColor="@color/tts_player_on_background_secondary"
+                android:includeFontPadding="true"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tts_player_music_pill"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="?attr/selectableItemBackground"
+            android:minHeight="88dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="10dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_reader_background_music_note"
+                android:tint="@color/tts_player_on_background"
+                android:contentDescription="@null" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="@string/reader_tts_background_music_pill_value"
+                android:textColor="@color/tts_player_on_background"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/reader_tts_background_music_label"
+                android:textColor="@color/tts_player_on_background_secondary"
+                android:includeFontPadding="true"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

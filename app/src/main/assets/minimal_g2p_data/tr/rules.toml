@@ -1,0 +1,186 @@
+# data/tr/rules.toml — Turkish (tr-TR) grapheme → phoneme rules.
+#
+# RFC-013. Modern Turkish orthography (1928 Latin alphabet) is almost
+# perfectly phonemic — one letter, one sound — so the engine is rule-based
+# with a small exception lexicon.
+#
+# Rule application (see crates/g2p-core/src/lang/tr.rs — same scan as the
+# ID engine):
+#   - Turkish-aware lowercasing FIRST (İ→i, I→ı — the standard Unicode
+#     lowercase map is wrong for Turkish dotless/dotted i).
+#   - Linear left-to-right scan over the lowercased NFC word.
+#   - At each position the FIRST rule (in file order) whose `pattern`
+#     matches as a prefix wins; the scan then advances by the pattern length.
+#   - No context column: Turkish needs none (the ID engine's word_final `e`
+#     branch has no Turkish counterpart).
+#
+# Phonology decisions (documented in RFC-013):
+#   - **Stress**: default FINAL syllable, `ˈ` (ID 112) emitted before the
+#     onset of the final syllable. Exceptions (place names, some adverbs,
+#     unstressed particles) live in lexicon.toml.
+#   - **ğ (yumuşak ge) is silent**: phonetically it lengthens the preceding
+#     vowel / glides between front vowels; with no length tokens in the
+#     inventory the closest stable encoding is deletion ("dağ" → `d a`,
+#     "öğretmen" → `ø ɾ e t m e n`). espeak-ng makes the same call modulo
+#     length marks.
+#   - **r → ɾ (tap)**: reuses the ES tap token (ID 114). The word-final
+#     devoiced fricated allophone is not encoded.
+#   - **ı → ɯ**: reuses the VI `ư` token (ID 98) — same string key,
+#     per-locale interpretation (one model = one meaning, the RFC-002 tone-
+#     token precedent).
+#   - **ö → ø (121), ü → y (122)**: the only two tokens Turkish adds.
+#   - **k/g/l palatal allophones** (before front vowels) are not encoded —
+#     allophonic, the acoustic model learns them from context.
+#   - Circumflex vowels (â î û, loanword palatalization/length) map to the
+#     plain vowels.
+#   - q/w/x are not Turkish letters; the router sends words containing them
+#     to the EN engine. Rules are kept as a safety net for direct engine
+#     calls (q→k, w→v, x→ks).
+
+[meta]
+dialect = "tr"
+version = 1
+
+# ── Consonants ──
+[[rule]]
+pattern = "c"
+phoneme = "dʒ"          # cam, gece
+
+[[rule]]
+pattern = "ç"
+phoneme = "tʃ"          # çay, çok
+
+[[rule]]
+pattern = "ğ"
+phoneme = ""            # silent — dağ, öğretmen (see header)
+
+[[rule]]
+pattern = "j"
+phoneme = "ʒ"           # jandarma, garaj (French loans)
+
+[[rule]]
+pattern = "ş"
+phoneme = "ʃ"           # şey, beş
+
+[[rule]]
+pattern = "y"
+phoneme = "j"           # yol, ay
+
+[[rule]]
+pattern = "r"
+phoneme = "ɾ"           # araba — tap, reuses the ES token
+
+[[rule]]
+pattern = "b"
+phoneme = "b"
+
+[[rule]]
+pattern = "d"
+phoneme = "d"
+
+[[rule]]
+pattern = "f"
+phoneme = "f"
+
+[[rule]]
+pattern = "g"
+phoneme = "g"
+
+[[rule]]
+pattern = "h"
+phoneme = "h"
+
+[[rule]]
+pattern = "k"
+phoneme = "k"
+
+[[rule]]
+pattern = "l"
+phoneme = "l"
+
+[[rule]]
+pattern = "m"
+phoneme = "m"
+
+[[rule]]
+pattern = "n"
+phoneme = "n"
+
+[[rule]]
+pattern = "p"
+phoneme = "p"
+
+[[rule]]
+pattern = "s"
+phoneme = "s"
+
+[[rule]]
+pattern = "t"
+phoneme = "t"
+
+[[rule]]
+pattern = "v"
+phoneme = "v"
+
+[[rule]]
+pattern = "z"
+phoneme = "z"
+
+# ── Loanword safety net (router sends q/w/x words to EN normally) ──
+[[rule]]
+pattern = "q"
+phoneme = "k"
+
+[[rule]]
+pattern = "w"
+phoneme = "v"
+
+[[rule]]
+pattern = "x"
+phoneme = "k s"
+
+# ── Vowels ──
+[[rule]]
+pattern = "a"
+phoneme = "a"
+
+[[rule]]
+pattern = "e"
+phoneme = "e"
+
+[[rule]]
+pattern = "ı"
+phoneme = "ɯ"           # kız, ılık — close back unrounded
+
+[[rule]]
+pattern = "i"
+phoneme = "i"
+
+[[rule]]
+pattern = "o"
+phoneme = "o"
+
+[[rule]]
+pattern = "ö"
+phoneme = "ø"           # göz, dört
+
+[[rule]]
+pattern = "u"
+phoneme = "u"
+
+[[rule]]
+pattern = "ü"
+phoneme = "y"           # gül, üç
+
+# ── Circumflex vowels (loanwords: kâğıt, millî, sükût) ──
+[[rule]]
+pattern = "â"
+phoneme = "a"
+
+[[rule]]
+pattern = "î"
+phoneme = "i"
+
+[[rule]]
+pattern = "û"
+phoneme = "u"

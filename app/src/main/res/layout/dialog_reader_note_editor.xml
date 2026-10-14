@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingStart="2dp"
+    android:paddingEnd="2dp"
+    android:paddingTop="6dp">
+
+    <EditText
+        android:id="@+id/reader_note_input"
+        android:layout_width="match_parent"
+        android:layout_height="112dp"
+        android:background="@drawable/shape_reader_note_input_bg"
+        android:gravity="top|start"
+        android:hint="@string/reader_highlight_add_note"
+        android:inputType="textMultiLine|textCapSentences"
+        android:maxLines="5"
+        android:padding="12dp"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textColorHint="?android:attr/textColorSecondary"
+        android:textSize="16sp" />
+</LinearLayout>

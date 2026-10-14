@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thư viện mini</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  :root {
+    --ink:       #1a1410;
+    --paper:     #f7f3ed;
+    --warm:      #e8e0d4;
+    --accent:    #8b4513;
+    --accent2:   #c0832a;
+    --muted:     #7a6e64;
+    --line:      #d4c9bc;
+    --card:      #ffffff;
+    --tag-bg:    #ede7df;
+    --tag-text:  #5c4a35;
+    --radius:    6px;
+    --shadow:    0 2px 12px rgba(26,20,16,.08);
+    --shadow-lg: 0 8px 32px rgba(26,20,16,.14);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* ── TOP BAR ──
+     Bo logo "Thu vien Mini" va folder-indicator (nhan trong o duoi da khong con click-de-doi-
+     thu-vien nua, de o day chi gay nham la 1 nut chuc nang va chiem cho lam vo bo cuc man hinh
+     hep) -- header gio chi con: nut icon tim kiem (bam de mo rong thanh 1 o nhap toan bo header,
+     xem #searchToggle/.search-wrap.expanded), so luong sach, va cum nut grid/list. */
+  header {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0 12px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,.3);
+  }
+
+  .icon-btn {
+    background: none; border: 1px solid rgba(255,255,255,.2);
+    border-radius: 50%; color: rgba(255,255,255,.75);
+    width: 32px; height: 32px; cursor: pointer; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    transition: all .15s;
+  }
+  .icon-btn:hover, .icon-btn.active { background: rgba(255,255,255,.15); color: white; border-color: rgba(255,255,255,.35); }
+
+  /* Thu gon mac dinh: chi thay icon kinh lup. Bam vao -> them class "expanded", o nhap chiem
+     het chieu rong header (thay the total-count/view-btns tam thoi de khong bi vo/tran o man
+     hinh hep), co nut "x" de dong lai. Xem toggleSearch()/closeSearch() trong app.js. */
+  .search-wrap {
+    display: flex; align-items: center; gap: 8px;
+    flex: 0 0 auto; min-width: 0;
+    transition: flex .15s;
+  }
+  .search-wrap.expanded { flex: 1 1 auto; }
+  #searchInput {
+    width: 0; min-width: 0; flex: 0;
+    background: rgba(255,255,255,.1);
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 24px;
+    padding: 0 16px;
+    height: 32px;
+    color: white;
+    font-size: 13.5px;
+    font-family: 'Inter', sans-serif;
+    outline: none;
+    opacity: 0;
+    transition: width .15s, opacity .15s, background .2s, border-color .2s;
+  }
+  .search-wrap.expanded #searchInput { width: 100%; flex: 1; opacity: 1; }
+  #searchInput::placeholder { color: rgba(255,255,255,.45); }
+  #searchInput:focus { background: rgba(255,255,255,.15); border-color: rgba(255,255,255,.4); }
+  .search-close { display: none; }
+  .search-wrap.expanded .search-close { display: flex; }
+
+  .header-right {
+    margin-left: auto;
+    display: flex; align-items: center; gap: 10px;
+    font-size: 12px; color: rgba(255,255,255,.6);
+    flex-shrink: 0;
+  }
+  /* Khi tim kiem dang mo rong, nhuong het cho o nhap tren man hinh hep -- xem toggleSearch(). */
+  .search-wrap.expanded ~ .header-right { display: none; }
+
+  /* Nut "Hien thi" duy nhat (thay 2 nut Grid/List + popover so cot rieng le truoc day) mo 1
+     dropdown day du kieu menu "Display" cua tab Device Library (list/grid 2/3/4 cot, tung dong
+     co icon + nhan + nut radio) -- xem toggleViewMenu()/chooseViewOption() trong app.js. */
+  .view-menu-wrap { position: relative; flex-shrink: 0; }
+  .view-menu {
+    position: absolute; top: 40px; right: 0;
+    width: 240px;
+    background: #2a2622; border: 1px solid rgba(255,255,255,.12);
+    border-radius: 12px; padding: 6px 0;
+    box-shadow: var(--shadow-lg); z-index: 200;
+    display: none;
+  }
+  .view-menu.open { display: block; }
+  .view-menu-title {
+    font-size: 11px; font-weight: 600; letter-spacing: .5px; text-transform: uppercase;
+    color: rgba(255,255,255,.45); padding: 8px 16px 6px;
+  }
+  .view-menu-item {
+    display: flex; align-items: center; gap: 14px; width: 100%;
+    background: none; border: none; cursor: pointer;
+    padding: 9px 16px; color: rgba(255,255,255,.85);
+    font-family: 'Inter', sans-serif; font-size: 13.5px; text-align: left;
+    transition: background .12s;
+  }
+  .view-menu-item:hover { background: rgba(255,255,255,.06); }
+  .vmi-icon {
+    width: 18px; height: 18px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,.7);
+  }
+  .vmi-label { flex: 1; }
+  .vmi-radio {
+    width: 17px; height: 17px; border-radius: 50%; flex-shrink: 0;
+    border: 2px solid rgba(255,255,255,.35);
+    position: relative;
+  }
+  .view-menu-item.active .vmi-radio { border-color: var(--accent2); }
+  .view-menu-item.active .vmi-radio::after {
+    content: ''; position: absolute; inset: 2px;
+    border-radius: 50%; background: var(--accent2);
+  }
+  .view-menu-item.active .vmi-icon, .view-menu-item.active .vmi-label { color: white; }
+
+
+  /* ── LAYOUT ── */
+  .app { display: flex; min-height: calc(100vh - 56px); }
+
+  /* ── SIDEBAR ── */
+  aside {
+    width: 240px; flex-shrink: 0;
+    background: var(--card); border-right: 1px solid var(--line);
+    padding: 20px 0; overflow-y: auto;
+    max-height: calc(100vh - 56px);
+    position: sticky; top: 56px;
+  }
+  .sidebar-section { margin-bottom: 6px; }
+  .sidebar-label {
+    font-size: 10px; font-weight: 600; letter-spacing: 1.2px;
+    text-transform: uppercase; color: var(--muted); padding: 6px 20px 4px;
+  }
+  .sidebar-item {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 6px 20px; cursor: pointer; border-radius: 0;
+    font-size: 13px; color: var(--ink); transition: background .12s;
+    user-select: none; border: none; background: none; width: 100%; text-align: left;
+  }
+  .sidebar-item:hover { background: var(--warm); }
+  .sidebar-item.active { background: var(--accent); color: white; font-weight: 500; }
+  .sidebar-item.active .badge { background: rgba(255,255,255,.25); color: white; }
+  .badge {
+    font-size: 10px; font-family: 'JetBrains Mono', monospace;
+    background: var(--tag-bg); color: var(--muted);
+    padding: 1px 6px; border-radius: 10px; flex-shrink: 0;
+  }
+  .sidebar-divider { height: 1px; background: var(--line); margin: 8px 16px; }
+  .tag-list { max-height: 260px; overflow-y: auto; }
+  .tag-list::-webkit-scrollbar { width: 4px; }
+  .tag-list::-webkit-scrollbar-thumb { background: var(--line); border-radius: 2px; }
+
+  /* ── MAIN ── */
+  main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+
+  /* ── ACTION BUTTON (used e.g. by retry button in autoload zone) ── */
+  .btn-folder {
+    background: var(--accent); color: white;
+    border: none; border-radius: var(--radius);
+    padding: 8px 18px; cursor: pointer;
+    font-size: 13px; font-family: 'Inter', sans-serif;
+    font-weight: 500; transition: background .15s;
+    display: flex; align-items: center; gap: 6px; white-space: nowrap;
+  }
+  .btn-folder:hover { background: #7a3c10; }
+
+  /* ── TOOLBAR ── */
+  .toolbar {
+    background: var(--card); border-bottom: 1px solid var(--line);
+    padding: 10px 24px;
+    display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  }
+  .result-count { font-size: 13px; color: var(--muted); margin-right: auto; }
+  .result-count strong { color: var(--ink); }
+
+  select.filter-select {
+    font-family: 'Inter', sans-serif; font-size: 12.5px;
+    background: var(--paper); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 5px 28px 5px 10px;
+    color: var(--ink); cursor: pointer; outline: none;
+    -webkit-appearance: none; appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%237a6e64'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 10px center;
+  }
+  select.filter-select:focus { border-color: var(--accent); }
+
+  /* ── GRID ── */
+  .book-grid {
+    padding: 24px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(156px, 1fr));
+    gap: 20px;
+  }
+  /* Nguoi dung tu chon so cot qua popover cua nut Grid (xem setGridCols() trong app.js) --
+     ghi de auto-fill mac dinh o tren bang so cot co dinh. */
+  body.grid-fixed-cols .book-grid { grid-template-columns: repeat(var(--grid-cols, 2), 1fr); }
+  body.list-view .book-grid { grid-template-columns: 1fr; gap: 0; padding: 0; }
+
+  /* CARD */
+  .book-card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: var(--radius); overflow: hidden; cursor: pointer;
+    transition: transform .15s, box-shadow .15s;
+    display: flex; flex-direction: column;
+  }
+  .book-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+
+  .cover-wrap {
+    aspect-ratio: 2/3; background: var(--warm);
+    position: relative; overflow: hidden;
+  }
+  .cover-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .cover-placeholder {
+    width: 100%; height: 100%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 8px; padding: 12px;
+  }
+  .cover-placeholder-icon { font-size: 28px; opacity: .35; }
+  .cover-placeholder-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 11px; font-weight: 600; text-align: center;
+    line-height: 1.3; color: var(--muted); word-break: break-word;
+  }
+  .cover-placeholder[data-hue="0"] { background: #ede4f0; }
+  .cover-placeholder[data-hue="1"] { background: #e4edf0; }
+  .cover-placeholder[data-hue="2"] { background: #f0ede4; }
+  .cover-placeholder[data-hue="3"] { background: #e4f0ea; }
+  .cover-placeholder[data-hue="4"] { background: #f0e4e4; }
+  .cover-placeholder[data-hue="5"] { background: #e4e8f0; }
+  .cover-placeholder[data-hue="6"] { background: #f0e9e4; }
+  .cover-placeholder[data-hue="7"] { background: #eaf0e4; }
+
+  .format-badges {
+    position: absolute; bottom: 6px; left: 6px;
+    display: flex; gap: 3px; flex-wrap: wrap;
+  }
+  .fmt-badge {
+    font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 500;
+    padding: 1px 5px; border-radius: 3px;
+    background: rgba(0,0,0,.55); color: white; backdrop-filter: blur(4px);
+  }
+  .fmt-badge.epub { background: rgba(45,106,79,.85); }
+  .fmt-badge.pdf  { background: rgba(139,69,19,.85); }
+  .fmt-badge.mp3, .fmt-badge.m4b, .fmt-badge.aac { background: rgba(90,45,130,.85); }
+
+  /* Nut tai nhanh (them vao Device Library) de o goc bia sach -- xem
+     app.js#requestDownloadBook()/renderCard(). */
+  .dl-badge {
+    position: absolute; top: 6px; right: 6px;
+    width: 26px; height: 26px; border-radius: 50%;
+    background: rgba(26,20,16,.6); color: white; border: none;
+    font-size: 13px; cursor: pointer; backdrop-filter: blur(4px);
+    display: flex; align-items: center; justify-content: center;
+    transition: background .15s;
+  }
+  .dl-badge:hover { background: var(--accent); }
+  .dl-badge:disabled { opacity: .6; cursor: default; }
+  .dl-spinner { animation: spin .8s linear infinite; }
+  .dl-badge-done { cursor: default; }
+  .dl-badge-done:hover { background: rgba(26,20,16,.6); } /* khong doi mau khi hover vi khong bam duoc */
+
+  .card-info {
+    padding: 10px 10px 12px; flex: 1;
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 12.5px; font-weight: 600; line-height: 1.35; color: var(--ink);
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .card-author {
+    font-size: 11px; color: var(--muted);
+    display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .card-rating { font-size: 11px; color: var(--accent2); margin-top: auto; padding-top: 4px; }
+
+  /* LIST VIEW */
+  body.list-view .book-card {
+    border-radius: 0; border-left: none; border-right: none; border-top: none;
+    flex-direction: row; box-shadow: none !important;
+  }
+  /* transform: none chỉ áp cho trạng thái hover (tắt hiệu ứng "nhấc lên" của grid) -- KHÔNG đặt
+     ở rule .book-card gốc bên trên và KHÔNG dùng !important, vì .swipe-row .book-card cần tự do
+     nhận transform: translateX(...) do JS gán (xem onSwipePointerMove/revealSwipeRow trong
+     app.js) để trượt lộ 2 nút "Tải & Mở"/"Tải & Chia sẻ". Trước đây rule này có
+     `transform: none !important`, vô tình đè luôn transform của swipe khiến vuốt không có tác
+     dụng gì trên màn hình dù logic JS vẫn chạy đúng. */
+  body.list-view .book-card:hover { background: var(--warm); transform: none; }
+  body.list-view .cover-wrap {
+    width: 52px; flex-shrink: 0; aspect-ratio: unset;
+    height: 70px; margin: 10px 14px 10px 20px;
+    border-radius: 3px; overflow: hidden;
+  }
+  body.list-view .cover-placeholder-title { display: none; }
+  body.list-view .cover-placeholder-icon { font-size: 18px; }
+  body.list-view .format-badges { bottom: 2px; left: 2px; }
+  body.list-view .fmt-badge { font-size: 8px; padding: 0 3px; }
+
+  /* Card-info chuyen sang xep chong 2 dong thay vi 1 hang ngang co dinh 3 cot. */
+  body.list-view .card-info {
+    flex-direction: column; align-items: flex-start; justify-content: center;
+    gap: 3px; padding: 10px 20px 10px 0;
+  }
+  body.list-view .card-title {
+    width: 100%; font-size: 13.5px; -webkit-line-clamp: 1;
+  }
+  /* card-author/card-rating dung o grid -- an di o list view, thay bang .card-meta gop chung. */
+  body.list-view .card-author, body.list-view .card-rating { display: none; }
+
+  .card-meta { display: none; } /* mac dinh an -- chi hien o list view */
+  body.list-view .card-meta {
+    display: flex; align-items: center; gap: 5px; width: 100%;
+    font-size: 11.5px; color: var(--muted); overflow: hidden; white-space: nowrap;
+  }
+  body.list-view .card-meta > span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  body.list-view .card-meta .meta-author { min-width: 0; flex-shrink: 1; }
+  body.list-view .card-meta .meta-rating { color: var(--accent2); flex-shrink: 0; letter-spacing: 1px; }
+  body.list-view .card-meta .meta-format {
+    flex-shrink: 0; font-family: 'JetBrains Mono', monospace; font-size: 10.5px;
+  }
+  body.list-view .card-meta .meta-date { flex-shrink: 0; margin-left: auto; padding-left: 8px; }
+  body.list-view .card-meta .meta-dot { flex-shrink: 0; opacity: .5; }
+
+  /* SWIPE-TO-REVEAL (list view) -- 2 nut Download & Open / Download & Share lo ra khi vuot trai. */
+  .swipe-row { position: relative; overflow: hidden; }
+  .swipe-actions {
+    position: absolute; top: 0; right: 0; bottom: 0;
+    width: 152px; display: flex;
+  }
+  body:not(.list-view) .swipe-actions { display: none; } /* an toan neu lo ton tai o grid */
+  .swipe-action {
+    flex: 1; border: none; cursor: pointer; color: #fff;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 4px; font-family: 'Inter', sans-serif; font-size: 10.5px; font-weight: 600;
+  }
+  .swipe-action-open  { background: var(--accent); }
+  .swipe-action-share { background: var(--accent2); }
+  .swipe-row .book-card {
+    position: relative; z-index: 1; background: var(--card);
+    transition: transform .18s ease-out; touch-action: pan-y;
+  }
+
+  /* ── PAGINATION ── */
+  .pagination {
+    display: flex; align-items: center; justify-content: center;
+    gap: 6px; padding: 24px; flex-wrap: wrap;
+  }
+  .page-btn {
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 5px 10px;
+    cursor: pointer; color: var(--ink); transition: all .12s;
+    min-width: 32px; text-align: center;
+  }
+  .page-btn:hover { background: var(--warm); border-color: var(--accent); }
+  .page-btn.active { background: var(--accent); color: white; border-color: var(--accent); font-weight: 600; }
+  .page-btn:disabled { opacity: .35; cursor: not-allowed; }
+
+  /* ── AUTO-LOAD SCREEN (loading / error while fetching /api/library.json) ── */
+  .autoload-zone {
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    min-height: calc(100vh - 56px); gap: 20px; padding: 40px 20px;
+  }
+  .autoload-card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 12px; padding: 48px 56px;
+    text-align: center; max-width: 480px; width: 100%;
+  }
+  .autoload-icon { font-size: 48px; margin-bottom: 16px; }
+  .autoload-card h2 { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 8px; }
+  .autoload-card p { color: var(--muted); font-size: 13px; line-height: 1.6; margin-bottom: 6px; }
+  .btn-folder.retry { margin-top: 14px; }
+
+  /* Loading / Empty */
+  .loading {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 16px; padding: 80px 20px; color: var(--muted); width: 100%;
+  }
+  .spinner {
+    width: 36px; height: 36px; border: 3px solid var(--line);
+    border-top-color: var(--accent); border-radius: 50%;
+    animation: spin .8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .empty { display: flex; flex-direction: column; align-items: center; padding: 80px 20px; gap: 12px; color: var(--muted); font-size: 14px; }
+  .empty-icon { font-size: 40px; }
+
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-thumb { background: var(--line); border-radius: 3px; }
+
+  @media (max-width: 700px) {
+    /* Sidebar bộ lọc chuyển từ "ẩn hẳn" sang "drawer" trượt từ trái, đè lên nội
+       dung — mở bằng #sidebarToggle trên header, xem toggleSidebar()/closeSidebar()
+       trong app.js. Header cao 52px (xem `header { height: 52px }` ở trên) nên
+       drawer + backdrop đều bắt đầu từ dưới header, không đè lên header. */
+    aside {
+      display: block;
+      position: fixed;
+      top: 52px; left: 0; bottom: 0;
+      width: 82%;
+      max-width: 300px;
+      max-height: none;
+      transform: translateX(-100%);
+      transition: transform .25s ease;
+      z-index: 150;
+      box-shadow: var(--shadow-lg);
+    }
+    body.sidebar-open aside { transform: translateX(0); }
+
+    .sidebar-backdrop {
+      display: none;
+      position: fixed;
+      top: 52px; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,.4);
+      z-index: 140;
+    }
+    body.sidebar-open .sidebar-backdrop { display: block; }
+
+    .book-grid { padding: 12px; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <button class="icon-btn" id="sidebarToggle" title="Bộ lọc" onclick="toggleSidebar()">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+      <path d="M4 6h16M4 12h16M4 18h16"/>
+    </svg>
+  </button>
+  <button class="icon-btn" id="searchToggle" title="Tìm kiếm" onclick="toggleSearch()">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+    </svg>
+  </button>
+  <div class="search-wrap" id="searchWrap" style="display:none">
+    <input type="text" id="searchInput" placeholder="Tìm tiêu đề, tác giả, tag…">
+    <button class="icon-btn search-close" id="searchClose" title="Đóng tìm kiếm" onclick="closeSearch()">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <path d="M18 6 6 18M6 6l12 12"/>
+      </svg>
+    </button>
+  </div>
+  <div class="header-right">
+    <span id="totalCount" style="display:none"></span>
+    <div class="view-menu-wrap" id="viewMenuWrap" style="display:none">
+      <button class="icon-btn" id="viewMenuBtn" title="Hiển thị" onclick="toggleViewMenu(event)">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+          <rect x="0" y="0" width="6" height="6" rx="1"/><rect x="10" y="0" width="6" height="6" rx="1"/>
+          <rect x="0" y="10" width="6" height="6" rx="1"/><rect x="10" y="10" width="6" height="6" rx="1"/>
+        </svg>
+      </button>
+      <div class="view-menu" id="viewMenu">
+        <div class="view-menu-title">Hiển thị</div>
+        <button class="view-menu-item" data-view="list" onclick="chooseViewOption('list')">
+          <span class="vmi-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+              <rect x="0" y="1" width="16" height="2" rx="1"/><rect x="0" y="7" width="16" height="2" rx="1"/>
+              <rect x="0" y="13" width="16" height="2" rx="1"/>
+            </svg>
+          </span>
+          <span class="vmi-label">Danh sách</span>
+          <span class="vmi-radio"></span>
+        </button>
+        <button class="view-menu-item" data-view="grid-2" onclick="chooseViewOption('grid-2')">
+          <span class="vmi-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+              <rect x="0" y="1" width="6.5" height="14" rx="1"/><rect x="9.5" y="1" width="6.5" height="14" rx="1"/>
+            </svg>
+          </span>
+          <span class="vmi-label">Lưới (2 cuốn/hàng)</span>
+          <span class="vmi-radio"></span>
+        </button>
+        <button class="view-menu-item" data-view="grid-3" onclick="chooseViewOption('grid-3')">
+          <span class="vmi-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+              <rect x="0" y="1" width="4" height="14" rx="1"/><rect x="6" y="1" width="4" height="14" rx="1"/><rect x="12" y="1" width="4" height="14" rx="1"/>
+            </svg>
+          </span>
+          <span class="vmi-label">Lưới (3 cuốn/hàng)</span>
+          <span class="vmi-radio"></span>
+        </button>
+        <button class="view-menu-item" data-view="grid-4" onclick="chooseViewOption('grid-4')">
+          <span class="vmi-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+              <rect x="0" y="1" width="2.8" height="14" rx="1"/><rect x="4.4" y="1" width="2.8" height="14" rx="1"/><rect x="8.8" y="1" width="2.8" height="14" rx="1"/><rect x="13.2" y="1" width="2.8" height="14" rx="1"/>
+            </svg>
+          </span>
+          <span class="vmi-label">Lưới (4 cuốn/hàng)</span>
+          <span class="vmi-radio"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- AUTO-LOAD ZONE (shown while /api/library.json is being fetched from the local server, or on error) -->
+<div class="autoload-zone" id="autoloadZone">
+  <div class="autoload-card" id="autoloadCard">
+    <div class="autoload-icon">📚</div>
+    <h2>Đang tải thư viện…</h2>
+    <p>Đang đọc dữ liệu đã đồng bộ trên máy.</p>
+  </div>
+</div>
+
+<!-- MAIN APP -->
+<div class="app" id="appZone" style="display:none">
+  <div class="sidebar-backdrop" id="sidebarBackdrop" onclick="closeSidebar()"></div>
+  <!-- SIDEBAR -->
+  <aside id="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-label">Bộ lọc</div>
+      <button class="sidebar-item active" data-filter="all" onclick="filterBy('all',this)">
+        📚 Tất cả sách <span class="badge" id="badgeAll">0</span>
+      </button>
+      <button class="sidebar-item" data-filter="has_cover" onclick="filterBy('has_cover',this)">
+        🖼 Có bìa sách <span class="badge" id="badgeCover">0</span>
+      </button>
+      <button class="sidebar-item" data-filter="rated" onclick="filterBy('rated',this)">
+        ⭐ Có đánh giá <span class="badge" id="badgeRated">0</span>
+      </button>
+    </div>
+    <div class="sidebar-divider"></div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Định dạng</div>
+      <div id="formatList"></div>
+    </div>
+    <div class="sidebar-divider"></div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Ngôn ngữ</div>
+      <div id="langList"></div>
+    </div>
+    <div class="sidebar-divider"></div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Thể loại</div>
+      <div class="tag-list" id="tagList"></div>
+    </div>
+    <div class="sidebar-divider"></div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Nhà xuất bản</div>
+      <div class="tag-list" id="publisherList"></div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main>
+    <div class="toolbar">
+      <span class="result-count" id="resultCount"></span>
+      <select class="filter-select" id="sortSelect" onchange="applySort()">
+        <option value="added_desc" selected>Mới nhập → Cũ</option>
+        <option value="added_asc">Nhập cũ → Mới</option>
+        <option value="title_asc">Tên A→Z</option>
+        <option value="title_desc">Tên Z→A</option>
+        <option value="author_asc">Tác giả A→Z</option>
+        <option value="rating_desc">Đánh giá cao nhất</option>
+      </select>
+    </div>
+
+    <div id="loadingMain" class="loading">
+      <div class="spinner"></div>
+      <span>Đang tải dữ liệu…</span>
+    </div>
+
+    <div class="book-grid" id="bookGrid"></div>
+    <div class="pagination" id="pagination"></div>
+  </main>
+</div>
+
+<!-- Xem chi tiet 1 sach gio duoc mo bang BookDetailActivity (native), khong con modal HTML
+     #modalOverlay/#modal nua -- xem app.js#openBookDetailNative(). -->
+
+<script src="app.js"></script>
+</body>
+</html>

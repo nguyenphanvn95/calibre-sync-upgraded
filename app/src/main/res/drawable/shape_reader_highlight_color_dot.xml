@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Plain white oval; ReaderHighlightsSheet tints this per-row via
+     View#setBackgroundTintList/ImageViewCompat depending on the highlight's stored color, so one
+     drawable covers all four highlight colors instead of four near-duplicate files. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <solid android:color="#FFFFFFFF" />
+</shape>

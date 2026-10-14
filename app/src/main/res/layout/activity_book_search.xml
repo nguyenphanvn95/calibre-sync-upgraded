@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Layout rieng cho BookSearchActivity (man hinh ket qua tim kiem, mo qua Android Search
+     Framework, ACTION_SEARCH). Truoc day dung ListView + BookCursorAdapter rieng de tranh dung
+     chung voi CollectionFragment (xem lich su comment cu). Gio doi sang RecyclerView +
+     BookRecyclerAdapter (item_book_swipe.xml, LIST mode) giong het Device Library tab, de co
+     duoc: (1) bam vao 1 dong mo man hinh preview (DeviceBookDetailActivity) thay vi mo doc
+     luon, va (2) vuot trai/phai de lo cac nut Sync/Share/Delete va Listen/Read, xem
+     BookSearchActivity#onCreate/#onStart va CollectionFragment#showBooks lam mau. -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BookSearchActivity">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/col_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingTop="5dp"
+        tools:listitem="@layout/item_book_swipe" />
+
+    <LinearLayout
+        android:id="@+id/search_empty_state"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="32dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/search_empty_state_icon"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_marginBottom="18dp"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_empty_search_result"
+            android:tint="?android:attr/textColorSecondary" />
+
+        <TextView
+            android:id="@+id/search_empty_state_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/search_empty_no_results_title"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</RelativeLayout>

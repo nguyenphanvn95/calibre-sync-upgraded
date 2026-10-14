@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Panel "Mục lục" trượt từ cạnh trái, thay cho AlertDialog cũ của
+     EpubReaderActivity#openTableOfContents() (xem prompt-nang-cap-muc-luc-panel-truot.md).
+     Bind bởi net.mrphan.calibre.reader.epub.toc.ReaderTocPanel. Bắt đầu GONE; ReaderTocPanel
+     show()/hide() điều khiển visibility + animation.
+     Cấu trúc: scrim (bấm để đóng) phủ toàn màn hình, panel_container neo bên trái, rộng
+     min(360dp, 85% chiều ngang màn hình) tính bằng code (xem ReaderTocPanel#applyPanelWidth),
+     cao full màn hình. -->
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/reader_toc_panel_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="gone">
+
+    <!-- Scrim: bấm ra ngoài panel để đóng, giống modal drawer chuẩn Android -->
+    <View
+        android:id="@+id/reader_toc_panel_scrim"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#99000000"
+        android:clickable="true"
+        android:focusable="true" />
+
+    <!-- Panel thật sự: neo trái, KHÔNG match_parent theo chiều ngang -->
+    <LinearLayout
+        android:id="@+id/reader_toc_panel_container"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:orientation="vertical"
+        android:background="?attr/colorSurface"
+        android:elevation="8dp">
+
+        <!-- ===== HEADER: back + 3 tab + sort (yêu cầu 2.1) ===== -->
+        <LinearLayout
+            android:id="@+id/reader_toc_header"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"
+            android:background="?attr/colorButtonNormal">
+            <!-- Dùng ?attr/colorButtonNormal (DayNight-aware) thay vì ?attr/colorSurfaceVariant:
+                 attr đó chỉ tồn tại ở theme Material3, còn app này dùng
+                 Theme.MaterialComponents.DayNight (xem styles.xml), gây crash
+                 UnsupportedOperationException khi inflate. Cùng lý do với
+                 shape_sync_info_field_bg.xml / bg_stat_card.xml. -->
+
+            <ImageButton
+                android:id="@+id/reader_toc_btn_back"
+                style="?attr/borderlessButtonStyle"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:padding="8dp"
+                android:src="@drawable/ic_action_back"
+                android:contentDescription="@string/reader_toc_close"
+                android:background="?attr/selectableItemBackgroundBorderless" />
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/reader_toc_tab_layout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:tabMode="fixed"
+                app:tabGravity="fill"
+                app:tabIndicatorColor="@color/reader_accent_blue"
+                app:tabSelectedTextColor="@color/reader_accent_blue" />
+
+            <ImageButton
+                android:id="@+id/reader_toc_btn_sort"
+                style="?attr/borderlessButtonStyle"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:padding="8dp"
+                android:src="@drawable/ic_menu_sort"
+                android:contentDescription="@string/reader_toc_sort"
+                android:background="?attr/selectableItemBackgroundBorderless" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider" />
+
+        <!-- ===== NỘI DUNG: thay theo tab (ReaderTocPage) ===== -->
+        <FrameLayout
+            android:id="@+id/reader_toc_page_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider" />
+
+        <!-- ===== FOOTER: tên chương hiện tại + search + slot action theo tab (yêu cầu 2.1).
+             Thanh search (bên dưới) swap visibility với footer này khi bật/tắt (không chồng
+             layer), xem ReaderTocPanel#toggleSearchBar. ===== -->
+        <LinearLayout
+            android:id="@+id/reader_toc_footer"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="4dp">
+
+            <TextView
+                android:id="@+id/reader_toc_footer_chapter_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textSize="13sp"
+                android:alpha="0.75" />
+
+            <ImageButton
+                android:id="@+id/reader_toc_btn_search"
+                style="?attr/borderlessButtonStyle"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:padding="9dp"
+                android:src="@drawable/ic_selection_search"
+                android:contentDescription="@string/reader_toc_search"
+                android:background="?attr/selectableItemBackgroundBorderless" />
+
+            <!-- Slot cho action riêng của tab đang mở, vd nút "+" tạo bookmark ở tab "Đánh dấu
+                 trang". ReaderTocPage có thể add/removeAllViews() vào đây. -->
+            <FrameLayout
+                android:id="@+id/reader_toc_footer_action_slot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <!-- Thanh tìm kiếm trong panel (yêu cầu 2.1 "nút search hoạt động ngay trong panel") -
+             ẨN mặc định, hiện khi bấm reader_toc_btn_search, thay thế reader_toc_footer (swap
+             visibility, không chồng layer). Mỗi ReaderTocPage tự nhận text đổi qua callback do
+             ReaderTocPanel truyền vào (ReaderTocPage#onQueryChanged), KHÔNG mở dialog/activity
+             nào khác. -->
+        <LinearLayout
+            android:id="@+id/reader_toc_search_bar"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="8dp"
+            android:visibility="gone">
+
+            <EditText
+                android:id="@+id/reader_toc_search_field"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:singleLine="true"
+                android:imeOptions="actionSearch"
+                android:hint="@string/reader_toc_search_hint"
+                android:background="@null" />
+
+            <ImageButton
+                android:id="@+id/reader_toc_btn_search_close"
+                style="?attr/borderlessButtonStyle"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:padding="9dp"
+                android:src="@drawable/ic_close"
+                android:contentDescription="@android:string/cancel"
+                android:background="?attr/selectableItemBackgroundBorderless" />
+        </LinearLayout>
+
+    </LinearLayout>
+</FrameLayout>

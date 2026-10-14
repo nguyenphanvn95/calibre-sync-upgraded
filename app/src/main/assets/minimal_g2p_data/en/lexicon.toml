@@ -1,0 +1,86 @@
+# Manual override dictionary (custom phoneme set, space-separated tokens).
+# Entries here take precedence over cmudict.txt and fallback rules.
+# Use this for project-specific pronunciations or words missing from CMUdict.
+#
+# Format: word = "phoneme1 phoneme2 ..."
+# Vowels carry stress digit (0/1/2); consonants are unstressed.
+#
+# Example entries:
+[word]
+# Common function words — exact stress/schwa handling
+the = "ð ə0"
+a = "ə0"
+of = "ʌ1 v"
+to = "t u1"
+i = "aɪ1"
+
+# Phase 0.4 — EN function-word lexicon promotion.
+# Short EN function words that are VI-letter-legal (rejected only by f/j/w/z
+# in `is_vietnamese_word`) fall through to the VI engine and produce garbage.
+# `route_vi_legal_word` Rule 1 consults `lookup_lexicon`, so promoting these
+# short-syllable EN words gives the router an early EN exit.
+# All phonemes are ARPABET-derived from CMUdict (citation/stressed forms);
+# see `crates/g2p-core/src/arpabet.rs` for the mapping.
+he = "h i1"
+she = "ʃ i1"
+we = "w i1"
+me = "m i1"
+be = "b i1"
+do = "d u1"
+go = "g oʊ1"
+no = "n oʊ1"
+so = "s oʊ1"
+my = "m aɪ1"
+by = "b aɪ1"
+on = "ɑ1 n"
+in = "ɪ1 n"
+at = "æ1 t"
+is = "ɪ1 z"
+are = "ɑ1 r"
+was = "w ɑ1 z"
+will = "w ɪ1 l"
+can = "k æ1 n"
+this = "ð ɪ1 s"
+that = "ð æ1 t"
+these = "ð i1 z"
+those = "ð oʊ1 z"
+they = "ð eɪ1"
+them = "ð ɛ1 m"
+have = "h æ1 v"
+has = "h æ1 z"
+had = "h æ1 d"
+but = "b ʌ1 t"
+or = "ɔ1 r"
+and = "æ1 n d"
+if = "ɪ1 f"
+not = "n ɑ1 t"
+your = "j ɔ1 r"
+our = "aʊ1 ɝ0"
+their = "ð ɛ1 r"
+who = "h u1"
+what = "w ʌ1 t"
+when = "w ɛ1 n"
+where = "w ɛ1 r"
+why = "w aɪ1"
+how = "h aʊ1"
+
+# Phase 0.2 — idiosyncrasy lexicon overrides (loanwords, neologisms,
+# non-derivable stress). These cannot be reached by LTS rule grammar:
+# proper nouns, morphology-driven stress, or hard-to-derive vowel quality.
+# Per locked decision D1 in docs/lts/accuracy_improvement_plan.md.
+regex = "r i1 dʒ ɛ0 k s"
+mutex = "m j u1 t ɛ0 k s"
+json = "dʒ eɪ1 s ɑ0 n"
+nguyen = "w ɪ1 n"
+emoji = "i0 m oʊ1 dʒ i0"
+dystopia = "d ɪ0 s t oʊ1 p i0 ə0"
+kombucha = "k oʊ0 m b u1 tʃ ə0"
+
+# 2-letter storage units below the ALL-CAPS acronym router threshold (≥3).
+# CMUdict ships `tb` and `usb` but not `gb`/`kb`/`mb`/`pb`, so these would
+# otherwise fall through to `fallback_g2p` and emit raw consonants
+# (`16GB` → `g b`). Spell them as English letter names to match `tb`.
+gb = "dʒ i1 b i1"
+kb = "k eɪ1 b i1"
+mb = "ɛ1 m b i1"
+pb = "p i1 b i1"

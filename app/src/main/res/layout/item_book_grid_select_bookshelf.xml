@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Grid cell style "Gia sach" (Bookshelf) cho Device Library (BookRecyclerAdapter,
+     TYPE_GRID_BOOKSHELF). Chi hien bia sach, khong hien tua/tien trinh (giong anh mau) - cac
+     TextView bi_title/bi_progress van co mat de findViewById khong tra null, nhung luon GONE,
+     xem BookRecyclerAdapter#onBindViewHolder. Padding ngang rat nho de sach nam sat nhau nhu
+     tren gia thuc te; padding duoi danh cho khoang cach giua cac hang. -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:paddingStart="1dp"
+    android:paddingEnd="1dp"
+    android:paddingBottom="10dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/bi_thumbnail"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/dumbbook"
+            app:layout_constraintDimensionRatio="2:3"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Canh ke go ma cuon sach dang "dung" len tren, xem bg_bookshelf_shelf_plank.xml -->
+        <View
+            android:id="@+id/bi_shelf_plank"
+            android:layout_width="0dp"
+            android:layout_height="8dp"
+            android:background="@drawable/bg_bookshelf_shelf_plank"
+            app:layout_constraintTop_toBottomOf="@id/bi_thumbnail"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/bi_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Title"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/bi_shelf_plank"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/bi_progress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/bi_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/bi_uuid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/bi_progress"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <CheckBox
+        android:id="@+id/bi_select_checkbox"
+        android:layout_width="@dimen/selection_checkbox_size"
+        android:layout_height="@dimen/selection_checkbox_size"
+        android:layout_gravity="top|start"
+        android:layout_margin="6dp"
+        android:clickable="false"
+        android:focusable="false"
+        android:visibility="gone" />
+
+</FrameLayout>

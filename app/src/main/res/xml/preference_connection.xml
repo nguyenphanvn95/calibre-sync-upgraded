@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Noi dung tab "Ket noi" cua SettingsActivity (xem SettingsTab.CONNECTION). Tach ra tu
+  <PreferenceCategory android:title="@string/settings_category_connection_title"> trong
+  res/xml/preference.xml (nay da xoa), giu nguyen android:key cua tung muc.
+-->
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <CheckBoxPreference android:key="pref_auto_discover_server" android:title="@string/pref_auto_discover_server_title" android:defaultValue="false" android:summary="@string/pref_auto_discover_server_summary"/>
+    <CheckBoxPreference android:key="pref_autocon" android:title="@string/pref_autocon_title" android:defaultValue="false" android:summary="@string/pref_autocon_summary"/>
+    <EditTextPreference android:key="pref_wd_address" android:title="@string/pref_wd_address_title" android:dependency="pref_autocon" />
+    <EditTextPreference android:key="pref_cs_url" android:title="@string/pref_cs_url_title" />
+    <EditTextPreference android:key="pref_send2ereader_base_url"
+        android:title="@string/pref_send2ereader_url_title"
+        android:summary="@string/pref_send2ereader_url_summary"
+        android:dialogMessage="@string/pref_send2ereader_url_dialog" />
+
+    <PreferenceCategory android:title="@string/pref_category_auto_sync_title">
+
+        <ListPreference
+            android:key="pref_auto_sync_interval"
+            android:title="@string/pref_auto_sync_interval_title"
+            android:entries="@array/pref_auto_sync_interval_entries"
+            android:entryValues="@array/pref_auto_sync_interval_values"
+            android:defaultValue="0" />
+
+        <!-- Chi hien khi pref_auto_sync_interval = "custom" (xem SettingsFragment#
+             setupAutoSyncPreferences, dialogChoNhapSoPhutTuyChinh mo AlertDialog voi EditText,
+             khong dung DialogPreference dung san vi can validate so nguyen duong ngay trong dialog). -->
+        <Preference
+            android:key="pref_auto_sync_interval_custom_display"
+            android:title="@string/pref_auto_sync_interval_custom_title"
+            android:dependency="pref_auto_sync_interval" />
+
+        <!-- entries/entryValues KHONG khai bao san trong XML: duoc SettingsFragment nap dong luc
+             chay tu CloudRemoteStore.getAll() (giong het cach lam voi prefNghiDefaultModel trong
+             refreshNghiDefaultModelList(), vi danh sach remote thay doi theo tai khoan da dang
+             nhap). Mac dinh khi bat tinh nang: TAT CA remote ho tro sync deu duoc chon. -->
+        <MultiSelectListPreference
+            android:key="pref_auto_sync_remotes"
+            android:title="@string/pref_auto_sync_remotes_title"
+            android:dependency="pref_auto_sync_interval" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

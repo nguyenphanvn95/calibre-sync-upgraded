@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/reader_music_player_root"
+    android:layout_width="match_parent"
+    android:layout_height="96dp"
+    android:layout_gravity="bottom"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:paddingStart="18dp"
+    android:paddingEnd="18dp"
+    android:paddingBottom="10dp"
+    android:visibility="gone">
+
+    <LinearLayout
+        android:id="@+id/reader_music_player_pill"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_gravity="bottom"
+        android:background="@drawable/bg_tts_mini_player_pill"
+        android:clickable="true"
+        android:elevation="8dp"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="7dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="8dp"
+        android:paddingBottom="5dp">
+
+        <FrameLayout
+            android:id="@+id/reader_music_player_thumb_wrap"
+            android:layout_width="44dp"
+            android:layout_height="44dp">
+
+            <ImageView
+                android:id="@+id/reader_music_player_thumb_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="3dp"
+                android:background="@drawable/bg_reader_music_thumb"
+                android:clipToOutline="true"
+                android:contentDescription="@null"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_reader_background_music_note"
+                android:tint="#FFFFFF" />
+
+            <net.mrphan.calibre.reader.music.ReaderMusicProgressRingView
+                android:id="@+id/reader_music_player_thumb_ring"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/reader_music_player_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/reader_music_player_artist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:textColor="#D8DCCF"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/reader_music_player_play_pause"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_tts_mini_play_button"
+            android:contentDescription="@string/reader_music_play_pause"
+            android:padding="11dp"
+            android:src="@drawable/ic_reader_music_pause"
+            android:tint="#555B43" />
+
+        <ImageButton
+            android:id="@+id/reader_music_player_close"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="4dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/reader_music_stop"
+            android:padding="6dp"
+            android:src="@drawable/ic_reader_music_close"
+            android:tint="#D8DCCF" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/reader_music_player_bubble"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:layout_gravity="bottom|end"
+        android:background="@drawable/bg_reader_music_thumb"
+        android:contentDescription="@string/reader_background_music_label"
+        android:clickable="true"
+        android:elevation="9dp"
+        android:focusable="true"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/reader_music_player_bubble_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="4dp"
+            android:background="@drawable/bg_reader_music_thumb"
+            android:clipToOutline="true"
+            android:contentDescription="@null"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_reader_background_music_note"
+            android:tint="#FFFFFF" />
+
+        <net.mrphan.calibre.reader.music.ReaderMusicProgressRingView
+            android:id="@+id/reader_music_player_bubble_ring"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
+</FrameLayout>

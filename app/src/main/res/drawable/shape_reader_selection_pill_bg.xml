@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Dark rounded pill background for ReaderSelectionToolbar's new floating action bar —
+     matches Readest Android's dark, fully-rounded selection toolbar (see the reference
+     screenshot in prompt-nang-cap-selection-toolbar-v2.md) instead of the old white square-corner
+     shape_reader_color_swatch_bg card. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <corners android:radius="24dp" />
+    <solid android:color="#E6202124" />
+</shape>

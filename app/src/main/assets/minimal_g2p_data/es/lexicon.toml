@@ -1,0 +1,68 @@
+# data/es/lexicon.toml — Spanish exception dictionary (es-MX).
+#
+# Rules in `rules.toml` cover the overwhelming majority of Spanish words
+# (the orthography is highly phonemic). This file holds only the
+# exceptions:
+#
+#   route = "primary"   use these phonemes (Spanish-naturalized loanwords,
+#                       irregular x→/x/, irregular stress, conjunctions).
+#   route = "fallback"  ignore `phonemes`; the router sends the word to the
+#                       EN engine (genuinely foreign words / English names).
+#
+# Phoneme strings are space-separated tokens that must exist in
+# data/phoneme_id_map.json. The primary-stress marker `ˈ` is its own token.
+# No syllable-boundary dots are emitted (RFC-003 non-goal).
+
+# ── Conjunction "y" ("and") → /i/, not the onset /ʝ/ a lone y would yield ──
+[[entry]]
+word = "y"
+phonemes = "i"
+route = "primary"
+
+# ── Irregular es-MX <x> = /x/ (velar fricative), not the default /ks/ ──
+[[entry]]
+word = "méxico"
+phonemes = "ˈ m e x i k o"
+route = "primary"
+
+[[entry]]
+word = "mexicano"
+phonemes = "m e x i ˈ k a n o"
+route = "primary"
+
+# ── Spanish-naturalized loanwords whose pronunciation deviates from rules ──
+[[entry]]
+word = "wifi"
+phonemes = "ˈ w i f i"
+route = "primary"
+
+[[entry]]
+word = "software"
+phonemes = "ˈ s o f t w e ɾ"
+route = "primary"
+
+[[entry]]
+word = "iphone"
+phonemes = "ˈ a j f o n"
+route = "primary"
+
+# ── Genuinely foreign words / English proper names → EN engine ──
+[[entry]]
+word = "shakespeare"
+phonemes = ""
+route = "fallback"
+
+[[entry]]
+word = "smith"
+phonemes = ""
+route = "fallback"
+
+[[entry]]
+word = "john"
+phonemes = ""
+route = "fallback"
+
+[[entry]]
+word = "michael"
+phonemes = ""
+route = "fallback"

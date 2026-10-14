@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Bieu tuong ban tay don gian, dai dien tab Thao tac trong ReaderSettingsSheet, clone khai niem
+     gesture cua Readest, xem prompt-nang-cap-reader-settings-tabbed.md muc 7. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#FF000000"
+        android:strokeWidth="1.6"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M8,12 L8,6 C8,5.2 8.7,4.5 9.5,4.5 C10.3,4.5 11,5.2 11,6 L11,11 M11,10.5 L11,5.5 C11,4.7 11.7,4 12.5,4 C13.3,4 14,4.7 14,5.5 L14,11 M14,10.5 L14,7 C14,6.2 14.7,5.5 15.5,5.5 C16.3,5.5 17,6.2 17,7 L17,14 C17,17.9 14.9,20.5 11.5,20.5 C9,20.5 7.7,19.2 6.3,17 L4.4,13.9 C4,13.2 4.2,12.3 4.9,11.9 C5.6,11.5 6.5,11.7 6.9,12.4 L8,14" />
+</vector>

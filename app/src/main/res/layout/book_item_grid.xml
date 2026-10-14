@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="4dp">
+
+    <!-- Fixed 2:3 book-cover aspect ratio so the thumbnail looks right whether the grid is
+         showing 2, 3 or 4 books per row (column width varies, so a fixed pixel height can't
+         work here the way it can in the single-column list item). -->
+    <ImageView
+        android:id="@+id/bi_thumbnail"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/dumbbook"
+        app:layout_constraintDimensionRatio="2:3"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/bi_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:gravity="center_horizontal"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:text="Title"
+        android:textSize="12sp"
+        android:textStyle="normal"
+        android:lineSpacingMultiplier="0.95"
+        app:layout_constraintTop_toBottomOf="@id/bi_thumbnail"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- % tien trinh doc, thay cho dong tac gia (bi_author) da bo di de khop Readest (grid chi
+         hien tua de + %, khong co tac gia). An hoan toan khi khong co du lieu tien trinh, xem
+         BookCursorAdapter. -->
+    <TextView
+        android:id="@+id/bi_progress"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:gravity="center_horizontal"
+        android:textSize="11sp"
+        android:textColor="?android:attr/textColorSecondary"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/bi_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="42%" />
+
+    <!-- Not shown; read by the click handlers (OPDSBrowserFragment) the same way as in the
+         list layout (book_item.xml), just to carry the book's UUID with the view. -->
+    <TextView
+        android:id="@+id/bi_uuid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/bi_progress"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

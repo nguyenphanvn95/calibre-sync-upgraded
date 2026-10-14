@@ -1,0 +1,219 @@
+<resources>
+
+    <!-- Minimal AppCompat/Material theme so nothing in the old ActionBar-era layouts crashes.
+         Not restyled for looks — see README/CHANGELOG "nice to have, not done".
+
+         BUG FIX: was "Theme.MaterialComponents.DayNight.DarkActionBar". The ".DarkActionBar"
+         suffix means exactly what it says: it pins the ActionBar to a permanently dark
+         (near-black) appearance no matter which day/night mode is active, so even with
+         "Giao diện" set to "Sáng" (light) in Settings, the top bar still rendered as a dark
+         band that clashed with the rest of the light-themed screen below it. Plain
+         "Theme.MaterialComponents.DayNight" still gives every Activity here its ActionBar (see
+         BarTabActivity's class comment on why that's required), but now lets its colors follow
+         the same day/night switch as everything else instead of being hardcoded dark.
+
+         actionBarStyle points at the AppActionBar style below (background = white in light
+         mode / dark gray in dark mode, via values/colors.xml + values-night/colors.xml's
+         toolbar_background) instead of touching colorPrimary directly: colorPrimary is reused
+         all over this app as an accent color (blue library-icon badges in
+         bg_library_icon_circle.xml, checked-state text/icons, provider card selection borders,
+         etc.), and pointing colorPrimary itself at white/dark-gray would turn all of those
+         invisible against their own background. Styling only the ActionBar's own "background"
+         item avoids that. statusBarColor is set the same way so the status bar blends in too;
+         windowLightStatusBar=true keeps its icons/clock dark and readable against the white
+         bar in light mode; values-night/styles.xml below flips both the AppActionBar base and
+         windowLightStatusBar for the dark-gray bar. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight">
+        <item name="actionBarStyle">@style/AppActionBar</item>
+        <item name="android:statusBarColor">@color/toolbar_background</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <!-- Widget.MaterialComponents.Light.ActionBar.Solid already gives dark title text/icons,
+         the right contrast for a white bar; only its "background" item needs overriding here.
+         values-night/styles.xml redeclares this parented off the plain (dark) ActionBar.Solid
+         variant instead, for light title text/icons against the dark-gray bar. -->
+    <style name="AppActionBar" parent="Widget.MaterialComponents.Light.ActionBar.Solid">
+        <item name="background">@color/toolbar_background</item>
+    </style>
+
+    <!-- No classic ActionBar for BookDetailActivity: the title bar's opaque background used to sit
+         on top of the cover and block part of it. The screen now draws its own transparent
+         overlay back button (bd_btn_back in activity_book_detail.xml) directly over the
+         full-bleed cover instead, with title/author shown as plain text below the cover. -->
+    <style name="Theme.Calibre.BookDetail" parent="Theme.MaterialComponents.DayNight.NoActionBar" />
+
+    <!-- Fullscreen (no ActionBar) theme for EpubReaderActivity/PdfReaderActivity/CbzReaderActivity;
+         these draw their own minimal close-button/page-indicator overlay instead. -->
+    <style name="Theme.Calibre.Reader" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowTranslucentNavigation">false</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
+        <item name="android:enforceStatusBarContrast">false</item>
+        <item name="android:enforceNavigationBarContrast">false</item>
+        <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
+    </style>
+
+    <!-- Fullscreen DialogFragment theme cho ReaderImageToolDialog (Image Tool, xem
+         prompt-nang-cap-image-tool-trong-sach.md) - xem ảnh trong sách toàn màn hình,
+         không có title bar / viền dialog nổi, nền đen kín màn hình như một Activity thật. -->
+    <style name="Theme.Calibre.FullScreenDialog" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowBackground">@android:color/black</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <!-- Cloud Libraries upgrade: CloudBrowserActivity and ContentServerBrowserActivity both draw
+         their own Toolbar (with a folder breadcrumb / WebView progress bar underneath it) via
+         setSupportActionBar(), so they need NoActionBar just like BookDetail/Reader above. -->
+    <style name="Theme.Calibre.CloudBrowser" parent="Theme.MaterialComponents.DayNight.NoActionBar" />
+
+    <!-- BookDetailActivity (Calibre Library tab "book details" screen) -->
+    <style name="BookDetailActionButton">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:tint">?attr/colorControlNormal</item>
+        <item name="android:scaleType">fitCenter</item>
+    </style>
+
+    <style name="BookDetailSectionTitle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_marginBottom">6dp</item>
+    </style>
+
+    <style name="BookDetailInfoRow">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:paddingTop">2dp</item>
+    </style>
+
+    <!-- Icon-only button inside ReaderSelectionToolbar's new dark pill (view_reader_selection_pill_toolbar.xml).
+         White icon on the dark pill background, borderless ripple, same 24dp glyphs the old
+         ActionMode menu already used (ic_reader_highlight, ic_selection_*). -->
+    <style name="ReaderSelectionPillButton">
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
+        <item name="android:tint">#FFFFFF</item>
+        <item name="android:scaleType">fitCenter</item>
+    </style>
+
+    <!-- Row 1 style-toggle button (Underline / Highlight-fill) in the redesigned light selection
+         card, view_reader_selection_pill_toolbar.xml , see ReaderSelectionToolbar#refreshStyleButtons.
+         Square, rounded-corner background (selector_reader_selection_style_bg) that fills green
+         only in the state_selected item, matching the reference screenshot's active style icon. -->
+    <style name="ReaderSelectionStyleToggleButton">
+        <item name="android:layout_width">34dp</item>
+        <item name="android:layout_height">34dp</item>
+        <item name="android:padding">6dp</item>
+        <item name="android:background">@drawable/selector_reader_selection_style_bg</item>
+        <item name="android:tint">@color/selector_reader_selection_style_icon_tint</item>
+        <item name="android:scaleType">fitCenter</item>
+    </style>
+
+    <!-- Row 2 action button (Xoá / Ghi chú / Sao chép / Từ điển / Dịch) in the redesigned light
+         selection card , a vertical icon-over-label LinearLayout, matching the reference
+         screenshot's row of labeled icons rather than the old icon-only ActionMode items. Applied
+         to the LinearLayout root of each row-2 item (see view_reader_selection_pill_toolbar.xml);
+         the icon/label children inside use ReaderSelectionActionIcon/ReaderSelectionActionLabel
+         below. -->
+    <style name="ReaderSelectionActionButton">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
+        <item name="android:paddingTop">6dp</item>
+        <item name="android:paddingBottom">4dp</item>
+    </style>
+
+    <style name="ReaderSelectionActionIcon">
+        <item name="android:layout_width">22dp</item>
+        <item name="android:layout_height">22dp</item>
+        <item name="android:tint">@color/reader_selection_icon_tint</item>
+        <item name="android:scaleType">fitCenter</item>
+    </style>
+
+    <style name="ReaderSelectionActionLabel">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">3dp</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:textColor">@color/reader_selection_label_text</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="ReaderSelectionColorDot">
+        <item name="android:layout_width">30dp</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:background">@drawable/shape_reader_highlight_color_dot</item>
+    </style>
+
+    <style name="ReaderSelectionCapsuleIconButton">
+        <item name="android:layout_width">38dp</item>
+        <item name="android:layout_height">38dp</item>
+        <item name="android:padding">7dp</item>
+        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
+        <item name="android:tint">@color/reader_selection_icon_tint</item>
+        <item name="android:scaleType">centerInside</item>
+    </style>
+
+    <!-- Full-height BottomSheetDialog theme, used by TtsPlayerBottomSheet (full player) and
+         BackgroundMusicSettingsDialog (cài đặt nhạc nền) - both are meant to fill nearly the
+         whole screen rather than the small peek-height sheet Material uses by default. -->
+    <style name="ThemeOverlay.App.FullScreenBottomSheet" parent="ThemeOverlay.MaterialComponents.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/Widget.App.FullScreenBottomSheet</item>
+    </style>
+    <style name="Widget.App.FullScreenBottomSheet" parent="Widget.MaterialComponents.BottomSheet.Modal" />
+
+    <!-- AddCloudRemoteDialogFragment: provider-picker cards ("Thêm máy chủ") replacing the old
+         cramped 5-way RadioGroup row. Each provider is a checkable MaterialCardView (icon + label)
+         arranged 2-per-row; MaterialCardView's built-in checked state drives the stroke/background
+         color selectors below plus the corner checkmark, so no custom badge view is needed. -->
+    <style name="ProviderSelectCard" parent="Widget.MaterialComponents.CardView">
+        <item name="cardCornerRadius">14dp</item>
+        <item name="cardElevation">0dp</item>
+        <item name="strokeWidth">1.5dp</item>
+        <item name="strokeColor">@color/selector_provider_card_stroke</item>
+        <item name="cardBackgroundColor">@color/selector_provider_card_bg</item>
+        <item name="checkedIcon">@drawable/ic_check_circle_filled</item>
+        <item name="checkedIconMargin">6dp</item>
+        <item name="checkedIconSize">20dp</item>
+        <item name="rippleColor">?attr/colorPrimary</item>
+        <item name="android:checkable">true</item>
+        <item name="android:layout_marginHorizontal">5dp</item>
+        <item name="android:layout_marginVertical">5dp</item>
+    </style>
+
+    <style name="ProviderSelectCardLabel">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">10dp</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+</resources>

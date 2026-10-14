@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Light (DayNight-aware) rounded card background for ReaderSelectionToolbar's redesigned
+     two-row pill (view_reader_selection_pill_toolbar.xml) , replaces the old dark, fully-round
+     shape_reader_selection_pill_bg to match the reference screenshot's white/near-white card with
+     a pointer triangle underneath it (see ic_selection_pointer_down.xml). -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <corners android:radius="10dp" />
+    <solid android:color="@color/reader_selection_card_bg" />
+</shape>

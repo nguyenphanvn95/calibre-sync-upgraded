@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="action_share">Chia sẻ</string>
+    <string name="pill_action_sync_short">Đồng bộ</string>
+    <string name="status_starting">Đang khởi động dịch vụ đồng bộ…</string>
+    <string name="status_discovering">Đang tìm máy chủ Calibre…</string>
+    <string name="status_no_server_found">Không tìm thấy máy chủ Calibre nào</string>
+    <string name="status_connecting">Đang kết nối tới máy chủ…</string>
+    <string name="status_syncing">Đã kết nối — đang đồng bộ với Calibre</string>
+    <string name="status_scanning_library">Đang quét thư viện sách…</string>
+    <string name="status_connected_idle">Đã kết nối — đang chờ</string>
+    <string name="status_disconnected">Đã ngắt kết nối máy chủ</string>
+    <string name="status_not_connected">Chưa kết nối</string>
+    <string name="status_wireless_off">Đã tắt kết nối không dây</string>
+    <string name="status_error_calibre_busy">Lỗi: máy chủ Calibre đang bận</string>
+    <string name="status_error_cant_connect">Lỗi: không thể kết nối tới máy chủ</string>
+    <string name="status_error_cant_download">Lỗi: không thể tải tệp về</string>
+    <string name="status_error_wrong_password">Lỗi: sai mật khẩu</string>
+    <string name="status_error_root_no_access">Lỗi: không truy cập được thư mục lưu trữ</string>
+    <string name="status_error_server">Lỗi: máy chủ gặp sự cố</string>
+
+    <string name="toast_external_book_unsupported_format">Định dạng này chưa được hỗ trợ trong
+        Calibre Sync, hãy mở bằng ứng dụng khác</string>
+    <string name="toast_external_book_open_failed">Không thể mở tệp này</string>
+
+    <string name="pref_app_language_title">Ngôn ngữ</string>
+    <string name="pref_app_language_option_system">Theo hệ thống</string>
+
+    <!-- Calibre Library tab (OPDS browser) -->
+    <string name="opds_filter_by">Lọc theo...</string>
+    <string name="opds_sort_by">Sắp xếp theo...</string>
+    <string name="opds_select_library">Chọn thư viện</string>
+    <string name="opds_library_fallback_name">Thư viện Calibre</string>
+    <string name="opds_library_count_loading">Đang tải…</string>
+    <string name="opds_library_icon_desc">Thư viện</string>
+    <string name="opds_search_not_supported">Máy chủ này không hỗ trợ tìm kiếm. Hãy thử duyệt theo tác giả, thẻ hoặc bộ sách.</string>
+
+    <!-- Book Detail screen (Calibre Library tab) -->
+    <string name="bookdetail_title">Chi tiết sách</string>
+    <string name="bookdetail_cover_desc">Bìa sách</string>
+    <string name="bookdetail_action_back">Quay lại</string>
+    <string name="bookdetail_action_read_aloud">Nghe sách</string>
+    <string name="bookdetail_action_view_cover">Xem bìa</string>
+    <string name="bookdetail_action_tags">Thẻ cục bộ</string>
+    <string name="bookdetail_share_text_fallback">%1$s — %2$s</string>
+    <string name="bookdetail_action_download">Tải xuống</string>
+    <string name="bookdetail_action_read">Đọc</string>
+    <string name="bookdetail_section_publication">Thông tin xuất bản</string>
+    <string name="bookdetail_section_file_info">Thông tin file</string>
+    <string name="bookdetail_row_updated">Cập nhật: %1$s</string>
+    <string name="bookdetail_row_language">Ngôn ngữ: %1$s</string>
+    <string name="bookdetail_row_publisher">Nhà xuất bản: %1$s</string>
+    <string name="bookdetail_row_file_with_size">%1$s (%2$s)</string>
+    <string name="bookdetail_row_file_no_size">%1$s</string>
+    <string name="bookdetail_send_to_ereader">Gửi tới E-Reader</string>
+    <string name="bookdetail_feature_coming_soon">Sắp ra mắt</string>
+
+    <string name="pref_send2ereader_url_title">Địa chỉ send2ereader</string>
+    <string name="pref_send2ereader_url_summary">URL instance send2ereader dùng để gửi sách tới máy đọc sách (Kindle/Kobo)</string>
+    <string name="pref_send2ereader_url_dialog">Nhập URL đầy đủ, ví dụ https://send.djazz.se hoặc địa chỉ instance tự host của bạn. Xem hướng dẫn tại github.com/daniel-j/send2ereader</string>
+    <string name="pref_auto_discover_server_title">Tự động dò tìm máy chủ Calibre</string>
+    <string name="pref_auto_discover_server_summary">Khi tắt, ứng dụng chỉ dò tìm máy chủ Calibre trên mạng lúc bạn bấm vào mục "Calibre wireless device" trong menu điều hướng</string>
+    <string name="s2e_instance_hint">Mở trình duyệt trên máy đọc sách của bạn và truy cập: %1$s. Máy đọc sách sẽ hiện một mã ghép cặp, nhập mã đó vào ô dưới đây.</string>
+    <string name="s2e_btn_open_browser">Mở trang này trên điện thoại (để kiểm tra)</string>
+    <string name="s2e_key_hint">Mã ghép cặp (ví dụ: 5PAV)</string>
+    <string name="s2e_btn_send">Gửi</string>
+    <string name="s2e_error_key_required">Vui lòng nhập mã ghép cặp</string>
+    <string name="s2e_error_upload_failed">Gửi thất bại: %1$s</string>
+    <string name="s2e_success">Đã gửi tới máy đọc sách. Kiểm tra trình duyệt trên máy đọc sách của bạn.</string>
+    <string name="s2e_downloading">Đang tải sách để gửi…</string>
+    <string name="s2e_error_download_failed">Tải sách thất bại, không thể gửi tới máy đọc sách</string>
+    <string name="s2e_error_no_file">Không tìm thấy file sách trên thiết bị</string>
+
+    <!-- Màn hình xem trước sách của tab Device Library (DeviceBookDetailActivity), dùng chung
+         một số chuỗi bookdetail_row_*/bookdetail_section_* ở trên (nhà xuất bản, ngôn ngữ, cập
+         nhật, thông tin xuất bản/file) với màn hình chi tiết sách của tab Calibre Library. -->
+    <string name="devicebd_row_pubdate">Xuất bản: %1$s</string>
+    <string name="devicebd_row_series">Bộ truyện: %1$s</string>
+    <string name="devicebd_row_series_with_index">Bộ truyện: %1$s (Tập %2$s)</string>
+    <string name="devicebd_row_rating">Đánh giá: %1$s</string>
+    <string name="devicebd_row_tags">Thẻ: %1$s</string>
+    <string name="devicebd_row_identifiers">Định danh: %1$s</string>
+    <string name="devicebd_row_filename">File: %1$s</string>
+    <string name="devicebd_row_format">Định dạng: %1$s</string>
+    <string name="devicebd_row_size">Dung lượng: %1$s</string>
+    <string name="devicebd_row_calibre_id">Calibre ID: %1$s</string>
+    <string name="devicebd_section_other">Thông tin khác</string>
+
+    <!-- Device Library empty-state -->
+    <string name="collection_empty_not_configured">Bạn chưa chọn thư mục lưu sách.</string>
+    <string name="collection_empty_no_permission">Cần cấp quyền lưu trữ để đọc thư mục sách của bạn.</string>
+    <string name="collection_empty_dir_missing">Thư mục sách đã chọn không còn tồn tại.</string>
+    <string name="collection_empty_action_choose_folder">Chọn thư mục lưu sách</string>
+    <string name="collection_empty_action_grant_permission">Cấp quyền</string>
+    <string name="collection_empty_action_choose_again">Chọn lại thư mục</string>
+    <string name="collection_empty_no_tags">Chưa có sách nào được gắn thẻ. Mở trang chi tiết một quyển sách và dùng mục \"Thẻ cục bộ\" để thêm thẻ.</string>
+    <string name="collection_empty_no_authors">Chưa có sách nào trên máy có thông tin tác giả.</string>
+    <string name="collection_empty_no_series">Chưa có sách nào trên máy có thông tin bộ sách.</string>
+    <string name="collection_empty_no_publishers">Chưa có sách nào trên máy có thông tin nhà xuất bản.</string>
+    <string name="collection_empty_no_matches">Chưa có sách nào trên máy khớp với bộ lọc này.</string>
+    <string name="collection_filter_rating_n_plus">Từ %1$d sao trở lên</string>
+    <string name="collection_empty_reading_status">Chưa có sách nào ở tình trạng đọc này.</string>
+    <string name="menu_collection_tags">Lọc theo...</string>
+    <string name="menu_collection_sort_by">Sắp xếp theo...</string>
+    <string name="collection_filter_by_tags">Thẻ</string>
+    <string name="collection_filter_by_author">Tác giả</string>
+    <string name="collection_filter_by_reading_status">Tình trạng đọc</string>
+    <string name="collection_filter_by_series">Bộ sách</string>
+    <string name="collection_filter_by_publisher">Nhà xuất bản</string>
+    <string name="collection_filter_by_rating">Đánh giá</string>
+    <string name="collection_reading_status_new">Chưa đọc</string>
+    <string name="collection_reading_status_reading">Đang đọc</string>
+    <string name="collection_reading_status_finished">Đã đọc xong</string>
+
+    <!-- SortByDialog (nút "Sắp xếp theo..." ở cả 2 tab) -->
+    <string name="sort_direction_ascending">Sắp xếp tăng dần</string>
+    <string name="sort_direction_descending">Sắp xếp giảm dần</string>
+    <string name="sort_field_title">Tựa đề</string>
+    <string name="sort_field_author">Tác giả</string>
+    <string name="sort_field_rating">Đánh giá</string>
+    <string name="sort_field_published">Ngày xuất bản</string>
+    <string name="sort_field_last_modified">Sửa đổi gần nhất</string>
+    <string name="sort_field_series">Bộ sách</string>
+    <string name="sort_field_recent">Mới thêm</string>
+    <string name="sort_field_last_opened">Mở gần nhất</string>
+    <string name="sort_field_publisher">Nhà xuất bản</string>
+    <string name="sort_field_file_size">Kích thước tệp</string>
+
+    <string name="toast_rescan_found_books">Đã tìm thấy %1$d sách mới</string>
+    <string name="toast_rescan_no_new_books">Không có sách mới</string>
+
+    <!-- Cloud Libraries (tab Connection) -->
+    <string name="cloud_card_wireless_devices">Thiết bị không dây Calibre</string>
+    <string name="wireless_status_tap_to_connect">Nhấn để kết nối thủ công</string>
+    <string name="wireless_status_searching">Đang tìm server...</string>
+    <string name="wireless_status_connecting">Đang kết nối...</string>
+    <string name="wireless_error_short_busy">Server đang bận</string>
+    <string name="wireless_error_short_cant_connect">Không thể kết nối</string>
+    <string name="wireless_error_short_wrong_password">Sai mật khẩu</string>
+    <string name="wireless_error_short_server_error">Lỗi từ server</string>
+    <string name="wireless_status_icon_connected_desc">Đã kết nối</string>
+    <string name="wireless_status_icon_error_desc">Lỗi kết nối</string>
+    <string name="cloud_libraries_header">Thư viện Calibre</string>
+    <string name="cloud_sync_header">Đồng bộ đám mây</string>
+    <string name="cloud_type_google_drive">Google Drive</string>
+    <string name="cloud_type_webdav">WebDAV</string>
+    <string name="cloud_type_ftp">FTP</string>
+    <string name="cloud_card_content_server">Calibre Content Server</string>
+    <string name="cloud_card_webdav_ftp">WebDAV / FTP / NAS</string>
+    <string name="cloud_card_onedrive">OneDrive</string>
+    <string name="cloud_card_box">Box</string>
+    <string name="cloud_card_pcloud">pCloud</string>
+    <string name="cloud_card_nextcloud">Nextcloud</string>
+    <string name="cloud_card_owncloud">ownCloud</string>
+    <string name="cloud_card_local_storage">Bộ nhớ cục bộ</string>
+    <string name="cloud_coming_soon_subtitle">Sẽ hỗ trợ trong bản cập nhật sau</string>
+    <string name="cloud_coming_soon_message">Tính năng này sẽ được hỗ trợ trong một bản cập nhật trong tương lai.</string>
+    <string name="cloud_coming_soon_ack">Đã hiểu</string>
+    <string name="cloud_not_configured">Chưa cấu hình Google Drive. Xem CLOUD_SETUP.md để biết cách thêm Google Client ID.</string>
+    <string name="cloud_signed_in">Đã đăng nhập</string>
+    <string name="cloud_not_signed_in">Chưa đăng nhập</string>
+    <string name="cloud_not_connected">Chưa kết nối</string>
+    <string name="cloud_add_remote">Thêm máy chủ</string>
+    <string name="cloud_add_another_remote">+ Thêm máy chủ khác</string>
+    <string name="cloud_remotes_added">%1$d máy chủ đã thêm</string>
+    <string name="content_server_not_connected_hint">Hãy kết nối tới Calibre Content Server trước (mục Thiết bị không dây Calibre ở trên).</string>
+    <string name="cloud_login_google">Đăng nhập với Google</string>
+    <string name="cloud_login_google_hint">Đăng nhập để duyệt và tải sách từ Google Drive của bạn.</string>
+    <string name="cloud_login_google_failed">Đăng nhập Google thất bại</string>
+    <string name="cloud_login_google_cancelled">Đã huỷ đăng nhập Google</string>
+    <string name="gdrive_oauth_title">Đăng nhập Google Drive</string>
+    <string name="gdrive_oauth_waiting">Đang mở trình duyệt để đăng nhập…</string>
+    <string name="gdrive_oauth_server_start_failed">Không thể khởi động dịch vụ đăng nhập nội bộ. Vui lòng thử lại.</string>
+    <string name="gdrive_oauth_missing_code">Google không trả về mã xác thực. Vui lòng đăng nhập lại.</string>
+    <string name="gdrive_oauth_notification_channel_name">Đăng nhập Google Drive</string>
+    <string name="gdrive_oauth_notification_title">Đang đăng nhập Google Drive</string>
+    <string name="gdrive_oauth_notification_text">Đang chờ bạn hoàn tất đăng nhập trên Chrome…</string>
+    <string name="cloud_login_google_failed_reason">Đăng nhập Google thất bại: %1$s</string>
+    <string name="gdrive_disconnect_title">Ngắt kết nối Google Drive?</string>
+    <string name="gdrive_disconnect_message">Bạn sẽ cần đăng nhập lại để duyệt hoặc đồng bộ sách từ Google Drive.</string>
+    <string name="gdrive_disconnect_confirm">Ngắt kết nối</string>
+    <string name="cloud_field_display_name">Tên gợi nhớ (không bắt buộc)</string>
+    <string name="cloud_field_host">Địa chỉ máy chủ</string>
+    <string name="cloud_field_port">Cổng</string>
+    <string name="cloud_field_username">Tên đăng nhập</string>
+    <string name="cloud_field_password">Mật khẩu</string>
+    <string name="cloud_field_base_path">Đường dẫn thư mục gốc (không bắt buộc, mặc định /)</string>
+    <string name="cloud_field_use_tls">Dùng TLS / SSL (WebDAVS / FTPS)</string>
+    <string name="cloud_error_required">Bắt buộc</string>
+    <string name="cloud_error_invalid_port">Nhập cổng hợp lệ (1-65535)</string>
+    <string name="cloud_test_connection">Kiểm tra kết nối</string>
+    <string name="cloud_test_connection_success">Kết nối thành công</string>
+    <string name="cloud_test_connection_failed">Kết nối thất bại</string>
+    <string name="cloud_test_connection_failed_reason">Kết nối thất bại: %1$s</string>
+    <string name="cloud_remote_menu">Thêm tuỳ chọn</string>
+    <string name="cloud_action_browse">Duyệt</string>
+    <string name="cloud_action_edit">Sửa</string>
+    <string name="cloud_action_delete">Xoá</string>
+    <string name="cloud_confirm_delete_remote">Xoá \"%1$s\"? Mật khẩu đã lưu cũng sẽ bị xoá.</string>
+    <string name="cloud_remote_not_found">Máy chủ này không còn tồn tại.</string>
+    <string name="cloud_folder_empty">Thư mục này trống</string>
+    <string name="cloud_downloading">Đang tải xuống…</string>
+    <string name="cloud_download_success">Đã tải %1$s</string>
+    <string name="cloud_download_failed">Không thể tải %1$s</string>
+    <string name="cloud_download_failed_generic">Tải xuống thất bại</string>
+    <string name="cloud_load_folder_failed">Không thể tải thư mục này: %1$s</string>
+    <string name="cloud_unsupported_extension">Định dạng file này không có trong Loại file chấp nhận (Cài đặt). Vẫn tải xuống?</string>
+    <string name="cloud_download_anyway">Vẫn tải xuống</string>
+    <string name="cloud_workspace_doc_unsupported">File Google Docs/Sheets/Slides không thể tải xuống như sách điện tử.</string>
+
+    <string name="cloud_card_gdrive_opds_library">Libraries on Gdrive</string>
+    <string name="gdrive_opds_libraries_added">%1$d thư viện đã lưu</string>
+    <string name="gdrive_opds_add_library_title">Thêm thư viện Calibre trên Google Drive</string>
+    <string name="gdrive_opds_edit_library_title">Sửa thư viện Calibre trên Google Drive</string>
+    <string name="gdrive_opds_field_display_name">Tên hiển thị (tùy chọn)</string>
+    <string name="gdrive_opds_field_file_id_or_link">ID hoặc link chia sẻ metadata_public.json</string>
+    <string name="gdrive_opds_add_library_hint">File metadata_public.json phải được chia sẻ ở chế độ \"Anyone with the link\" trên Google Drive. Dán link chia sẻ hoặc ID file vào ô trên, app sẽ tự kiểm tra.</string>
+    <string name="gdrive_opds_validation_found_file">Tìm thấy file: %1$s</string>
+    <string name="gdrive_opds_validation_reusing_saved">Đang dùng cấu hình đã lưu trước đó</string>
+    <string name="gdrive_opds_validation_not_found">Không tìm thấy file trên Google Drive. Kiểm tra lại ID/link.</string>
+    <string name="gdrive_opds_validation_not_public">File chưa được chia sẻ công khai (\"Anyone with the link\").</string>
+    <string name="gdrive_opds_validation_quota_exceeded">Google Drive API đã vượt quota, thử lại sau.</string>
+    <string name="gdrive_opds_validation_network_error">Không kết nối được tới Google Drive.</string>
+    <string name="gdrive_opds_validation_unknown_error">Không kiểm tra được file này.</string>
+    <string name="gdrive_opds_add_another_library">+ Thêm thư viện khác</string>
+    <string name="gdrive_opds_qr_scan_button">Quét QR</string>
+    <string name="gdrive_opds_qr_scan_hint">Đưa camera vào mã QR của thư viện</string>
+    <string name="gdrive_opds_qr_camera_permission_denied">Cần quyền camera để quét mã QR</string>
+    <string name="gdrive_opds_qr_camera_error">Không mở được camera</string>
+    <string name="gdrive_opds_qr_invalid_link">Mã QR này không chứa link thư viện Calibre hợp lệ</string>
+    <string name="gdrive_opds_confirm_delete_library">Xóa \"%1$s\"? Dữ liệu đã đồng bộ trên máy cũng sẽ bị xóa.</string>
+    <string name="gdrive_opds_not_synced_yet">Chưa đồng bộ</string>
+    <string name="gdrive_opds_syncing">Đang đồng bộ thư viện…</string>
+    <string name="gdrive_opds_sync_failed_generic">Không đồng bộ được thư viện này. Thử lại sau.</string>
+    <string name="gdrive_opds_library_not_found">Không tìm thấy thư viện này (có thể đã bị xóa).</string>
+    <string name="gdrive_opds_already_in_device_library_title">Đã có trong thư viện của bạn</string>
+    <string name="gdrive_opds_already_in_device_library_message">Sách này đã có trong Device Library. Vẫn muốn tải lại?</string>
+    <string name="gdrive_opds_redownload_overwrite">Ghi đè</string>
+    <string name="gdrive_opds_redownload_add_new">Thêm bản mới</string>
+    <string name="dialog_save">Lưu</string>
+
+
+    <plurals name="opds_library_book_count">
+        <item quantity="other">%s cuốn sách</item>
+    </plurals>
+
+    <string name="tag_editor_title">Thẻ cục bộ</string>
+    <string name="tag_editor_input_hint">Nhập tên thẻ rồi nhấn Enter</string>
+    <string name="tag_editor_done">Xong</string>
+
+    <string name="opds_offline_banner_has_libraries">Không kết nối được với máy chủ Calibre. Truy cập các thư viện online.</string>
+    <string name="opds_offline_banner_no_libraries">Không kết nối được với máy chủ Calibre, và bạn chưa thêm thư viện online nào.</string>
+    <string name="opds_offline_retry_button">Thử lại</string>
+    <string name="opds_offline_libraries_title">Thư viện online</string>
+
+    <string name="pref_book_open_effect_title">Hiệu ứng mở/đóng sách</string>
+    <string name="pref_book_open_effect_summary">Hiệu ứng cửa lùa với ảnh bìa khi mở (bìa tách đôi ra hai bên) và khi đóng (hai nửa bìa chạy vào ghép lại) bất kỳ cuốn sách nào</string>
+    <string name="pref_book_preview_fab_action_title">Hành động nút nổi ở trang xem trước sách</string>
+    <string name="pref_book_preview_fab_action_summary">Chọn nút nổi góc dưới màn hình xem trước sách sẽ gửi sách tới e-reader, mở đọc ngay, hay đọc to (TTS)</string>
+
+    <!-- Continue reading/listening FAB + auto-resume-on-launch (see ContinueReadingResolver.kt) -->
+    <string name="pref_grid_show_title_progress_title">Hiện tựa sách và tiến trình đọc ở chế độ lưới</string>
+    <string name="pref_grid_show_title_progress_summary">Hiện tựa sách và phần trăm tiến trình đọc bên dưới ảnh bìa khi duyệt ở chế độ lưới (grid)</string>
+    <string name="pref_grid_display_style_title">Kiểu hiển thị Grid view</string>
+    <string name="pref_grid_display_style_summary">Chọn cách hiển thị bìa sách ở chế độ lưới (grid), áp dụng cho cả tab Device Library và Calibre Library</string>
+
+    <string name="pref_grid_display_style_option_default">Mặc định</string>
+    <string name="pref_grid_display_style_option_bookshelf">Giá sách</string>
+    <string name="pref_grid_display_style_option_simple2">Simple 2</string>
+    <string name="pref_show_continue_reading_fab_title">Nút tiếp tục đọc</string>
+    <string name="pref_show_continue_reading_fab_summary">Hiện nút hình quyển sách ở góc dưới phải màn hình để mở nhanh cuốn sách bạn vừa đọc/nghe gần đây nhất</string>
+    <string name="pref_auto_resume_last_book_title">Tự động mở sách khi khởi động</string>
+    <string name="pref_auto_resume_last_book_summary">Khi mở app, tự động tiếp tục cuốn sách bạn đang đọc hoặc nghe dở gần đây nhất</string>
+    <string name="fab_continue_reading_description">Tiếp tục đọc</string>
+    <string name="toast_no_recent_book">Chưa có cuốn sách nào được đọc gần đây</string>
+
+    <!-- Menu Drawer: "About" cũ đổi thành "Có gì mới" (WhatsNewActivity) + nút "Thoát" mới, xem
+         nav_drawer_menu.xml/MainActivity. -->
+    <string name="nav_about">Có gì mới</string>
+    <string name="nav_exit">Thoát</string>
+    <string name="update_available_title">Có phiên bản mới</string>
+    <string name="update_available_message">Calibre Sync %1$s đã sẵn sàng. Bạn đang dùng %2$s.</string>
+    <string name="update_now">Cập nhật</string>
+    <string name="update_later">Để sau</string>
+
+    <string name="whats_new_title_format">%1$s %2$s (%3$d)</string>
+    <string name="whats_new_section_format">Có gì mới ở phiên bản %1$s</string>
+    <string-array name="whats_new_bullets">
+        <item>• Thêm engine đọc to Nghe Epub TTS, hỗ trợ nhập thư mục model thủ công\n• Bổ sung bộ font của Waka Toolkit, Bookerly và các theme ảnh nền Waka\n• Sửa dark mode của trình đọc EPUB để nền tối và chữ sáng hoạt động đúng\n• Cải thiện ngắt câu khi đọc to và sửa tốc độ Nghe Epub TTS bị đảo ngược</item>
+        <item>• Thêm màn hình \"Tiến trình\" mới trong menu điều hướng: thời gian đọc theo ngày/tuần/tháng/năm, chuỗi ngày đọc liên tục kèm kỷ lục, mục tiêu đọc hàng ngày tùy chỉnh, so sánh xu hướng theo tuần, tần suất dịch và tốc độ đọc ước lượng\n• Thời gian đọc ở đây được cộng dồn cho toàn bộ thư viện và vẫn được giữ lại kể cả khi sách sau này bị xóa hoặc sửa</item>
+        <item>• Tô sáng câu đang đọc trong \"Đọc cho nghe\" chính xác hơn\n• Sleep timer giờ giảm âm lượng mượt hơn trước khi dừng phát\n• Thêm nút nghe thử giọng đọc trước khi chọn trong danh sách giọng\n• Cải thiện độ ổn định khi phát audio</item>
+        <item>• Mô tả sách có định dạng giờ hiện đúng thay vì hiện nguyên thẻ HTML\n• Hiện thêm Ngày xuất bản và Cập nhật lần cuối cho sách thư viện Google Drive\n• Đổi nút \"Thẻ cục bộ\" trên trang preview sách thành \"Chia sẻ\"</item>
+        <item>• Sửa lỗi không tải được sách khi bấm Download trên trang duyệt Calibre Content Server — giờ hoạt động đúng như OPDS và Google Drive</item>
+        <item>• Device Library và Calibre Library không còn bị nhảy về đầu danh sách khi quay lại từ trang preview sách</item>
+        <item>• Thêm màn hình \"Có gì mới\" (thay cho \"Giới thiệu\") trong menu điều hướng\n• Thêm nút \"Thoát\" mới để đóng hẳn app</item>
+        <item>• Sửa lỗi sửa metadata sách xong bị lần đồng bộ thư viện kế tiếp âm thầm ghi đè mất\n• Hiệu đính đầy đủ Cột tùy biến (Custom Column) từ Calibre Desktop\n• Cột tùy biến giờ hiện trên trang chi tiết sách (bật/tắt trong Cài đặt)\n• "Lấy metadata từ ebook" giờ đọc thêm cả Cột tùy biến từ file EPUB</item>
+        <item>• Sắp xếp: thêm Bộ sách, Đánh giá, Nhà xuất bản, Ngày xuất bản, Kích thước tệp\n• Lọc theo: thêm Bộ sách, Nhà xuất bản, Đánh giá, và mọi Cột tùy biến\n• Áp dụng cho cả Device Library và Calibre Library</item>
+        <item>• Lưu đầy đủ Nhà xuất bản, Ngày xuất bản, Bộ sách, Đánh giá, Ngôn ngữ, Identifiers, Ngày thêm và Kích thước tệp cho mọi sách, không còn bị đánh rơi khi đồng bộ\n• Đặt nền tảng cho việc hiệu đính Cột tùy biến đầy đủ</item>
+        <item>• Nút "Scan QR" mới cạnh "+ Add another library" để thêm thư viện Calibre-on-Google-Drive\n• Quét hoàn toàn trên máy, không cần đăng nhập thêm</item>
+        <item>• Đổi package name nội bộ của app\n• Có thể cần đăng nhập lại các tài khoản cloud sau khi cập nhật</item>
+        <item>• Thêm công tắc trong Cài đặt để ẩn tựa sách và % tiến trình đọc ở chế độ Grid, cho giao diện chỉ hiện bìa sách gọn hơn</item>
+        <item>• Thêm nút "Sort by..." cạnh "Filter by...", có công tắc Tăng dần/Giảm dần, ở cả Device Library và Calibre Library</item>
+        <item>• Bấm vào tài khoản cloud đã kết nối giờ hiện thông tin thư viện + nút "Đồng bộ ngay"\n• Đổi tên sách không còn gây upload trùng lên cloud\n• Bỏ qua upload file chưa thay đổi, file lớn tải lên ổn định hơn\n• Sửa lỗi audio đọc nền (TTS) tự tắt khi chuyển sang app khác\n• Thêm nút "+" để tự nhập sách thủ công vào Device Library</item>
+        <item>• Thêm từ điển phát âm cho phép tự định nghĩa cách đọc tên riêng/từ khó, giúp giọng đọc TTS tự nhiên hơn</item>
+        <item>• Sửa lỗi màn hình trắng khi không kết nối được máy chủ Calibre\n• Giờ hiện nút thử lại và danh sách thư viện Google Drive đã lưu thay vào đó</item>
+        <item>• Gộp "Cài đặt đọc" thành 1 bảng có nhiều tab (Phông chữ / Bố cục / Màu / Thao tác / Đọc to)\n• Nâng cấp trình duyệt thư viện Google Drive để duyệt nhanh hơn</item>
+    </string-array>
+
+    <!-- Man hinh "Tien trinh" (ProgressActivity, DATABASE_VERSION 17) - dich day du (khac tien
+         le tu WhatsNewActivity o cac ban cap nhat truoc, xem CHANGELOG.md) vi day la tinh nang
+         nguoi dung chinh, dung dung cac cum tu da xuat hien trong anh chup man hinh goc. -->
+    <string name="nav_progress">Tiến trình</string>
+    <string name="progress_title">Tiến trình</string>
+    <string name="progress_tab_week">Tuần</string>
+    <string name="progress_tab_month">Tháng</string>
+    <string name="progress_tab_year">Năm</string>
+    <string name="progress_tab_all_time">Tất cả thời gian</string>
+    <string name="progress_average_per_week">Trung bình mỗi tuần:</string>
+    <string name="progress_minutes_suffix">phút</string>
+    <string name="progress_reading_time_title">Thời gian đọc</string>
+    <string name="progress_total">Tổng</string>
+    <string name="progress_today">Hôm nay</string>
+    <string name="progress_daily_goal">Mục tiêu hàng ngày</string>
+    <string name="progress_streak_title">Chuỗi ngày</string>
+    <string name="progress_streak_current">Hiện tại</string>
+    <string name="progress_streak_record">Kỷ lục</string>
+    <string name="progress_weekly_activity">Hoạt động hàng tuần</string>
+    <string name="progress_trend_title">Xu hướng</string>
+    <string name="progress_trend_description">Thời gian đọc hàng tuần của bạn so với tuần trước:</string>
+    <string name="progress_previous_period">Tuần trước</string>
+    <string name="progress_current_period">Tuần hiện tại</string>
+    <string name="progress_not_enough_data">Không đủ dữ liệu để tính phần trăm đọc</string>
+    <string name="progress_reading_speed_title">Tốc độ đọc</string>
+    <string name="progress_reading_speed_unit">từ mỗi phút</string>
+    <string name="progress_reading_speed_today_format">%1$d hôm nay</string>
+    <string name="progress_goal_picker_title">CHỌN MỤC TIÊU ĐỌC HÀNG NGÀY CỦA BẠN</string>
+    <string name="progress_goal_easy">Dễ dàng</string>
+    <string name="progress_goal_medium">Trung bình</string>
+    <string name="progress_goal_hard">Khó khăn</string>
+    <string name="progress_goal_custom">Giá trị của bạn</string>
+    <string name="progress_goal_minutes_format">%1$d phút</string>
+    <string name="progress_save">Lưu</string>
+    <string name="progress_cancel">Hủy</string>
+    <string-array name="progress_weekday_short">
+        <item>T7</item>
+        <item>CN</item>
+        <item>T2</item>
+        <item>T3</item>
+        <item>T4</item>
+        <item>T5</item>
+        <item>T6</item>
+    </string-array>
+
+    <string name="reader_bookmarks_empty_title">Bạn chưa có dấu trang nào</string>
+    <string name="reader_bookmarks_empty_body">Các trang bạn đánh dấu sẽ hiển thị tại đây. Vui lòng nhấn nút dấu trang để lưu.</string>
+    <string name="reader_notes_empty_title">Bạn chưa có ghi chú nào</string>
+    <string name="reader_notes_empty_body">Nội dung bạn ghi chú sẽ hiển thị tại đây. Vui lòng quét chọn nội dung chữ trong sách để ghi chú.</string>
+    <string name="search_empty_no_results_title">Chưa có cuốn sách nào</string>
+
+    <!-- Reader themes cloned from Waka Toolkit -->
+    <string name="reader_color_theme_waka_light">Waka sáng</string>
+    <string name="reader_color_theme_waka_gray">Waka xám</string>
+    <string name="reader_color_theme_waka_dark">Waka tối</string>
+    <string name="reader_color_theme_waka_bg_black">Waka nền đen</string>
+    <string name="reader_color_theme_waka_bg_blue">Waka nền xanh dương</string>
+    <string name="reader_color_theme_waka_bg_green">Waka nền xanh lá</string>
+    <string name="reader_color_theme_waka_bg_green2">Waka nền xanh lá 2</string>
+    <string name="reader_color_theme_waka_bg_white">Waka giấy trắng</string>
+    <string name="reader_color_theme_waka_bg_scrapbook">Waka giấy scrapbook</string>
+    <string name="reader_color_theme_waka_bg_sand">Waka nền cát</string>
+    <string name="reader_color_theme_waka_bg_moonsky">Waka trăng đêm</string>
+    <string name="reader_color_theme_waka_bg_leaves">Waka lá cây</string>
+    <string name="reader_color_theme_vip_city">VIP thành phố</string>
+    <string name="reader_color_theme_vip_hoa_dep">VIP hoa đẹp</string>
+    <string name="reader_color_theme_vip_hoa_dep_2">VIP hoa đẹp 2</string>
+    <string name="reader_color_theme_vip_hoa_nuoc">VIP hoa nước</string>
+    <string name="reader_color_theme_vip_nui_non">VIP núi non</string>
+    <string name="reader_color_theme_vip_nuoc_bien">VIP nước biển</string>
+    <string name="reader_color_theme_vip_sua_bien">VIP sứa biển</string>
+    <string name="reader_color_theme_vip_to_quoc">VIP tổ quốc</string>
+    <string name="reader_color_theme_vip_to_quoc_2">VIP tổ quốc 2</string>
+    <string name="reader_color_theme_vip_tuoi_tho">VIP tuổi thơ</string>
+    <string name="reader_color_theme_vip_vo_dinh">VIP vô định</string>
+    <string name="reader_background_opacity_label">Độ đậm ảnh nền</string>
+    <string name="reader_background_opacity_value">Độ đậm ảnh nền: %1$d%%</string>
+
+    <string name="pref_tts_models_title">TTS Models</string>
+    <string name="pref_tts_models_summary">Quản lý giọng đọc NghiTTS, Nghe Epub TTS và Edge TTS</string>
+
+    <string name="pref_ngheepubtts_model_dir_title">Thư mục models Nghe Epub TTS</string>
+    <string name="pref_ngheepubtts_model_dir_summary_default">Chưa chọn thư mục — chọn thư mục chứa model-tts.json và các file .enc</string>
+
+    <string name="pref_ngheepubtts_scan_now_title">Quét lại models Nghe Epub</string>
+    <string name="pref_ngheepubtts_scan_now_summary">Quét thư mục đã chọn để import các file .enc mới hoặc đã thay đổi</string>
+
+    <string name="pref_ngheepubtts_default_voice_title">Giọng Nghe Epub mặc định</string>
+    <string name="pref_ngheepubtts_default_voice_summary_empty">Chưa có giọng Nghe Epub nào được import</string>
+
+    <string name="toast_ngheepubtts_choose_folder_first">Hãy chọn thư mục models Nghe Epub trước khi quét</string>
+    <string name="toast_ngheepubtts_scan_result">Đã import %1$d model, %2$d giọng đọc</string>
+    <string name="toast_ngheepubtts_scan_error">Quét thư mục Nghe Epub thất bại, xem log để biết chi tiết</string>
+
+</resources>

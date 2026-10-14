@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center_vertical"
+    android:orientation="horizontal" >
+
+    <!-- Fixed 2:3 book-cover box (same ratio as book_item_grid.xml) with centerCrop, so every
+         row's thumbnail is the same size regardless of the source cover's native aspect ratio.
+         Previously only maxWidth was set with wrap_content height and fitCenter, so a tall
+         cover and a near-square cover rendered at very different sizes/paddings. -->
+    <ImageView
+        android:id="@+id/bi_thumbnail"
+        android:layout_width="70dp"
+        android:layout_height="105dp"
+        android:layout_margin="5dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/dumbbook" />
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/bi_title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="4dp"
+            android:text="Title"
+            android:textSize="15sp"
+            android:textStyle="normal"
+            android:fontFamily="sans-serif-medium"
+            android:letterSpacing="0.0"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:textColor="?android:attr/textColorPrimary" />
+
+        <TextView
+            android:id="@+id/bi_author"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="1dp"
+            android:text="Author"
+            android:textSize="12.5sp"
+            android:textStyle="normal"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textColor="?android:attr/textColorSecondary" />
+
+        <!-- Doan mo ta/comment rut gon (toi da 2 dong), kieu Readest. An hoan toan
+             (View.GONE) khi sach khong co comment, xem BookCursorAdapter. -->
+        <TextView
+            android:id="@+id/bi_comment"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="3dp"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:textSize="12sp"
+            android:lineSpacingExtra="1dp"
+            android:textColor="?android:attr/textColorSecondary"
+            android:visibility="gone"
+            tools:text="Mo ta ngan gon cua cuon sach hien thi toi da hai dong roi cat bot..." />
+
+        <!-- % tien trinh doc, chi chu khong co progress bar do hoa, kieu Readest. An hoan toan
+             khi sach chua doc / khong tinh duoc % (PDF, CBZ), xem BookCursorAdapter. -->
+        <TextView
+            android:id="@+id/bi_progress"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="2dp"
+            android:textSize="11sp"
+            android:textColor="?attr/colorPrimary"
+            android:visibility="gone"
+            tools:text="42%" />
+
+        <TextView
+            android:id="@+id/bi_uuid"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:typeface="monospace"
+            android:visibility="invisible" />
+
+    </LinearLayout>
+
+</LinearLayout>

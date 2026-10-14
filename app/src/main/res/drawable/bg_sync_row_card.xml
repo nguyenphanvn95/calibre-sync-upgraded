@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Nền bo góc cho hàng "Đồng bộ lần cuối: ... + nút ĐỒNG BỘ" - cùng kiểu bg_stat_card.xml
+     nhưng bo góc lớn hơn (16dp) vì hàng này cao và rộng hơn 1 ô thống kê đơn lẻ. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <corners android:radius="16dp" />
+    <solid android:color="?attr/colorButtonNormal" />
+</shape>

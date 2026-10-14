@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Floating action pill shown at the bottom of Device Library (CollectionFragment) while
+     mSelectionMode is active - a quick-access duplicate of the existing header 3-dot overflow
+     menu (collection_selection_mode.xml), NOT a replacement for it (see
+     CollectionFragment#onHeaderOverflowClick, left untouched). Mirrors the "Move / Copy / Share /
+     Delete / More" bottom action bar of the My Files app: one icon + short label per action,
+     evenly divided (layout_weight="1"), inside a dark fully-rounded pill.
+
+     Default GONE - toggled from CollectionFragment#updateSelectionUI(). Positioned
+     layout_alignParentBottom in activity_collection.xml; its bottomMargin is adjusted at runtime
+     by CollectionFragment#repositionSelectionPill() so it never overlaps
+     net.mrphan.calibre.reader.tts.GlobalTtsFloatingPanel (the separate floating TTS/music mini
+     player, attached directly to android.R.id.content by MainActivity, outside this fragment's
+     own view tree). -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/collection_selection_pill"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:orientation="horizontal"
+    android:background="@drawable/shape_collection_selection_pill_bg"
+    android:elevation="8dp"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp"
+    android:paddingStart="4dp"
+    android:paddingEnd="4dp"
+    android:visibility="gone">
+
+    <LinearLayout
+        android:id="@+id/pill_select_all"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:focusable="true"
+        android:contentDescription="@string/menu_selection_select_all">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_menu_select_all"
+            android:importantForAccessibility="no" />
+
+        <TextView
+            android:id="@+id/pill_select_all_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/menu_selection_select_all"
+            android:textColor="#FFFFFF"
+            android:textSize="11sp"
+            android:maxLines="1"
+            android:ellipsize="end" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/pill_sync"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:focusable="true"
+        android:contentDescription="@string/action_sync_to_cloud">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_menu_cloud_upload"
+            android:importantForAccessibility="no" />
+
+        <TextView
+            android:id="@+id/pill_sync_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/pill_action_sync_short"
+            android:textColor="#FFFFFF"
+            android:textSize="11sp"
+            android:maxLines="1"
+            android:ellipsize="end" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/pill_share"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:focusable="true"
+        android:contentDescription="@string/action_share">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_menu_share"
+            android:importantForAccessibility="no" />
+
+        <TextView
+            android:id="@+id/pill_share_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/action_share"
+            android:textColor="#FFFFFF"
+            android:textSize="11sp"
+            android:maxLines="1"
+            android:ellipsize="end" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/pill_delete"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:focusable="true"
+        android:contentDescription="@string/dialog_button_delete">
+
+        <!-- Destructive red tint applied programmatically in CollectionFragment (same
+             color_action_destructive resource HeaderOverflowMenu#setDestructiveItemIds uses),
+             not hardcoded here, so both places stay in sync if that color ever changes. -->
+        <ImageView
+            android:id="@+id/pill_delete_icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_menu_delete"
+            android:importantForAccessibility="no" />
+
+        <TextView
+            android:id="@+id/pill_delete_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/dialog_button_delete"
+            android:textSize="11sp"
+            android:maxLines="1"
+            android:ellipsize="end" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/pill_exit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:focusable="true"
+        android:contentDescription="@string/menu_selection_exit">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_menu_exit"
+            android:importantForAccessibility="no" />
+
+        <TextView
+            android:id="@+id/pill_exit_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/menu_selection_exit"
+            android:textColor="#FFFFFF"
+            android:textSize="11sp"
+            android:maxLines="1"
+            android:ellipsize="end" />
+    </LinearLayout>
+
+</LinearLayout>

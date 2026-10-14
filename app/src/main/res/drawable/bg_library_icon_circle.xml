@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Circular colored badge drawn behind ic_library_default on each "choose a library" card
+     (see item_library_card.xml / LibraryCardAdapter). A fixed brand-blue fill is used instead of
+     ?attr/colorPrimary so the badge reads consistently in both light and dark theme, the same
+     way a library's own logo/cover art would. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <solid android:color="#2F6FED" />
+</shape>

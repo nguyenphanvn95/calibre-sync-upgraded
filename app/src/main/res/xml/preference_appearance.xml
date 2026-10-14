@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Noi dung tab "Giao dien" cua SettingsActivity (xem SettingsTab.APPEARANCE). Tach ra tu
+  <PreferenceCategory android:title="@string/settings_category_appearance_title"> trong
+  res/xml/preference.xml (nay da xoa), giu nguyen android:key cua tung muc.
+-->
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="@string/pref_appearance_group_display_title">
+
+        <ListPreference
+            android:key="pref_app_theme"
+            android:title="@string/pref_app_theme_title"
+            android:entries="@array/pref_app_theme_entries"
+            android:entryValues="@array/pref_app_theme_values"
+            android:defaultValue="-1" />
+        <ListPreference
+            android:key="pref_app_language"
+            android:title="@string/pref_app_language_title"
+            android:entries="@array/pref_app_language_entries"
+            android:entryValues="@array/pref_app_language_values"
+            android:defaultValue=""
+            android:persistent="false" />
+        <MultiSelectListPreference android:title="@string/pref_book_info_columns_title"
+            android:key="pref_book_info_columns"
+            android:entries="@array/pref_book_info_columns_entries"
+            android:entryValues="@array/pref_book_info_columns_values"
+            android:defaultValue="@array/pref_book_info_columns_default" />
+        <CheckBoxPreference
+            android:key="pref_book_open_effect"
+            android:title="@string/pref_book_open_effect_title"
+            android:summary="@string/pref_book_open_effect_summary"
+            android:defaultValue="true" />
+
+        <!-- Hanh dong cua FAB goc duoi-phai tren 2 man xem truoc sach (BookDetailActivity /
+             DeviceBookDetailActivity) - xem applyFabAction() o ca 2 Activity.
+             defaultValue="send_to_ereader" de giu dung hanh vi mac dinh hien co, khong doi trai
+             nghiem cua user cu khi cap nhat app. -->
+        <ListPreference
+            android:key="pref_book_preview_fab_action"
+            android:title="@string/pref_book_preview_fab_action_title"
+            android:summary="@string/pref_book_preview_fab_action_summary"
+            android:entries="@array/pref_book_preview_fab_action_entries"
+            android:entryValues="@array/pref_book_preview_fab_action_values"
+            android:defaultValue="send_to_ereader" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pref_appearance_group_grid_title">
+
+        <!-- Kiem soat layout tung o Grid o ca 2 tab (Device Library + Calibre Library OPDS) - xem
+             GridDisplayStyle.java, BookRecyclerAdapter#setGridStyle, BookCursorAdapter mGridStyle. -->
+        <ListPreference
+            android:key="pref_grid_display_style"
+            android:title="@string/pref_grid_display_style_title"
+            android:summary="@string/pref_grid_display_style_summary"
+            android:entries="@array/pref_grid_display_style_entries"
+            android:entryValues="@array/pref_grid_display_style_values"
+            android:defaultValue="default" />
+
+        <!-- Chi anh huong che do Grid (GRID_2/GRID_3/GRID_4 Device Library, che do grid Calibre
+             Library); List/Simple list/Carousel luon hien tua sach, khong co khai niem an/hien.
+             Dung 1 pref key chung cho ca 2 tab, xem StorageUtils.PREF_GRID_SHOW_TITLE_PROGRESS. -->
+        <CheckBoxPreference
+            android:key="pref_grid_show_title_progress"
+            android:title="@string/pref_grid_show_title_progress_title"
+            android:summary="@string/pref_grid_show_title_progress_summary"
+            android:defaultValue="true" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pref_appearance_group_continue_reading_title">
+
+        <!-- Nang cap "Tiep tuc doc/nghe" (giong Moon Reader) - xem ContinueReadingResolver.kt va
+             MainActivity#openLastActivity/onCreate. Khong doi schema DB, chi doc lai 2 preference
+             nay. -->
+        <CheckBoxPreference
+            android:key="pref_show_continue_reading_fab"
+            android:title="@string/pref_show_continue_reading_fab_title"
+            android:summary="@string/pref_show_continue_reading_fab_summary"
+            android:defaultValue="true" />
+        <CheckBoxPreference
+            android:key="pref_auto_resume_last_book"
+            android:title="@string/pref_auto_resume_last_book_title"
+            android:summary="@string/pref_auto_resume_last_book_summary"
+            android:defaultValue="false" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

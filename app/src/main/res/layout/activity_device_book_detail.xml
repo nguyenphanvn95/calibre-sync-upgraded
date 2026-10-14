@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Root theme is Theme.Calibre.BookDetail (NoActionBar, same theme activity_book_detail.xml
+    uses): this screen draws its own transparent overlay back button (dbd_btn_back below)
+    directly on top of the full-bleed cover instead of using the classic ActionBar. dbd_root/
+    dbd_scroll ids are used by DeviceBookDetailActivity#applyWindowInsets to pad the back button
+    below the status bar and the scrollable content above the nav bar, the same edge-to-edge
+    pattern already used by activity_book_detail.xml/BookSearchActivity/SettingsActivity.
+    Unlike activity_book_detail.xml (Calibre Library / OPDS tab), this screen has no Download
+    button, since a Device Library book is already on disk, and its metadata rows are added at
+    runtime instead of being fixed, since metadata.calibre entries can carry a different set of
+    fields from book to book.
+-->
+<!-- FrameLayout them vao de co the noi FAB "Gui toi E-Reader" de len goc duoi-phai man hinh,
+     giong het cach activity_book_detail.xml da doi, ban than dbd_scroll/dbd_root ben trong
+     khong doi gi ca. -->
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<ScrollView
+    android:id="@+id/dbd_scroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="false">
+
+    <LinearLayout
+        android:id="@+id/dbd_root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Nested ConstraintLayout just for the cover, so it can keep a fixed 2:3 aspect ratio
+             while everything else below stays a plain vertical LinearLayout. No padding here:
+             the cover deliberately extends edge to edge, behind the status bar, with only the
+             back button floating on top of it. -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/dbd_cover"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/dumbbook"
+                android:contentDescription="@string/bookdetail_cover_desc"
+                app:layout_constraintDimensionRatio="2:3"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <!-- Transparent overlay back button: no bar, no title text, just the arrow over
+                 the cover. Top margin is set at runtime to clear the status bar (see
+                 DeviceBookDetailActivity#applyWindowInsets); the small circular scrim behind
+                 the arrow keeps it legible on light covers. -->
+            <ImageButton
+                android:id="@+id/dbd_btn_back"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_margin="8dp"
+                android:background="@drawable/bg_book_detail_back_scrim"
+                android:padding="10dp"
+                android:src="@drawable/ic_action_back"
+                android:contentDescription="@string/bookdetail_action_back"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+        <TextView
+            android:id="@+id/dbd_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:textStyle="bold"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/dbd_author"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:alpha="0.7" />
+
+        <!-- Action row: edit metadata, view cover full screen, open chapter list to listen via
+             TTS, read, share. Nut Nghe (headphones) da doi cho voi nut Hieu dinh (edit) theo
+             yeu cau, gio nam ngay ben trai nut Doc (read) thay vi o dau hang. No Download button
+             here, unlike activity_book_detail.xml's action row: a Device Library book is already
+             on disk. See DeviceBookDetailActivity#wireActionButtons for the id-to-listener
+             mapping (khong doi, vi wiring dua theo id, khong phai vi tri trong layout). -->
+        <LinearLayout
+            android:id="@+id/dbd_actions_row"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="12dp">
+
+            <ImageButton
+                android:id="@+id/dbd_btn_edit_metadata"
+                style="@style/BookDetailActionButton"
+                android:src="@drawable/ic_action_edit"
+                android:contentDescription="@string/bookdetail_action_edit_metadata" />
+
+            <ImageButton
+                android:id="@+id/dbd_btn_view_cover"
+                style="@style/BookDetailActionButton"
+                android:src="@drawable/ic_action_cover"
+                android:contentDescription="@string/bookdetail_action_view_cover" />
+
+            <ImageButton
+                android:id="@+id/dbd_btn_toggle_read"
+                style="@style/BookDetailActionButton"
+                android:src="@drawable/ic_action_headphones"
+                android:contentDescription="@string/bookdetail_action_read_aloud" />
+
+            <ImageButton
+                android:id="@+id/dbd_btn_read"
+                style="@style/BookDetailActionButton"
+                android:src="@drawable/ic_action_open_book"
+                android:contentDescription="@string/bookdetail_action_read" />
+
+            <ImageButton
+                android:id="@+id/dbd_btn_share"
+                style="@style/BookDetailActionButton"
+                android:src="@drawable/ic_menu_share"
+                android:contentDescription="@string/action_share" />
+
+        </LinearLayout>
+
+        <!-- Publication info card: rows are added at runtime, one per metadata.calibre field
+             that's actually present for this book (publisher, pubdate, last_modified,
+             languages, series, rating, tags, identifiers, ...), see
+             DeviceBookDetailActivity#renderPublicationInfo. The whole card is hidden if none of
+             those fields are present. -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/dbd_publication_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="1dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:padding="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/BookDetailSectionTitle"
+                    android:drawableStart="@drawable/ic_action_info"
+                    android:drawablePadding="8dp"
+                    android:drawableTint="?attr/colorControlNormal"
+                    android:text="@string/bookdetail_section_publication" />
+
+                <LinearLayout
+                    android:id="@+id/dbd_metadata_container"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/dbd_row_summary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- File info card: filename, format, size, Calibre id, added at runtime, see
+             DeviceBookDetailActivity#renderFileInfo. -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="1dp">
+
+            <LinearLayout
+                android:id="@+id/dbd_file_info_container"
+                android:orientation="vertical"
+                android:padding="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/BookDetailSectionTitle"
+                    android:drawableStart="@drawable/ic_stat_book"
+                    android:drawablePadding="8dp"
+                    android:drawableTint="?attr/colorControlNormal"
+                    android:text="@string/bookdetail_section_file_info" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Other info card: any metadata.calibre field this screen doesn't already know how to
+             label nicely, shown as plain "key: value" rows so nothing in the file is ever
+             silently dropped. Hidden entirely when there's nothing left over, see
+             DeviceBookDetailActivity#renderOtherInfo. -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/dbd_other_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="1dp"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:padding="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/BookDetailSectionTitle"
+                    android:drawableStart="@drawable/ic_menu_overflow"
+                    android:drawablePadding="8dp"
+                    android:drawableTint="?attr/colorControlNormal"
+                    android:text="@string/devicebd_section_other" />
+
+                <LinearLayout
+                    android:id="@+id/dbd_other_info_container"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Chua dung Button o day nua, xem FAB dbd_btn_send_to_ereader ben ngoai ScrollView. -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="80dp" />
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/dbd_btn_send_to_ereader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="20dp"
+        android:text="@string/bookdetail_send_to_ereader"
+        android:textColor="@android:color/white"
+        app:icon="@drawable/ic_action_send"
+        app:iconTint="@android:color/white"
+        app:backgroundTint="@color/color_send_to_ereader"
+        app:rippleColor="@color/color_send_to_ereader_ripple" />
+
+</FrameLayout>

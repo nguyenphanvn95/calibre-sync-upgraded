@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Clone bo cuc "Sync Info" cua Readest (Tools > Sync info): header co nut
+     back + tieu de giua, ben duoi la cac cap nhan CAPS + o gia tri bo tron.
+     Xem prompt-nang-cap-reader-sync.md muc 7. -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="24dp">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp">
+
+        <ImageButton
+            android:id="@+id/sync_info_back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center_vertical"
+            android:layout_marginStart="12dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            android:contentDescription="@string/reader_sync_info_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/reader_sync_info_title"
+            android:textStyle="bold"
+            android:textSize="17sp" />
+    </FrameLayout>
+
+    <!-- 5 hang giong nhau: dung include de tranh lap code XML.
+         FIX (crash NPE tai BookSyncInfoSheet.bindField): android:id tren <include> CHI duoc
+         Android inflater ap dung khi <include> cung khai bao android:layout_width VA
+         android:layout_height. Neu thieu ca hai (nhu truoc day), toan bo override (id lan
+         layout_*) bi AM THAM bo qua va root view giu nguyen id goc cua item_sync_info_field.xml
+         (khong co id nao ca). Ket qua: root.findViewById(R.id.sync_info_field_fingerprint/...)
+         tra ve null ngay tu field dau tien, gay NullPointerException trong bindField() khi goi
+         findViewById tren "fieldRoot" null. Them layout_width/layout_height (gia tri giong voi
+         root LinearLayout cua item_sync_info_field.xml) de override id hoat dong dung. -->
+    <include layout="@layout/item_sync_info_field" android:id="@+id/sync_info_field_fingerprint"
+        android:layout_width="match_parent" android:layout_height="wrap_content" />
+    <include layout="@layout/item_sync_info_field" android:id="@+id/sync_info_field_title"
+        android:layout_width="match_parent" android:layout_height="wrap_content" />
+    <include layout="@layout/item_sync_info_field" android:id="@+id/sync_info_field_author"
+        android:layout_width="match_parent" android:layout_height="wrap_content" />
+    <include layout="@layout/item_sync_info_field" android:id="@+id/sync_info_field_identifiers"
+        android:layout_width="match_parent" android:layout_height="wrap_content" />
+    <include layout="@layout/item_sync_info_field" android:id="@+id/sync_info_field_last_synced"
+        android:layout_width="match_parent" android:layout_height="wrap_content" />
+
+</LinearLayout>

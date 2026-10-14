@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Header hien thi icon ung dung + ten app o dinh Drawer, cong them 2 nut quick toggle
+     (doi ngon ngu / doi theme) o goc duoi phai, gan sat day header, xem
+     prompt-nav-drawer-quick-toggle-language-theme.md.
+     Dung @color/toolbar_background lam nen (giong app_header.xml) thay vi ?attr/colorPrimary de
+     dong bo Light/Dark voi toolbar that su cua app - xem ghi chu trong app_header.xml. Chu dung
+     ?android:attr/textColorPrimary de tu doi mau theo theme thay vi mau trang co dinh (se bien
+     mat tren nen sang cua Light theme). -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="160dp"
+    android:background="@color/toolbar_background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <ImageView
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_launcher" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/app_name"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- 2 nut quick toggle, xep doc, goc duoi phai - dung vi tri nguoi dung yeu cau (xem anh mau
+         menu_navigation.jpg, 2 vong tron do danh dau vi tri muc tieu: gan sat day header, ngang
+         hang voi phia duoi ten app "Calibre Sync", thay vi sat dinh nhu truoc). Click listener +
+         logic doi ngon ngu/theme nam trong MainActivity#setupDrawerQuickToggles(). -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="14dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/btn_drawer_quick_language"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/drawer_quick_language_description"
+            android:padding="1dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_flag_gb" />
+
+        <ImageButton
+            android:id="@+id/btn_drawer_quick_theme"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="6dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/drawer_quick_theme_description"
+            android:padding="6dp"
+            android:src="@drawable/ic_theme_system"
+            android:tint="?android:attr/textColorPrimary" />
+    </LinearLayout>
+
+</FrameLayout>

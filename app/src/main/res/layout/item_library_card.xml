@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- One row of the "choose a library" screen (see LibraryCardAdapter / OPDSBrowserFragment#
+     renderLibrarySelection). Replaces the old plain android.R.layout.simple_list_item_1 text
+     row with a full-width card: a badge icon (Calibre's own "open book" glyph — this project
+     doesn't bundle the real Calibre desktop logo as an asset, see ic_action_open_book), the
+     library's name, and a small subtitle showing its total book count once known (see
+     OPDSLibraryStatsLoader) — left blank while unknown so nothing broken/misleading is shown
+     for servers that don't report a count.
+
+     Root is a plain FrameLayout wrapping a MaterialCardView (rather than a bare
+     MaterialCardView as the GridView row) so the row keeps its own margin independent of
+     GridView's horizontalSpacing/verticalSpacing, which only applies *between* cells, not
+     around the outer edge of the grid. -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="14dp"
+        app:cardElevation="2dp"
+        app:cardBackgroundColor="?attr/colorSurface"
+        android:foreground="?attr/selectableItemBackground">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="14dp">
+
+            <!-- Library icon badge -->
+            <FrameLayout
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_library_icon_circle">
+
+                <ImageView
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_action_open_book"
+                    android:contentDescription="@string/opds_library_icon_desc"
+                    android:importantForAccessibility="no" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="14dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/library_card_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="?attr/colorOnSurface"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    tools:text="Thư viện Calibre" />
+
+                <TextView
+                    android:id="@+id/library_card_subtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:textSize="13sp"
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    tools:text="1,234 cuốn sách" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_library_chevron"
+                android:contentDescription="@null"
+                android:importantForAccessibility="no"
+                app:tint="?android:attr/textColorSecondary" />
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+</FrameLayout>

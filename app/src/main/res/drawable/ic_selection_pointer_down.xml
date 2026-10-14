@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Small solid triangle used underneath view_reader_selection_pill_toolbar.xml's card as a
+     speech-bubble-style pointer toward the selected text, matching the reference screenshot. Kept
+     as a plain white vector and re-tinted at layout time via android:tint="@color/
+     reader_selection_card_bg" so it automatically matches the card's Light/Dark color instead of
+     needing a separate values-night drawable. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="16dp"
+    android:height="8dp"
+    android:viewportWidth="16"
+    android:viewportHeight="8">
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M0,0 L16,0 L8,8 Z" />
+</vector>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Small floating "which color?" row shown right under/over the selection toolbar when the
+     Highlight icon is tapped — mirrors Readest's inline color-dot picker instead of forcing four
+     always-visible color buttons into the ActionMode bar itself (see
+     ReaderSelectionToolbar#showColorSwatchPopup). Reuses the same rounded card background and dot
+     drawable ReaderHighlightsSheet already uses, so a highlight looks the same wherever it's
+     created or listed. -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/reader_selection_color_popup_root"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@drawable/shape_reader_color_swatch_bg"
+    android:elevation="8dp"
+    android:paddingStart="14dp"
+    android:paddingEnd="14dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp">
+
+    <View
+        android:id="@+id/reader_selection_color_yellow"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:background="@drawable/shape_reader_highlight_color_dot"
+        android:contentDescription="@string/reader_highlight_color_yellow" />
+
+    <View
+        android:id="@+id/reader_selection_color_green"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="14dp"
+        android:background="@drawable/shape_reader_highlight_color_dot"
+        android:contentDescription="@string/reader_highlight_color_green" />
+
+    <View
+        android:id="@+id/reader_selection_color_blue"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="14dp"
+        android:background="@drawable/shape_reader_highlight_color_dot"
+        android:contentDescription="@string/reader_highlight_color_blue" />
+
+    <View
+        android:id="@+id/reader_selection_color_pink"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="14dp"
+        android:background="@drawable/shape_reader_highlight_color_dot"
+        android:contentDescription="@string/reader_highlight_color_pink" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="14dp"
+        android:background="#33000000" />
+
+    <ImageButton
+        android:id="@+id/reader_selection_color_remove"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="14dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="4dp"
+        android:src="@android:drawable/ic_menu_close_clear_cancel"
+        android:contentDescription="@string/reader_selection_cancel" />
+
+</LinearLayout>

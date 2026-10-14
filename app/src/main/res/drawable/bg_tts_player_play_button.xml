@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Nút play/pause lớn ở giữa hàng transport controls trong dialog_tts_player.xml - hình
+     tròn trắng, icon bên trong tô đen (android:tint="#000000" đặt trực tiếp trên
+     ImageButton) để tương phản, giống trình phát audiobook chuyên nghiệp. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <solid android:color="#FFFFFF" />
+</shape>

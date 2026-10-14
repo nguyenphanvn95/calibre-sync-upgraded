@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Nen card bo goc cho tung nhom cai dat trong ReaderSettingsSheet (font, layout, mau, thao
+     tac, doc to), phong theo cac khoi nen toi trong anh Readest dinh kem, xem
+     prompt-nang-cap-reader-settings-tabbed.md muc 4.4. Khong phu thuoc theme mau doc
+     (ReaderColorTheme) vi day la UI cua chinh bang cai dat, khong phai noi dung sach; nhung van
+     phai theo theme khung ung dung (Sang/Toi) nen dung ?attr/colorButtonNormal (DayNight-aware)
+     thay vi mot mau xam co dinh. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <corners android:radius="14dp" />
+    <solid android:color="?attr/colorButtonNormal" />
+</shape>

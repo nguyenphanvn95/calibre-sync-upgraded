@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Icon "Sách" cho ô thống kê trong bottomsheet_cloud_remote_info.xml /
+     bottomsheet_gdrive_library_info.xml. Dùng ?attr/colorPrimary (không hardcode) để tự đổi
+     đúng theo theme Sáng/Tối, giống ic_check_circle_filled.xml đã có trong dự án. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="22dp"
+    android:height="22dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:fillColor="?attr/colorPrimary"
+        android:pathData="M18,2H6C4.9,2 4,2.9 4,4v16c0,1.1 0.9,2 2,2h12c1.1,0 2,-0.9 2,-2V4C20,2.9 19.1,2 18,2zM11,4h2v8l-1,-0.75L11,12V4zM18,20H6V4h3v12l3,-2.25L15,16V4h3V20z" />
+</vector>

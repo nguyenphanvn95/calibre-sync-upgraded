@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Noi dung tab "Doc to" cua SettingsActivity (xem SettingsTab.TTS). Tach ra tu
+  <PreferenceCategory android:title="@string/settings_category_tts_title"> trong
+  res/xml/preference.xml (nay da xoa), giu nguyen android:key cua tung muc, bao gom ca
+  <PreferenceScreen android:key="pref_tts_models_screen"> long ben trong (dieu huong nested-screen
+  qua SettingsActivity.onPreferenceStartScreen() khong doi, chi khac la gio no nam trong file rieng
+  nay thay vi preference.xml dung chung).
+-->
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceScreen
+        android:key="pref_tts_models_screen"
+        android:title="@string/pref_tts_models_title"
+        android:summary="@string/pref_tts_models_summary">
+
+        <Preference
+            android:key="pref_nghitts_model_dir"
+            android:title="@string/pref_nghitts_model_dir_title"
+            android:summary="@string/pref_nghitts_model_dir_summary_default" />
+
+        <Preference
+            android:key="pref_nghitts_scan_now"
+            android:title="@string/pref_nghitts_scan_now_title"
+            android:summary="@string/pref_nghitts_scan_now_summary" />
+
+        <ListPreference
+            android:key="pref_nghitts_default_model"
+            android:title="@string/pref_nghitts_default_model_title"
+            android:summary="@string/pref_nghitts_default_model_summary_empty" />
+
+        <Preference
+            android:key="pref_ngheepubtts_model_dir"
+            android:title="@string/pref_ngheepubtts_model_dir_title"
+            android:summary="@string/pref_ngheepubtts_model_dir_summary_default" />
+
+        <Preference
+            android:key="pref_ngheepubtts_scan_now"
+            android:title="@string/pref_ngheepubtts_scan_now_title"
+            android:summary="@string/pref_ngheepubtts_scan_now_summary" />
+
+        <ListPreference
+            android:key="pref_ngheepubtts_default_voice"
+            android:title="@string/pref_ngheepubtts_default_voice_title"
+            android:summary="@string/pref_ngheepubtts_default_voice_summary_empty" />
+
+    </PreferenceScreen>
+
+</PreferenceScreen>

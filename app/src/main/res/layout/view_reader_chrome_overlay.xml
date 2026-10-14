@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Shared reader "chrome": floating toolbar overlay used by activity_reader_epub.xml,
+  activity_reader_pdf.xml and activity_reader_cbz.xml via <include>. Bound at runtime by
+  net.mrphan.calibre.reader.chrome.ReaderChromeOverlay - see that class for behaviour.
+  Starts GONE; ReaderChromeOverlay shows/hides it in response to the middle-of-screen tap gesture.
+
+  Readest-style thin header (top) + thin footer (bottom) + hamburger menu bottom sheet, replacing
+  the old full-screen semi-transparent button grid. The middle area of the screen is intentionally
+  left transparent so the page content stays visible while the chrome is shown, only the
+  header/footer strips themselves carry a solid-ish background.
+-->
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/reader_chrome_overlay_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:clickable="true"
+    android:focusable="true"
+    android:visibility="gone">
+
+    <include layout="@layout/view_reader_header_bar" />
+
+    <!-- Bottom-anchored stack: progress panel slides in directly above the footer bar when the
+         "Tien do" footer icon is tapped (see ReaderChromeOverlay#toggleProgressPanel). id dung
+         de ReaderChromeOverlay day ca khoi nay len cao hon thanh TTS mini player (neu dang hien),
+         xem ReaderChromeOverlay#syncBottomStackWithMiniPlayer(). -->
+    <LinearLayout
+        android:id="@+id/reader_chrome_bottom_stack"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="vertical">
+
+        <include layout="@layout/view_reader_progress_panel" />
+
+        <include layout="@layout/view_reader_footer_bar" />
+
+    </LinearLayout>
+
+</FrameLayout>

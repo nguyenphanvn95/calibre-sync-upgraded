@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Khung chinh cua man hinh Settings, thay the activity_settings.xml: cung mot thanh tab icon
+     ngang tren cung nhu sheet_reader_settings.xml, nhung noi dung ben duoi la mot
+     PreferenceFragmentCompat (danh sach cuon dai) thay vi mot ReaderSettingsPage wrap_content, nen
+     page_container o day dung match_parent thay vi wrap_content, xem SettingsSheet.kt. -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        android:paddingTop="8dp">
+
+        <LinearLayout
+            android:id="@+id/settings_sheet_tab_row"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp" />
+
+    </HorizontalScrollView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="?android:attr/listDivider" />
+
+    <FrameLayout
+        android:id="@+id/settings_sheet_page_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

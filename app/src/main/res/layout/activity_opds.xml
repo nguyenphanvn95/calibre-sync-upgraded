@@ -1,0 +1,69 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context=".CollectionActivity"
+    android:orientation="vertical">
+
+    <net.mrphan.calibre.widget.GradientLoadingBar
+        android:id="@+id/col_prog"
+        android:layout_width="fill_parent"
+        android:layout_height="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:visibility="invisible"/>
+
+    <!-- Banner hien khi root feed Content Server that bai (loi mang, KHONG phai 401 va KHONG
+         phai truong hop chua cau hinh server), xem OPDSBrowserFragment#onRootFeedConnectionFailed.
+         An mac dinh, chi hien trong che do "GDrive offline fallback". -->
+    <LinearLayout
+        android:id="@+id/opds_offline_banner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="?attr/colorSurface"
+        android:padding="16dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tvOfflineBannerMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="?android:attr/textColorSecondary"
+            tools:text="Khong ket noi duoc voi may chu Calibre. Truy cap cac thu vien online." />
+
+        <Button
+            android:id="@+id/btnOfflineRetry"
+            style="?attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="4dp"
+            android:text="@string/opds_offline_retry_button" />
+    </LinearLayout>
+
+    <!-- GridView instead of ListView: with numColumns(1) it renders exactly like the old
+         single-column list (see book_item.xml, still full-width rows); numColumns(2/3/4) is
+         how the Calibre Library tab's grid display modes are implemented (see
+         OPDSBrowserFragment#setViewColumns). GridView is an AbsListView just like ListView, so
+         setAdapter/setOnItemClickListener keep working unchanged; unlike ListView, GridView has
+         no addHeaderView/addFooterView, so the "more" footer is added as a plain sibling view
+         below it instead (see OPDSBrowserFragment#onCreateView), not attached to the adapter. -->
+    <GridView
+        android:id="@+id/col_list"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:numColumns="1"
+        android:stretchMode="columnWidth"
+        android:horizontalSpacing="4dp"
+        android:verticalSpacing="4dp"
+        android:gravity="center" >
+
+    </GridView>
+
+
+</LinearLayout>

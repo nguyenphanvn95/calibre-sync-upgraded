@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- progressDrawable cho ReaderProgressSeekBar: rãnh dạng viên nang (pill) bo tròn 2 đầu, thay
+     cho thanh mảnh mặc định của Android - xem prompt-nang-cap-thanh-tien-do-doc.md. Dùng đúng
+     2 id chuẩn @android:id/background và @android:id/progress để AppCompatSeekBar tự vẽ theo
+     % progress hiện tại, không cần code Kotlin tự tính toán clip. -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@android:id/background">
+        <shape android:shape="rectangle">
+            <solid android:color="#4A4A4E" />
+            <corners android:radius="16dp" />
+        </shape>
+    </item>
+    <item android:id="@android:id/progress">
+        <clip>
+            <shape android:shape="rectangle">
+                <solid android:color="#D6D6DA" />
+                <corners android:radius="16dp" />
+            </shape>
+        </clip>
+    </item>
+</layer-list>

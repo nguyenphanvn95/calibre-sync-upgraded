@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Nen the bo goc cho mot hang cai dat doc lap trong App Settings, dong bo phong cach voi
+     shape_reader_settings_group_bg.xml cua Reader Settings. Dung ?attr/colorButtonNormal de tu
+     doi mau theo Sang/Toi, khong hard-code mau xam. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <corners android:radius="14dp" />
+    <solid android:color="?attr/colorButtonNormal" />
+</shape>

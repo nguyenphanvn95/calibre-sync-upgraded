@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Compact TTS mini player: docked at the bottom of the screen while "Đọc cho nghe" is
+     playing/paused. Bound at runtime by net.mrphan.calibre.reader.tts.TtsMiniPlayerView - see
+     that class for behavior. Hidden by default (GONE); TtsMiniPlayerView#show()/hide() controls
+     visibility. -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tts_mini_player_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:layout_marginStart="18dp"
+    android:layout_marginEnd="18dp"
+    android:layout_marginBottom="10dp"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:background="@drawable/bg_tts_mini_player_pill"
+    android:elevation="8dp"
+    android:paddingStart="8dp"
+    android:paddingEnd="8dp"
+    android:paddingTop="6dp"
+    android:paddingBottom="6dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:visibility="gone">
+
+    <ImageView
+        android:id="@+id/tts_mini_player_icon"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:background="@drawable/bg_tts_mini_icon_badge"
+        android:padding="7dp"
+        android:src="@drawable/ic_reader_volume"
+        android:tint="#FFFFFF"
+        android:contentDescription="@null" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginStart="9dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tts_mini_player_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:singleLine="true"
+            android:ellipsize="end" />
+
+        <TextView
+            android:id="@+id/tts_mini_player_progress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#D8DCCF"
+            android:textSize="12sp"
+            android:singleLine="true"
+            android:ellipsize="end" />
+
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/tts_mini_player_prev"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="4dp"
+        android:src="@drawable/ic_tts_mini_prev"
+        android:tint="#FFFFFF"
+        android:contentDescription="@string/reader_tts_previous_sentence" />
+
+    <ImageButton
+        android:id="@+id/tts_mini_player_play_pause"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/bg_tts_mini_play_button"
+        android:padding="10dp"
+        android:src="@drawable/ic_tts_mini_pause"
+        android:tint="#555B43"
+        android:contentDescription="@string/reader_tts_play_pause" />
+
+    <ImageButton
+        android:id="@+id/tts_mini_player_next"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="5dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="4dp"
+        android:src="@drawable/ic_tts_mini_next"
+        android:tint="#FFFFFF"
+        android:contentDescription="@string/reader_tts_next_sentence" />
+
+    <ImageButton
+        android:id="@+id/tts_mini_player_close"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="1dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="4dp"
+        android:src="@drawable/ic_tts_mini_close"
+        android:tint="#D8DCCF"
+        android:contentDescription="@string/reader_chrome_close" />
+
+</LinearLayout>

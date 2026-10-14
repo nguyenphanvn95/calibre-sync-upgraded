@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Icon 40x40dp khong nhan chu, dung cho nhom trai/phai cua header. Khac
+     item_reader_chrome_action.xml (icon + nhan chu, dung cho ReaderMenuSheet cu). -->
+<ImageButton
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/reader_header_icon_button"
+    style="?attr/borderlessButtonStyle"
+    android:layout_width="40dp"
+    android:layout_height="40dp"
+    android:padding="9dp"
+    android:tint="#FFFFFF"
+    android:background="?attr/selectableItemBackgroundBorderless" />

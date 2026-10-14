@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Background for the floating "now playing" TTS panel (view_tts_floating_mini_player.xml),
+     rounded corners + dark semi-transparent fill so it reads as a floating card over whatever
+     screen it's overlaid on (Device Library, Calibre Library, book search, PDF reader), matching
+     the reference screenshot's floating audio bar. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <solid android:color="#F2555B43" />
+    <corners android:radius="30dp" />
+</shape>

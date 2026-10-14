@@ -1,0 +1,279 @@
+# data/it/rules.toml — Italian (it-IT) grapheme → phoneme rules.
+#
+# RFC-012. Italian orthography is highly regular for consonants/vowels
+# (espeak-ng handles IT with rules only), so the engine is rule-based with a
+# small exception lexicon for proparoxytones and open-vowel quality.
+#
+# Rule application (see crates/g2p-core/src/lang/it.rs — same scan as the
+# Spanish engine):
+#   - Linear left-to-right scan over the lowercased NFC word (apostrophes
+#     stripped first: "l'amico" scans as "lamico").
+#   - At each position the FIRST rule (in file order) whose `pattern`
+#     matches as a prefix AND whose `context` holds wins; the scan then
+#     advances by the matched pattern length.
+#   - Multi-char digraphs are listed first so longest-match wins.
+#
+# `context` values (closed enum `ItRuleContext`):
+#   any                 always applies (default; may be omitted)
+#   before_front_vowel  next char after the pattern is e/è/é/i/ì/í
+#   before_vowel        next char after the pattern is any vowel
+#   word_initial        match position is index 0 of the word
+#   before_voiced_cons  next char after the pattern is b/d/g/l/m/n/r/v
+#
+# Phonology decisions (documented in RFC-012):
+#   - Geminates are emitted as doubled tokens ("fatto" → f a t t o); the
+#     single-char rules apply twice naturally. Digraph geminates need the
+#     explicit cc/gg/zz rules below ("faccia" → f a t tʃ a).
+#   - Open/closed e/o: closed /e o/ by default; ò/è carry /ɔ ɛ/ (written
+#     accents are word-final in Italian). Common stem-internal open-vowel
+#     words live in lexicon.toml.
+#   - `z` is /dz/ word-initially (zero, zona), /ts/ elsewhere (grazie,
+#     stazione); `zz` defaults to /tts/ ("t ts" — pizza), with /ddz/ words
+#     (mezzo, azzurro) in the lexicon. The big `-izzare` verb class reads
+#     /tts/ under this default — accepted approximation (regional variation
+#     is wide; southern varieties say /tts/).
+#   - `s` is /z/ before voiced consonants (sbaglio → /zb/); plain /s/
+#     elsewhere, including between vowels (the North-Italian intervocalic
+#     /z/ is left to the lexicon: casa, cosa, musica, …).
+#   - Glide-forming i/u are emitted as plain vowel tokens; the stress pass
+#     groups them into diphthong nuclei (same approach as Spanish).
+
+[meta]
+dialect = "it"
+version = 1
+
+# ── Trigraphs / geminate digraphs (longest-match first) ──
+[[rule]]
+pattern = "cqu"
+phoneme = "k k w"       # acqua /ˈakkwa/
+
+[[rule]]
+pattern = "cci"
+context = "before_vowel"
+phoneme = "t tʃ"        # faccia /ˈfattʃa/ — the i is silent before a vowel
+
+[[rule]]
+pattern = "cc"
+context = "before_front_vowel"
+phoneme = "t tʃ"        # ricce, eccetera
+
+[[rule]]
+pattern = "ggi"
+context = "before_vowel"
+phoneme = "d dʒ"        # maggio /ˈmaddʒo/
+
+[[rule]]
+pattern = "gg"
+context = "before_front_vowel"
+phoneme = "d dʒ"        # oggetto, oggi (via gg+i)
+
+[[rule]]
+pattern = "gli"
+context = "before_vowel"
+phoneme = "ʎ"           # famiglia /faˈmiʎʎa/ — silent i before a vowel
+
+[[rule]]
+pattern = "gli"
+phoneme = "ʎ i"         # gli, egli, fogli
+
+[[rule]]
+pattern = "gn"
+phoneme = "ɲ"           # ogni, signore
+
+[[rule]]
+pattern = "sci"
+context = "before_vowel"
+phoneme = "ʃ"           # lascia /ˈlaʃʃa/ — silent i before a vowel
+
+[[rule]]
+pattern = "sc"
+context = "before_front_vowel"
+phoneme = "ʃ"           # scena, pesce ("sch" falls through to s + ch → s k)
+
+[[rule]]
+pattern = "ch"
+phoneme = "k"           # chiesa, che
+
+[[rule]]
+pattern = "gh"
+phoneme = "g"           # ghiaccio, spaghetti
+
+[[rule]]
+pattern = "ci"
+context = "before_vowel"
+phoneme = "tʃ"          # ciao /ˈtʃao/ — silent i before a vowel
+
+[[rule]]
+pattern = "gi"
+context = "before_vowel"
+phoneme = "dʒ"          # giorno /ˈdʒorno/ — silent i before a vowel
+
+[[rule]]
+pattern = "zz"
+phoneme = "t ts"        # pizza /ˈpittsa/; /ddz/ exceptions in lexicon
+
+[[rule]]
+pattern = "qu"
+phoneme = "k w"         # questo, quando
+
+# ── Single consonants (context-sensitive first) ──
+[[rule]]
+pattern = "c"
+context = "before_front_vowel"
+phoneme = "tʃ"          # cena, cinema
+
+[[rule]]
+pattern = "c"
+phoneme = "k"           # casa, come
+
+[[rule]]
+pattern = "g"
+context = "before_front_vowel"
+phoneme = "dʒ"          # gente, magico
+
+[[rule]]
+pattern = "g"
+phoneme = "g"           # gatto, lago
+
+[[rule]]
+pattern = "z"
+context = "word_initial"
+phoneme = "dz"          # zero, zona, zaino
+
+[[rule]]
+pattern = "z"
+phoneme = "ts"          # grazie, stazione, marzo
+
+[[rule]]
+pattern = "s"
+context = "before_voiced_cons"
+phoneme = "z"           # sbaglio, svelto, smettere
+
+[[rule]]
+pattern = "s"
+phoneme = "s"
+
+[[rule]]
+pattern = "h"
+phoneme = ""            # silent: ho, hanno, hotel
+
+[[rule]]
+pattern = "q"
+phoneme = "k"           # rare without u (loans)
+
+[[rule]]
+pattern = "j"
+phoneme = "j"           # loans / archaic: Jacopo, juventus
+
+[[rule]]
+pattern = "k"
+phoneme = "k"           # loans: kiwi
+
+[[rule]]
+pattern = "w"
+phoneme = "w"           # loans: würstel → w-
+
+[[rule]]
+pattern = "x"
+phoneme = "k s"         # loans: taxi, xilofono
+
+[[rule]]
+pattern = "y"
+phoneme = "j"           # loans: yoga
+
+[[rule]]
+pattern = "p"
+phoneme = "p"
+
+[[rule]]
+pattern = "b"
+phoneme = "b"
+
+[[rule]]
+pattern = "t"
+phoneme = "t"
+
+[[rule]]
+pattern = "d"
+phoneme = "d"
+
+[[rule]]
+pattern = "f"
+phoneme = "f"
+
+[[rule]]
+pattern = "v"
+phoneme = "v"
+
+[[rule]]
+pattern = "l"
+phoneme = "l"
+
+[[rule]]
+pattern = "m"
+phoneme = "m"
+
+[[rule]]
+pattern = "n"
+phoneme = "n"
+
+[[rule]]
+pattern = "r"
+phoneme = "r"           # trill/tap — single token, same as ES rr / VI r
+
+# ── Vowels (accented forms carry stress; see pattern_is_accented_it) ──
+[[rule]]
+pattern = "a"
+phoneme = "a"
+
+[[rule]]
+pattern = "à"
+phoneme = "a"           # città — accent forces final stress
+
+[[rule]]
+pattern = "e"
+phoneme = "e"           # closed /e/ default; open /ɛ/ exceptions in lexicon
+
+[[rule]]
+pattern = "è"
+phoneme = "ɛ"           # è, caffè — grave accent marks open /ɛ/
+
+[[rule]]
+pattern = "é"
+phoneme = "e"           # perché — acute accent marks closed /e/
+
+[[rule]]
+pattern = "i"
+phoneme = "i"
+
+[[rule]]
+pattern = "ì"
+phoneme = "i"           # lì, così
+
+[[rule]]
+pattern = "í"
+phoneme = "i"           # nonstandard variant spelling of ì
+
+[[rule]]
+pattern = "o"
+phoneme = "o"           # closed /o/ default; open /ɔ/ exceptions in lexicon
+
+[[rule]]
+pattern = "ò"
+phoneme = "ɔ"           # però, ciò — grave accent marks open /ɔ/
+
+[[rule]]
+pattern = "ó"
+phoneme = "o"           # rare; closed /o/
+
+[[rule]]
+pattern = "u"
+phoneme = "u"
+
+[[rule]]
+pattern = "ù"
+phoneme = "u"           # più, virtù
+
+[[rule]]
+pattern = "ú"
+phoneme = "u"           # nonstandard variant spelling of ù

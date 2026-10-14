@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Grid cell style "Simple 2" cho Calibre Library/OPDS (BookCursorAdapter, mGridMode=true,
+     mGridStyle=SIMPLE2). Bia sach phu kin o, tua sach tren lop phu gradient, badge dinh dang
+     goc tren-trai. -->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="2dp">
+
+    <ImageView
+        android:id="@+id/bi_thumbnail"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/dumbbook"
+        app:layout_constraintDimensionRatio="2:3"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/bi_format_badge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/bg_grid_format_badge"
+        android:textColor="#FFFFFF"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        tools:text="EPUB"
+        app:layout_constraintTop_toTopOf="@id/bi_thumbnail"
+        app:layout_constraintStart_toStartOf="@id/bi_thumbnail" />
+
+    <View
+        android:id="@+id/bi_simple2_scrim"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:background="@drawable/scrim_grid_simple2_bottom"
+        app:layout_constraintBottom_toBottomOf="@id/bi_thumbnail"
+        app:layout_constraintStart_toStartOf="@id/bi_thumbnail"
+        app:layout_constraintEnd_toEndOf="@id/bi_thumbnail" />
+
+    <TextView
+        android:id="@+id/bi_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginEnd="6dp"
+        android:layout_marginBottom="4dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="Title"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/bi_progress"
+        app:layout_constraintStart_toStartOf="@id/bi_thumbnail"
+        app:layout_constraintEnd_toEndOf="@id/bi_thumbnail" />
+
+    <TextView
+        android:id="@+id/bi_progress"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginEnd="6dp"
+        android:layout_marginBottom="4dp"
+        android:textColor="#D9FFFFFF"
+        android:textSize="10sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/bi_thumbnail"
+        app:layout_constraintStart_toStartOf="@id/bi_thumbnail"
+        app:layout_constraintEnd_toEndOf="@id/bi_thumbnail"
+        tools:text="42%" />
+
+    <TextView
+        android:id="@+id/bi_uuid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/bi_thumbnail"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

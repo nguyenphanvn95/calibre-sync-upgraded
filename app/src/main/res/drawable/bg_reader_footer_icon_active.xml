@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Vong tron mo phia sau 1 icon footer dang "hoat dong" - xem
+     ReaderChromeOverlay#applyFooterIconTint(). Ghep voi setColorFilter(reader_accent_blue) tren
+     chinh icon do de ra dung hieu ung "to xanh khi nut dang hoat" kieu Readest. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <solid android:color="@color/reader_accent_blue_muted" />
+</shape>

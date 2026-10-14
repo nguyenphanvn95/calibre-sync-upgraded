@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Tieu de nhom, nam ngoai the, phong theo item_reader_settings_group_header.xml cua Reader
+     Settings de dong bo phong cach giua 2 man hinh cai dat. -->
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/title"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="20dp"
+    android:layout_marginEnd="20dp"
+    android:layout_marginTop="18dp"
+    android:layout_marginBottom="4dp"
+    android:textAllCaps="true"
+    android:textColor="?android:attr/textColorSecondary"
+    android:textSize="12sp"
+    android:textStyle="bold" />

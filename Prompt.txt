@@ -1,0 +1,13 @@
+1. Nâng cấp theme và font chữ:
+Đây là mã nguồn ứng dụng calibre sync, hãy nghiên cứu phần chọn theme, và font chữ của trình reader của ứng dụng
+Clone các theme và font chữ chưa có từ epub reader offline của extension Waka toolkit (ở thư mục D:\My Projects\Waka Tools)
+Bổ sung vào trình reader của calibre-sync
+Lưu ý: 
+- Chế độ dark mode của reader calibre sync đang chưa hoạt động (chuyển nền tối, chữ sáng màu)
+- Nâng verson của ứng dụng, đồng thời cập nhật vào What's new cho đến nâng cấp theme và fonts.
+
+
+
+2. Nâng cấp hiệu ứng cuộn trang khi chuyển trang ở chế độ lật của reader calibre sync
+Kiểm tra và hoàn thiện hiệu ứng lật giúp tôi
+Lưu ý: nâng verson lên 1 điểm để đánh dấu nâng cấp này.

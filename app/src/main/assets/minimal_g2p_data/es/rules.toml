@@ -1,0 +1,213 @@
+# data/es/rules.toml — Spanish (es-MX) grapheme → phoneme rules.
+#
+# RFC-003. Mexican Spanish: seseo (c/z/s → /s/, no /θ/) and yeísmo
+# (ll/y → /ʝ/, no /ʎ/). Allophones [β ð ɣ] are NOT encoded — phonemic
+# /b d g/ only; the VITS acoustic model learns the spirantized realization.
+#
+# Rule application (see crates/g2p-core/src/lang/es.rs):
+#   - Linear left-to-right scan over the lowercased NFC word.
+#   - At each position the FIRST rule (in file order) whose `pattern`
+#     matches as a prefix AND whose `context` holds wins; the scan then
+#     advances by the matched pattern length.
+#   - Multi-char digraphs are listed first so longest-match wins.
+#
+# `context` values (closed enum `RuleContext`):
+#   any                  always applies (default; may be omitted)
+#   before_front_vowel   next char after the pattern is e/é/i/í
+#   after_vowel          previous char is a vowel (a e i o u á é í ó ú ü)
+#   word_initial         match position is index 0
+#   after_nls            previous char is n, l, or s
+#
+# An empty `phoneme = ""` emits nothing (silent letter).
+
+[meta]
+dialect = "mx"
+version = 1
+
+# ── Multi-char digraphs (longest-match: must precede single-char rules) ──
+[[rule]]
+pattern = "ch"
+phoneme = "tʃ"
+
+[[rule]]
+pattern = "ll"
+phoneme = "ʝ"
+
+[[rule]]
+pattern = "rr"
+phoneme = "r"
+
+[[rule]]
+pattern = "qu"
+context = "before_front_vowel"
+phoneme = "k"           # qu+e/i → /k/, silent u
+
+[[rule]]
+pattern = "gü"
+context = "before_front_vowel"
+phoneme = "gw"          # diaeresis: gü+e/i → /gw/ (must precede "gu")
+
+[[rule]]
+pattern = "gu"
+context = "before_front_vowel"
+phoneme = "g"           # gu+e/i → /g/, silent u
+
+# ── Single consonants with front-vowel sensitivity ──
+[[rule]]
+pattern = "c"
+context = "before_front_vowel"
+phoneme = "s"           # seseo: c+e/i → /s/
+
+[[rule]]
+pattern = "c"
+phoneme = "k"           # default c → /k/
+
+[[rule]]
+pattern = "z"
+phoneme = "s"           # seseo: z → /s/ everywhere
+
+[[rule]]
+pattern = "g"
+context = "before_front_vowel"
+phoneme = "x"           # g+e/i → /x/
+
+[[rule]]
+pattern = "g"
+phoneme = "g"           # default g → /g/
+
+[[rule]]
+pattern = "j"
+phoneme = "x"           # j → voiceless velar fricative /x/
+
+[[rule]]
+pattern = "h"
+phoneme = ""            # silent (the 'ch' digraph above already consumed ch)
+
+[[rule]]
+pattern = "ñ"
+phoneme = "ɲ"
+
+[[rule]]
+pattern = "v"
+phoneme = "b"           # v and b share /b/
+
+# y: post-vocalic glide /j/ (rey), otherwise onset /ʝ/ (yo)
+[[rule]]
+pattern = "y"
+context = "after_vowel"
+phoneme = "j"
+
+[[rule]]
+pattern = "y"
+phoneme = "ʝ"
+
+# r: trill /r/ word-initially or after n/l/s; otherwise tap /ɾ/
+[[rule]]
+pattern = "r"
+context = "word_initial"
+phoneme = "r"
+
+[[rule]]
+pattern = "r"
+context = "after_nls"
+phoneme = "r"
+
+[[rule]]
+pattern = "r"
+phoneme = "ɾ"
+
+# ── Remaining plain consonants ──
+[[rule]]
+pattern = "p"
+phoneme = "p"
+
+[[rule]]
+pattern = "b"
+phoneme = "b"
+
+[[rule]]
+pattern = "t"
+phoneme = "t"
+
+[[rule]]
+pattern = "d"
+phoneme = "d"
+
+[[rule]]
+pattern = "k"
+phoneme = "k"           # naturalized loanwords: kilómetro, kayak
+
+[[rule]]
+pattern = "w"
+phoneme = "w"           # naturalized loanwords: wifi, web, kiwi
+
+[[rule]]
+pattern = "f"
+phoneme = "f"
+
+[[rule]]
+pattern = "s"
+phoneme = "s"
+
+[[rule]]
+pattern = "m"
+phoneme = "m"
+
+[[rule]]
+pattern = "n"
+phoneme = "n"
+
+[[rule]]
+pattern = "l"
+phoneme = "l"
+
+[[rule]]
+pattern = "x"
+phoneme = "k s"         # léxico, taxi: x → /ks/ (space-separated multi-token emit).
+                        # Irregular es-MX cases (México → /x/) go in the lexicon.
+
+# ── Vowels. Accented variants emit the same phoneme but flag the syllable
+#    as carrying the orthographic stress (handled in es.rs). ──
+[[rule]]
+pattern = "a"
+phoneme = "a"
+
+[[rule]]
+pattern = "e"
+phoneme = "e"
+
+[[rule]]
+pattern = "i"
+phoneme = "i"
+
+[[rule]]
+pattern = "o"
+phoneme = "o"
+
+[[rule]]
+pattern = "u"
+phoneme = "u"
+
+[[rule]]
+pattern = "á"
+phoneme = "a"
+
+[[rule]]
+pattern = "é"
+phoneme = "e"
+
+[[rule]]
+pattern = "í"
+phoneme = "i"
+
+[[rule]]
+pattern = "ó"
+phoneme = "o"
+
+[[rule]]
+pattern = "ú"
+phoneme = "u"
+
+[[rule]]
+pattern = "ü"
+phoneme = "u"           # standalone ü (the gü+e/i digraph is handled above)

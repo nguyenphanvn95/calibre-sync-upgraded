@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Bieu tuong thu muc (folder), dai dien tab "Luu tru" trong thanh tab ngang cua
+     SettingsActivity (xem SettingsTab.kt), khoi nay gom Book Folder (pref_root_dir_path) va
+     danh sach dinh dang file duoc quet (pref_filetypes). -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="M4,5 L9,5 L11,7.3 L20,7.3 C20.55,7.3 21,7.75 21,8.3 L21,18 C21,18.55 20.55,19 20,19 L4,19 C3.45,19 3,18.55 3,18 L3,6 C3,5.45 3.45,5 4,5 Z" />
+</vector>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- KHONG dung <merge> lam root: sheet_book_sync_info.xml gan android:id rieng
+     cho moi lan <include> (sync_info_field_fingerprint/title/author/...) de
+     BookSyncInfoSheet.bindField() tim dung hang bang findViewById(containerId).
+     <merge> khong co root view that nen id tren the <include> se bi bo qua,
+     gay NPE + trung id giua 5 hang — xem BookSyncInfoSheet.kt crash NPE. -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp"
+    android:paddingTop="12dp">
+
+    <TextView
+        android:id="@+id/sync_info_field_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textAllCaps="true"
+        android:textColor="?android:attr/textColorSecondary" />
+
+    <TextView
+        android:id="@+id/sync_info_field_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:padding="12dp"
+        android:background="@drawable/shape_sync_info_field_bg"
+        android:textSize="14sp"
+        android:fontFamily="monospace" />
+</LinearLayout>

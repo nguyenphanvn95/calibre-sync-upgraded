@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Group rieng chi de HeaderOverflowMenu (popup 3 cham cua ConnectionFragment) tu chen 1
+         vach ngang giua nhom "ket noi" o tren va nhom "khac"/canh bao o duoi, xem
+         ConnectionFragment#onHeaderOverflowClick(). Khong anh huong logic onOptionsItemSelected. -->
+    <group android:id="@+id/group_overflow_connection">
+        <item
+                android:id="@+id/menu_rediscover"
+                android:icon="@drawable/ic_menu_rediscover"
+                android:title="@string/menu_rediscover"></item>
+        <item
+                android:id="@+id/menu_manual_connection"
+                android:icon="@drawable/ic_menu_manual_connection"
+                android:title="@string/menu_manual_connection"
+                android:showAsAction="ifRoom"></item>
+    </group>
+    <group android:id="@+id/group_overflow_connection_danger">
+        <item
+                android:id="@+id/menu_disconnect"
+                android:icon="@drawable/ic_menu_disconnect"
+                android:title="@string/menu_disconnect"></item>
+    </group>
+
+</menu>

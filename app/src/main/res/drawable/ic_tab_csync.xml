@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Icon "Calibre Library" cho nav_calibre_library trong nav_drawer_menu.xml — thay the PNG
+     ic_tab_csync cu (drawable-ldpi/mdpi/hdpi/xhdpi). PNG cu co nen dac (khong trong suot) nen khi
+     NavigationView ap itemIconTint mac dinh, ca khoi vuong bi to dac thanh 1 mau, mat het chi
+     tiet icon ben trong -> nhin giong 1 o vuong den/trang khong ro hinh (dung nhu mo ta cua
+     nguoi dung). Doi sang vector "sach mo" (open book, kieu Material Design "menu_book", nen
+     hoan toan trong suot) de tuong trung cho thu vien sach Calibre content server, dong thoi
+     phan biet ro voi Device Library (bieu tuong thu muc), Calibre wireless device (mui ten len
+     xuong) va Calibre Libraries on GDrive (may + sach). NavigationView tu tint lai theo
+     itemIconTint mac dinh cua theme nen mau fillColor/tint o day khong quan trong, giu quy uoc
+     giong ic_action_info.xml / ic_menu_exit.xml da co san. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24"
+    android:tint="#FFFFFF">
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="M21,5c-1.11,-0.35 -2.33,-0.5 -3.5,-0.5c-1.95,0 -4.05,0.4 -5.5,1.5c-1.45,-1.1 -3.55,-1.5 -5.5,-1.5S2.45,4.9 1,6v14.65c0,0.25 0.25,0.5 0.5,0.5c0.1,0 0.15,-0.05 0.25,-0.05C3.1,20.45 5.05,20 6.5,20c1.95,0 4.05,0.4 5.5,1.5c1.35,-0.85 3.8,-1.5 5.5,-1.5c1.65,0 3.35,0.3 4.75,1.05c0.1,0.05 0.15,0.05 0.25,0.05c0.25,0 0.5,-0.25 0.5,-0.5V6C22.4,5.55 21.75,5.25 21,5z M21,18.5c-1.1,-0.35 -2.3,-0.5 -3.5,-0.5c-1.7,0 -4.15,0.65 -5.5,1.5V8c1.35,-0.85 3.8,-1.5 5.5,-1.5c1.2,0 2.4,0.15 3.5,0.5V18.5z" />
+</vector>

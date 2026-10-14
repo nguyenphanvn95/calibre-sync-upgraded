@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Icon lich cho o "Hom nay" (anh mau anh 1/4: lich outline mau xanh duong). Rieng cho man hinh
+     Tien trinh nen mau co dinh (khong theo Sang/Toi), giong quy uoc color_progress_accent. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:fillColor="#4C8DFF"
+        android:pathData="M17,3h-1V1h-2v2H10V1L8,1v2H7C5.34,3 4.01,4.34 4.01,6L4,20c0,1.66 1.34,3 3,3h10c1.66,0
+            3,-1.34 3,-3V6C20,4.34 18.66,3 17,3zM17,20L7,20c-0.55,0 -1,-0.45 -1,-1V9h12v10C18,19.55 17.55,20 17,20z" />
+</vector>

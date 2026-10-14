@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Nen pill bo tron cho cac badge so sanh "so voi tuan truoc" tren man hinh "Tien trinh"
+     (badge_trend/badge_reading_speed trong activity_progress.xml).
+     Mau chu (xanh/do/mac dinh) duoc ProgressActivity dat rieng theo tung truong hop tang/giam/
+     khong doi - nen chi can 1 mau trung tinh duy nhat, giong bg_stat_card nhung bo tron nhieu
+     hon (pill) va dam hon 1 chut de tach voi nen the ben ngoai. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <corners android:radius="20dp" />
+    <solid android:color="?attr/colorButtonNormal" />
+</shape>

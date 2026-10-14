@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Root theme is Theme.Calibre.BookDetail (NoActionBar, see values/styles.xml): this screen
+    draws its own transparent overlay back button (bd_btn_back below) directly on top of the
+    full-bleed cover instead of using the classic ActionBar, whose opaque title bar used to sit
+    on top of the cover and block part of it. bd_root/bd_scroll ids are used by
+    BookDetailActivity#applyWindowInsets to pad the back button below the status bar and the
+    scrollable content above the nav bar, the same edge-to-edge pattern already used by
+    BookSearchActivity/SettingsActivity on targetSdk 35.
+-->
+<!-- FrameLayout them vao de co the noi FAB "Gui toi E-Reader" de len goc duoi-phai man hinh
+     (xem anh mau), thay vi 1 Button rong het chieu ngang nam cuoi noi dung cuon nhu truoc.
+     ban than bd_scroll/bd_root ben trong khong doi gi ca. -->
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<ScrollView
+    android:id="@+id/bd_scroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="false">
+
+    <LinearLayout
+        android:id="@+id/bd_root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Nested ConstraintLayout just for the cover, so it can keep a fixed 2:3 aspect ratio
+             (same technique as book_item_grid.xml) while everything else below stays a plain
+             vertical LinearLayout. No padding here: the cover deliberately extends edge to
+             edge, behind the status bar, with only the back button floating on top of it. -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/bd_cover"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/dumbbook"
+                android:contentDescription="@string/bookdetail_cover_desc"
+                app:layout_constraintDimensionRatio="2:3"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <!-- Transparent overlay back button: no bar, no title text, just the arrow over
+                 the cover. Top margin is set at runtime to clear the status bar (see
+                 BookDetailActivity#applyWindowInsets); the small circular scrim behind the
+                 arrow itself (bg_book_detail_back_scrim) is only there so it stays legible on
+                 light covers, everywhere else the cover shows straight through. -->
+            <ImageButton
+                android:id="@+id/bd_btn_back"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_margin="8dp"
+                android:background="@drawable/bg_book_detail_back_scrim"
+                android:padding="10dp"
+                android:src="@drawable/ic_action_back"
+                android:contentDescription="@string/bookdetail_action_back"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Padding that used to live on the root LinearLayout now lives here, below the
+             edge-to-edge cover block, so title/author/cards/button keep their original spacing. -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+        <TextView
+            android:id="@+id/bd_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:textStyle="bold"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/bd_author"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:alpha="0.7" />
+
+        <!-- Action row: share, view cover full screen, listen via TTS, read, download. See
+             BookDetailActivity#wireActionButtons for the mapping notes: several of these are
+             local-only stand-ins for Calibre-Web server actions the Content Server's read-only
+             OPDS feed simply has no API for. bd_btn_tags (a "Local tags" stub that only showed a
+             "not implemented yet" toast) was replaced by bd_btn_share, matching
+             DeviceBookDetailActivity's dbd_btn_share. -->
+        <LinearLayout
+            android:id="@+id/bd_actions_row"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="12dp">
+
+            <ImageButton
+                android:id="@+id/bd_btn_share"
+                style="@style/BookDetailActionButton"
+                android:src="@drawable/ic_menu_share"
+                android:contentDescription="@string/action_share" />
+
+            <ImageButton
+                android:id="@+id/bd_btn_view_cover"
+                style="@style/BookDetailActionButton"
+                android:src="@drawable/ic_action_cover"
+                android:contentDescription="@string/bookdetail_action_view_cover" />
+
+            <ImageButton
+                android:id="@+id/bd_btn_toggle_read"
+                style="@style/BookDetailActionButton"
+                android:src="@drawable/ic_action_headphones"
+                android:contentDescription="@string/bookdetail_action_read_aloud" />
+
+            <ImageButton
+                android:id="@+id/bd_btn_read"
+                style="@style/BookDetailActionButton"
+                android:src="@drawable/ic_action_open_book"
+                android:contentDescription="@string/bookdetail_action_read" />
+
+            <ImageButton
+                android:id="@+id/bd_btn_download"
+                style="@style/BookDetailActionButton"
+                android:src="@drawable/ic_action_download"
+                android:contentDescription="@string/bookdetail_action_download" />
+
+        </LinearLayout>
+
+        <!-- Publication info card. Rows keep their fixed id (findViewById elsewhere depends on
+             them), each row now gets a small leading icon (drawableStart) via BookDetailInfoRow,
+             matching calibre-web-companion's per-row icon style. Tags moved from a plain text
+             row (bd_row_tags, now permanently hidden) to a runtime ChipGroup inside
+             bd_tags_container, see BookDetailActivity#renderPublicationInfo. The whole card
+             hides itself if every row inside ends up empty, see bd_publication_card. -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/bd_publication_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="1dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:padding="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/BookDetailSectionTitle"
+                    android:drawableStart="@drawable/ic_action_info"
+                    android:drawablePadding="8dp"
+                    android:drawableTint="?attr/colorControlNormal"
+                    android:text="@string/bookdetail_section_publication" />
+
+                <TextView
+                    android:id="@+id/bd_row_updated"
+                    style="@style/BookDetailInfoRow"
+                    android:drawableStart="@drawable/ic_sort_calendar"
+                    android:drawablePadding="8dp"
+                    android:drawableTint="?attr/colorControlNormal" />
+
+                <TextView
+                    android:id="@+id/bd_row_published"
+                    style="@style/BookDetailInfoRow"
+                    android:drawableStart="@drawable/ic_sort_calendar"
+                    android:drawablePadding="8dp"
+                    android:drawableTint="?attr/colorControlNormal" />
+
+                <TextView
+                    android:id="@+id/bd_row_language"
+                    style="@style/BookDetailInfoRow"
+                    android:drawableStart="@drawable/ic_selection_translate"
+                    android:drawablePadding="8dp"
+                    android:drawableTint="?attr/colorControlNormal" />
+
+                <TextView
+                    android:id="@+id/bd_row_publisher"
+                    style="@style/BookDetailInfoRow"
+                    android:drawableStart="@drawable/ic_stat_publisher"
+                    android:drawablePadding="8dp"
+                    android:drawableTint="?attr/colorControlNormal" />
+
+                <TextView
+                    android:id="@+id/bd_row_series"
+                    style="@style/BookDetailInfoRow"
+                    android:drawableStart="@drawable/ic_stat_series"
+                    android:drawablePadding="8dp"
+                    android:drawableTint="?attr/colorControlNormal" />
+
+                <TextView
+                    android:id="@+id/bd_row_rating"
+                    style="@style/BookDetailInfoRow"
+                    android:drawableStart="@drawable/ic_action_star"
+                    android:drawablePadding="8dp"
+                    android:drawableTint="?attr/colorControlNormal" />
+
+                <!-- Hang text cu, gio luon GONE (thay boi bd_tags_container), giu lai id vi
+                     renderPublicationInfo() van tham chieu de dam bao an. -->
+                <TextView
+                    android:id="@+id/bd_row_tags"
+                    style="@style/BookDetailInfoRow"
+                    android:visibility="gone" />
+
+                <LinearLayout
+                    android:id="@+id/bd_tags_container"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/bd_row_identifiers"
+                    style="@style/BookDetailInfoRow"
+                    android:drawableStart="@drawable/ic_action_info"
+                    android:drawablePadding="8dp"
+                    android:drawableTint="?attr/colorControlNormal" />
+
+                <TextView
+                    android:id="@+id/bd_row_summary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- File info card: one row per format is added at runtime, see
+             BookDetailActivity#renderFileInfo(). -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="1dp">
+
+            <LinearLayout
+                android:id="@+id/bd_file_info_container"
+                android:orientation="vertical"
+                android:padding="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/BookDetailSectionTitle"
+                    android:drawableStart="@drawable/ic_stat_book"
+                    android:drawablePadding="8dp"
+                    android:drawableTint="?attr/colorControlNormal"
+                    android:text="@string/bookdetail_section_file_info" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Chua dung Button o day nua, xem FAB bd_btn_send_to_ereader ben ngoai ScrollView,
+             de "noi" o goc duoi-phai thay vi nam trong dong chay noi dung cuon. Khoang trong
+             80dp ben duoi chi de card cuoi cung khong bi FAB de hoan toan len khi cuon toi day. -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="80dp" />
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
+
+    <!-- FAB "Gui toi E-Reader": noi co dinh o goc duoi-phai man hinh, de len tren noi dung cuon,
+         giong nut pill xanh trong anh mau. android:layout_gravity="bottom|end" la thu dat vi tri
+         FAB trong FrameLayout nay (khong lien quan gi toi CoordinatorLayout vi day chi la
+         FrameLayout don gian, khong can hanh vi tu-an khi cuon). -->
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/bd_btn_send_to_ereader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="20dp"
+        android:text="@string/bookdetail_send_to_ereader"
+        android:textColor="@android:color/white"
+        app:icon="@drawable/ic_action_send"
+        app:iconTint="@android:color/white"
+        app:backgroundTint="@color/color_send_to_ereader"
+        app:rippleColor="@color/color_send_to_ereader_ripple" />
+
+</FrameLayout>

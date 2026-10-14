@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/epub_reader_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/epub_reader_background_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@null"
+        android:scaleType="centerCrop"
+        android:visibility="gone" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/epub_navigator_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- Old lone reader_close_button ImageButton removed in favour of the shared chrome overlay's
+         "Đóng"/"Quit" controls (see net.mrphan.calibre.reader.chrome.ReaderChromeOverlay) - see
+         spec section 5: "không được để 2 cơ chế đóng khác nhau tồn tại song song". -->
+    <include layout="@layout/view_reader_chrome_overlay" />
+
+    <!-- TTS mini player (net.mrphan.calibre.reader.tts.TtsMiniPlayerView). Placed AFTER
+         view_reader_chrome_overlay so it always draws on top of the toolbar overlay, matching the
+         "Đọc cho nghe" UX spec: the mini player must stay visible even while the chrome overlay
+         menu is open, not be hidden behind it. -->
+    <include layout="@layout/view_tts_mini_player" />
+
+    <!-- Reader background music mini player (separate from TTS background music). -->
+    <include layout="@layout/view_reader_background_music_player" />
+
+    <!-- Hiện khi đang convert MOBI/AZW/AZW3/TXT sang EPUB tạm trước khi Readium mở được, xem
+         EpubReaderActivity#setUpNavigatorFragmentFactory và reader/convert/EbookFormatConverter. -->
+    <ProgressBar
+        android:id="@+id/epub_reader_converting_progress"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+    <!-- Hiện mặc định ngay từ onCreate() cho đến khi navigatorFragment được gắn xong và trang
+         đầu tiên render xong (hoặc mở sách lỗi, lúc đó Activity tự đóng), thay vì để người
+         dùng thấy màn hình trắng/đứng hình trong lúc đang mở publication. Xem
+         EpubReaderActivity#setUpNavigatorFragmentFactory. Đặt SAU FragmentContainerView để luôn
+         che được nội dung sách chưa sẵn sàng. -->
+    <ProgressBar
+        android:id="@+id/epub_reader_loading_progress"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="visible" />
+
+    <!-- Panel Mục lục (Chương/Đánh dấu trang/Ảnh) - xem
+         prompt-nang-cap-muc-luc-panel-truot.md. Đặt SAU cả TTS mini player: khi panel mở, nó là
+         một "trang phụ" toàn màn hình, che luôn mini player, giống cách ReaderMenuSheet che mọi
+         overlay khác khi mở. -->
+    <include layout="@layout/view_reader_toc_panel" />
+
+    <include layout="@layout/view_reader_background_music_panel" />
+
+</FrameLayout>

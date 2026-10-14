@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Floating "now playing" TTS panel, shown OUTSIDE the reader (Device Library, Calibre
+     Library browsing, book search, PDF reader) while a "Đọc cho nghe" session from
+     TtsPlaybackService is still active in the background, mirroring Readest's floating audio bar
+     (see the reference screenshot). Inflated and added on top of an Activity's content view at
+     RUNTIME by net.mrphan.calibre.reader.tts.GlobalTtsFloatingPanel, unlike
+     view_tts_mini_player.xml (the in-reader docked bar), this is NOT statically <include>d in
+     any Activity's layout XML, so it can float above any screen without editing every layout.
+
+     Root tag's layout_width/height/gravity/margin attrs become real FrameLayout.LayoutParams
+     when inflated against android.R.id.content (see GlobalTtsFloatingPanel#ensurePanelInflated),
+     which is what makes this genuinely "float" with margins on all sides instead of docking
+     edge-to-edge like the in-reader bar.
+
+     Reuses the SAME child ids as view_tts_mini_player.xml (tts_mini_player_root/icon/title/
+     progress/prev/play_pause/next/close) so net.mrphan.calibre.reader.tts.TtsMiniPlayerView binds
+     to this layout completely unmodified. Previous is kept hidden for compactness, while next is
+     shown beside the play button to match the Waka-style pill player. -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tts_mini_player_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:layout_marginStart="18dp"
+    android:layout_marginEnd="18dp"
+    android:layout_marginBottom="14dp"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:background="@drawable/bg_tts_floating_panel"
+    android:elevation="10dp"
+    android:paddingStart="7dp"
+    android:paddingEnd="10dp"
+    android:paddingTop="6dp"
+    android:paddingBottom="6dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:visibility="gone">
+
+    <FrameLayout
+        android:layout_width="48dp"
+        android:layout_height="48dp">
+
+        <ImageView
+            android:id="@+id/tts_mini_player_cover"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:scaleType="centerCrop"
+            android:background="@drawable/bg_tts_floating_cover_placeholder"
+            android:contentDescription="@null" />
+
+        <!-- Small read-aloud badge shown over the cover, kept present (not removed) so
+             TtsMiniPlayerView's non-null findViewById(tts_mini_player_icon) doesn't crash; visible
+             here (unlike prev/next) since it doubles as a helpful "this is TTS audio" glyph over
+             the cover thumbnail, similar to a mini play-source badge. -->
+        <ImageView
+            android:id="@+id/tts_mini_player_icon"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="2dp"
+            android:src="@drawable/ic_reader_read_aloud"
+            android:tint="#FFFFFF"
+            android:contentDescription="@null" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginStart="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tts_mini_player_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:singleLine="true"
+            android:ellipsize="end" />
+
+        <TextView
+            android:id="@+id/tts_mini_player_progress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#D8DCCF"
+            android:textSize="12sp"
+            android:singleLine="true"
+            android:ellipsize="end" />
+
+    </LinearLayout>
+
+    <!-- Kept for TtsMiniPlayerView compatibility only, see file header. Zero size + GONE means
+         no space is allocated and nothing is drawn. -->
+    <ImageButton
+        android:id="@+id/tts_mini_player_prev"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        android:contentDescription="@null" />
+
+    <ImageButton
+        android:id="@+id/tts_mini_player_play_pause"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="7dp"
+        android:background="@drawable/bg_tts_mini_play_button"
+        android:padding="10dp"
+        android:src="@drawable/ic_tts_mini_pause"
+        android:tint="#555B43"
+        android:contentDescription="@string/reader_tts_play_pause" />
+
+    <ImageButton
+        android:id="@+id/tts_mini_player_next"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="7dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="5dp"
+        android:src="@drawable/ic_tts_mini_next"
+        android:tint="#FFFFFF"
+        android:contentDescription="@string/reader_tts_next_sentence" />
+
+    <ImageButton
+        android:id="@+id/tts_mini_player_close"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="1dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="4dp"
+        android:src="@drawable/ic_tts_mini_close"
+        android:tint="#D8DCCF"
+        android:contentDescription="@string/reader_chrome_close" />
+
+</LinearLayout>

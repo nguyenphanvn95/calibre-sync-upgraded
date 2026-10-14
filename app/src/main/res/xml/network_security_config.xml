@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Calibre's wireless "Smart Device" socket and, by default, its Content Server both speak
+     plain HTTP/TCP on the LAN (no TLS unless the user manually configures the ssl-certfile
+     option on the Calibre side). Android 9+ blocks cleartext traffic by default for apps
+     targeting API 28+, so we explicitly allow it. This is a LAN-only app by design (see
+     README); if the user points OPDS at an https:// Content Server, that already works
+     without this override since it's only cleartext (http://) that Android blocks. -->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true" />
+</network-security-config>

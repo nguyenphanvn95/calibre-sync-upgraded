@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Switched from GridView to RecyclerView so ItemTouchHelper (swipe-to-reveal Share/Delete,
+     see SwipeRevealCallback) can attach — ItemTouchHelper only works on RecyclerView, not on
+     GridView/AbsListView. BookRecyclerAdapter switches between LinearLayoutManager (list /
+     simple list / carousel-but-horizontal) and GridLayoutManager (grid 2/3/4) depending on the
+     current view mode; see CollectionFragment#buildLayoutManagerFor(). -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context=".CollectionActivity" >
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/col_list"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_alignParentLeft="true"
+                        android:clipToPadding="false"
+                        android:clipChildren="false"
+                        android:paddingTop="5dp"
+                        tools:listitem="@layout/item_book_swipe" >
+                    </androidx.recyclerview.widget.RecyclerView>
+
+    <!-- Carousel-only chrome (ViewMode.CAROUSEL): the centered book's title/author plus a dot
+         strip, shown directly below the centered cover so the whole "cover + title + author +
+         dots" block reads as one centered group (matching the reference "TUYỂN TẬP SÁCH"
+         screenshot), plus two faint prev/next arrows for tapping through the carousel without a
+         swipe. All GONE outside Carousel mode , visibility is toggled from
+         CollectionFragment#applyCarouselChrome(), which runs from setupTouchHelper() any time the
+         view mode changes (see showBooks()).
+         No layout_alignParentBottom/marginBottom here on purpose , with no vertical rule at all,
+         this LinearLayout's top sits at layout_marginTop from the RelativeLayout's top (y=0), and
+         CollectionFragment#layoutCarouselChrome() sets that margin at runtime to exactly
+         "top padding used to center the cover row + cover height + a small gap", so this panel
+         always lands right under the centered cover no matter the screen size , see that method
+         for the full centering math (mirrors the horizontal side-padding trick already used to
+         center the first/last card). -->
+    <LinearLayout
+        android:id="@+id/col_carousel_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:clickable="false"
+        android:focusable="false"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/col_carousel_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:gravity="center"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textStyle="bold"
+            tools:text="Bỏ người tốt, chốt người tồi" />
+
+        <TextView
+            android:id="@+id/col_carousel_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:gravity="center"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            tools:text="Noah Phạm" />
+
+        <net.mrphan.calibre.CarouselDotsIndicatorView
+            android:id="@+id/col_carousel_dots"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp" />
+
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/col_carousel_prev"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="2dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_reader_next"
+        android:scaleX="-1"
+        android:alpha="0.5"
+        android:contentDescription="@string/carousel_previous_book"
+        android:visibility="gone" />
+
+    <ImageButton
+        android:id="@+id/col_carousel_next"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="2dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_reader_next"
+        android:alpha="0.5"
+        android:contentDescription="@string/carousel_next_book"
+        android:visibility="gone" />
+
+    <!-- Floating multi-select action pill, see view_collection_selection_pill.xml for full
+         context. Default GONE, alignParentBottom with a 16dp margin - nothing else in this
+         layout anchors to the bottom, so it doesn't conflict with any existing view. Its
+         bottomMargin is adjusted at runtime by CollectionFragment#repositionSelectionPill() to
+         clear GlobalTtsFloatingPanel when that's showing. -->
+    <include
+        layout="@layout/view_collection_selection_pill"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="16dp" />
+
+    <LinearLayout
+        android:id="@+id/col_empty_state"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="32dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/col_empty_state_icon"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_marginBottom="18dp"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_empty_search_result"
+            android:tint="?android:attr/textColorSecondary" />
+
+        <TextView
+            android:id="@+id/col_empty_state_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:text="@string/collection_empty_not_configured" />
+
+        <Button
+            android:id="@+id/col_empty_state_action"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/collection_empty_action_choose_folder" />
+
+    </LinearLayout>
+
+</RelativeLayout>

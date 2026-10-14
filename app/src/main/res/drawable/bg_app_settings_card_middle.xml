@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Hang o giua mot nhom nhieu hang: vuong ca 4 canh, chi hien qua duong ke mo phia duoi. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <corners android:radius="0dp" />
+    <solid android:color="?attr/colorButtonNormal" />
+</shape>

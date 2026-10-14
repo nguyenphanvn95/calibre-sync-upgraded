@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/image_tool_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- Thanh tren cung: dong, bo dem trang, chia se, tai xuong. -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="4dp"
+        android:paddingVertical="4dp">
+
+        <ImageButton
+            android:id="@+id/image_tool_close"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            android:tint="#FFFFFF"
+            android:contentDescription="@android:string/cancel" />
+
+        <TextView
+            android:id="@+id/image_tool_counter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            tools:text="3 / 12" />
+
+        <ImageButton
+            android:id="@+id/image_tool_share"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/ic_menu_share"
+            android:tint="#FFFFFF"
+            android:contentDescription="@string/reader_image_tool_share" />
+
+        <ImageButton
+            android:id="@+id/image_tool_download"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/stat_sys_download"
+            android:tint="#FFFFFF"
+            android:contentDescription="@string/reader_toc_image_saved" />
+    </LinearLayout>
+
+    <!-- Cot zoom ben phai, giua man hinh: phong to / thu nho. -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|end"
+        android:layout_marginEnd="8dp"
+        android:orientation="vertical"
+        android:background="#33FFFFFF">
+
+        <ImageButton
+            android:id="@+id/image_tool_zoom_in"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/ic_input_add"
+            android:tint="#FFFFFF"
+            android:contentDescription="@string/reader_image_tool_zoom_in" />
+
+        <ImageButton
+            android:id="@+id/image_tool_zoom_out"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/ic_menu_revert"
+            android:tint="#FFFFFF"
+            android:contentDescription="@string/reader_image_tool_zoom_out" />
+    </LinearLayout>
+
+    <!-- Nut chuyen anh truoc, canh trai giua man hinh. -->
+    <ImageButton
+        android:id="@+id/image_tool_prev"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center_vertical|start"
+        android:layout_marginStart="4dp"
+        android:background="#33000000"
+        android:src="@android:drawable/ic_media_previous"
+        android:tint="#FFFFFF"
+        android:contentDescription="@string/reader_image_tool_prev" />
+
+    <!-- Nut chuyen anh sau, canh phai giua man hinh, chua vao cot zoom (marginEnd lon hon 48dp cot zoom). -->
+    <ImageButton
+        android:id="@+id/image_tool_next"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center_vertical|end"
+        android:layout_marginEnd="60dp"
+        android:background="#33000000"
+        android:src="@android:drawable/ic_media_next"
+        android:tint="#FFFFFF"
+        android:contentDescription="@string/reader_image_tool_next" />
+
+</FrameLayout>

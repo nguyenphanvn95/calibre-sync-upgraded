@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Dùng cho DeviceBookDetailActivity/BookDetailActivity#onSwipeToAdjacentBook(-1): người dùng vuốt
+  trái->phải để mở cuốn sách TRƯỚC ĐÓ trong danh sách, màn hình mới (preview cuốn trước đó) phải
+  trượt vào từ mép TRÁI, cùng hướng với ngón tay, thay vì dùng chung hiệu ứng "vào từ phải" của
+  chiều mở cuốn kế tiếp như trước đây. Cặp với book_detail_exit_to_right.xml cho màn hình cũ.
+-->
+<translate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fromXDelta="-100%"
+    android:toXDelta="0%"
+    android:duration="220"
+    android:interpolator="@android:interpolator/decelerate_quint" />

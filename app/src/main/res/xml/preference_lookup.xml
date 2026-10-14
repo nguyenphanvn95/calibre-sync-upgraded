@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Noi dung tab "Tu dien va Dich" cua SettingsActivity (xem SettingsTab.LOOKUP). Tach ra tu
+  <PreferenceCategory android:title="@string/settings_lookup_category_title"> trong
+  res/xml/preference.xml (nay da xoa), giu nguyen android:key cua tung muc.
+-->
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <ListPreference
+        android:key="lookup_target_language"
+        android:title="@string/settings_lookup_target_language_title"
+        android:entries="@array/lookup_language_names"
+        android:entryValues="@array/lookup_language_codes"
+        android:defaultValue="vi" />
+    <ListPreference
+        android:key="lookup_translation_provider"
+        android:title="@string/settings_lookup_translation_provider_title"
+        android:entries="@array/lookup_translation_provider_entries"
+        android:entryValues="@array/lookup_translation_provider_values"
+        android:defaultValue="google_free" />
+    <EditTextPreference
+        android:key="lookup_deepl_api_key"
+        android:title="@string/settings_lookup_deepl_key_title"
+        android:summary="@string/settings_lookup_deepl_key_summary" />
+
+</PreferenceScreen>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Used only behind the BookDetailActivity overlay back button (bd_btn_back). The rest of the
+    header has no background at all, see activity_book_detail.xml, so the cover shows through
+    everywhere except this small circle, which exists purely so the arrow stays visible on light
+    covers, not as a title bar.
+-->
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="#33FFFFFF">
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="#33000000" />
+        </shape>
+    </item>
+</ripple>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Noi dung tab "He thong" cua SettingsActivity (xem SettingsTab.SYSTEM). Tach ra tu
+  <PreferenceCategory android:title="@string/settings_category_system_title"> trong
+  res/xml/preference.xml (nay da xoa), giu nguyen android:key cua tung muc.
+-->
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <CheckBoxPreference android:summary="@string/pref_debug_summary" android:title="@string/pref_debug_title" android:key="pref_debug"/>
+    <Preference android:title="@string/pref_version_name" android:key="pref_app_version_name" />
+
+</PreferenceScreen>

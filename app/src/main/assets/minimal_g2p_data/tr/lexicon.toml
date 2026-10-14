@@ -1,0 +1,275 @@
+# data/tr/lexicon.toml — Turkish exception dictionary (tr-TR).
+#
+# Rules in `rules.toml` cover regular Turkish words (final-syllable stress).
+# This file holds only the exceptions:
+#
+#   route = "primary"   use these phonemes — non-final-stress words
+#                       (place names with Sezer stress, initial-stressed
+#                       adverbs/conjunctions/greetings, question words) and
+#                       unstressed clitics/particles (no ˈ at all).
+#   route = "fallback"  ignore `phonemes`; the router sends the word to the
+#                       EN engine (genuinely foreign words / English names).
+#
+# Phoneme strings are space-separated tokens that must exist in
+# data/phoneme_id_map.json. Primary stress is `ˈ` (ID 112), placed before
+# the onset of the stressed syllable. Lookup happens on the Turkish-
+# lowercased (İ→i, I→ı), apostrophe-stripped word.
+
+# ── Unstressed particles & clitics (no ˈ marker) ──
+# The question particle mi/mı/mu/mü and the clitics de/da/ki are written as
+# separate words but are enclitic — they never carry stress.
+[[entry]]
+word = "mi"
+phonemes = "m i"
+route = "primary"
+
+[[entry]]
+word = "mı"
+phonemes = "m ɯ"
+route = "primary"
+
+[[entry]]
+word = "mu"
+phonemes = "m u"
+route = "primary"
+
+[[entry]]
+word = "mü"
+phonemes = "m y"
+route = "primary"
+
+[[entry]]
+word = "de"
+phonemes = "d e"
+route = "primary"
+
+[[entry]]
+word = "da"
+phonemes = "d a"
+route = "primary"
+
+[[entry]]
+word = "ki"
+phonemes = "k i"
+route = "primary"
+
+[[entry]]
+word = "ve"
+phonemes = "v e"
+route = "primary"
+
+[[entry]]
+word = "ile"
+phonemes = "i l e"
+route = "primary"
+
+[[entry]]
+word = "için"
+phonemes = "i tʃ i n"
+route = "primary"
+
+[[entry]]
+word = "gibi"
+phonemes = "g i b i"
+route = "primary"
+
+[[entry]]
+word = "bu"
+phonemes = "b u"
+route = "primary"
+
+[[entry]]
+word = "şu"
+phonemes = "ʃ u"
+route = "primary"
+
+[[entry]]
+word = "o"
+phonemes = "o"
+route = "primary"
+
+[[entry]]
+word = "ne"
+phonemes = "n e"
+route = "primary"
+
+[[entry]]
+word = "bir"
+phonemes = "b i ɾ"
+route = "primary"
+
+# ── Initial-stressed adverbs / conjunctions / question words ──
+[[entry]]
+word = "şimdi"
+phonemes = "ˈ ʃ i m d i"
+route = "primary"
+
+[[entry]]
+word = "sonra"
+phonemes = "ˈ s o n ɾ a"
+route = "primary"
+
+[[entry]]
+word = "yarın"
+phonemes = "ˈ j a ɾ ɯ n"
+route = "primary"
+
+[[entry]]
+word = "belki"
+phonemes = "ˈ b e l k i"
+route = "primary"
+
+[[entry]]
+word = "ama"
+phonemes = "ˈ a m a"
+route = "primary"
+
+[[entry]]
+word = "ancak"
+phonemes = "ˈ a n dʒ a k"
+route = "primary"
+
+[[entry]]
+word = "çünkü"
+phonemes = "ˈ tʃ y n k y"
+route = "primary"
+
+[[entry]]
+word = "yalnız"
+phonemes = "ˈ j a l n ɯ z"
+route = "primary"
+
+[[entry]]
+word = "nasıl"
+phonemes = "ˈ n a s ɯ l"
+route = "primary"
+
+[[entry]]
+word = "neden"
+phonemes = "ˈ n e d e n"
+route = "primary"
+
+[[entry]]
+word = "niçin"
+phonemes = "ˈ n i tʃ i n"
+route = "primary"
+
+[[entry]]
+word = "nerede"
+phonemes = "ˈ n e ɾ e d e"
+route = "primary"
+
+[[entry]]
+word = "böyle"
+phonemes = "ˈ b ø j l e"
+route = "primary"
+
+[[entry]]
+word = "şöyle"
+phonemes = "ˈ ʃ ø j l e"
+route = "primary"
+
+[[entry]]
+word = "öyle"
+phonemes = "ˈ ø j l e"
+route = "primary"
+
+[[entry]]
+word = "bugün"
+phonemes = "ˈ b u g y n"
+route = "primary"
+
+[[entry]]
+word = "evet"
+phonemes = "ˈ e v e t"
+route = "primary"
+
+[[entry]]
+word = "hayır"
+phonemes = "ˈ h a j ɯ ɾ"
+route = "primary"
+
+[[entry]]
+word = "değil"
+phonemes = "ˈ d e i l"
+route = "primary"
+
+[[entry]]
+word = "merhaba"
+phonemes = "ˈ m e ɾ h a b a"
+route = "primary"
+
+[[entry]]
+word = "anne"
+phonemes = "ˈ a n n e"
+route = "primary"
+
+# ── Place names (Sezer stress — penult/antepenult, never final) ──
+[[entry]]
+word = "ankara"
+phonemes = "ˈ a n k a ɾ a"
+route = "primary"
+
+[[entry]]
+word = "istanbul"
+phonemes = "i s ˈ t a n b u l"
+route = "primary"
+
+[[entry]]
+word = "izmir"
+phonemes = "ˈ i z m i ɾ"
+route = "primary"
+
+[[entry]]
+word = "türkiye"
+phonemes = "ˈ t y ɾ k i j e"
+route = "primary"
+
+[[entry]]
+word = "londra"
+phonemes = "ˈ l o n d ɾ a"
+route = "primary"
+
+[[entry]]
+word = "paris"
+phonemes = "ˈ p a ɾ i s"
+route = "primary"
+
+[[entry]]
+word = "almanya"
+phonemes = "a l ˈ m a n j a"
+route = "primary"
+
+[[entry]]
+word = "amerika"
+phonemes = "a ˈ m e ɾ i k a"
+route = "primary"
+
+# ── Foreign words / brand names → EN engine ──
+[[entry]]
+word = "google"
+route = "fallback"
+
+[[entry]]
+word = "facebook"
+route = "fallback"
+
+[[entry]]
+word = "twitter"
+route = "fallback"
+
+[[entry]]
+word = "instagram"
+route = "fallback"
+
+[[entry]]
+word = "youtube"
+route = "fallback"
+
+[[entry]]
+word = "iphone"
+route = "fallback"
+
+[[entry]]
+word = "android"
+route = "fallback"

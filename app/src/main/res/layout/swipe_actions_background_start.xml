@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Included by item_book_swipe.xml / item_book_simple_swipe.xml as one of the FrameLayout's
+     background children, cung cap 2 nut Nghe sach / Doc sach lo ra khi nguoi dung swipe TU TRAI
+     SANG PHAI. Luon nam duoi swipe_foreground_content; doi voi swipe phai, foreground duoc
+     SwipeRevealCallback dich sang phai (translationX duong) de lo vung nay ra o phia trai. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:gravity="center_vertical|start"
+    android:background="@android:color/transparent">
+
+    <FrameLayout
+        android:id="@+id/action_listen"
+        android:layout_width="@dimen/swipe_action_button_width"
+        android:layout_height="match_parent"
+        android:background="#6A1B9A"
+        android:contentDescription="@string/bookdetail_action_read_aloud">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_action_headphones" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/action_read"
+        android:layout_width="@dimen/swipe_action_button_width"
+        android:layout_height="match_parent"
+        android:background="#00838F"
+        android:contentDescription="@string/bookdetail_action_read">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_action_open_book" />
+    </FrameLayout>
+
+</LinearLayout>

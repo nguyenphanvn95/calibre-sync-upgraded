@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Tieu de nho cho mot nhom cai dat ben trong the card (shape_reader_settings_group_bg), vi du
+     "Phong chu", "Gian dong", "Che do sang toi"; xem ReaderSettingsRowBinder.addGroupHeader(). -->
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/reader_settings_group_header_text"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="14dp"
+    android:layout_marginBottom="4dp"
+    android:textSize="12sp"
+    android:textStyle="bold"
+    android:textAllCaps="true"
+    android:textColor="?android:attr/textColorSecondary" />

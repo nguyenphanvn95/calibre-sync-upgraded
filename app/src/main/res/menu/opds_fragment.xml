@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+<!--        <item
+        android:id="@+id/menu_goback"
+        android:icon="@drawable/ic_button_prev"
+        android:title="@string/menu_goback"
+        android:showAsAction="ifRoom|withText"
+        />-->
+        <item
+            android:id="@+id/menu_search"
+            android:title="@string/menu_search"
+            android:icon="@drawable/ic_menu_search"
+            android:showAsAction="ifRoom|collapseActionView"
+            android:actionViewClass="android.widget.SearchView"
+                />
+        <item
+            android:id="@+id/menu_filter_by"
+            android:title="@string/opds_filter_by"
+            android:icon="@drawable/ic_menu_tags"
+            android:showAsAction="never"
+            android:visible="false" />
+        <item
+            android:id="@+id/menu_sort_by"
+            android:icon="@drawable/ic_menu_sort"
+            android:title="@string/opds_sort_by"
+            android:showAsAction="never"
+            android:visible="false" />
+        <!-- Was a nested <menu> submenu (List/Grid x3 as a checkable group); Android rendered
+             that as an anchored dropdown under the toolbar. Now a plain leaf item: tapping it
+             opens ViewModePickerDialog instead, a centered floating dialog. -->
+        <item
+            android:id="@+id/menu_view_mode"
+            android:title="@string/menu_view_mode"
+            android:icon="@drawable/ic_menu_view_mode"
+            android:showAsAction="ifRoom"></item>
+
+</menu>

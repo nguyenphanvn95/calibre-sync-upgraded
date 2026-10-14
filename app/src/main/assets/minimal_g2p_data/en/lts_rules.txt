@@ -1,0 +1,411 @@
+# data/en/lts_rules.txt — English Letter-to-Sound rules.
+#
+# Spec:       docs/lts/rule_format.md
+# References: docs/lts/references.md
+# RFC:        docs/rfc/008-lts-fallback.md
+#
+# Clean-room provenance discipline: every rule cites a non-espeak source.
+# Build-time checks (run via `cargo test --features lts`):
+#   - every rule parses
+#   - every phoneme token exists in data/phoneme_id_map.json
+#   - every rule has a `# cite:` comment
+#   - no cite contains "espeak" (case-insensitive)
+#
+# Stress convention: rules emit "1" on every stressed vowel; the
+# EnLts::predict pass demotes the second+ stressed vowel of each word
+# to "0" matching fallback_g2p's monosyllabic-primary-stress heuristic.
+#
+# Phase 1 v0 coverage: ~100 rules across 6 tiers. Known gaps:
+#   - context-sensitive `th` (voiced /ð/ in function words)
+#   - Greek/French `ch` variants (/k/ school, /ʃ/ chef)
+#   - `oo` split (food vs book)
+#   - `ow` split (cow vs slow)
+#   - `wh` silent-w (who, whose)
+#   - `-ed` allomorphs after /s/ contexts
+# These need lexical override or lookahead beyond the engine's reach.
+# Phase 3 OOV eval will quantify the gap; Phase 4 may expand rule count.
+
+[a]
+# Open-syllable a before -tion/-sion → /eɪ/ — Carney ch.5
+# (nation, station, occasion, evasion). Captures the lengthening
+# triggered by the suffix.
+(C)a(tion) -> eɪ1   # cite: Carney ch.5 open-syllable lengthening
+(C)a(sion) -> eɪ1   # cite: Carney ch.5 open-syllable lengthening
+# Silent-e CVCe: a → /eɪ/ — Carney ch.5 (make, cake, gate)
+(C)a(Ce$) -> eɪ1   # cite: Carney ch.5 CVCe pattern
+# ai/ay → /eɪ/ — Carney ch.5 (rain, day, may, play)
+ai -> eɪ1   # cite: Carney ch.5 vowel digraphs
+ay -> eɪ1   # cite: Carney ch.5 vowel digraphs
+# au/aw → /ɔ/ — Carney ch.5 (caught, saw, law, August)
+au -> ɔ1   # cite: Carney ch.5 vowel digraphs
+aw -> ɔ1   # cite: Carney ch.5 vowel digraphs
+# ar → /ɑr/ — Roach ch.3 r-coloration (car, far, star, hard)
+ar -> ɑ1 r   # cite: Roach ch.3 r-colored vowels
+# Unstressed final -a → schwa — Roach ch.9 weak forms (sofa, comma,
+# media, pizza). Polysyllabic only (LEFT VC ensures word > 2 chars).
+# Placed BEFORE the default `a -> æ1` so this fires on word-final 'a'.
+(VC)a($) -> ə0   # cite: Roach ch.9 weak forms
+# Default short a → /æ/ — Roach ch.3 (cat, hat, map, ran)
+a -> æ1   # cite: Roach ch.3 short vowels
+
+[b]
+# Silent b in -mb after vowel — Carney ch.6 (lamb, comb, climb)
+# (Handled in [m] group; here only the bare consonant.)
+b -> b   # cite: Roach ch.4 plosives
+
+[c]
+# Greek ch- → /k/ before r/l at word start (chronic, chrome, chord,
+# chloride). Conservative: only fires in the safest contexts where the
+# letter sequence is reliably Greek-origin. Placed BEFORE the default
+# `ch -> tʃ`; priority handles the tiebreak (longer match equal, more
+# context wins).
+(^)ch(r) -> k   # cite: Carney ch.4 Greek ch
+(^)ch(l) -> k   # cite: Carney ch.4 Greek ch
+# ch → /tʃ/ — Carney ch.4 (chair, chip, much).
+# Greek /k/ (school) and French /ʃ/ (chef) need lexical override.
+ch -> tʃ   # cite: Carney ch.4 digraphs
+# ck → /k/ — Carney ch.4 (back, lock, stick)
+ck -> k   # cite: Carney ch.4 digraphs
+# Soft c before e/i/y → /s/ — Carney ch.4 (cell, city, cycle)
+c(e) -> s   # cite: Carney ch.4 soft c
+c(i) -> s   # cite: Carney ch.4 soft c
+c(y) -> s   # cite: Carney ch.4 soft c
+# Default c → /k/ — Roach ch.4 (cat, cup, cope)
+c -> k   # cite: Roach ch.4 plosives
+
+[d]
+# Final -dge → /dʒ/ — Carney ch.4 digraphs (judge, bridge, hedge,
+# kludge). Placed BEFORE the default `d -> d`; longer MATCH wins by
+# priority anyway, but file order keeps the family adjacent.
+dge($) -> dʒ   # cite: Carney ch.4 digraphs
+# Bare d — Roach ch.4
+d -> d   # cite: Roach ch.4 plosives
+
+[e]
+# Silent terminal e after VCC cluster — Carney ch.6 (force, lapse,
+# metaverse, glimpse). Placed ABOVE the (VC)e($) family so the more
+# specific VCC pattern is reached first by file order (priorities tie
+# at (1, 4) vs (1, 3) — the VCC rule already wins on context richness).
+(VCC)e($) ->   # cite: Carney ch.6 silent terminal e
+# Unstressed final -el → syllabic-l → schwa + l. Roach ch.9 syllabic
+# consonants (bezel, panel, towel, vowel). Placed BEFORE the bare
+# silent-e rule so candidates ending in -el get schwa instead of being
+# routed to default ɛ1.
+(VC)e(l$) -> ə0   # cite: Roach ch.9 syllabic consonants
+# Unstressed final -en → syllabic-n → schwa + n. Roach ch.9 (open,
+# token, garden, kitten). Same placement reasoning as -el.
+(VC)e(n$) -> ə0   # cite: Roach ch.9 syllabic consonants
+# NOTE: `(VC)e(r$) -> ə0` was considered for the lettER set but is
+# shadowed by the existing `(C)er($) -> ɝ1` rule (MATCH `er` 2 chars
+# beats MATCH `e` 1 char by longer-match priority). Skipped to avoid a
+# dead rule; revisit if `(C)er($)` is ever removed or refactored.
+# Silent terminal e after VC — Carney ch.6 (make, time, hope, code).
+# Matched BEFORE the bare 'e' rule by priority (more context).
+(VC)e($) ->   # cite: Carney ch.6 silent terminal e
+# Silent-e CVCe: e → /i/ — Carney ch.5 (these, scene, complete)
+(C)e(Ce$) -> i1   # cite: Carney ch.5 CVCe pattern
+# ee → /i/ — Carney ch.5 (see, feet, tree, week)
+ee -> i1   # cite: Carney ch.5 vowel digraphs
+# ea → /i/ default — Carney ch.5 (eat, sea, beach, mean).
+# Exceptions: break /eɪ/, head /ɛ/ need lexical override.
+ea -> i1   # cite: Carney ch.5 vowel digraphs
+# ew → /u/ — Carney ch.5 (new, blew, flew). Conservative.
+ew -> u1   # cite: Carney ch.5 vowel digraphs
+# eu → /u/ — Carney ch.5 (feud, neutral). Conservative.
+eu -> u1   # cite: Carney ch.5 vowel digraphs
+# er final after consonant → /ɝ/ — Roach ch.3 (worker, faster, river)
+# Carney ch.10 treats this as the comparative/agentive suffix.
+(C)er($) -> ɝ1   # cite: Roach ch.3 r-colored vowels
+# er before consonant → /ɝ/ — Roach ch.3 (her, term, person)
+(C)er(C) -> ɝ1   # cite: Roach ch.3 r-colored vowels
+# -ed after voiceless consonants → /t/ — Carney ch.10
+(p)ed($) -> t   # cite: Carney ch.10 -ed allomorph
+(k)ed($) -> t   # cite: Carney ch.10 -ed allomorph
+(f)ed($) -> t   # cite: Carney ch.10 -ed allomorph
+# -ed after /t/ or /d/ → /əd/ — Carney ch.10
+(t)ed($) -> ə0 d   # cite: Carney ch.10 -ed allomorph
+(d)ed($) -> ə0 d   # cite: Carney ch.10 -ed allomorph
+# -ed after voiceless sibilant (s, x) → /t/ — Carney ch.10 -ed allomorph
+# (kissed, fixed, taxed, hissed). Mirrors the (p/k/f)ed family.
+(s)ed($) -> t   # cite: Carney ch.10 -ed allomorph
+(x)ed($) -> t   # cite: Carney ch.10 -ed allomorph
+# -ed after voiced /z/ → /d/ — Carney ch.10 -ed allomorph
+# (buzzed, fizzed, jazzed). Voicing-assimilation completes the set.
+(z)ed($) -> d   # cite: Carney ch.10 -ed allomorph
+# Default short e → /ɛ/ — Roach ch.3 (bed, ten, pen)
+e -> ɛ1   # cite: Roach ch.3 short vowels
+
+[f]
+# Bare f — Roach ch.4 fricatives
+f -> f   # cite: Roach ch.4 fricatives
+
+[g]
+# Silent g before n at word start — Carney ch.6 (gnome, gnat, gnaw)
+(^)gn -> n   # cite: Carney ch.6 silent letters
+# Final -gn after vowel → /n/ — Carney ch.6 (sign, design, foreign)
+(V)gn($) -> n   # cite: Carney ch.6 silent letters
+# gh at word start → /g/ — Carney ch.4 (ghost, ghastly, ghetto)
+(^)gh -> g   # cite: Carney ch.4 digraphs
+# gh after au/ou is usually silent (caught, bought, light); since
+# our vowel digraph rules consume au/ou separately, gh here is silent.
+# Conservative: drop gh mid-word.
+(V)gh -> # cite: Carney ch.6 silent letters
+# Soft g before e/i/y → /dʒ/ — Carney ch.4 (gem, giant, gym)
+g(e) -> dʒ   # cite: Carney ch.4 soft g
+g(i) -> dʒ   # cite: Carney ch.4 soft g
+g(y) -> dʒ   # cite: Carney ch.4 soft g
+# Degeminate gg → /g/ — Carney ch.7 (bigger, suggest, vlogger).
+# Without this, the second g in "gg" can be misread by the soft-g
+# rule if it precedes e/i/y (e.g. "vlogger" → wrongly /vlɑdʒɝ/).
+gg -> g   # cite: Carney ch.7 doubled consonants
+# Default g → /g/ — Roach ch.4 (go, get, gun)
+g -> g   # cite: Roach ch.4 plosives
+
+[h]
+# Bare h — Roach ch.4 (silent h in honor/hour needs lexical override)
+h -> h   # cite: Roach ch.4 fricatives
+
+[i]
+# "igh" trigraph → /aɪ/ — Carney ch.6 (light, night, high, sigh,
+# gaslighting). Captures the silent gh AND lengthens the i in one
+# match; takes priority over bare 'i' + later (V)gh silent rule.
+igh -> aɪ1   # cite: Carney ch.6 silent letters / igh trigraph
+# Silent-e CVCe: i → /aɪ/ — Carney ch.5 (ride, time, bike, line)
+(C)i(Ce$) -> aɪ1   # cite: Carney ch.5 CVCe pattern
+# ie → /i/ default — Carney ch.5 (chief, brief, piece).
+# Exceptions: pie/tie /aɪ/ — lexical override.
+ie -> i1   # cite: Carney ch.5 vowel digraphs
+# ir → /ɝ/ — Roach ch.3 (bird, girl, first, third)
+ir -> ɝ1   # cite: Roach ch.3 r-colored vowels
+# -ing word-final → /ɪŋ/ — Carney ch.10.
+# Emits ɪ1; stress-demote pass downgrades to ɪ0 in polysyllables
+# (running → r ʌ1 n ɪ0 ŋ) but keeps ɪ1 in monosyllables that look like
+# "C+ing" roots (sing, king, thing → /sɪŋ/, /kɪŋ/, /θɪŋ/).
+(V)ing($) -> ɪ1 ŋ   # cite: Carney ch.10 -ing suffix
+(C)ing($) -> ɪ1 ŋ   # cite: Carney ch.10 -ing suffix
+# Unstressed word-final -i (the happY set) → /i0/ — Wells 1982 Vol.1
+# (kiwi, sushi, bikini, taxi). Polysyllabic only (LEFT VC ensures word
+# > 2 chars so monosyllables like "I" don't fire). Placed BEFORE the
+# default `i -> ɪ1`.
+(VC)i($) -> i0   # cite: Wells 1982 Vol.1 happY set
+# Default short i → /ɪ/ — Roach ch.3 (sit, hit, big, ship)
+i -> ɪ1   # cite: Roach ch.3 short vowels
+
+[j]
+# Letter j → /dʒ/ — Carney ch.4 (jam, jet, jump)
+j -> dʒ   # cite: Carney ch.4 letter j
+
+[k]
+# Silent k before n at word start — Carney ch.6 (knee, knife, know)
+(^)kn -> n   # cite: Carney ch.6 silent letters
+# Bare k — Roach ch.4
+k -> k   # cite: Roach ch.4 plosives
+
+[l]
+# Syllabic-l word-final -le → schwa + l — Roach ch.9 (table, little,
+# simple, candle, paddle). Placed BEFORE `ll -> l`; longer MATCH wins
+# automatically (3 chars beats 2), but file order keeps the family
+# grouped.
+(C)le($) -> ə0 l   # cite: Roach ch.9 syllabic consonants
+# Degeminate ll → /l/ — Carney ch.7 (call, hill, doll)
+ll -> l   # cite: Carney ch.7 doubled consonants
+# Bare l — Roach ch.4
+l -> l   # cite: Roach ch.4 laterals
+
+[m]
+# Final -mb after vowel: silent b → /m/ — Carney ch.6 (lamb, comb, climb)
+(V)mb($) -> m   # cite: Carney ch.6 silent letters
+# Final -mn after vowel: silent n → /m/ — Carney ch.6 (autumn, column, hymn)
+(V)mn($) -> m   # cite: Carney ch.6 silent letters
+# Degeminate mm → /m/ — Carney ch.7
+mm -> m   # cite: Carney ch.7 doubled consonants
+# Bare m — Roach ch.4
+m -> m   # cite: Roach ch.4 nasals
+
+[n]
+# ng syllable-finally → /ŋ/ — Carney ch.4 (sing, song, hang, ring)
+ng($) -> ŋ   # cite: Carney ch.4 digraphs
+# ng before consonant → /ŋ/ — Carney ch.4 (singer, hanging)
+(V)ng(C) -> ŋ   # cite: Carney ch.4 digraphs
+# Nasal place assimilation: /n/ → /ŋ/ before /k/ or /g/ — Roach ch.6
+# (think, ink, bank, ankle, finger, hunger). Allophonic but
+# orthographically detectable from n+k / n+g sequence.
+(V)n(k) -> ŋ   # cite: Roach ch.6 nasal assimilation
+(V)n(g) -> ŋ   # cite: Roach ch.6 nasal assimilation
+# Degeminate nn → /n/ — Carney ch.7
+nn -> n   # cite: Carney ch.7 doubled consonants
+# Bare n — Roach ch.4
+n -> n   # cite: Roach ch.4 nasals
+
+[o]
+# Open-syllable o before -tion/-sion → /oʊ/ — Carney ch.5
+# (motion, notion, lotion, erosion, explosion)
+(C)o(tion) -> oʊ1   # cite: Carney ch.5 open-syllable lengthening
+(C)o(sion) -> oʊ1   # cite: Carney ch.5 open-syllable lengthening
+# Open-syllable o before -Cate suffix → /oʊ/ — Carney ch.5
+# (donate, phonate, rotate, vibrate's vowel pattern by analogy).
+# Same lengthening trigger as -tion/-sion: the suffix attracts stress
+# and the preceding vowel opens.
+(C)o(Cate) -> oʊ1   # cite: Carney ch.5 open-syllable lengthening
+# Silent-e CVCe: o → /oʊ/ — Carney ch.5 (rope, note, vote, home)
+(C)o(Ce$) -> oʊ1   # cite: Carney ch.5 CVCe pattern
+# oa → /oʊ/ — Carney ch.5 (boat, coat, road, soap)
+oa -> oʊ1   # cite: Carney ch.5 vowel digraphs
+# oe → /oʊ/ — Carney ch.5 (toe, foe, doe). Exceptions: shoe /u/.
+oe -> oʊ1   # cite: Carney ch.5 vowel digraphs
+# FOOT-set short oo before /k/ or /d/ → /ʊ/ — Wells 1982 Vol.1 FOOT
+# set (book, look, took, wood, good, hood). Placed BEFORE the GOOSE
+# default `oo -> u1`; priority handles tiebreak (more context wins).
+oo(k) -> ʊ1   # cite: Wells 1982 Vol.1 FOOT set
+oo(d) -> ʊ1   # cite: Wells 1982 Vol.1 FOOT set
+# oo → /u/ default — Carney ch.5 (food, room, soon).
+# Exception: book/look/good /ʊ/ — lexical override.
+oo -> u1   # cite: Carney ch.5 vowel digraphs
+# ou → /aʊ/ default — Carney ch.5 (out, house, mouth, loud).
+# Exceptions: soup /u/, touch /ʌ/, through /u/ — lexical override.
+ou -> aʊ1   # cite: Carney ch.5 vowel digraphs
+# -ous suffix family — Carney ch.10 morphological endings.
+# After ci → /ʃəs/ (gracious, precious, suspicious).
+(ci)ous($) -> ʃ ə0 s   # cite: Carney ch.10 -ous suffix
+# After ti → /ʃəs/ (cautious, ambitious, infectious).
+(ti)ous($) -> ʃ ə0 s   # cite: Carney ch.10 -ous suffix
+# After vowel → /əs/ (famous, generous, nervous, dangerous).
+(V)ous($) -> ə0 s   # cite: Carney ch.10 -ous suffix
+# After consonant → /əs/ (jealous, marvelous, fabulous).
+(C)ous($) -> ə0 s   # cite: Carney ch.10 -ous suffix
+# GOAT-set ow after consonant at word end (slow, show, snow, grow).
+# Placed BEFORE the MOUTH default `ow -> aʊ1`; priority handles tiebreak.
+(C)ow($) -> oʊ1   # cite: Carney ch.5 GOAT set
+# GOAT-set ow after consonant before consonant (window, shadow, narrow,
+# fellow). Same placement reasoning as the $-anchored variant.
+(C)ow(C) -> oʊ1   # cite: Carney ch.5 GOAT set
+# ow → /aʊ/ default — Carney ch.5 (cow, now, down, brown).
+# Exception: slow/show/snow /oʊ/ — lexical override.
+ow -> aʊ1   # cite: Carney ch.5 vowel digraphs
+# oi → /ɔɪ/ — Carney ch.5 (oil, coin, point, voice)
+oi -> ɔɪ1   # cite: Carney ch.5 vowel digraphs
+# oy → /ɔɪ/ — Carney ch.5 (boy, joy, toy, employ)
+oy -> ɔɪ1   # cite: Carney ch.5 vowel digraphs
+# or → /ɔr/ — Roach ch.3 (for, born, short, sport)
+or -> ɔ1 r   # cite: Roach ch.3 r-colored vowels
+# Unstressed final -o → /oʊ0/ — Carney ch.5 open-syllable lengthening
+# (potato, tomato, photo, kilo, hippo). Polysyllabic only (LEFT VC
+# ensures word > 2 chars so monosyllables like "do", "to", "so", "no"
+# — all in CMUdict — bypass this rule). Placed BEFORE the default
+# `o -> ɑ1`.
+(VC)o($) -> oʊ0   # cite: Carney ch.5 open-syllable lengthening
+# Default short o → /ɑ/ — Roach ch.3 GenAm (hot, top, lot, on)
+o -> ɑ1   # cite: Roach ch.3 short vowels (GenAm)
+
+[p]
+# ph → /f/ — Carney ch.4 (phone, photograph, phantom, sphere)
+ph -> f   # cite: Carney ch.4 digraphs
+# Silent p before s/n/t at word start — Carney ch.6
+(^)ps -> s   # cite: Carney ch.6 silent letters
+(^)pn -> n   # cite: Carney ch.6 silent letters
+(^)pt -> t   # cite: Carney ch.6 silent letters
+# Degeminate pp → /p/ — Carney ch.7
+pp -> p   # cite: Carney ch.7 doubled consonants
+# Bare p — Roach ch.4
+p -> p   # cite: Roach ch.4 plosives
+
+[q]
+# qu before vowel → /kw/ — Carney ch.4 (queen, quick, quote)
+qu(V) -> k w   # cite: Carney ch.4 digraphs
+# Bare q → /k/ — Carney ch.4 (Iraq, qabala)
+q -> k   # cite: Carney ch.4 letter q
+
+[r]
+# Degeminate rr → /r/ — Carney ch.7
+rr -> r   # cite: Carney ch.7 doubled consonants
+# Bare r — Roach ch.4
+r -> r   # cite: Roach ch.4 approximants
+
+[s]
+# sh → /ʃ/ — Carney ch.4 (ship, shop, fish, wash)
+sh -> ʃ   # cite: Carney ch.4 digraphs
+# -sion after vowel → /ʒən/ — Carney ch.10 (vision, decision, fusion)
+(V)sion -> ʒ ə0 n   # cite: Carney ch.10 -sion suffix
+# -sion after consonant → /ʃən/ — Carney ch.10 (mission, tension, mansion)
+(C)sion -> ʃ ə0 n   # cite: Carney ch.10 -sion suffix
+# Degeminate ss → /s/ — Carney ch.7
+ss -> s   # cite: Carney ch.7 doubled consonants
+# Bare s — Roach ch.4 (voiced /z/ between vowels needs lexical override)
+s -> s   # cite: Roach ch.4 fricatives
+
+[t]
+# tch trigraph → /tʃ/ — Carney ch.4 digraphs (catch, fetch, glitch,
+# kitchen, butcher). Longer MATCH (3 chars) wins automatically over
+# `th` and bare `t`; placed at the top of the section for readability.
+tch -> tʃ   # cite: Carney ch.4 digraphs
+# th → /θ/ default — Carney ch.4 (think, thank, both, math).
+# Voiced /ð/ in the/this/that/then needs lexical override.
+th -> θ   # cite: Carney ch.4 digraphs
+# -tion → /ʃən/ — Carney ch.10 (nation, action, motion, fraction)
+tion -> ʃ ə0 n   # cite: Carney ch.10 -tion suffix
+# -ture → /tʃɝ/ — Carney ch.10 (nature, picture, mixture)
+(V)ture -> tʃ ɝ0   # cite: Carney ch.10 -ture suffix
+# Degeminate tt → /t/ — Carney ch.7
+tt -> t   # cite: Carney ch.7 doubled consonants
+# Bare t — Roach ch.4
+t -> t   # cite: Roach ch.4 plosives
+
+[u]
+# Silent-e CVCe: u → /u/ — Carney ch.5 (rude, rule, June).
+# /ju/ in cute/mute/fuse needs lexical override.
+(C)u(Ce$) -> u1   # cite: Carney ch.5 CVCe pattern
+# ur → /ɝ/ — Roach ch.3 (turn, burn, fur, hurt)
+ur -> ɝ1   # cite: Roach ch.3 r-colored vowels
+# Unstressed final -u → /u0/ — Carney ch.5 vowel correspondences
+# (menu, guru, tofu, haiku). Polysyllabic only (LEFT VC ensures word
+# > 2 chars). Placed BEFORE the default `u -> ʌ1`.
+(VC)u($) -> u0   # cite: Carney ch.5 vowel correspondences
+# Default short u → /ʌ/ — Roach ch.3 (cup, but, run, hut)
+u -> ʌ1   # cite: Roach ch.3 short vowels
+
+[v]
+# Bare v — Roach ch.4
+v -> v   # cite: Roach ch.4 fricatives
+
+[w]
+# wh → /w/ default — Carney ch.4 (what, when, where).
+# /h/ in who/whose/whole needs lexical override.
+wh -> w   # cite: Carney ch.4 digraphs
+# Silent w before r at word start — Carney ch.6 (write, wrong, wrap)
+(^)wr -> r   # cite: Carney ch.6 silent letters
+# Bare w — Roach ch.4
+w -> w   # cite: Roach ch.4 approximants
+
+[x]
+# Word-initial x before vowel → /z/ — Carney ch.4 (xylophone, xenon,
+# xenophobe, xerox). Conservative: only fires at ^ with following V so
+# non-initial 'x' in "box, fox, tax" continues to map to /ks/. Placed
+# BEFORE the default `x -> k s`; priority handles tiebreak.
+(^)x(V) -> z   # cite: Carney ch.4 letter x word-initial
+# Letter x → /ks/ — Carney ch.4 (box, fox, tax). Word-initial /z/
+# (xylophone, xenon) needs lexical override.
+x -> k s   # cite: Carney ch.4 letter x
+
+[y]
+# Initial y before vowel → /j/ consonant — Roach ch.4 (yes, yet, year)
+(^)y(V) -> j   # cite: Roach ch.4 approximants
+# Final y after consonant → /i/ short — Carney ch.5 (happy, city, baby).
+# Note: /aɪ/ in monosyllables (by, my, cry) is contextual on word length —
+# beyond simple-context handling. Conservative: /i/.
+(C)y($) -> i1   # cite: Carney ch.5 letter y as vowel
+# Default y as vowel → /ɪ/ — Carney ch.5 (gym, myth, system)
+y -> ɪ1   # cite: Carney ch.5 letter y as vowel
+
+[z]
+# Word-initial zh → /dʒ/ — Wells 1982 Vol.3 (Mandarin-origin names
+# like Zhang, Zhou, Zhejiang adapted into English). Placed BEFORE bare
+# `zh -> ʒ`; priority handles tiebreak (more context wins).
+(^)zh -> dʒ   # cite: Wells 1982 Vol.3 Pacific Rim names
+# zh digraph elsewhere → /ʒ/ — Carney ch.4 (rare in English orthography
+# outside loans; covers cases like "Zhukov" non-initial). Longer MATCH
+# (2 chars) wins over bare `z`.
+zh -> ʒ   # cite: Carney ch.4 digraphs
+# Degeminate zz → /z/ — Carney ch.7
+zz -> z   # cite: Carney ch.7 doubled consonants
+# Bare z — Roach ch.4
+z -> z   # cite: Roach ch.4 fricatives

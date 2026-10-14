@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Panel truot len tren footer khi bam icon Tien do.
+     NANG CAP (xem prompt-nang-cap-thanh-tien-do-doc.md): thay hang
+     Back-button/SeekBar-mong/Forward-button/nhan-%-rieng cu bang:
+       1. Mot thanh tien do dang "vien nang" (pill) day, % duoc ve THANG len chinh pill boi
+          ReaderProgressSeekBar (xem class do) thay vi TextView rieng ben canh - gon va "chuyen
+          nghiep" hon, giong Readest.
+       2. Nhan ten chuong hien tai, dat NGAY DUOI pill.
+       3. Mot hang DAY DU 6 nut dieu huong kieu Readest: Ve dau sach - Chuong truoc - Lui vi tri -
+          Toi vi tri - Chuong sau - Ve cuoi sach (thay vi chi 2 nut Chuong truoc/sau nhu cu). -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/reader_progress_panel_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#F21A1A1A"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:paddingTop="12dp"
+    android:paddingBottom="4dp"
+    android:visibility="gone">
+
+    <net.mrphan.calibre.reader.chrome.ReaderProgressSeekBar
+        android:id="@+id/reader_progress_seekbar"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:max="100"
+        android:paddingStart="0dp"
+        android:paddingEnd="0dp"
+        android:progressDrawable="@drawable/reader_progress_seekbar_track"
+        android:thumb="@drawable/reader_progress_seekbar_thumb"
+        android:splitTrack="false" />
+
+    <TextView
+        android:id="@+id/reader_progress_chapter_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:gravity="center"
+        android:textColor="#B3FFFFFF"
+        android:textSize="12sp"
+        android:maxLines="1"
+        android:ellipsize="end" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="2dp">
+
+        <ImageButton
+            android:id="@+id/reader_progress_jump_start_button"
+            style="?attr/borderlessButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_reader_skip_start"
+            android:scaleType="centerInside"
+            android:padding="8dp"
+            android:tint="#FFFFFF"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/reader_progress_jump_start" />
+
+        <ImageButton
+            android:id="@+id/reader_progress_prev_chapter_button"
+            style="?attr/borderlessButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_reader_prev"
+            android:scaleType="centerInside"
+            android:padding="8dp"
+            android:tint="#FFFFFF"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/reader_progress_prev_chapter" />
+
+        <ImageButton
+            android:id="@+id/reader_progress_back_button"
+            style="?attr/borderlessButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_reader_undo"
+            android:scaleType="centerInside"
+            android:padding="8dp"
+            android:tint="#FFFFFF"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/reader_action_back" />
+
+        <ImageButton
+            android:id="@+id/reader_progress_forward_button"
+            style="?attr/borderlessButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_reader_redo"
+            android:scaleType="centerInside"
+            android:padding="8dp"
+            android:tint="#FFFFFF"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/reader_action_forward" />
+
+        <ImageButton
+            android:id="@+id/reader_progress_next_chapter_button"
+            style="?attr/borderlessButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_reader_next"
+            android:scaleType="centerInside"
+            android:padding="8dp"
+            android:tint="#FFFFFF"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/reader_progress_next_chapter" />
+
+        <ImageButton
+            android:id="@+id/reader_progress_jump_end_button"
+            style="?attr/borderlessButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_reader_skip_end"
+            android:scaleType="centerInside"
+            android:padding="8dp"
+            android:tint="#FFFFFF"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/reader_progress_jump_end" />
+
+    </LinearLayout>
+
+</LinearLayout>
