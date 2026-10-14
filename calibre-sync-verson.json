@@ -1,9 +1,9 @@
 {
-  "versionCode": 19,
-  "versionName": "3.5.2",
+  "versionCode": 20,
+  "versionName": "5.53",
   "releaseUrl": "https://github.com/nguyenphanvn95/calibre-sync-upgraded/releases/latest",
   "downloadUrl": "https://github.com/nguyenphanvn95/calibre-sync-upgraded/releases/latest",
-  "title": "Calibre Sync 3.5.2",
+  "title": "Calibre Sync 5.53",
   "message": "Đã có phiên bản Calibre Sync mới. Bấm Cập nhật để mở trang release và tải bản mới nhất.",
   "required": false
 }
